@@ -202,6 +202,7 @@ console.log("game.demoMakeTeams() was called...");
 		var team2 = TeamService.newTeam("Red Team", [gp3, gp1]);
 
 		game.teams.push(angular.extend({}, team2));
+		//var object = angular.merge({}, object1, object2)
 
 		$scope.teams = game.teams;
 
