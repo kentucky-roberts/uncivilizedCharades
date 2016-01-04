@@ -201,87 +201,6 @@ angular
 
 
 
-
-
-
-
- //  .factory('PlayerService', function() {
- //    var service = {
- //      newPlayer: newPlayer
- //    };
-   
- //    /**
- //     * New Player Object
- //     * @param playerName
- //     * @param initialScore
- //     * @constructor
- //     */
-
- //    function Team(teamrName, initialScore) {
- //        this.player = player;
- //    }
-
-
-
- //    Player.prototype.logInfo = function(){
-	// 	console.log("Name: " +this.name+ " initialScore: "+ this.initialScore  +  " Score: "+ this.score +  "skips: "  + this.skips  );
-	// };
- //    /**
- //     * Change the score by amount
- //     * @param amountToChange
- //     */
-
- //    Player.prototype.changeScore = function(amountToChange){
- //        if(!angular.isDefined(this.score)){
- //            this.score = this.initialScore;
- //        }
- //        this.score += amountToChange;
- //    };
-
- //    Player.prototype.resetScore = function () {
- //        this.score = this.initialScore;
- //    };
-
- //    Player.prototype.useSkip = function(){
- //        if(!angular.isDefined(this.skips)){
- //            this.skips = 3;
- //        }
- //        this.skips -= 1;
- //    };
-
- //    Player.prototype.getPlayers = function() {
- //      console.log("Return all of the players!");
- //    };
-
- //    Player.prototype.joinTeam = function(teamName){
- //        this.team = teamName;
- //    };
-
- //    /**
- //     * Resets the score of a player back to initial score.
- //     */
- //    Player.prototype.resetScore = function () {
- //        this.score = this.initialScore;
- //    };
- //    /**
- //     * Creates a new player object
- //     * @param playerName
- //     * @param initialScore
- //     * @returns {PlayerService.Player}
- //     */
- //    function newPlayer(playerName, initialScore) {
- //      var player = new Player(playerName, initialScore);
- //      //console.log(player);
- //      return player;
- //    }
- //    return service;
- //  })
-
-
-
-
-
-
 .factory('GameService', function() {
 
     var service = {
@@ -334,7 +253,28 @@ angular
     return service;
 }) //  function GameService])
 
-
+.service('CountdownService', function() {
+    this.tags = {
+        a: true,
+        b: true
+    };
+    
+    this.setTrueTag = function() {
+        alert("Setting TRUE from service");
+        this.tags.a = true;
+        this.tags.b = true;
+        
+        //how do I get the watch in MyCtrl to be triggered?
+    };
+    
+    this.setFalseTag = function() {
+        alert("Within myService->setFalseTag");
+        this.tags.a = false;
+        this.tags.b = false;
+        
+        //how do I get the watch in MyCtrl to be triggered?
+    };
+})
 
 
 

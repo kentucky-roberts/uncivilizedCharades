@@ -25,7 +25,7 @@
 		<button ng-click="game.nextTurn()" class="button button-outline button-royal">Next Turn</button>
             <button ng-click="game.nextStep()" class="button button-outline button-royal">Next Step</button>
 
-		<button ng-click="skipCard()" class="button button-outline button-royal">Skip Card This Card</button>
+		<button ng-click="setFalseTag()" class="button button-outline button-royal">Skip Card This Card</button>
            <button ng-click="addCard()" class="button button-outline button-royal">Add Card</button>
            
            <!-- print player info -->
@@ -45,14 +45,36 @@
       </div>
 
 
+<!-- 
+
+<td-cards control="cardsControl">
+        <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-transition-left="cardSwipedLeft($index)" on-transition-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+          <div class="image" ng-controller="CardCtrl">
+            <div class="no-text">NOPE</div>
+            <img ng-src="{{card.image}}">
+            <div class="yes-text">LIKE</div>
+          </div>
+        </td-card>
+        <div class="control">
+          <button ng-click="noClick()" class="button button-outline button-assertive">No</button>
+          <button ng-click="yesClick()" class="button button-outline button-balanced">Yes</button>
+        </div>
+        <div class="empty" ng-if="!cards.length">
+          <button ng-click="reload()" class="button button-outline button-positive">Reload</button>
+        </div>
+      </td-cards>
+ -->
+
+
+
 
 <div ng-if="cards.active">
 	 <td-cards control="cardsControl">
 	       <td-card 
       	    ng-repeat="card in cards.active"
-                on-swipe-up="cardSwipedUp($index)"
-                on-swipe-left="cardSwipedLeft($index)"
-                on-swipe-right="cardSwipedRight($index)"
+                on-transition-up="cardSwipedUp($index)"
+                on-transition-left="cardSwipedLeft($index)"
+                on-transition-right="cardSwipedRight($index)"
                 on-partial-swipe="cardPartialSwipe(amt)" 
                 on-destroy="cardDestroyed($index)"
                 class="card card-{{$index}}  card-{{( hideCards == true ) ? 'back' : 'face' }} ">
@@ -63,6 +85,19 @@
 	                </article>
 
 	                <button  ng-click="activateCard($index);" class="button button-calm button-outlined td-button">TD Button</button>
+<!-- 
+ion-ios-timer-outline
+ion-close
+ion-ios-person-outline
+ion-ios-people-outline
+ion-asterisk
+ion-log-out
+ion-log-in
+ion-power
+ion-ribbon-a
+ion-ribbon-b
+ion-trophy -->
+
 
 				<div ng-if="cards.activeCard.length">
 	                		<span class="button button-balanced button-block icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">Start Countdown!</span>
@@ -197,7 +232,7 @@
 	    </ion-content>
 	  </ion-modal-view>
 	</script>
-	<script type="text/ng-template" id="login.html">
+	<script type="text/ng-template" id="success.html">
 	    <div class="modal">
 	        <ion-header-bar>
 	            <h1 class="title">Success!</h1>

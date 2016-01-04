@@ -6,9 +6,11 @@ angular
          'ngAnimate',
          'ngTouch',
          'ngMessages',
-         'ngDragDrop',
-         'angular-svg-round-progress',
-         'ionic.contrib.ui.tinderCards'
+         //'ngDraggableDrop',
+         'ngDraggable',
+         'xeditable',
+         'angular-svg-round-progress'
+         //'ionic.contrib.ui.tinderCards'
          //'ionic.contrib.ui.cards'
     ])
 

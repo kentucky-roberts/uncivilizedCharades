@@ -1,0 +1,192 @@
+<ion-view view-title="Drop players into teams">
+<style>/* .tabs { display: none; } */</style>
+  <div ng-controller="GameController">
+      <ion-pane ng-controller="AppController">
+
+            <div class="row">
+                <div class="col">
+                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
+                        <span class="title"><h2><a href="#" editable-text="team1.name">{{ team1.name || "team1" }}</a></h2></span>
+                        <ul class="dragable-objects">
+                            <li ng-repeat="player in droppedObjects1" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                                {{player.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
+                         <span class="title"><h2><a href="#" editable-text="team2.name">{{ team2.name || "team2" }}</a></h2></span>
+                        <ul class="dragable-objects">
+                            <li ng-repeat="player in droppedObjects2" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                                {{player.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <ul class="draggable-objects">
+                        <li ng-repeat="player in unassignedPlayers">
+                            <div ng-drag="true" ng-drag-data="player" data-allow-transform="true"> {{player.name}} </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col">
+                <button class="button button-outline button-positive" ng-click="setTrueTag()">True</button>
+                <button class="button button-outline button-positive" ng-click="setFalseTag()">False</button>
+            </div>
+        </div>
+
+
+
+    <div class="bar bar-footer">
+        <button class="button button-outline button-positive" ng-click="newPlayer()"><i class="ion-ios-plus-empty"></i> New Player</button>
+        <button class="button button-outline button-positive" ng-click="showLogin()">Login</button>
+         <span class="button button-outline button-royal icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">&nbsp;120</span>
+    </div><!--bar bar-footer-->
+
+
+<script type="text/ng-template" id="newPlayer.html">
+    <div class="modal">
+         <ion-header-bar class="bar bar-header bar-dark">
+            <h1 class="title">Add New Player</h1>
+            <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+            <form>
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">Player Name</span>
+                        <input type="text" ng-model="playerName" />
+                    </label>
+                </div>
+            </form>
+            <button type="submit" class="button button-block button-balanced" ng-click="addNewPlayer(playerName, initialScore)">Add New Player</button>
+            <button class="button button-block button-stable next-step hidden" ng-click="game.readyNextTurn()" type="button">Next Step</button>
+        </ion-content>
+    </div>
+</script>
+<script type="text/ng-template" id="login.html">
+    <div class="modal">
+         <ion-header-bar class="bar bar-header bar-dark">
+            <h1 class="title">Login</h1>
+            <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+            <form>
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">Username</span>
+                        <input type="text" ng-model="username" />
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Password</span>
+                        <input type="password" ng-model="password" />
+                    </label>
+                </div>
+            </form>
+            <button type="submit" class="button button-block button-calm" ng-click="login(username, password)">Login</button>
+        </ion-content>
+    </div>
+</script>
+<script type="text/ng-template" id="timer.html">
+    <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-dark">
+            <h1 class="title">Act it out!</h1>
+            <button class="button button-clear button-primary" ng-click="modal.hide();stopTimer(true);">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+            <div class="progress-wrapper">
+                <div class="progress">
+                    {{humanizeDurationTimer(timer,'s')}}
+                </div>
+                <div round-progress 
+                    max="timeForTimer" 
+                    current="timer" 
+                    clockwise="false" 
+                    rounded="true" 
+                    responsive="true"
+                    color="#26bb65" 
+                    bgcolor="#eaeaea" 
+                    stroke="10" 
+                    animation="easeInOutBack" 
+                    animation-delay="0" 
+                    class="text-center"></div>
+            </div>
+            <div ng-if="!started && !paused && !done">
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-outline button-balanced button-rounded button-block" ng-click="startTimer()">
+                            Start
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="started && !done">
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-balanced button-rounded button-block" ng-click="modal.hide();stopTimer(true);showSuccess();">
+                            Got it!
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>
+<script type="text/ng-template" id="successMessage.html">
+    <div class="modal">
+         <ion-header-bar class="bar bar-header bar-success">
+            <h1 class="title">Success!</h1>
+        </ion-header-bar>
+        <ion-content class="bg-success">
+            <div class="row">
+                <div class="col">
+                    <h2>Congratulations xxxx!</h2>
+                    <br>
+                    <i class="ion-ribbon-b bigIcon" style="font-size: 40px;"></i>
+                    <h3>You have been awarded 1 point and now your team has xxxx points.</h3>
+                    <br>
+                    <br>
+                    <button class="button button-light button-block" ng-click="game.nextStep(); closeModal();">Next Turn</button>
+                </div>
+            </div>
+        </ion-content>
+    </div>
+</script>
+<script type="text/ng-template" id="timeExpiredMessage.html">
+    <div class="modal">
+        <ion-header-bar class="bar bar-header bar-error">
+            <h1 class="title">Time Expired!</h1>
+            <button class="button button-clear pull-left " ng-click="closeModal()">close</button>
+        </ion-header-bar>
+         <ion-content class="bg-error">
+            <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <h2>Booo xxxx!</h2>
+                    <br>
+                    <i class="ion-close bigIcon" style="font-size: 40px;"></i>
+                    <h3>No Points for activeTeam, opposing team offered chance to guess the phrase and steal point.</h3>
+                    <br>
+                    <br>
+                    <button class="button button-light button-large" ng-click="game.startBonousRound()">Steal Point</button>
+                    <button class="button button-light button-large" ng-click="game.nextStep()">Next Turn</button>
+                </div>
+                </div>
+            </div>
+        </ion-content>
+    </div>
+</script>
+
+</ion-pane>
+</div>
+<!--GameController-->
+</ion-view>

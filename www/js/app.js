@@ -45,7 +45,7 @@ angular
       url: '/game',
       views: {
         'tab-game': {
-          templateUrl: 'templates/game.html'
+          templateUrl: 'templates/game/new.game.directive.html'
         }
       }
     });
