@@ -1,14 +1,15 @@
 <ion-view view-title="Drop players into teams">
-<style>/* .tabs { display: none; } */</style>
   <div ng-controller="GameController">
       <ion-pane ng-controller="AppController">
 
             <div class="row">
                 <div class="col">
                     <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
-                        <span class="title"><h2><a href="#" editable-text="team1.name">{{ team1.name || "team1" }}</a></h2></span>
+                        <span class="title"><h2><a class="color-team1" href="#" editable-text="team1.name">{{ team1.name || "team1" }}</a></h2></span>
                         <ul class="dragable-objects">
-                            <li ng-repeat="player in droppedObjects1" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                            <li ng-repeat="player in droppedObjects1" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)"
+                                class="bg-team1"
+                                ng-center-anchor="{{centerAnchor}}">
                                 {{player.name}}
                             </li>
                         </ul>
@@ -16,16 +17,17 @@
                 </div>
                 <div class="col">
                     <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
-                         <span class="title"><h2><a href="#" editable-text="team2.name">{{ team2.name || "team2" }}</a></h2></span>
+                         <span class="title"><h2><a  class="color-team2" href="#" editable-text="team2.name">{{ team2.name || "team2" }}</a></h2></span>
                         <ul class="dragable-objects">
-                            <li ng-repeat="player in droppedObjects2" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                            <li ng-repeat="player in droppedObjects2" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" 
+                                class="bg-team2"
+                                ng-center-anchor="{{centerAnchor}}">
                                 {{player.name}}
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col">
                     <ul class="draggable-objects">
@@ -35,21 +37,21 @@
                     </ul>
                 </div>
             </div>
-
-        <div class="row">
-            <div class="col">
-                <button class="button button-outline button-positive" ng-click="setTrueTag()">True</button>
-                <button class="button button-outline button-positive" ng-click="setFalseTag()">False</button>
+            <div class="row">
+                <div class="col">
+                    <button class="button button-outline button-positive" ng-click="setTrueTag()">True</button>
+                    <button class="button button-outline button-positive" ng-click="setFalseTag()">False</button>
+                    <button class="button button-outline button-positive" ng-audio="sound/cha-ching.mp3" volume="0.5" start="0.2">Cha Ching</button>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="bar bar-footer">
+                    <button class="button button-outline button-positive" ng-click="newPlayer()"><i class="ion-ios-plus-empty"></i> New Player</button>
+                    <button class="button button-outline button-positive" ng-click="showLogin()">Login</button>
+                     <span class="button button-outline button-royal icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">&nbsp;120</span>
+                </div><!--bar bar-footer-->
+            </div>
 
-
-
-    <div class="bar bar-footer">
-        <button class="button button-outline button-positive" ng-click="newPlayer()"><i class="ion-ios-plus-empty"></i> New Player</button>
-        <button class="button button-outline button-positive" ng-click="showLogin()">Login</button>
-         <span class="button button-outline button-royal icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">&nbsp;120</span>
-    </div><!--bar bar-footer-->
 
 
 <script type="text/ng-template" id="newPlayer.html">

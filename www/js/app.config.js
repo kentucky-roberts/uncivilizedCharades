@@ -9,7 +9,8 @@ angular
          //'ngDraggableDrop',
          'ngDraggable',
          'xeditable',
-         'angular-svg-round-progress'
+         'angular-svg-round-progress',
+         'ngAudio'
          //'ionic.contrib.ui.tinderCards'
          //'ionic.contrib.ui.cards'
     ])

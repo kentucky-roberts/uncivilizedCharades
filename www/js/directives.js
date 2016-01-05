@@ -19,7 +19,7 @@ angular
 .directive('charadesGame', function() {
   return {
     restrict: 'E',
-    templateUrl: 'templates/game/game.directive.html',
+    templateUrl: 'templates/game/new.game.directive.html',
     controller: 'GameController',
     controllerAs: 'game'
   }

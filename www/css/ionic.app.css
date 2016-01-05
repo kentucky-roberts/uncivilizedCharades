@@ -26,7 +26,7 @@ $dark:                            #444 !default;
   used under CC BY http://creativecommons.org/licenses/by/4.0/
   Modified icons to fit ionicon’s grid from original.
 */
-@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two|Open+Sans+Condensed:300,700|Sigmar+One);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600|Shadows+Into+Light+Two);
 @font-face {
   font-family: "Ionicons";
   src: url("../lib/ionic/fonts/ionicons.eot?v=2.0.1");
@@ -9991,11 +9991,11 @@ td-card.flip {
 
 body {
   cursor: url("http://ionicframework.com/img/finger.png"), auto;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-backface-visibility: hidden;
   background-color: #333;
   margin-top: 50px;
-  color: darkgrey; }
+  color: #c7c7c7; }
 
 .pane {
   background-color: #333;
@@ -10006,6 +10006,9 @@ body {
   top: 0;
   left: 0; }
 
+a {
+  color: #fc0; }
+
 ion-content {
   background-color: #333;
   color: white;
@@ -10015,19 +10018,26 @@ ion-content {
   top: 0;
   left: 0; }
 
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+  color: #ffffff; }
+
 h2 {
-  color: #fff !important; }
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 16px; }
+
+h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #ffffff; }
 
 .editable-click, a.editable-click {
   text-decoration: none;
   color: #ffffff;
   border-bottom: dashed 1px #ffffff; }
-
-h2.a {
-  color: #ffffff; }
-
-h1 {
-  color: white; }
 
 .text-black {
   color: black; }
@@ -10061,16 +10071,49 @@ h1 {
   text-align: center; }
 
 a.editable-click {
-  color: white;
+  color: #fb292d;
   border-bottom: dotted 2px white; }
 
 a.editable-click:hover {
-  color: #47a447;
-  border-bottom-color: #47a447; }
+  color: #fb292d;
+  border-bottom-color: #fb292d; }
+
+.bg-team1 {
+  background-color: #fb292d;
+  color: #212121; }
+
+.bg-team2 {
+  background-color: #84bcde;
+  color: #212121; }
+
+.color-team1 {
+  color: #fb292d; }
+
+.color-team2 {
+  color: #84bcde; }
 
 .without-shadow {
   -webkit-box-shadow: none !important;
   box-shadow: none !important; }
+
+.td-cards {
+  position: fixed; }
+
+.td-card {
+  display: none;
+  position: fixed;
+  -webkit-transform: scale(1, 1);
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 300px;
+  margin-left: -150px;
+  margin-top: -150px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards; }
 
 .card {
   float: left;
@@ -10120,7 +10163,7 @@ a.editable-click:hover {
 
 .card .card-face {
   color: #000;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: #fff; }
 
 .card .card-back {
@@ -10167,7 +10210,7 @@ h1.td-title {
   text-align: center; }
 
 .yellow-text {
-  color: yellow !important; }
+  color: #fc0important; }
 
 .white-text {
   color: white !important; }
@@ -10200,14 +10243,6 @@ h1.td-title {
   margin: 15px auto;
   width: 96px;
   height: 96px; }
-
-.bar.bar-transparent {
-  background-color: transparent;
-  background-image: none;
-  border: none; }
-
-.bar .title {
-  color: #eee; }
 
 /*progress time text on middle of circle*/
 .progress-wrapper {
