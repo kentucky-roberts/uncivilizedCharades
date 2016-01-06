@@ -1,0 +1,14 @@
+{
+  "teams": {
+    "team1": {
+      "teamName": "The Goodguys",
+      "teamScore": 0,
+      "players": {}
+    },
+    "team2": {
+      "teamName": "The Badguys",
+      "teamScore": 0,
+      "players": {}
+    }
+  }
+}

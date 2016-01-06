@@ -66,30 +66,30 @@ angular
 
 
 
- .factory('UserSrvice', function() {
+ // .factory('UserSrvice', function() {
      
-      var service = {
-          newUser: newUser
-      };
+ //      var service = {
+ //          newUser: newUser
+ //      };
 
-    /**
-     * New User Object
-     * @param playerName
-     * @param initialScore
-     * @constructor
-     */
+ //    /**
+ //     * New User Object
+ //     * @param playerName
+ //     * @param initialScore
+ //     * @constructor
+ //     */
 
-      function User(userName, password) {
-          this.userName = userName;
-          this.password = password;
-      }
+ //      function User(userName, password) {
+ //          this.userName = userName;
+ //          this.password = password;
+ //      }
 
-      function newUser(userName, password) {
-        var user = newUser(userName, password);
-        return user;
-      }
-      return service;
- })
+ //      function newUser(userName, password) {
+ //        var user = newUser(userName, password);
+ //        return user;
+ //      }
+ //      return service;
+ // })
 
 
 
@@ -253,6 +253,9 @@ angular
     return service;
 }) //  function GameService])
 
+
+
+
 .service('CountdownService', function() {
     this.tags = {
         a: true,
@@ -260,7 +263,6 @@ angular
     };
     
     this.setTrueTag = function() {
-        alert("Setting TRUE from service");
         this.tags.a = true;
         this.tags.b = true;
         
@@ -268,7 +270,6 @@ angular
     };
     
     this.setFalseTag = function() {
-        alert("Within myService->setFalseTag");
         this.tags.a = false;
         this.tags.b = false;
         
@@ -446,4 +447,26 @@ angular
       return null;
     } // get:
   };
-});
+})
+
+
+// .factory('UserService', function ($resource) {
+//       var data = $resource('../api/users/:user', {user: '@user'}, {
+//       update:{
+//           method:'PUT'
+//           }
+//       });
+//       return data;
+//   });
+
+
+
+.factory('UserService', ['$resource',
+  function($resource){
+    return $resource('api/users.json', {}, {
+      query: {method:'GET', params:{userId:'users'}, isArray:true}
+    });
+
+   
+
+  }]);

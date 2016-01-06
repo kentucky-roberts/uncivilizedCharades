@@ -1,0 +1,39 @@
+{
+  "players": {
+    "player1": {
+      "playerName": "Lt. Dan",
+      "initialScore": 0,
+      "score": 0,
+      "skips": 5,
+      "team": "team1"
+    },
+    "player2": {
+      "playerName": "Jenny"
+      "initialScore": 0,
+      "score": 0,
+      "skips": 5,
+      "team": "team1"
+    },
+    "player3": {
+      "playerName": "Momma"
+      "initialScore": 0,
+      "score": 0,
+      "skips": 5,
+      "team": "team1"
+    },
+    "player4": {
+      "playerName": "Forrest"
+      "initialScore": 0,
+      "score": 0,
+      "skips": 5,
+      "team": "team1"
+    },
+    "player5": {
+      "playerName": "Bubba"
+      "initialScore": 0,
+      "score": 0,
+      "skips": 5,
+      "team": "team1"
+    }
+  }
+}

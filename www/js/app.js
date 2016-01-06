@@ -26,30 +26,61 @@ angular
 
 .config(function($stateProvider, $urlRouterProvider) {
 
- $stateProvider
- .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
-  .state('tab.login', {
-    url: '/login',
-    views: {
-      'tab-login': {
-        templateUrl: 'templates/login.html',
-        controller: 'AppController'
-      }
-    }
-  })
-  .state('tab.game', {
-      url: '/game',
-      views: {
-        'tab-game': {
-          templateUrl: 'templates/game/new.game.directive.html'
+ $stateProvider.state('tab', {
+        url: '/tab',
+        abstract: true,
+        templateUrl: 'templates/tabs.html'
+      })
+      .state('tab.login', {
+        url: '/login',
+        views: {
+          'tab-login': {
+            templateUrl: 'templates/login.html',
+            controller: 'AppController'
+          }
         }
-      }
-    });
+      })
+      .state('tab.main-menu', {
+        url: '/main-menu',
+        views: {
+          'tab-main-menu': {
+            templateUrl: 'templates/main-menu.html',
+            controller: 'AppController'
+          }
+        }
+      })
+      .state('tab.players', {
+        url: '/players',
+        views: {
+          'tab-players': {
+            templateUrl: 'templates/players.html'
+          }
+        }
+      })
+      .state('tab.teams', {
+        url: '/teams',
+        views: {
+          'tab-teams': {
+            templateUrl: 'templates/teams.html'
+          }
+        }
+      })
+      .state('tab.store', {
+        url: '/store',
+        views: {
+          'tab-store': {
+            templateUrl: 'templates/store.html'
+          }
+        }
+      })
+      .state('tab.game', {
+          url: '/game',
+          views: {
+            'tab-game': {
+              templateUrl: 'templates/game/new.game.directive.html'
+            }
+          }
+        });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
-
 });

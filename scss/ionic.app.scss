@@ -19,7 +19,7 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@import "../www/lib/ionic/scss/ionic";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600|Shadows+Into+Light+Two);
 @import 'clock';
 @import 'animations';
@@ -33,6 +33,7 @@ body {
    margin-top: 50px;
    color: #c7c7c7;
 }
+
 .pane {
     background-color: #333;
     color: white;
@@ -45,6 +46,7 @@ body {
 a {
   color: #fc0;
 }
+
 ion-content {
     background-color: #333;
     color: white;
@@ -54,7 +56,6 @@ ion-content {
     top: 0;
     left: 0;
 }
-
 
 h1 {
       font-family: 'Open Sans', sans-serif;
@@ -74,7 +75,6 @@ h3 {
     font-weight: 300;
     color: #ffffff;
 }
-
 
 .editable-click, a.editable-click {
     text-decoration: none;
@@ -123,12 +123,12 @@ a.editable-click {
     color: #fb292d;
     border-bottom: dotted 2px white;
 }
+
 a.editable-click:hover { 
     color: #fb292d;
     border-bottom-color: #fb292d;
 }
 
- 
 .bg-team1 {
   background-color: #fb292d;
   color:  #212121;
@@ -147,6 +147,32 @@ a.editable-click:hover {
   color: #84bcde;
 }
 
+.line {
+  height: 100%;
+  min-height: 250px;
+
+    .line--dark {
+        -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+        -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+        box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+        border-right: 1px solid #121212;
+    }
+    .line--narrow {
+      width: 2px;
+    }
+
+    .line--vertical {
+      border-left: 1px solid #121212;
+    }
+}
+
+.vertical-rule-left-dark {
+    -moz-box-shadow: rgba(255, 255, 255, 0.07) 1px 0 0 inset;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.07) 1px 0 0 inset;
+    box-shadow: rgba(255, 255, 255, 0.07) 1px 0 0 inset;
+    border-left: 4px solid #121212;
+    padding: 0 25px;
+}
 
 .without-shadow {
     -webkit-box-shadow: none!important;
@@ -278,7 +304,6 @@ h1.td-title {
 }
 
 .card p {
-    font-family: 'Roboto Condensed', sans-serif;
     font-size: 35px;
     position: absolute;
     left: 0px;
@@ -288,7 +313,7 @@ h1.td-title {
 }
 
 .yellow-text {
-    color: #fc0important;
+    color: #fc0;
 }
 
 .white-text {
