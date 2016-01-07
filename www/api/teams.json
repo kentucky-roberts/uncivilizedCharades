@@ -1,14 +1,14 @@
-{
-  "teams": {
-    "team1": {
+{ "teams":  [
+    {
+      "id": 1,
       "teamName": "The Goodguys",
-      "teamScore": 0,
-      "players": {}
+        "teamScore": 0,
+        "players": {}
     },
-    "team2": {
+    {
+      "id": 2,
       "teamName": "The Badguys",
-      "teamScore": 0,
-      "players": {}
-    }
+        "teamScore": 0,
+        "players": {}
   }
-}
+]}

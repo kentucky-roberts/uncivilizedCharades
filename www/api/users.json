@@ -1,37 +1,16 @@
-{
-    "player1": {
-      "playerName": "Lt. Dan",
-      "initialScore": 0,
-      "score": 0,
-      "skips": 5,
-      "team": "team1"
+{ "users":  [
+    {
+      "Id":  0,
+      "userName": "Admin",
+      "image": "images/avatar.png",
+      "email": "croberts@lknpro.com",
+      "password": "root"
     },
-    "player2": {
-      "playerName": "Jenny"
-      "initialScore": 0,
-      "score": 0,
-      "skips": 5,
-      "team": "team1"
-    },
-    "player3": {
-      "playerName": "Momma"
-      "initialScore": 0,
-      "score": 0,
-      "skips": 5,
-      "team": "team1"
-    },
-    "player4": {
-      "playerName": "Forrest"
-      "initialScore": 0,
-      "score": 0,
-      "skips": 5,
-      "team": "team1"
-    },
-    "player5": {
-      "playerName": "Bubba"
-      "initialScore": 0,
-      "score": 0,
-      "skips": 5,
-      "team": "team1"
+      {
+      "id":  1,
+      "userName": "Chris Roberts",
+      "image": "images/avatar.png",
+      "email": "lknroberts@gmail.com",
+      "password": "root"
     }
-  }
+]}

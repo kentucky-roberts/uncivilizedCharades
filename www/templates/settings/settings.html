@@ -1,0 +1,47 @@
+<ion-view view-title="Settings">
+  <ion-content ng-controller="AppController">
+    <div class="list">
+        <form>
+            <label class="item item-divider">
+                Profile
+            </label>
+          <div class="list">
+            <a class="item item-avatar" href="#">
+              <img src="img/avatar.jpg">
+              <h2>{{demoUsername}}</h2>
+            </a>
+            <label class="item item-input">
+              <span class="input-label">Username</span>
+              <input type="text" ng-model="data.username">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Password</span>
+              <input type="password" ng-model="data.password">
+            </label>
+
+            <label class="item item-divider">
+                Max Points: {{data.maxScore}}
+            </label>
+            <ion-radio ng-repeat="item in maxScoreList"
+                       ng-value="item.value"
+                       ng-model="data.maxScore">
+              {{ item.text }}
+            </ion-radio>
+            <label class="item item-divider">
+                Countdown Time: {{data.secondsRemaining}}
+            </label>
+            <ion-radio ng-repeat="item in secondsRemainingList"
+                       ng-value="item.value"
+                       ng-model="data.secondsRemaining"
+                       ng-change="secondsRemainingChange(item)"
+                       name="seconds-remaining">
+              {{ item.text }}
+            </ion-radio>
+            <label class="item">
+              <button class="button button-block button-positive" type="submit" ng-click="doSettings()">Save Settings</button>
+            </label>
+          </div>
+        </form>
+    </div>
+  </ion-content>
+</ion-view>

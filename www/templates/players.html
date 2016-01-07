@@ -1,13 +1,13 @@
 <ion-view view-title="Add new players">
   <ion-content>
 
-      <ion-list ng-controller="GameController"
+      <ion-list
             can-swipe="listCanSwipe"
             show-delete="shouldShowDelete"
             show-edit="showEdit"
             class="item-remove-animate">
                         
-            <ion-item class="item-remove-animate" ng-repeat="player in game.players" type="item-text-wrap">
+            <ion-item class="item-remove-animate" ng-repeat="player in players" type="item-text-wrap">
                 {{player.name}}
                 <ion-option-button class="button-assertive" ng-click="players.$remove(player)">Remove</ion-option-button>
             </ion-item>
@@ -16,7 +16,9 @@
                 
       <p ng-show="err" class="error">{{err}}</p>
       <div class="bar bar-footer">
-          <button class="button button-clear" ng-click="newPlayer()"><i class="ion-ios-plus-empty"></i> Add another player</button>
+          
+          <button class="button button-stable" ng-click="newPlayer()"><i class="ion-ios-plus-empty"></i> Add another player</button>
+          <button class="button button-dark button-outlined pull-right {{ (players.length === 6) ? 'show' : 'hidden' }}" ng-click="selectTabWithIndex(2)">Next</button>
       </div>
 
       <script type="text/ng-template" id="newPlayer.html">
@@ -34,7 +36,7 @@
                           </label>
                       </div>
                   </form>
-                  <button type="submit" class="button button-block button-balanced" ng-click="addNewPlayer(playerName, initialScore)">Add New Player</button>
+                  <button type="submit" class="button button-block button-balanced" ng-click="addNewPlayer(playerName)">Add New Player</button>
                   <button class="button button-block button-stable next-step hidden" ng-click="game.readyNextTurn()" type="button">Next Step</button>
               </ion-content>
           </div>

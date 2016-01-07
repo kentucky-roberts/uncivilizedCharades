@@ -2,7 +2,7 @@
 angular
   .module('app.controllers', [])
 
-.controller('AppController', function($scope, LoginService, UserService, $ionicPopup, $state, $http, $ionicModal, $timeout, ngAudio) {
+.controller('AppController', function($scope, LoginService, UserService, PlayerService, GameService, ngAudio, $ionicPopup, $state, $http, $ionicModal, $timeout) {
 
 	////////////////////////////////////////
 	// User Authentication
@@ -31,31 +31,77 @@ angular
 	$scope.soundVoiceOn = function() { $scope.voiceOn.play(); };
 	$scope.soundVoiceOff = function() { $scope.voiceOff.play(); };
 
-    ////////////////////////////////////////
-    // Layout Methods
-    ////////////////////////////////////////
-    $scope.hideNavBar = function() {
-        document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
-    };
+	////////////////////////////////////////
+	// Layout Methods
+	////////////////////////////////////////
+	$scope.hideNavBar = function() {
+	    document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
+	};
 
-    $scope.showNavBar = function() {
-        document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
-    };
+	$scope.showNavBar = function() {
+	    document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
+	};
 
-    $scope.noHeader = function() {
-        var content = document.getElementsByTagName('ion-content');
-        for (var i = 0; i < content.length; i++) {
-            if (content[i].classList.contains('has-header')) {
-                content[i].classList.toggle('has-header');
-            }
-        }
-    };
-
-
-
+	$scope.noHeader = function() {
+	    var content = document.getElementsByTagName('ion-content');
+	    for (var i = 0; i < content.length; i++) {
+	        if (content[i].classList.contains('has-header')) {
+	            content[i].classList.toggle('has-header');
+	        }
+	    }
+	};
 
 	$scope.oneUser = UserService.get({user: 1});
-	console.log($scope.oneUser);
+	console.log("One User!!: " + $scope.oneUser);
+
+	$scope.master = {};
+    	$scope.demoUsername = "Jerry Rice";
+	$scope.maxScoreList = [{
+	    text: "5 Points",
+	    value: "5"
+	}, {
+	    text: "10 Points",
+	    value: "10"
+	}, {
+	    text: "15 Points",
+	    value: "15"
+	}];
+
+	$scope.secondsRemainingList = [{
+	    text: "60 seconds",
+	    value: "60"
+	}, {
+	    text: "90 seconds",
+	    value: "90"
+	}, {
+	    text: "120 seconds",
+	    value: "120"
+	}];
+
+	$scope.settingsData = {
+	    maxScore: '10',
+	    secondsRemaining: '60'
+	};
+
+	$scope.secondsRemainingChange = function(item) {
+	    console.log("secondsRemaining text:", item.text, "value:", item.value);
+	    $scope.master = angular.copy(item);
+	};
+
+	$scope.maxScoreChange = function(item) {
+	    console.log("maxScoreChange text:", item.text, "value:", item.value);
+	    $scope.master = angular.copy(item);
+
+	};
+
+	$scope.doSettings = function(item) {
+	    $rootScope.maxScore = $scope.settingsData.maxScore;
+	    $rootScope.secondsRemaining = $scope.settingsData.secondsRemaining;
+	    console.log('master: ', $rootScope.master);
+	    console.log('maxScore: ', $scope.maxScore);
+	    console.log('secondsRemaining: ', $scope.secondsRemaining);
+	};
+
 
 	// UserService.save({name: 'Saimon', email: 'saimon@devdactic.com'});
 	// // UserService.update({user: 1}, {name: 'Saimon', email: 'saimon@devdactic.com'});
@@ -91,11 +137,37 @@ angular
 
 //.controller('UserController', function(GameService {})
 
-.controller('GameController', function($scope, $state, $ionicModal, $timeout, $ionicPopup, $timeout, $ionicLoading, ModalService, TeamService, PlayerService, CardService, DealerService, GameService, CountdownService) {
+
+
+.controller('IntroController', function ($scope, $state, $ionicSlideBoxDelegate) {
+
+  // Called to navigate to the main app
+  $scope.startApp = function () {
+    $state.go('app.game');
+  };
+  $scope.next = function () {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function () {
+    $ionicSlideBoxDelegate.previous();
+  };
+
+  // Called each time the slide changes
+  $scope.slideChanged = function (index) {
+    $scope.slideIndex = index;
+  };
+})
+
+
+.controller('GameController', function($scope, $state, $ionicTabsDelegate, $rootScope, $ionicModal, $timeout, $ionicPopup, $timeout, $ionicLoading, ModalService, TeamService, PlayerService, CardService, DealerService, GameService, CountdownService) {
   
   $scope.showLoading = function() {
     $ionicLoading.show();
   }; $scope.showLoading();
+
+  $scope.shouldShowDelete = false;
+  $scope.shouldShowReorder = false;
+  $scope.listCanSwipe = true
 
     var game = this;
 
@@ -159,8 +231,6 @@ angular
 	  	console.log("New game.turn: " + game.turn);
 	  	
 	  	game.getActivePlayer(turn);
-
-	  	
 	  };
 
 	  game.readyNextTurn = function() {
@@ -208,6 +278,7 @@ angular
 	        modal.show();
 	      });
 	  };
+
 	  
 	  $scope.showLogin = function() {
 	    ModalService
@@ -217,6 +288,11 @@ angular
 	      });
 	  };
 	  
+
+	  $scope.selectTabWithIndex = function(index) {
+	    $ionicTabsDelegate.select(index);
+	  };
+
 	$scope.addNewPlayer = function(playerName) {
 		console.log("game.addNewPlayer() was called...");
 		var newPlayer = PlayerService.newPlayer(playerName);
@@ -226,8 +302,32 @@ angular
 		//$scope.player = game.players[0];
 		console.log(game.players[0].name);
 		console.log($scope.players);
-		$scope.closeModal();
+
+		// $scope.err = null;
+		// var newPlayer = PlayerService.newPlayer(playerName);
+		// $scope.players.push(angular.extend({}, newPlayer))
+		
+		// console.log("game.addNewPlayer() was called...");
+		// var newPlayer = PlayerService.newPlayer(playerName);
+		// console.log(newPlayer);
+		// game.players.push(angular.extend({}, newPlayer));
+		// $scope.players = angular.copy(game.players);
+		// console.log(game.players[0].name);
+		// console.log($scope.players);
+
+		// .then(function( /* user */ ) {
+		//     $scope.modal.remove();
+		// }, function(err) {
+		//     $scope.err = errMessage(err);
+		// });
+
+
+		//$scope.closeModal();
+		$scope.modal.remove();
 	};
+// $scope.$on('$ionicView.enter', function(e) {
+ 
+//  });
 
 	game.demoMakePlayers = function() {
 		console.log("game.demoMakePlayers() was called...");
@@ -334,7 +434,7 @@ angular
 	 $scope.centerAnchor = true;
         $scope.toggleCenterAnchor = function () {$scope.centerAnchor = !$scope.centerAnchor}
 
-        $scope.unassignedPlayers = [{name:'Player1'}, {name:'Player2'}, {name:'Player3'}, {name:'Player4'}];
+        $scope.unassignedPlayers = $scope.players;
         $scope.droppedObjects1 = [];
         $scope.droppedObjects2= [];
 

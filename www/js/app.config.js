@@ -1,6 +1,5 @@
 angular
    .module('app.config', [
-        'ionic',
         'ngCordova',
         'firebase',
         'ngResource',

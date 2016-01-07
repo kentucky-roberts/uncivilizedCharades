@@ -1,5 +1,6 @@
 angular
   .module('app', [
+        'ionic',
         'app.config', 
         'app.animations',
         'app.directives', 
@@ -49,11 +50,17 @@ angular
           }
         }
       })
+      .state('intro', {
+        url: '/intro',
+        templateUrl: 'templates/intro.html',
+        controller: 'IntroController'
+      })
       .state('tab.players', {
         url: '/players',
         views: {
           'tab-players': {
-            templateUrl: 'templates/players.html'
+            templateUrl: 'templates/players.html',
+            controller: 'GameController'
           }
         }
       })
@@ -61,7 +68,8 @@ angular
         url: '/teams',
         views: {
           'tab-teams': {
-            templateUrl: 'templates/teams.html'
+            templateUrl: 'templates/teams.html',
+            controller: 'GameController'
           }
         }
       })
@@ -77,7 +85,15 @@ angular
           url: '/game',
           views: {
             'tab-game': {
-              templateUrl: 'templates/game/new.game.directive.html'
+              templateUrl: 'templates/game.html'
+            }
+          }
+        })
+      .state('tab.settings', {
+          url: '/settings',
+          views: {
+            'tab-settings': {
+              templateUrl: 'templates/settings/settings.html'
             }
           }
         });
