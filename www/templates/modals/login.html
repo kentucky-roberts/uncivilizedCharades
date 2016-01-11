@@ -1,0 +1,21 @@
+<div class="modal">
+     <ion-header-bar class="bar bar-header bar-dark">
+        <h1 class="title">Login</h1>
+        <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <form>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <input type="text" ng-model="username" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password</span>
+                    <input type="password" ng-model="password" />
+                </label>
+            </div>
+        </form>
+        <button type="submit" class="button button-block button-calm" ng-click="login(username, password)">Login</button>
+    </ion-content>
+</div>

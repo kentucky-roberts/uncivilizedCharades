@@ -1,28 +1,39 @@
-angular.module('app.settings', [])
+angular.module('app.controllers', [])
 
 .controller('SettingsController', 
   function($scope, $ionicModal, $timeout, $rootScope) {
 
-    $scope.master = {};
-    $scope.demoUsername = "Jerry Rice";
+      $scope.master = {};
+     
+      $scope.demoUsername = "Jerry Rice";
+      $scope.maxScoreList = [{
+          text: "5 Points",
+          value: "5"
+      }, {
+          text: "10 Points",
+          value: "10"
+      }, {
+          text: "15 Points",
+          value: "15"
+      }];
 
-    $scope.maxScoreList = [
-      { text: "5 Points", value: "5" },
-      { text: "10 Points", value: "10" },
-      { text: "15 Points", value: "15" }
-    ];
+      $scope.secondsRemainingList = [{
+          text: "60 seconds",
+          value: "60"
+      }, {
+          text: "90 seconds",
+          value: "90"
+      }, {
+          text: "120 seconds",
+          value: "120"
+      }];
 
-    $scope.secondsRemainingList = [
-      { text: "60 seconds", value: "60" },
-      { text: "90 seconds", value: "90" },
-      { text: "120 seconds", value: "120" }
-    ];
-    
-    $scope.settingsData = {
-      maxScore: '10',
-      secondsRemaining: '60'
-    };
-    
+      $scope.settingsData = {
+          maxScore: '10',
+          secondsRemaining: '60'
+      };
+
+
     $scope.secondsRemainingChange = function(item) {
       console.log("secondsRemaining text:", item.text, "value:", item.value);
       $scope.master = angular.copy(item);

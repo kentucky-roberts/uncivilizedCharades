@@ -1,13 +1,41 @@
-<ion-view view-title="Login" name="login-view">
-  <ion-content class="padding">
-      <div class="list list-inset">
-          <label class="item item-input">
-              <input type="text" placeholder="Username" ng-model="data.username">
-          </label>
-          <label class="item item-input">
-              <input type="password" placeholder="Password" ng-model="data.password">
-          </label>
+<ion-view view-title="Login" name="login-view" >
+  <ion-content ng-controller="AppController" class="padding">
+      
+      <h1>Uncivilized Charades</h1>
+
+      <div class="login-container">                    
+            <div class="form-box">
+           
+                  <img class="avatar" src="img/avatar.jpg">
+
+                  <input name="email" type="text" ng-model="email" placeholder="Your Email">
+                  
+                  <input name="password" type="password" ng-model="password" placeholder="Your Password">
+
+                  <input ng-cloak ng-show="createMode" name="confirm" type="password" ng-model="confirm" placeholder="Confirm Password">
+
+                  <button class="button button-positive button-outline button-block button-register" ng-click="login(email, pass)" ng-hide="createMode">
+                      Log In</button>
+                  <button class="button button-positive button-outline button-block button-register" ng-click="createMode = true" ng-hide="createMode">Register</button>
+                  <button class="button button-positive button-block button-register" ng-cloak ng-show="createMode" ng-click="createAccount()">Create Account</button>
+                  <button class="button button-light button-outline button-block" ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
+                  
+                  <p ng-show="err" class="error">{{err}}</p>
+                  
+                  <p class="fine-print">
+                      By signing in you are agreeing to our <a href="#">Conditions</a> and our <a href="#">Privacy Notice</a>.
+                  </p>
+
+
+          </div>
       </div>
-      <button class="button button-block button-calm" ng-click="login()">Login</button>
+
+
+      <div class="message__container">
+          <p class="message">
+              {{ app.message }}
+          </p>
+      </div>
+
   </ion-content>
 </ion-view>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Ionic Todo Tutorial</title>
+    
+    
+    
+    
+    
+    
+    
+    
+  </head>
+
+  <body>
+
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    
+    <title>Todo</title>
+
+    <link href="http://code.ionicframework.com/1.0.0-beta.1/css/ionic.min.css" rel="stylesheet">
+    <script src="http://code.ionicframework.com/1.0.0-beta.1/js/ionic.bundle.min.js"></script>
+  </head>
+<body ng-app="todo" ng-controller="TodoCtrl">
+        <ion-side-menus>
+           <ion-side-menu-content>
+                <ion-header-bar class="bar-dark">
+                    <button class="button button-icon" ng-click="toggleGames()">
+                        <i class="icon ion-navicon"></i>
+                    </button>
+                    <h1 class="title">{{activeGame.title}}</h1>
+                <!-- New Task button-->
+                    <button class="button button-icon" ng-click="newPlayer()">
+                        <i class="icon ion-compose"></i>
+                    </button>
+                </ion-header-bar>
+                <ion-content scroll="true">
+                    <ion-list>
+                        <ion-item ng-repeat="player in activeGame.players">
+                            <img src="img/player-images/avatar.jpg" class="avatar">
+                            <h2>{{player.name}}</h2>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-side-menu-content>
+            
+            <ion-side-menu side="left">
+                <ion-header-bar class="bar-dark">
+                    <h1 class="title">Games</h1>
+                    <button class="button button-icon ion-plus" ng-click="showGameModal()">
+                    </button>
+                </ion-header-bar>
+                <ion-content scroll="true">
+                    <ion-list>
+                        <ion-item ng-repeat="game in games" ng-click="selectGame(game, $index)" >
+                            {{game.title}}
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-side-menu>
+            <script id="new-player.html" type="text/ng-template">
+
+              <div class="modal">
+
+                <!-- Modal header bar -->
+                <ion-header-bar class="bar-secondary">
+                  <h1 class="title">New Player</h1>
+                  <button class="button button-clear button-positive" ng-click="closeNewPlayer()">Cancel</button>
+                </ion-header-bar>
+
+                <!-- Modal content area -->
+                <ion-content>
+
+                  <form ng-submit="createPlayer(player)">
+                    <div class="list">
+                      <label class="item item-input">
+                        <input type="text" placeholder="What is the new player's name?" ng-model="player.name">
+                      </label>
+                    </div>
+                    <div class="padding">
+                      <button type="submit" class="button button-block button-positive">Create Player</button>
+                    </div>
+                  </form>
+
+                </ion-content>
+
+              </div>
+
+            </script>
+            <script id="new-game.html" type="text/ng-template">
+
+              <div class="modal">
+
+                <!-- Modal header bar -->
+                <ion-header-bar class="bar-secondary">
+                  <h1 class="title">New Game</h1>
+                  <button class="button button-clear button-positive" ng-click="closeNewGame()">Cancel</button>
+                </ion-header-bar>
+
+                <!-- Modal content area -->
+                <ion-content>
+
+                  <form ng-submit="newGame(game)">
+                    <div class="list">
+                      <label class="item item-input">
+                        <input type="text" placeholder="Game Title" ng-model="game.title">
+                      </label>
+                    </div>
+                    <div class="padding">
+                      <button type="submit" class="button button-block button-positive">Create Game</button>
+                    </div>
+                  </form>
+
+                </ion-content>
+
+              </div>
+
+            </script>
+        </ion-side-menus>
+    </body>
+    
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>

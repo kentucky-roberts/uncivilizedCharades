@@ -1,197 +1,106 @@
-<ion-view view-title="Drop players into teams">
-  <div ng-controller="GameController">
-      <ion-pane ng-controller="AppController">
+<ion-view view-title="Uncivilized Charades" name="game-view">
+  <ion-content class="padding">
+     <div ng-controller="CardsController">
 
-            <div class="row">
-                <div class="col">
-                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
-                        <span class="title"><h2><a class="color-team1" href="#" editable-text="team1.name">{{ team1.name || "team1" }}</a></h2></span>
-                        <ul class="dragable-objects">
-                            <li ng-repeat="player in droppedObjects1" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)"
-                                class="bg-team1"
-                                ng-center-anchor="{{centerAnchor}}">
-                                {{player.name}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="bar bar-header bar-{{ teamColor }}">
+                <h1 class="title">{{activeTeam}}</h1>
+            </div><!--  bar  -->
+                
+                <div class="bar bar-subheader bar-transparent">
+                  
+                  <h2 class="instruction-text {{ (step === -1) ? 'show' : 'hidden' }}">
+                      Swipe the card UP to Start Game
+                      <div class="arrow-box">
+                        <i class="ion-ios-arrow-thin-up"></i>
+                      </div>
+                  </h2>
+                  <h2 class="instruction-text {{ (step === 0) ? 'show' : 'hidden' }}">
+                      {{activeTeam}}'s Up!<br> Choose a Secret Phrase to act out.
+                  </h2>
+                  <h2 class="instruction-text {{ (step === 1) ? 'show' : 'hidden' }}">
+                      Swipe right and left, choose a card, press GO! button.
+                  </h2>
+                  <h2 class="instruction-text {{ (step === 2) ? 'show' : 'hidden' }}">
+                      Act out the Secret Phrase ...<br>
+                      <strong><div class="seconds-remaining">00:{{secondsRemaining}}</div></strong>
+                  </h2>
+                  <h2 class="instruction-text {{ (step === 3) ? 'show' : 'hidden' }}">
+                      Swipe the card UP to begin next turn
+                      <div class="arrow-box">
+                        <i class="ion-ios-arrow-thin-up center-block animated"></i>
+                      </div>
 
-                <div class="">
-                    <ul class="draggable-objects">
-                        <li ng-repeat="player in unassignedPlayers">
-                            <div class="draggable-player" ng-drag="true" ng-drag-data="player" data-allow-transform="true"> {{player.name}} </div>
-                        </li>
-                    </ul>
-                </div>
+                  </h2>
 
-                <div class="col">
-                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
-                         <span class="title"><h2><a  class="color-team2" href="#" editable-text="team2.name">{{ team2.name || "team2" }}</a></h2></span>
-                        <ul class="dragable-objects">
-                            <li ng-repeat="player in droppedObjects2" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" 
-                                class="bg-team2"
-                                ng-center-anchor="{{centerAnchor}}">
-                                {{player.name}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button class="button button-outline button-positive" ng-click="setTrueTag()">True</button>
-                    <button class="button button-outline button-positive" ng-click="setFalseTag()">False</button>
-                     <button class="button button-outline button-positive" ng-click="soundChaChing()">ChaChing</button>
-                    <button class="button button-outline button-positive" ng-audio="sound/awww.mp3" volume="0.5" start="0.2">Awww</button>
-                     <button class="button button-outline button-positive" ng-audio="sound/squish-fart.mp3" volume="0.5" start="0.2">Squish Fart</button>
-                     <button class="button button-outline button-positive" ng-audio="sound/messagebox.mp3" volume="0.5" start="0.2">Message Box</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="bar bar-footer">
-                    <button class="button button-outline button-positive" ng-click="newPlayer()"><i class="ion-ios-plus-empty"></i> New Player</button>
-                    <button class="button button-outline button-positive" ng-click="showLogin()">Login</button>
-                     <span class="button button-outline button-royal icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">&nbsp;120</span>
-                </div><!--bar bar-footer-->
-            </div>
+                </div><!--  bar bar-subheader -->
 
 
+                     
 
-<script type="text/ng-template" id="newPlayer.html">
-    <div class="modal">
-         <ion-header-bar class="bar bar-header bar-dark">
-            <h1 class="title">Add New Player</h1>
-            <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
-        </ion-header-bar>
-        <ion-content>
-            <form>
-                <div class="list">
-                    <label class="item item-input">
-                        <span class="input-label">Player Name</span>
-                        <input type="text" ng-model="playerName" />
-                    </label>
-                </div>
-            </form>
-            <button type="submit" class="button button-block button-balanced" ng-click="addNewPlayer(playerName, initialScore)">Add New Player</button>
-            <button class="button button-block button-stable next-step hidden" ng-click="game.readyNextTurn()" type="button">Next Step</button>
-        </ion-content>
-    </div>
-</script>
-<script type="text/ng-template" id="login.html">
-    <div class="modal">
-         <ion-header-bar class="bar bar-header bar-dark">
-            <h1 class="title">Login</h1>
-            <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
-        </ion-header-bar>
-        <ion-content>
-            <form>
-                <div class="list">
-                    <label class="item item-input">
-                        <span class="input-label">Username</span>
-                        <input type="text" ng-model="username" />
-                    </label>
-                    <label class="item item-input">
-                        <span class="input-label">Password</span>
-                        <input type="password" ng-model="password" />
-                    </label>
-                </div>
-            </form>
-            <button type="submit" class="button button-block button-calm" ng-click="login(username, password)">Login</button>
-        </ion-content>
-    </div>
-</script>
-<script type="text/ng-template" id="timer.html">
-    <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-dark">
-            <h1 class="title">Act it out!</h1>
-            <button class="button button-clear button-primary" ng-click="modal.hide();stopTimer(true);">Cancel</button>
-        </ion-header-bar>
-        <ion-content class="padding">
-            <div class="progress-wrapper">
-                <div class="progress">
-                    {{humanizeDurationTimer(timer,'s')}}
-                </div>
-                <div round-progress 
-                    max="timeForTimer" 
-                    current="timer" 
-                    clockwise="false" 
-                    rounded="true" 
-                    responsive="true"
-                    color="#26bb65" 
-                    bgcolor="#eaeaea" 
-                    stroke="10" 
-                    animation="easeInOutBack" 
-                    animation-delay="0" 
-                    class="text-center"></div>
-            </div>
-            <div ng-if="!started && !paused && !done">
-                <div class="row">
-                    <div class="col">
-                        <button class="button button-outline button-balanced button-rounded button-block" ng-click="startTimer()">
-                            Start
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div ng-if="started && !done">
-                <div class="row">
-                    <div class="col">
-                        <button class="button button-balanced button-rounded button-block" ng-click="modal.hide();stopTimer(true);showSuccess();">
-                            Got it!
-                        </button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </ion-content>
-    </ion-modal-view>
-</script>
-<script type="text/ng-template" id="successMessage.html">
-    <div class="modal">
-         <ion-header-bar class="bar bar-header bar-success">
-            <h1 class="title">Success!</h1>
-        </ion-header-bar>
-        <ion-content class="bg-success">
-            <div class="row">
-                <div class="col">
-                    <h2>Congratulations xxxx!</h2>
-                    <br>
-                    <i class="ion-ribbon-b bigIcon" style="font-size: 40px;"></i>
-                    <h3>You have been awarded 1 point and now your team has xxxx points.</h3>
-                    <br>
-                    <br>
-                    <button class="button button-light button-block" ng-click="game.nextStep(); closeModal();">Next Turn</button>
-                </div>
-            </div>
-        </ion-content>
-    </div>
-</script>
-<script type="text/ng-template" id="timeExpiredMessage.html">
-    <div class="modal">
-        <ion-header-bar class="bar bar-header bar-error">
-            <h1 class="title">Time Expired!</h1>
-            <button class="button button-clear pull-left " ng-click="closeModal()">close</button>
-        </ion-header-bar>
-         <ion-content class="bg-error">
-            <div class="row">
-            <div class="col">
-                <div class="text-center">
-                    <h2>Booo xxxx!</h2>
-                    <br>
-                    <i class="ion-close bigIcon" style="font-size: 40px;"></i>
-                    <h3>No Points for activeTeam, opposing team offered chance to guess the phrase and steal point.</h3>
-                    <br>
-                    <br>
-                    <button class="button button-light button-large" ng-click="game.startBonousRound()">Steal Point</button>
-                    <button class="button button-light button-large" ng-click="game.nextStep()">Next Turn</button>
-                </div>
-                </div>
-            </div>
-        </ion-content>
-    </div>
-</script>
+            <div ng-if="cards.active">
+               <td-cards control="cardsControl">
+                     <td-card 
+                        ng-repeat="card in cards.active"
+                            on-transition-up="cardSwipedUp($index)"
+                            on-transition-left="cardSwipedLeft($index)"
+                            on-transition-right="cardSwipedRight($index)"
+                            on-partial-swipe="cardPartialSwipe(amt)" 
+                            on-destroy="cardDestroyed($index)"
+                            class="card card-{{$index}}  card-{{( hideCards == true ) ? 'back' : 'face' }} ">
+                        <div  ng-controller="CardCtrl">
 
-</ion-pane>
-</div>
-<!--GameController-->
+                          <article class="phrase">
+                                <h1 class="td-title">{{card.phrase}}</h1>
+                              </article>
+
+                              <button  ng-click="activateCard($index);" class="button button-calm button-outlined td-button">Select Card</button>
+                                    <!-- 
+                                    ion-ios-timer-outline
+                                    ion-close
+                                    ion-ios-person-outline
+                                    ion-ios-people-outline
+                                    ion-asterisk
+                                    ion-log-out
+                                    ion-log-in
+                                    ion-power
+                                    ion-ribbon-a
+                                    ion-ribbon-b
+                                    ion-trophy -->
+
+                              <div ng-if="cards.activeCard.length">
+                                  <span class="button button-balanced button-block icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">Start Countdown!</span>
+                              </div>
+
+                        </div>
+                     </td-card>
+
+                <td-card id="end-card" drag="false" ng-if="cards.active.length === 0">
+                    <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
+                </td-card>
+
+               </td-cards>
+            </div>
+
+
+
+
+          
+            <div class="bar bar-footer bar-transparent">
+              <div class="title">
+                
+                <span id="team1ScoreBoard" class="team-score pull-left"><b>Team1 Score: {{team1Score}}</b></span>
+                <span id="team2ScoreBoard" class="team-score pull-right"><b>Team2 Score: {{team2Score}}</b></span>
+                <span class="team-score center-block"><b>turn: {{turn}} || step: {{step}}</b></span>
+                
+              </div>
+            </div>
+
+        </div>
+    </ion-content>
 </ion-view>
+
+
+
+
+
+

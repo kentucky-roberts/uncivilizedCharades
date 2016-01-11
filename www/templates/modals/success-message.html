@@ -1,0 +1,18 @@
+<div class="modal">
+     <ion-header-bar class="bar bar-header bar-success">
+        <h1 class="title balanced">Success!</h1>
+     </ion-header-bar>
+    <ion-content class="bg-success">
+        <div class="row">
+            <div class="col">
+                <h2>Congratulations {{game.activePlayer}}</h2>
+                <br>
+                <i class="ion-ribbon-b bigIcon" style="font-size: 40px;"></i>
+                <h3>You have been awarded 1 point and now your team has {{game.activeTeam}} points.</h3>
+                <br>
+                <br>
+                <button class="button button-light button-block" ng-click="game.nextStep(); closeModal();">Next Turn</button>
+            </div>
+        </div>
+    </ion-content>
+</div>

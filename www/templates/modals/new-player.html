@@ -1,0 +1,20 @@
+<div class="modal">
+     <ion-header-bar class="bar bar-clear">
+        <h1 class="title">Add New Player</h1>
+        <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <form>
+           <a class="item item-avatar" href="#">
+                <img src="img/avatar.jpg">
+            </a>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Player Name</span>
+                    <input type="text" ng-model="playerName" />
+                </label>
+            </div>
+        </form>
+        <button type="submit" class="button button-block button-balanced" ng-click="app.addNewPlayer(playerName)">Add New Player</button>
+    </ion-content>
+</div>

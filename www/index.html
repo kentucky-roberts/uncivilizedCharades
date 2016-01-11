@@ -3,11 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>UncivilizedCharades</title>
-    <!-- compiled css output -->
-    <link href="css/xeditable.css" rel="stylesheet">
-    <link href="css/ionic.app.css" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+    <title>UncivilizedCharades.app</title>
 
+    <link rel="stylesheet" href="css/xeditable.css">
+    <link rel="stylesheet" href="http://hafizbilal112.github.io/ion-fab-button/ion-fabButton.css">
+    <link rel="stylesheet" href="lib/ionic-ion-frost/ionic.contrib.frost.css">
+    <link rel="stylesheet" href="css/ionic.app.css">
     <style>
         
     *{
@@ -160,7 +162,9 @@
     </style>
 
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
+    <script src="lib/ionic-service-core/ionic-core.js"></script>
+    
+    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
 
     <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/jquery-ui/jquery-ui.min.js"></script>
@@ -169,16 +173,35 @@
     <!-- IMPORTANT : SHOULD be after ionic bundle and before cordova.js -->
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
     <!--<script src="lib/ionic-swipecards/ionic-swipecards.js"></script>-->
-    <script src="lib/firebase/firebase.js"></script>
-    <script src="lib/angularfire/dist/angularfire.js"></script>
+
+  <script src="lib//angular-route/angular-route.js"></script>
+  <script src="lib/firebase/firebase.js"></script>
+  <script src="lib/angularfire/dist/angularfire.js"></script>
+
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-    
+    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
+<!-- <script src="cordova.js"></script> -->
+    <script src="lib/ionic-ion-frost/ionic.contrib.frost.js"></script>
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/app.config.js"></script>
 
-    <!--<script src="js/ionic.swipecards.custom.js"></script>-->
+    <script src="templates/components/appversion/appversion-directive.js"></script>
+    <script src="templates/components/auth/auth.js"></script>
+    <script src="templates/components/firebase.utils/firebase.utils.js"></script>
+    <script src="templates/components/ngcloak/ngcloak-decorator.js"></script>
+    <script src="templates/components/reverse/reverse-filter.js"></script>
+    <script src="templates/components/security/security.js"></script>
+        
+    <script src="templates/main-menu/main-menu.controller.js"></script>
+    <script src="templates/game/game.controller.js"></script>
+    <script src="templates/settings/settings.controller.js"></script>
+    <script src="templates/login/login.controller.js"></script>
+
+
+
+
+    <script src="js/ionic.swipecards.custom.js"></script>
     <!--<script src="lib/ionic-ion-tinder-cards/ionic.tdcards.js"></script>-->
 
     <!-- Moment -->
@@ -186,27 +209,34 @@
     <!-- rounded progrssbar for timer on player -->
     <script src="lib/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
     <script src="lib/angular-animate/angular-animate.js"></script>
     <script src="lib/angular-touch/angular-touch.js"></script>
     <script src="lib/angular-messages/angular-messages.js"></script>
-    <!--<script src="lib/ngDraggable/ngDraggable.js"></script>-->
     <script src="lib/ngDraggable/ngDraggable.js"></script>
     <script src="lib/angular-xeditable/dist/js/xeditable.js"></script>
     <script src="lib/angular-audio/app/angular.audio.js"></script>
+    <script src="lib/ionic-toast/dist/ionic-toast.bundle.min.js"></script>
+    <script src="lib/ionic-native-transitions/dist/ionic-native-transitions.min.js"></script>
+    
+    
+    
+        <!--ion-fab-button-->
+    <script src="http://hafizbilal112.github.io/ion-fab-button/ion-fabButton.js"></script>
 
     <script src="js/animations.js"></script>
     <script src="js/directives.js"></script>
     <script src="js/controllers.js"></script>
-    <script src="templates/settings/settings.controller.js"></script>
+    
     <script src="js/services.js"></script>
+    <script src="js/filters.js"></script>
 </head>
 
-<body ng-app="app" animation="slide-left-right-ios7" ng-cloak="">
+<body ng-app="app" animation="slide-left-right-ios7" ng-cloak="" no-scroll="">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
-    <ion-nav-bar class="bar-dark">
-
+    <ion-nav-bar class="bar-transparent">
       <ion-nav-back-button>
       </ion-nav-back-button>
     </ion-nav-bar>

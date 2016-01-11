@@ -1,0 +1,60 @@
+//   Global Theme Variables - Ionic
+// --------------------------------------------------
+////
+//////
+////////
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+$calm:                            #11c1f3 !default;
+$fb-blue:                       	#3b5998 !default;
+$google-red:                   	#d34836 !default;
+
+
+//
+//   Set Custom Brand 
+// --------------------------------------------------
+//
+$brand-primary:						#fc0 !default;
+$brand-yellow:							#fc0 !default;
+$brand-blue:							#84bcde !default; 
+$brand-red:							#fb292d !default; 
+$brand-secondary:						#fc0 !default;
+$brand-color-link:						$brand-primary;
+$brand-bg:								#333 !default;
+$brand-color:							#c7c7c7 !default;
+$brand-font-family-base:				'Open Sans', sans-serif !default;
+$brand-font-family-hand-writing:		'Shadows Into Light Two', cursive !default;
+$brand-color-gray:						#444444 !default;
+$brand-gray:							$brand-color-gray;
+$brand-light-gray:						#bfbfbf !default;
+$brand-color-dark:						#121212 !default;
+$brand-color-light:						#c6c6c6 !default;
+
+$brand-color-success:					$energized;
+$brand-color-error:					$assertive;
+
+$brand-team1-color:			$brand-red;
+$brand-team2-color:			$brand-blue;
+
+
+
+
+
+
+
+
+//
+//   Get and Add Custom Brand 
+// --------------------------------------------------
+//
+$brand-link-color:		$brand-primary;
+$brand-link-color-hover:	#ffffff;
+
+
+

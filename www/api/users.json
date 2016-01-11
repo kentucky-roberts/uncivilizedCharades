@@ -1,13 +1,13 @@
-{ "users":  [
+{ "user":  [
     {
-      "Id":  0,
+      "id":  1,
       "userName": "Admin",
       "image": "images/avatar.png",
       "email": "croberts@lknpro.com",
       "password": "root"
     },
       {
-      "id":  1,
+      "id":  2,
       "userName": "Chris Roberts",
       "image": "images/avatar.png",
       "email": "lknroberts@gmail.com",

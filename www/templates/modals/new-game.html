@@ -1,0 +1,19 @@
+<div class="modal">
+     <ion-header-bar class="bar bar-clear">
+        <h1 class="title">New Game</h1>
+        <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
+    </ion-header-bar>
+    <ion-content class="has-header">
+
+        <section class="list" ng-repeat="player in app.players track by $index">
+            <a class="list-item item-player">
+                <img src="{{player.face}}" class="avatar">
+                <h2 class="ng-binding">{{player.name}}</h2>
+                <p class="ng-binding">Score: {{player.score}} <strong>Team:</strong> {{player.team}}</p>
+            </a>
+        </section>
+
+        <button type="submit" class="button button-block button-balanced" ng-click="app.createNewGame(app.players, app.teams)"> Create & Save New Game!</button>
+    </ion-content>
+</div>
+

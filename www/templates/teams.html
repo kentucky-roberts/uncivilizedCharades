@@ -1,10 +1,20 @@
-<ion-view view-title="Drop players into teams">
-      <ion-content ng-controller="GameController">
+<ion-view view-title="Drop players into teams" name="teams-view">
+  <ion-content ng-controller="appController" class="padding">
+
+            
+        <div class="bar bar-subheader bar-transparent">
+                <div class="col">
+                    <h2><a href="#" editable-text="team1.name">{{ team1.name || "team1" }}</a></h2>
+                </div>
+                <div class="col">
+                    <span class="title"><h2><a   href="#" editable-text="team2.name">{{ team2.name || "team2" }}</a></h2></span>
+                </div>
+        </div>
 
          <div class="row">
                 <div class="col">
                     <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
-                        <span class="title"><h2><a href="#" editable-text="team1.name">{{ team1.name || "team1" }}</a></h2></span>
+                        
                         <ul class="dragable-objects">
                             <li ng-repeat="player in droppedObjects1" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)"
                                 class="bg-team1"
@@ -17,7 +27,7 @@
 
                 <div class="">
                     <ul class="draggable-objects">
-                        <li ng-repeat="player in unassignedPlayers">
+                        <li ng-repeat="player in players track by $index">
                             <div class="draggable-player" ng-drag="true" ng-drag-data="player" data-allow-transform="true"> {{player.name}} </div>
                         </li>
                     </ul>
@@ -25,7 +35,6 @@
 
                 <div class="col">
                     <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
-                         <span class="title"><h2><a   href="#" editable-text="team2.name">{{ team2.name || "team2" }}</a></h2></span>
                         <ul class="dragable-objects">
                             <li ng-repeat="player in droppedObjects2" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" 
                                 class="bg-team2"
@@ -40,6 +49,8 @@
             <div class="bar bar-footer">
                 <button class="button button-dark button-outlined pull-right {{ (unassignedPlayers.length <= 0 ) ? 'show' : 'hidden' }}" ng-click="selectTabWithIndex(3)">Next</button>
             </div>
+
+
 
       <ion-content>
 </ion-view>

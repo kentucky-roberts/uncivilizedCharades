@@ -1,4 +1,4 @@
-<ion-view view-title="Intro" name="intro-view">
+<!-- <ion-view view-title="Intro" name="intro-view">
   <ion-content class="padding">
 	<h1>Intro</h1>
 	<h3>Main Menu Pre-Game option from Allens apti/game_txt.json</h3>
@@ -8,5 +8,31 @@
 
 
       
+  </ion-content>
+</ion-view>
+ -->
+<!-- 
+<ion-view title="{{pet.title}}">
+  <ion-content padding="true">
+    <p>{{ pet.description }}</p>
+    <p><a class="button button-small icon ion-arrow-left-b" href="#/tab/pets"> All Pets</a></p>
+  </ion-content>
+</ion-view>
+
+ -->
+<ion-view title="Adopt A Pet">
+  <ion-content has-tabs="true">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <span class="input-label">Your name</span>
+        <input type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Your email</span>
+        <input type="email">
+      </label>
+      <ion-toggle>Subscribe To Newsletter</ion-toggle>
+      <button class="button button-positive button-block">Adopt</button>
+    </div>
   </ion-content>
 </ion-view>

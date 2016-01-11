@@ -1,0 +1,46 @@
+    <div class="modal">
+    <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-dark">
+            <h1 class="title">Act it out!</h1>
+            <button class="button button-clear button-primary" ng-click="modal.hide();stopTimer(true);">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+            <div class="progress-wrapper">
+                <div class="progress">
+                    {{humanizeDurationTimer(timer,'s')}}
+                </div>
+                <div round-progress 
+                    max="timeForTimer" 
+                    current="timer" 
+                    clockwise="false" 
+                    rounded="true" 
+                    responsive="true"
+                    color="#26bb65" 
+                    bgcolor="#eaeaea" 
+                    stroke="10" 
+                    animation="easeInOutBack" 
+                    animation-delay="0" 
+                    class="text-center"></div>
+            </div>
+            <div ng-if="!started && !paused && !done">
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-outline button-balanced button-rounded button-block" ng-click="startTimer()">
+                            Start
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="started && !done">
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-balanced button-rounded button-block" ng-click="modal.hide();stopTimer(true);showSuccess();">
+                            Got it!
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</div>
