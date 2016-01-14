@@ -1,8 +1,18 @@
 <ion-view view-title="Create New Players" name="players-view">
   <ion-content class="padding">
 
+      <p class="messages">
+         <div class="title">
+            You currently have <strong>{{players.length}}</strong> of <strong>4</strong> minimum players for a new game.
+        </div>
+      </p>
+
+
+<button class="button button-positive button-outline button-icon ion-plus" ng-click="showNewPlayer()">Add New Player
+      </button>
+
       <div class="row">
-        <section class="col" ng-repeat="player in app.players track by $index">
+        <section class="col" ng-repeat="player in players track by $index">
             <a class="item-player">
                 <img src="{{player.face}}" class="avatar">
                 <h2 class="ng-binding">{{player.name}}</h2>
@@ -12,27 +22,18 @@
       </div>
 
 
+<div class="message__container">
+ <span class="brand-error {{ (readyForTeams === false) ? 'show' : 'hidden' }}">Please add more players...</span>
+        <span class="brand-success {{ (readyForTeams == true) ? 'show' : 'hidden' }}">Nice! You may now proceed to the next step or continue adding players!</span>
+</div>
 
 
-      <p class="messages">
-         <div class="title">
-            You currently have <strong>{{app.players.length}}</strong> of <strong>4</strong> minimum players for a new game.
-        </div>
-        <span class="brand-error {{ (app.readyForTeams === false) ? 'show' : 'hidden' }}">Please add more players...</span>
-        <span class="brand-success {{ (app.readyForTeams == true) ? 'show' : 'hidden' }}">Nice! You may now proceed to the next step or continue adding players!</span>
+    <div class="bar bar-footer bar-dark">    
 
-      </p>
-      
 
-    <div class="bar bar-footer bar-dark">
-
-   
-                <button class="button button-stable" ng-click="showNewPlayer()"><i class="ion-ios-plus-empty"></i> Add Player</button>
-              <a class="button icon-left ion-chevron-right button-clear button-dark {{ (app.readyForTeams === true) ? 'show' : 'hidden' }}" ng-click="app.showBuildTeams()"> Create New Teams </a>
-     
-
+            <a native-ui-sref="tabs.teams" native-ui-sref-opts="{reload: true}" class="button icon-left ion-chevron-right  button-positive {{ (readyForTeams === true) ? 'show' : 'show' }}" ng-click="showBuildTeams()"> Next Step</a>
     </div>
 
-  </ion-pane>
+  </ion-content>
 </ion-view>
 

@@ -5,12 +5,12 @@ angular
 // .controller('AppController', [ '$rootScope', '$scope',  '$window', '$interval', '$timeout', '$state', '$ionicTabsDelegate', '$ionicPopup', '$http', '$ionicModal', '$ionicLoading', 'ionicToast', 'ngAudio', 'LoginService', 'UserService', 'PlayerService', 'TeamService', 'GameService', 'CardService,' 'DealerService', 'ModalService', 'CountdownService',  
 // 	function($scope, $state, $window, $interval, $timeout, $ionicTabsDelegate, $ionicPopup, $http, $ionicModal, $ionicLoading, ionicToast, ngAudio, LoginService, UserService, PlayerService, TeamService, GameService, CardService, DealerService, ModalService, CountdownService) {
   	
-.controller('AppController', ['$scope', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicSwipeCardDelegate', '$ionicTabsDelegate', '$ionicPlatform', 'fbutil', '$firebaseObject', 'FBURL', 'ngAudio', 'ionicToast', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 'LoginService', 'GameService', 'UserService', 'AppService', 'GameService', 'Games', 
-  function($scope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicSwipeCardDelegate, $ionicTabsDelegate, $ionicPlatform, fbutil, $firebaseObject, FBURL, ngAudio, ionicToast, PlayerService, CardService, ModalService, CountdownService, DealerService, LoginService, GameService, UserService, AppService, GameService, Games) {
+.controller('AppController', ['$scope', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicTabsDelegate', '$ionicPlatform', 'fbutil', '$firebaseObject', 'FBURL', 'ngAudio', 'ionicToast', '$ionicNavBarDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 'LoginService', 'GameService', 'UserService', 'AppService', 'GameService', 'Games', 
+  function($scope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, $ionicPlatform, fbutil, $firebaseObject, FBURL, ngAudio, ionicToast, $ionicNavBarDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService, LoginService, GameService, UserService, AppService, GameService, Games) {
 
 	$scope.showLoading = function() {
 		$ionicLoading.show();
-	}; $scope.showLoading();
+	}; $scope.showLoading(); 
 
 	// $ionicPlatform.ready(function() {
 	//     $scope.$apply(function() {
@@ -21,161 +21,20 @@ angular
 	//         $scope.model = device.model;
 	//         $scope.platform = device.platform;
 	//         $scope.uuid = device.uuid;
-	//         $scope.bootApp();
+	//         $scope.boot$scope();
 	//     })
 	// })
 
 	var app = this;
-	app.showRegistration = false;
-	app.user = [];
-	app.players = [];
-	app.teams = [];
-
-	app.init = function() {
-		app.showRegistration = false;
-		app.user = [];
-		app.players = [];
-		app.teams = [];
-		app.readyForUser = true;
-		app.readyForPlayers = false;
-		app.readyForTeams = false;
-		app.showLoadGameButton = false;
-		app.showSavedGames = false;
-		app.message = "Login or register to start playing!";
-		app.start();
-	}
-
-	app.start = function() {
-		app.demoMakePlayers();
-		// if no user, login or create one
-		// 
-
-		if (app.user.length === -1 && app.readyForUser === true) {
-			app.showLoginUser();
-		}
-
-		//app.demoMakePlayers();
-	}
+	$scope.user = [];
+	$scope.players = [];
+	$scope.teams = [];
 
 
-	// app.addNewUser = function(userName, password) {
-	// 	var newUser = UserService.newUser(userName, password);
-	// 	app.user.push(angular.extend({}, newUser));
-	// 	$scope.user = angular.copy(app.user);
-	// 	console.log(app.user.userName);
-
-	// 	if (app.user.length == 1) {
-	// 		app.readyForPlayers = true
-	// 		app.showBuildPlayers();
-	// 	}
-	// };
-
-
-	app.addNewPlayer = function(playerName) {
-		console.log("app.addNewPlayer() was called...");
-		$scope.closeModal();
-		var newPlayer = PlayerService.newPlayer(playerName);
-		console.log(newPlayer);
-		
-		app.players.push(angular.extend({}, newPlayer));
-		$scope.players = angular.copy(app.players);
-		$scope.unassignedPlayers = angular.copy(app.players);
-
-		console.log("First app.players from array: " + app.players[0].name);
-		console.log("app.players.lenngth: " + app.players.length);
-
-
-		if (app.players.length >= 4 ) {
-			app.readyForTeams = true;
-			app.showBuildTeams();
-		}
-
-
+	$scope.saveNewGame = function(players) {
+		// GameService.saveFirebaseGame();
+		console.log("saveNewGame() called!");
 	};
-
-
-	////////////////////////////////////////
-	// ModalService
-	////////////////////////////////////////
-	  $scope.showNewPlayer = function() {
-	    ModalService
-	      .init('templates/modals/new-player.html', $scope)
-	      .then(function(modal) {
-	        modal.show();
-	      });
-	  };
-	  
-	  $scope.showLogin = function() {
-	    ModalService
-	      .init('templates/modals/login-user.html')
-	      .then(function(modal) {
-	        modal.show();
-	      });
-	  };
-
-
-	////////////////////////////////////////
-	// Toast
-	////////////////////////////////////////
-	$scope.showToast = function(){
-	<!-- ionicToast.show(message, position, stick, time); -->
-	  ionicToast.show('This is a toast at the top.', 'top', true, 2500);
-	};
-
-	////////////////////////////////////////
-	// User Authentication
-	////////////////////////////////////////
-	// $scope.showRegistration = app.showRegistration;
-	app.showLoginUser = function() {
-		$ionicTabsDelegate.select(0);
-	}
-
-	app.showBuildPlayers = function() {
-		$ionicTabsDelegate.select(1);
-	}
-
-	app.showBuildTeams = function() {
-		$ionicTabsDelegate.select(2);
-	}
-
-	app.showMainMenu = function() {
-		$ionicTabsDelegate.select(2);  // main-menu-tab
-
-		if (app.user.savedGames.length === -1) {
-			console.log("This user doesn't have any savedGames.  That means they can only create a new game.")
-			app.showCreateNewGame();
-		} else {
-			app.showLoadGameOrCreateNewGame();
-		}
-
-
-	}
-
-	//app.showAvailablePlayers = GameService.showAvailablePlayers();
-
-	app.showCreateNewGame = function() {
-		$ionicTabsDelegate.select(2);  // create-game-tab // uses app.players and app.teams in pop-up modal, asking to confirm newGame settings.  If YES then // ng-click="app.createNewGame(app.players, app.teams);" // 
-
-	};
-
-	app.showLoadGameOrCreateNewGame = function() {
-		$ionicTabsDelegate.select(2);  // create-game-tab // uses app.players and app.teams in pop-up modal, asking to confirm newGame settings.  If YES then // ng-click="app.createNewGame(app.players, app.teams);" // 
-		app.showLoadGameButton = true;
-	};
-
-	$scope.data = {};
-
-	// $scope.loginUser = function($scope) {
-	// 	var newUser = LoginService.loginUser(data);
-	//     	console.log("LOGIN user: " + $scope.data.userame + " - PW: " + $scope.data.password);
-
-	//     	if (newUser) {
-	// 		app.user.push(angular.extend({}, newUser));
-	// 		console.log("app.user: " + app.user.length);
-	//     	}
-
-	//     	app.showMainMenu();
-	// };
 
 
 	////////////////////////////////////////
@@ -207,6 +66,8 @@ angular
 	$scope.hideNavBar = function() {
 	    document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
 	};
+	
+	$scope.hideNavBar();
 
 	$scope.showNavBar = function() {
 	    document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
@@ -221,200 +82,47 @@ angular
 	    }
 	};
 
-	
-	// UserService.save({name: 'Saimon', email: 'saimon@devdactic.com'});
-	// // UserService.update({user: 1}, {name: 'Saimon', email: 'saimon@devdactic.com'});
-	// // UserService.update({user: 1, name: 'Saimon', email: 'saimon@devdactic.com'}, {});
+	////////////////////////////////////////
+	// User Authentication
+	////////////////////////////////////////
+	// $scope.showRegistration = $scope.showRegistration;
+	$scope.showLoginUser = function() {
+		$ionicTabsDelegate.select(0);
+	}
 
-	// var query = UserService.query();
+	$scope.showBuildPlayers = function() {
+		$ionicTabsDelegate.select(1);
+	}
 
-	// query.$promise.then(function(data) {
-	//     $scope.users = data;
-	//     console.log("users from query.$promise: " + $scope.users);
-	//     // Do whatever when the request is finished
-	// });
-	/**
-	* DragPlayers to make Teams
-	*
-	*
-	**/
-	 $scope.centerAnchor = true;
-        $scope.toggleCenterAnchor = function () {$scope.centerAnchor = !$scope.centerAnchor}
+	$scope.showBuildTeams = function() {
+		$ionicTabsDelegate.select(2);
+	}
 
-        //$scope.unassignedPlayers = app.players;
-        $scope.droppedObjects1 = [];
-        $scope.droppedObjects2= [];
+	$scope.showMainMenu = function() {
+		$ionicTabsDelegate.select(3);  // main-menu-tab
 
-        $scope.onDropComplete1=function(data,evt){
-            var index = $scope.droppedObjects1.indexOf(data);
-            var player = $scope.unassignedPlayers.indexOf(data);
-
-            if (index == -1) {
-              $scope.droppedObjects1.push(data); 
-              $scope.assignPlayerTeam(data);
-              $scope.soundClickOn();
-            }
-            if (player > -1) {
-              $scope.unassignedPlayers.splice(player, 1);
-            }
-        }
-        $scope.onDragSuccess1=function(data,evt){
-            console.log("133","$scope","onDragSuccess1", "", evt);
-            var index = $scope.droppedObjects1.indexOf(data);
-            if (index > -1) {
-                $scope.droppedObjects1.splice(index, 1);
-            }
-        }
-        $scope.onDragSuccess2=function(data,evt){
-            var index = $scope.droppedObjects2.indexOf(data);
-            
-            if (index > -1) {
-                $scope.droppedObjects2.splice(index, 1);
-                
-            }
-        }
-        $scope.onDropComplete2=function(data,evt){
-            var index = $scope.droppedObjects2.indexOf(data);
-            var player = $scope.unassignedPlayers.indexOf(data);
-            $scope.clickOn();
-
-            if (index == -1) {
-                $scope.droppedObjects2.push(data);
-            }
-          
-            if (player > -1) {
-              $scope.unassignedPlayers.splice(player, 1);
-            }
-
-        }
-
-        var inArray = function(array, player) {
-            var index = array.indexOf(player);
-        }
-
-
-        $scope.assignPlayerTeam = function(index) {
-      
-		var x = index;
-		
-		if ( app.players[x].team === team1 ) {
-			alert(app.players[x].team + "is on team1");
+		if ($scope.user.savedGames.length === -1) {
+			console.log("This user doesn't have any savedGames.  That means they can only create a new game.")
+			$scope.showCreateNewGame();
+		} else {
+			$scope.showLoadGameOrCreateNewGame();
 		}
+	}
 
-        	if (app.players[x].team === team2) {
-        		//PlayerService.player.changeTeam(team1);
-        		alert(app.players[x].team + "is on team2");
-        	}
-        	
-        	
-
-        };
-
-	$scope.team1 = {
-	    name: 'The Goodguys'
-	};
-
-	$scope.team2 = {
-	    name: 'The Badguys'
-	};
-
-
-	app.demoMakePlayers = function() {
-		console.log("game.demoMakePlayers() was called...");
-
-		var p1 = PlayerService.newPlayer("Randy Jackson");
-		app.players.push(angular.extend({}, p1));
-		
-		var p2 = PlayerService.newPlayer("Bert Rynolds");
-		app.players.push(angular.extend({}, p2));
-		
-		var p3 = PlayerService.newPlayer("Sandra Bullock");
-		app.players.push(angular.extend({}, p3));
-		
-		var p4 = PlayerService.newPlayer("Tim Taylor");
-		app.players.push(angular.extend({}, p4));
-		
-		$scope.players = angular.copy(app.players);
-		//$scope.player = game.players[0];
-		//console.log(game.players[0].name);
-		//console.log($scope.players);
-
-
-		//PlayerService.logInfo();
-		//p1.PlayerService.changeScore(5);
-		
-		 
-		 //var p1Stats = PlayerService.player.logInfo(p1);
-		 //sconsole.log(game.player[0]);
-		// p4.PlayerService.logInfo();
-
+	$scope.showCreateNewGame = function() {
+		$ionicTabsDelegate.select(3);  // create-game-tab // uses $scope.players and $scope.teams in pop-up modal, asking to confirm newGame settings.  If YES then // ng-click="$scope.createNewGame($scope.players, $scope.teams);" // 
 
 	};
 
-
-	app.demoMakeTeams = function() {
-		console.log("game.demoMakeTeams() was called...");
-		var gp0 = app.players[0];
-		var gp1 = app.players[1];
-		var gp2 = app.players[2];
-		var gp3 = app.players[3];
-
-		
-		var team1 = TeamService.newTeam("Blue Team", [gp0, gp2]);
-
-		app.teams.push(angular.extend({}, team1));
-
-		var team2 = TeamService.newTeam("Red Team", [gp3, gp1]);
-
-		app.teams.push(angular.extend({}, team2));
-		//var object = angular.merge({}, object1, object2)
-
-		$scope.teams = app.teams;
-
-
-		// var at = 0; //active team
-		// var ap = 0;  //active player
-
-		// function playerSequence() {
-		// 	if (game.teams.length === at ) {
-		// 		at = 0;
-		// 	}
-		// 	if (game.teams.players.length === ap ) {
-		// 		ap = 0;
-		// 	}
-		// 	game.activePlayer = game.teams[at].players[ap];
-		// 	console.log(game.activePlayer);
-		// 	nextPlayer(); 
-		// }
-
-		// function nextPlayer() {
-		// 	at ++;
-		// 	ap ++;
-		// }
-	       
-	 //       playerSequence();
-	      
-		
-
-
- 		for (var i = 0; i < app.teams.length; i++) {
-	        var t = app.teams[i];
-	      }
-
-	      for (var n = 0; n < t.players.length; n++) {
-	        var p = t.players[n];
-	       // console.log("playerName: " + p.name + "playerScore: " + p.score);
-	      }
-	     console.log( p);
-	 
-	 
+	$scope.showLoadGameOrCreateNewGame = function() {
+		$ionicTabsDelegate.select(3);  // create-game-tab // uses $scope.players and $scope.teams in pop-up modal, asking to confirm newGame settings.  If YES then // ng-click="$scope.createNewGame($scope.players, $scope.teams);" // 
+		$scope.showLoadGameButton = true;
 	};
 
 
 	$scope.bootApp = function() {
-		app.init()
+		$scope.init()
 	};
-
 	$scope.hideLoading = function() {
 	    $timeout(function() {
 	        $ionicLoading.hide();
@@ -422,6 +130,78 @@ angular
 	};
 	$scope.hideLoading();
 }])  //// @endAppController
+
+
+
+
+
+.controller('CardsCtrl', function($scope, $ionicModal, $ionicPopover, $ionicListDelegate, Cards) {
+
+  $scope.cards = Cards;
+
+  $scope.shouldShowDelete = false;
+  $scope.shouldShowReorder = false;
+  $scope.listCanSwipe = true
+
+  
+  //$scope.filterFunction = function(element) {
+   // return element.name.match(/^Ma/) ? true : false;
+  //};
+
+    $scope.filterFunction = function(element) {
+    return element.xLevel.match(/^Ma/) ? true : false;
+  };
+
+  $scope.addCard = function(phrase, color, xLevel) {
+    $scope.err = null;
+    $scope.cards.$add({
+      name: name, 
+      color: color,
+      xLevel: xLevel
+    })
+    .then(function(/* user */) {
+      $scope.modal.remove();
+    }, function(err) {
+      $scope.err = errMessage(err);
+    });
+  };
+
+  $scope.edit = function(item) {
+    alert('Edit Item: ' + item.id);
+  };
+
+  $ionicModal.fromTemplateUrl('templates/my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+
+
+}) //CardsCtrl
+
+
+
 
 // .controller('DeviceController', function($ionicPlatform, $scope, $cordovaDevice) {
 //     $ionicPlatform.ready(function() {
@@ -462,8 +242,8 @@ angular
   };
 })
 
-.controller('CardsController', ['$scope', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicSwipeCardDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 
-  function($scope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicSwipeCardDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService) {
+.controller('CardsController', ['$scope', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 
+  function($scope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, PlayerService, CardService, ModalService, CountdownService, DealerService) {
 
 	  var cardTypes = CardService.all();
 
@@ -481,10 +261,6 @@ angular
 	  $scope.playerCards = {};
 	  $scope.activeCards = [];
 
-	  $scope.reload = function(){
-	    CardService.reload();
-	  };
-
 	  $scope.cardsControl = {};
 
 	  $scope.cardDestroyed = function(index) {
@@ -493,11 +269,10 @@ angular
 
 	  $scope.deal = function() {
 	  	$scope.hideCards = true;
-	  	$scope.refreshCards();
-	  	$scope.activeCards = DealerService.deal(3);
-
+	  	//$scope.refreshCards();
+	  	$scope.activeCards = CardService.threeCards();
 	  }
-
+$scope.deal();
 	  $scope.addCard = function() {
 	    var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
 	    newCard.id = Math.random();
@@ -580,7 +355,73 @@ angular
 }])
 
 
-.controller('CardController', function($scope, $timeout, CardService) {
+.controller('CardsCtrl', function($scope, TDCardDelegate, $ionicModal, $ionicPopover, $ionicListDelegate, CardService) {
+
+  $scope.cards = CardService;
+
+  $scope.shouldShowDelete = false;
+  $scope.shouldShowReorder = false;
+  $scope.listCanSwipe = true
+
+  
+  //$scope.filterFunction = function(element) {
+   // return element.name.match(/^Ma/) ? true : false;
+  //};
+
+    $scope.filterFunction = function(element) {
+    return element.xLevel.match(/^Ma/) ? true : false;
+  };
+
+  $scope.addCard = function(phrase, color, xLevel) {
+    $scope.err = null;
+    $scope.cards.$add({
+      name: name, 
+      color: color,
+      xLevel: xLevel
+    })
+    .then(function(/* user */) {
+      $scope.modal.remove();
+    }, function(err) {
+      $scope.err = errMessage(err);
+    });
+  };
+
+  $scope.edit = function(item) {
+    alert('Edit Item: ' + item.id);
+  };
+
+  $ionicModal.fromTemplateUrl('templates/my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+
+
+}) //CardsCtrl
+
+
+.controller('CardController', function($scope, TDCardDelegate, $timeout, CardService) {
 
   var vm = this;
 
@@ -629,6 +470,19 @@ angular
 })
 
 
+.controller('CardCtrl', function($scope, TDCardDelegate) {
+  $scope.cardSwipedLeft = function(index) {
+    console.log('LEFT SWIPE');
+    $scope.addCard();
+  };
+  $scope.cardSwipedRight = function(index) {
+    console.log('RIGHT SWIPE');
+    $scope.addCard();
+  };
+})
+
+
+
 .controller('UnderCtrl', function($scope) {
   $scope.items = [];
   for(var i = 0; i < 30; i++) {
@@ -650,6 +504,144 @@ angular
 	store.products = ProductService.all();
 	$scope.products = store.products;
 
-
-	console.log("$scope.products.length: " + $scope.products.length);
 })
+
+
+
+.factory('Games', function() {
+  return {
+    all: function() {
+      var gameString = window.localStorage['games'];
+      if(gameString) {
+        return angular.fromJson(gameString);
+      }
+      return [];
+    },
+    save: function(games) {
+      window.localStorage['games'] = angular.toJson(games);
+    },
+    newGame: function(gameTitle) {
+      // Add a new project
+      return {
+        title: gameTitle,
+        players: []
+      };
+    },
+    getLastActiveIndex: function() {
+      return parseInt(window.localStorage['lastActiveGame']) || 0;
+    },
+    setLastActiveIndex: function(index) {
+      window.localStorage['lastActiveGame'] = index;
+    }
+  }
+})
+
+.controller('TodoCtrl', function($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, Games) {
+
+  // A utility function for creating a new project
+  // with the given projectTitle
+  var createGame = function(gameTitle) {
+    var newGame = Games.newGame(gameTitle);
+    $scope.games.push(newGame);
+    Games.save($scope.games);
+    $scope.selectGame(newGame, $scope.games.length - 1);
+    $scope.gameModal.hide();
+  }
+
+
+  // Load or initialize projects
+  $scope.games = Games.all();
+
+  // Grab the last active, or the first project
+  $scope.activeGame = $scope.games[Games.getLastActiveIndex()];
+    
+    $scope.showGameModal = function(){
+        $scope.gameModal.show();
+    };
+    
+  // Called to create a new project
+  $scope.newGame = function(game) {
+    //var projectTitle = prompt('Project name');
+    var gameTitle = game.title;
+    if(gameTitle) {
+      createGame(gameTitle);
+    }
+  };
+
+  // Called to select the given project
+  $scope.selectGame = function(game, index) {
+    $scope.activeGame = game;
+    Games.setLastActiveIndex(index);
+   // $scope.sideMenuController.close();
+   $ionicSideMenuDelegate.toggleRight();
+  };
+
+  // Create our modal
+  $ionicModal.fromTemplateUrl('new-player.html', function(modal) {
+    $scope.playerModal = modal;
+  }, {
+    scope: $scope
+  });
+  $ionicModal.fromTemplateUrl('new-game.html', function(modal) {
+    $scope.gameModal = modal;
+  }, {
+    scope: $scope
+  });
+
+  $scope.createPlayer = function(player) {
+    if(!$scope.activeGame || !player) {
+      return;
+    }
+    $scope.activeGame.players.push({
+      name: player.name 
+    });
+    $scope.playerModal.hide();
+
+    // Inefficient, but save all the projects
+    Games.save($scope.games);
+
+    player.name = "";
+  };
+
+
+
+
+
+    $scope.newPlayer = function() {
+        $scope.playerModal.show();
+    };
+
+    $scope.closeNewPlayer = function() {
+        $scope.playerModal.hide();
+    }
+    
+    $scope.closeNewGame = function(){
+        $scope.gameModal.hide();
+    }
+    
+    $scope.toggleGames = function() {
+        //console.log("---------------------------");
+        //console.log($scope);
+        //$scope.sideMenuController.toggleLeft();
+        $ionicSideMenuDelegate.toggleLeft();
+    };
+
+
+  // Try to create the first project, make sure to defer
+  // this by using $timeout so everything is initialized
+  // properly
+  $timeout(function() {
+    if($scope.games.length == 0) {
+      //while(true) {
+        $scope.gameModal.show();
+        //var projectTitle = prompt('Your first project title:');
+        //if(projectTitle) {
+          //createProject(projectTitle);
+          //break;
+        //}
+      //}
+    }
+  });
+
+});
+

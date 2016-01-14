@@ -2,11 +2,25 @@
 <widget id="com.ionicframework.uncivilizedcharades103378" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>uncivilizedCharades</name>
   <description>
-        An Ionic Framework and Cordova project.
-    </description>
-  <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
+        An Uncivilized game of Charades.
+  </description>
+  <author email="croberts@lknpro.com" href="http://lknpro.com/">
+      Christopher J. Roberts
     </author>
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="http://facebook.com/*" />
+  <allow-intent href="*://*.facebook.com/*" />
+  <allow-intent href="sms:*" />
+  <allow-intent href="tel:*" />
+    <allow-intent href="geo:*" />
+  <access origin="http://google.com" />
+  <access origin="https://google.com" />
+  <access origin="http://maps.google.com" />
+  <access origin="http://*.google.com" />
+  <access origin="content:///*" />
+  <allow-intent href="*.firebaseio.com" />
+  <allow-intent href="auth.firebase.com" />
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>

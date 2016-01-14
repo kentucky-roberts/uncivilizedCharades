@@ -14,7 +14,7 @@
 
                   <input ng-cloak ng-show="createMode" name="confirm" type="password" ng-model="confirm" placeholder="Confirm Password">
 
-                  <button class="button button-positive button-outline button-block button-register" ng-click="login(email, pass)" ng-hide="createMode">
+                  <button class="button button-positive button button-block button-login" ng-click="login(email, pass)" ng-hide="createMode">
                       Log In</button>
                   <button class="button button-positive button-outline button-block button-register" ng-click="createMode = true" ng-hide="createMode">Register</button>
                   <button class="button button-positive button-block button-register" ng-cloak ng-show="createMode" ng-click="createAccount()">Create Account</button>
@@ -22,10 +22,10 @@
                   
                   <p ng-show="err" class="error">{{err}}</p>
                   
-                  <p class="fine-print">
+                 <!--  <p class="fine-print">
                       By signing in you are agreeing to our <a href="#">Conditions</a> and our <a href="#">Privacy Notice</a>.
                   </p>
-
+ -->
 
           </div>
       </div>

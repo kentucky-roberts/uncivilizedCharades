@@ -1,2 +1,14 @@
+<h2>Game</h2>
+<p class="status" ng-hide="loggedIn">Please Log-In before playing this sweet game <a href="#/login">Click here to login</a></p>
+<p class="status good" ng-show="loggedIn">Hello {{user.email}}!</p>
 
-<charades-game></charades-game>
+
+<input ng-model="syncedValue.$value" type="text" ng-change="syncedValue.$save()" ng-show="loggedIn"/> <b>{{syncedValue.$value}}</b>
+
+
+<button class="button button-" ng-click="game.start()">Start Game</button>
+
+
+<div id="game-area" style="width: 980px; hieght: 350px; background: #c7c7c7; margin: 100px 15px; padding: 15px;">
+    <charades-game></charades-game>
+</div>

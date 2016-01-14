@@ -18,7 +18,7 @@ angular
         'angular-svg-round-progress',
         'ion-fab-button',
         'ionic.contrib.frost',          
-        'ionic.contrib.ui.cards'
+        'ionic.contrib.ui.tinderCards'
     ])
 
     .constant('version', '1.0.0')
@@ -33,20 +33,6 @@ angular
       // your Firebase data URL goes here, no trailing slash
       .constant('FBURL', 'https://charades-app.firebaseio.com')
     
-        .config(function($ionicNativeTransitionsProvider) {
-            $ionicNativeTransitionsProvider.setDefaultTransition({
-                type: 'slide',
-                direction: 'left'
-            });
-        })
-
-        .config(function($ionicNativeTransitionsProvider) {
-            $ionicNativeTransitionsProvider.setDefaultBackTransition({
-                type: 'slide',
-                direction: 'right'
-            });
-        })
-
       // double check that the app has been configured before running it and blowing up space and time
       .run(['FBURL', '$timeout', function(FBURL, $timeout) {
         if( FBURL.match('//INSTANCE.firebaseio.com') ) {
@@ -55,4 +41,4 @@ angular
             angular.element(document.body).removeClass('hide');
           }, 250);
         }
-      }])
+      }]);

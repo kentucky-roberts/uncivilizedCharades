@@ -25,11 +25,13 @@
     $brand-team2-color:         #84bcde !default;  //// Blue
 **
 */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
 .item {
-   -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0 inset;
-    -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0 inset;
-    box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0 inset;
-    border: 1px solid $brand-color-dark;
+
+    border: none!important;
     background-color: transparent;
     color: $brand-color-gray;
     position: relative;
@@ -39,6 +41,7 @@
     padding: 16px;
     font-size: 16px;
 }
+
 .item-content {
     position: relative;
     z-index: 2;
@@ -72,12 +75,13 @@
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
     display: block;
     padding-top: 2px;
-    padding-left: 0;
+    padding-left: 5px;
     height: 34px;
     color: white;
     vertical-align: middle;
     font-size: 24px;
     line-height: 26px;
+    border: 1px solid $brand-color-dark;
 }
 
 .modal {
@@ -89,7 +93,16 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     min-height: 100%;
     min-width: 100%;
     background-color: $brand-bg;
-    opacity: 0.7;
+    opacity: 1;
+}
+
+.input-label {
+    display: table;
+    padding: 7px 10px 7px 0px;
+    max-width: 200px;
+    width: 35%;
+    color:  $brand-color-gray;
+    font-size: 16px;
 }
 
 .ionic-contrib-frost {
@@ -109,7 +122,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     overflow: hidden;
     margin: 20px 10px;
     border-radius: 2px;
-    background-color: transparent;
+    background-color: $brand-bg;
 }
 
 .list {
@@ -118,7 +131,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     padding-bottom: 1px;
     padding-left: 0;
     margin-bottom: 20px;
-    background-color: transparent;
+    background-color: $brand-bg;
 }
 
 .list:last-child {
@@ -126,28 +139,60 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 
 form {
-    color: #c6c6c6;
+    color: $brand-color-dark;
 
     .input-label {
-        color: $brand-color-dark;
+        color: $brand-color-light;
         font-size: 16px;
     }
 }
 
-.border-top-dark {
-    -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0 inset;
-    -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0 inset;
-    box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0 inset;
-    border-top: 1px solid $brand-color-dark;
+// .pane {
+//     top: 0 !important;
+// }
+
+// .pane .has-header {
+//     top: 0 !important;
+// }
+
+.has-header {
+    top: 0 !important;
 }
 
-
-.border-bottom {
-    -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-    -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-    box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-    border-bottom: 1px solid $brand-color-dark;
+.bar-subheader {
+    top: 0;
+    display: block;
+    height: 44px;
 }
+
+.view {
+    background-color: transparent;
+}
+
+.bar.bar-header {
+    //background-color: #3f51b5;
+    height: 56px;
+    border-color: transparent;
+}
+
+.bar.bar-header:after{
+     position: absolute;
+     left: 0;
+     right: 0;
+     height: 6px;
+     z-index: 999;
+     content: '';
+     top: 0;
+ }
+
+ .bar.bar-header .title {
+    color: #f1f1f1;
+    height: 55px;
+    font-size: 1.3em;
+    line-height: 56px;
+    text-align: center;
+}
+
 
 .bar {
     display: -webkit-box;
@@ -175,6 +220,9 @@ form {
     border-width: 0;
     border-style: solid;
     border-top: 1px solid transparent;
+    -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+    box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
     border-bottom: 1px solid $brand-color-dark;
     background-color: $brand-bg;
     border-width: 1px will actually create 2 device pixels on retina;

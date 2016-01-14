@@ -4,6 +4,7 @@ angular
         'app.config', 
         'app.security',
         'app.login', 
+        'ngRoute', 
         'app.animations',
         'app.directives', 
         'app.controllers', 
@@ -11,7 +12,7 @@ angular
         'app.services'
       ])
 
-.run(['$ionicPlatform', '$rootScope', 'Auth', function($ionicPlatform, $rootScope, Auth) {       
+    .run(['$ionicPlatform', '$rootScope', function($ionicPlatform, $rootScope) {       
 
       $ionicPlatform.ready(function() {
 
@@ -25,10 +26,6 @@ angular
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
           }
-
-          Auth.$onAuth(function(user) {
-            $rootScope.loggedIn = !!user;
-          })
 
       });
     }])
@@ -44,10 +41,8 @@ angular
         url: '/login',
         views: {
           'tab-login': {
-            nativeTransitions: {
-                "type": "slide",
-                "direction": "up"
-            },
+            nativeTransitions: null,
+            cache: false,
             templateUrl: 'templates/login/login.directive.html',
             controller: 'LoginController'
           }
@@ -62,13 +57,10 @@ angular
         url: '/players',
         views: {
           'tab-players': {
-            nativeTransitions: {
-                "type": "slide",
-                "direction": "left"
-            },
+            nativeTransitions: null,
+            cache: false,
             templateUrl: 'templates/players.html',
-            controller: 'AppController',
-            controllerAs: 'app'
+            controller: 'GameController'
           }
         }
       })
@@ -76,11 +68,11 @@ angular
         url: '/teams',
         views: {
           'tab-teams': {
-            nativeTransitions: {
-                "type": "slide",
-                "direction": "left"
-            },
-            templateUrl: 'templates/teams.html'
+            nativeTransitions: null,
+            cache: false,
+            templateUrl: 'templates/teams.html',
+            controller: 'GameController',
+            controllerAs: 'game'
           }
         }
       })
@@ -89,47 +81,43 @@ angular
         views: {
           'tab-main-menu': {
             nativeTransitions: null,
+            cache: false,
             templateUrl: 'templates/main-menu/main-menu.directive.html',
-            controller: 'AppController',
-            controllerAs: 'app'
+            controller: 'AppController'
           }
         }
       })
       .state('tab.game', {
           url: '/game',
-          nativeTransitions: {
-                "type": "slide",
-                "direction": "down"
-            },
           views: {
             'tab-game': {
-              templateUrl: 'templates/game.html'
+              nativeTransitions: null,
+              cache: false,
+              templateUrl: 'templates/game/new.game.directive.html',
+              controller: 'GameController',
+              controllerAs: 'game'
             }
           }
         })
        .state('tab.store', {
-        url: '/store',
-        nativeTransitions: {
-            "type": "slide",
-            "direction": "left"
-        },
-         views: {
-          'tab-store': {
-            templateUrl: 'templates/store/store.directive.html',
-            controller: 'StoreController',
-            controllerAs: 'store'
+          url: '/store',
+          views: {
+            'tab-store': {
+              nativeTransitions: null,
+              cache: false,
+              templateUrl: 'templates/store/store.directive.html',
+              controller: 'StoreController'
+            }
           }
-        }
-      })
+        })
       .state('tab.settings', {
           url: '/settings',
-          nativeTransitions: {
-                "type": "slide",
-                "direction": "left"
-            },
           views: {
             'tab-settings': {
-              templateUrl: 'templates/settings/settings.directive.html'
+              nativeTransitions: null,
+              cache: false,
+              templateUrl: 'templates/settings/settings.directive.html',
+              controller: 'SettingsController'
             }
           }
         });

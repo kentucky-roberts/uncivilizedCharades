@@ -258,7 +258,7 @@ angular
     };
 
     Player.prototype.changeTeam = function(teamName){
-        if(!angular.isDefined(this.teamName)){
+        if(!angular.isDefined(this.team)){
             this.team = this.initialTeam;
         }
         this.team = teamName;
@@ -414,17 +414,17 @@ angular
 .service('CountdownService', function() {
 
     this.tags = {
-        startCountdown: true,
+        a: true,
         b: true
     };
     
     this.setTrueTag = function() {
-        this.tags.startCountdown = true;
+        this.tags.a = true;
         this.tags.b = true;
     };
     
     this.setFalseTag = function() {
-        this.tags.startCountdown = false;
+        this.tags.a = false;
         this.tags.b = false;
     };
 })
@@ -456,7 +456,7 @@ angular
                 dealer.handValue = 0;
                 dealer.isDone = false;
                 dealer.busted = false;
-                dealer.maxValue = GameService.maxValue();
+                dealer.maxValue = GameService.maxScore();
                 console.log('dealer.init was just called and returned' + dealer.maxValue);
                 dealer.minValue = 17;
             };
@@ -504,7 +504,7 @@ angular
 
 
 
-  .factory('CardService', ['$firebaseArray', function($firebaseArray) {
+  .factory('FirebaseService', ['$firebaseArray', function($firebaseArray) {
     var cardTypes = new Firebase('https://charades-app.firebaseio.com/card_types');
     var activeCard = cardTypes[0]; //initialize with 0
 
@@ -549,108 +549,133 @@ angular
   }])
 
 
+.factory('Cards', ['$firebaseArray', function($firebaseArray) {
+  var cardsRef = new Firebase('https://charades-app.firebaseio.com/card_types');
+  return $firebaseArray(cardsRef);
+}])
 
-// .factory("CardService", function() {
+.factory('Players', ['$firebaseArray', function($firebaseArray) {
+  var playersRef = new Firebase('https://charades-app.firebaseio.com/players');
+  return $firebaseArray(playersRef);
+}])
 
-//   var cardTypes =
-//     [
-//       {
-//         "id":1,
-//         "phrase":"One Legged Skier",
-//         "alt_phrase":"Pussy Cat"
-//       },
-//       {
-//         "id":2,
-//         "phrase":"Psychedelic Trip",
-//         "alt_phrase":"Tooth Fairy"
-//       },
-//       {
-//         "id":3,
-//         "phrase":"European Creeper",
-//         "alt_phrase":"Long Brown Hair"
-//       },
-//       {
-//         "id":4,
-//         "phrase":"Twerking Santa",
-//         "alt_phrase":"Rock A By Baby"
-//       },
-//       {
-//         "id":5,
-//         "phrase":"Pregnant Twerker",
-//         "alt_phrase":"Bug On The Ceiling"
-//       },
-//       {
-//         "id":6,
-//         "phrase":"Police Brutality",
-//         "alt_phrase":"Walking On The Sun"
-//       },
-//       {
-//         "id":7,
-//         "phrase":"Taser Victim",
-//         "alt_phrase":"Milky Way Galaxy"
-//       },
-//       {
-//         "id":8,
-//         "phrase":"Shwag Weed",
-//         "alt_phrase":"Dance The Night Away"
-//       },
-//       {
-//         "id":9,
-//         "phrase":"Bong Rip",
-//         "alt_phrase":"The Roof Is Out Fire"
-//       },
-//       {
-//         "id":10,
-//         "phrase":"Panty Thief",
-//         "alt_phrase":"Michael Jackson Moves"
-//       },
-//     ];
+/*
+.factory('CardTypes', ['$firebaseArray', function($firebaseArray) {
+  var cardsRef = new Firebase('https://charades-app.firebaseio.com/cards');
+  return $firebaseArray(cardsRef);
+}])
+*/
 
-//   var activeCard = cardTypes[0]; //initialize with 0
+.factory('CardType', ['$resource',
+  function($resource){
+    return $resource('api/card_types.json/', {}, {
+      query: {method:'GET', params:{cardId:'card_types'}, isArray:true},
+      findRange:{method: 'GET', params:{cardXLevel:'@xLevel'/'@xLevelMax'}, isArray:true}
+    });
+  }])
 
-//   function setActiveCard(index) {
-//       activeCard = cardTypes[index];
-//       console.log('activeCard is now ' + activeCard)
-//   }
-//   return {
-//     all: function() {
-//       return cardTypes;
-//     },
-//     first: function() {
-//       return cardTypes[0].phrase;
-//     },
-//     oneCard: function() {
-//       return cardTypes.slice(0,1);
-//     },
-//     threeCards: function() {
-//       return cardTypes.slice(0,3);
-//     },
-//     reload: function() {
-//       return cardTypes.slice(0,3);
-//     },
-//     destroyCard: function(index) {
-//       return cardTypes.slice(index, 1);
-//     },
-//     remove: function(card) {
-//       cards.splice(cards.indexOf(card), 1);
-//     },
-//     activeCard: function() {
-//       return activeCard;
-//     },
-//     getActiveCard: function(index) {
-//       setActiveCard(index);
-//       console.log(activeCard);
-//     },
-//     get: function(cardId) {
-//       for (var i = 0; i < cards.length; i++) {
-//         if (card[i].id === parseInt(cardId)) {
-//           return cards[i];
-//         }
-//       }
-//       return null;
-//     } // get:
-//   };
-// })
+
+.factory("CardService", function() {
+
+  var cardTypes =
+    [
+      {
+        "id":1,
+        "phrase":"One Legged Skier",
+        "alt_phrase":"Pussy Cat"
+      },
+      {
+        "id":2,
+        "phrase":"Psychedelic Trip",
+        "alt_phrase":"Tooth Fairy"
+      },
+      {
+        "id":3,
+        "phrase":"European Creeper",
+        "alt_phrase":"Long Brown Hair"
+      },
+      {
+        "id":4,
+        "phrase":"Twerking Santa",
+        "alt_phrase":"Rock A By Baby"
+      },
+      {
+        "id":5,
+        "phrase":"Pregnant Twerker",
+        "alt_phrase":"Bug On The Ceiling"
+      },
+      {
+        "id":6,
+        "phrase":"Police Brutality",
+        "alt_phrase":"Walking On The Sun"
+      },
+      {
+        "id":7,
+        "phrase":"Taser Victim",
+        "alt_phrase":"Milky Way Galaxy"
+      },
+      {
+        "id":8,
+        "phrase":"Shwag Weed",
+        "alt_phrase":"Dance The Night Away"
+      },
+      {
+        "id":9,
+        "phrase":"Bong Rip",
+        "alt_phrase":"The Roof Is Out Fire"
+      },
+      {
+        "id":10,
+        "phrase":"Panty Thief",
+        "alt_phrase":"Michael Jackson Moves"
+      },
+    ];
+
+  var activeCard = cardTypes[0]; //initialize with 0
+
+  function setActiveCard(index) {
+      activeCard = cardTypes[index];
+      console.log('activeCard is now ' + activeCard)
+  }
+  return {
+    all: function() {
+      return cardTypes;
+    },
+    first: function() {
+      return cardTypes[0].phrase;
+    },
+    oneCard: function() {
+      return cardTypes.slice(0,1);
+    },
+    threeCards: function() {
+      return cardTypes.slice(0,3);
+    },
+    reload: function() {
+      return cardTypes.slice(0,3);
+    },
+    destroyCard: function(index) {
+      return cardTypes.slice(index, 1);
+    },
+    remove: function(card) {
+      cards.splice(cards.indexOf(card), 1);
+    },
+    activeCard: function() {
+      return activeCard;
+    },
+    getActiveCard: function(index) {
+      setActiveCard(index);
+      console.log(activeCard);
+    },
+    get: function(cardId) {
+      for (var i = 0; i < cards.length; i++) {
+        if (card[i].id === parseInt(cardId)) {
+          return cards[i];
+        }
+      }
+      return null;
+    } // get:
+  };
+})
 
 
 .factory("ProductService", function() {

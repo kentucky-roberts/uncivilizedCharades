@@ -3,15 +3,33 @@
       <div class="list list-inset">
           
       </div>
-	<button native-ui-sref="tabs.home" native-ui-sref-opts="{reload: true}" native-options="{type: 'slide', direction:'down'}"></button>
+  
+<div class="row">
+   <div class="col">
+      <div class="testimonial item">
+          <p>
+              Welcome to Uncivilized Charades!
+          </p>
+          <div class="testimonials-arrow">
+          </div>
+          <div class="author">
+              <div class="testimonial-image "><img alt="testimonial photo of lt col brad magrath" src="img/player-images/avatar.jpg"></div>
+              <div class="testimonial-author-info">
+                  <a href="#"><span class="color">Brad Magrath</span></a> Lt Col US ARMY
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+  <button class="button button-block" ng-click="showToast()">Show Toast at top with close</button>
 
-	<button class="button button-block" ng-click="showToast()">Show Toast at top with close</button>
-	
+  
+  
 
-      <button class="button button-large button-stable button-outlined" ng-click="selectTabWithIndex(7)">Settings</button>
-      <button class="button button-large button-balanced" ng-click="selectTabWithIndex(5)">Visit Store</button>
+      <button class="button button-large button-stable button-outline" ng-click="selectTabWithIndex(7)">Settings</button>
+      <button class="button button-large button-balanced button-outline" ng-click="selectTabWithIndex(5)">Visit Store</button>
 
-      <button class="button button-large button-calm" ng-click="app.buildNewGame()">Start New Game</button>
+      <button class="button button-large button-calm button-outline" ng-click="app.buildNewGame()">Start New Game</button>
 
       <button class="button button-large button-positive {{ (app.showLoadGameButton === true) ? 'show' : 'hidden' }}" ng-click="app.showLoadSavedGames()">Load Saved Game</button>
 
@@ -22,3 +40,4 @@
 
   </ion-content>
 </ion-view>
+

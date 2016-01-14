@@ -1,106 +1,122 @@
-<ion-view view-title="Uncivilized Charades" name="game-view">
-  <ion-content class="padding">
-     <div ng-controller="CardsController">
+<ion-view view-title="Cards">
+<style> .tabs { display: none; } </style>
+<div ng-controller="GameController">
+  <ion-pane ng-controller="CardsController">
 
-            <div class="bar bar-header bar-{{ teamColor }}">
-                <h1 class="title">{{activeTeam}}</h1>
-            </div><!--  bar  -->
-                
-                <div class="bar bar-subheader bar-transparent">
-                  
-                  <h2 class="instruction-text {{ (step === -1) ? 'show' : 'hidden' }}">
-                      Swipe the card UP to Start Game
-                      <div class="arrow-box">
-                        <i class="ion-ios-arrow-thin-up"></i>
-                      </div>
-                  </h2>
-                  <h2 class="instruction-text {{ (step === 0) ? 'show' : 'hidden' }}">
-                      {{activeTeam}}'s Up!<br> Choose a Secret Phrase to act out.
-                  </h2>
-                  <h2 class="instruction-text {{ (step === 1) ? 'show' : 'hidden' }}">
-                      Swipe right and left, choose a card, press GO! button.
-                  </h2>
-                  <h2 class="instruction-text {{ (step === 2) ? 'show' : 'hidden' }}">
-                      Act out the Secret Phrase ...<br>
-                      <strong><div class="seconds-remaining">00:{{secondsRemaining}}</div></strong>
-                  </h2>
-                  <h2 class="instruction-text {{ (step === 3) ? 'show' : 'hidden' }}">
-                      Swipe the card UP to begin next turn
-                      <div class="arrow-box">
-                        <i class="ion-ios-arrow-thin-up center-block animated"></i>
-                      </div>
-
-                  </h2>
-
-                </div><!--  bar bar-subheader -->
-
-
-                     
-
-            <div ng-if="cards.active">
-               <td-cards control="cardsControl">
-                     <td-card 
-                        ng-repeat="card in cards.active"
-                            on-transition-up="cardSwipedUp($index)"
-                            on-transition-left="cardSwipedLeft($index)"
-                            on-transition-right="cardSwipedRight($index)"
-                            on-partial-swipe="cardPartialSwipe(amt)" 
-                            on-destroy="cardDestroyed($index)"
-                            class="card card-{{$index}}  card-{{( hideCards == true ) ? 'back' : 'face' }} ">
-                        <div  ng-controller="CardCtrl">
-
-                          <article class="phrase">
-                                <h1 class="td-title">{{card.phrase}}</h1>
-                              </article>
-
-                              <button  ng-click="activateCard($index);" class="button button-calm button-outlined td-button">Select Card</button>
-                                    <!-- 
-                                    ion-ios-timer-outline
-                                    ion-close
-                                    ion-ios-person-outline
-                                    ion-ios-people-outline
-                                    ion-asterisk
-                                    ion-log-out
-                                    ion-log-in
-                                    ion-power
-                                    ion-ribbon-a
-                                    ion-ribbon-b
-                                    ion-trophy -->
-
-                              <div ng-if="cards.activeCard.length">
-                                  <span class="button button-balanced button-block icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">Start Countdown!</span>
-                              </div>
-
-                        </div>
-                     </td-card>
-
-                <td-card id="end-card" drag="false" ng-if="cards.active.length === 0">
-                    <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
-                </td-card>
-
-               </td-cards>
-            </div>
-
-
-
-
-          
-            <div class="bar bar-footer bar-transparent">
-              <div class="title">
-                
-                <span id="team1ScoreBoard" class="team-score pull-left"><b>Team1 Score: {{team1Score}}</b></span>
-                <span id="team2ScoreBoard" class="team-score pull-right"><b>Team2 Score: {{team2Score}}</b></span>
-                <span class="team-score center-block"><b>turn: {{turn}} || step: {{step}}</b></span>
-                
-              </div>
-            </div>
-
+      <div class="td-title">
+        <div class="row">
+        <div class="col">ActiveCard: <span>{{ cards.activeCard.length }}</span><span>{{activeCard.phrase}}</span></div>
+          <div class="col">Master: <span>{{ cards.master.length }}</span></div>
+          <div class="col">Cards: <span>{{ cards.active.length }}</span></div>
+          <div class="col">Discards: <span>{{ cards.discards.length }}</span></div>
         </div>
-    </ion-content>
-</ion-view>
+        <div class="row">
+          <div class="col">Disliked: <span>{{ cards.disliked.length }}</span></div>
+          <div class="col">Liked: <span>{{ cards.liked.length }}</span></div>
+        </div>
+      </div>
 
 
 
 
+      <div class="td-footer">
+        <div class="row">
+    <button ng-click="deal()" class="button button-outline button-assertive">Deal</button>
+    <button ng-click="game.nextTurn()" class="button button-outline button-royal">Next Turn</button>
+            <button ng-click="game.nextStep()" class="button button-outline button-royal">Next Step</button>
+
+    <button ng-click="setFalseTag()" class="button button-outline button-royal">Skip Card This Card</button>
+           <button ng-click="addCard()" class="button button-outline button-royal">Add Card</button>
+           
+           <!-- print player info -->
+        </div>
+        <div class="row"><h3>Active Player: {{game.activePlayer.name}}</h3></div>
+        <div class="row">
+          <h3>GamePlayers</h3>
+          <div class="col" ng-repeat="player in game.players"> 
+            <div class="player-wrapper {{( player.isActive == true ) ? 'yellow-text' : 'white-text' }} " >
+              <b>$index: </b> {{$index}}<br>
+              <b>{{player.name}}</b><br>
+              <b>score: </b> {{player.score}}<br>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
 
+<!-- 
+
+<td-cards control="cardsControl">
+        <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-transition-left="cardSwipedLeft($index)" on-transition-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+          <div class="image" ng-controller="CardCtrl">
+            <div class="no-text">NOPE</div>
+            <img ng-src="{{card.image}}">
+            <div class="yes-text">LIKE</div>
+          </div>
+        </td-card>
+        <div class="control">
+          <button ng-click="noClick()" class="button button-outline button-assertive">No</button>
+          <button ng-click="yesClick()" class="button button-outline button-balanced">Yes</button>
+        </div>
+        <div class="empty" ng-if="!cards.length">
+          <button ng-click="reload()" class="button button-outline button-positive">Reload</button>
+        </div>
+      </td-cards>
+ -->
+
+
+
+
+<div ng-if="cards.active">
+   <td-cards control="cardsControl">
+         <td-card 
+            ng-repeat="card in cards.active"
+                on-transition-up="cardSwipedUp($index)"
+                on-transition-left="cardSwipedLeft($index)"
+                on-transition-right="cardSwipedRight($index)"
+                on-partial-swipe="cardPartialSwipe(amt)" 
+                on-destroy="cardDestroyed($index)"
+                class="card card-{{$index}}  card-{{( hideCards == true ) ? 'back' : 'face' }} ">
+            <div  ng-controller="CardCtrl">
+
+              <article class="phrase">
+                    <h1 class="td-title">{{card.phrase}}</h1>
+                  </article>
+
+                  <button  ng-click="activateCard($index);" class="button button-calm button-outlined td-button">TD Button</button>
+<!-- 
+ion-ios-timer-outline
+ion-close
+ion-ios-person-outline
+ion-ios-people-outline
+ion-asterisk
+ion-log-out
+ion-log-in
+ion-power
+ion-ribbon-a
+ion-ribbon-b
+ion-trophy -->
+
+
+        <div ng-if="cards.activeCard.length">
+                      <span class="button button-balanced button-block icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">Start Countdown!</span>
+                    </div>
+
+            </div>
+         </td-card>
+
+    <td-card id="end-card" drag="false" ng-if="cards.active.length === 0">
+        <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
+    </td-card>
+
+   </td-cards>
+</div>
+
+    </ion-pane>
+
+
+      <div class="control">
+      <button ng-click="activateCard($index)" class="button button-outline button-balanced">Activate Card</button>
+      <button ng-click="deActivateCard($index)" class="button button-outline button-balanced">De-Activate Card</button>
+  </div>
