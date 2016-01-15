@@ -8,6 +8,7 @@
   "dependencies": {
     "angular-audio": "~1.7.1",
     "ionic-toast": "~0.2.0",
-    "firebase-token-generator": "~2.0.0"
+    "firebase-token-generator": "~2.0.0",
+    "firebase-simple-login": "~1.6.4"
   }
 }

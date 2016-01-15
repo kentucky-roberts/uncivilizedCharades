@@ -5,8 +5,8 @@ angular
 // .controller('AppController', [ '$rootScope', '$scope',  '$window', '$interval', '$timeout', '$state', '$ionicTabsDelegate', '$ionicPopup', '$http', '$ionicModal', '$ionicLoading', 'ionicToast', 'ngAudio', 'LoginService', 'UserService', 'PlayerService', 'TeamService', 'GameService', 'CardService,' 'DealerService', 'ModalService', 'CountdownService',  
 // 	function($scope, $state, $window, $interval, $timeout, $ionicTabsDelegate, $ionicPopup, $http, $ionicModal, $ionicLoading, ionicToast, ngAudio, LoginService, UserService, PlayerService, TeamService, GameService, CardService, DealerService, ModalService, CountdownService) {
   	
-.controller('AppController', ['$scope', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicTabsDelegate', '$ionicPlatform', 'fbutil', '$firebaseObject', 'FBURL', 'ngAudio', 'ionicToast', '$ionicNavBarDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 'LoginService', 'GameService', 'UserService', 'AppService', 'GameService', 'Games', 
-  function($scope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, $ionicPlatform, fbutil, $firebaseObject, FBURL, ngAudio, ionicToast, $ionicNavBarDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService, LoginService, GameService, UserService, AppService, GameService, Games) {
+.controller('AppController', ['$scope', '$rootScope', '$firebaseAuth', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicTabsDelegate', '$ionicPlatform', 'fbutil', '$firebaseObject', 'FBURL', 'ngAudio', 'ionicToast', '$ionicNavBarDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 'LoginService', 'GameService', 'UserService', 'AppService', 'GameService', 'Games', 
+  function($scope, $rootScope, $firebaseAuth, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, $ionicPlatform, fbutil, $firebaseObject, FBURL, ngAudio, ionicToast, $ionicNavBarDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService, LoginService, GameService, UserService, AppService, GameService, Games) {
 
 	$scope.showLoading = function() {
 		$ionicLoading.show();
@@ -29,6 +29,78 @@ angular
 	$scope.user = [];
 	$scope.players = [];
 	$scope.teams = [];
+
+
+	$scope.user = {
+            email: "",
+            password: ""
+        };
+        $scope.createUser = function() {
+            var email = this.user.email;
+            var password = this.user.password;
+            if (!email || !password) {
+                $rootScope.notify("Enter your email and password.");
+                return false;
+            }
+            $rootScope.show('Sight tight, creating your new account ...');
+            $rootScope.auth.$createUser(email, password, function(error, user) {
+	                if (!error) {
+	                    $rootScope.hide();
+	                    $rootScope.userEmail = user.email;
+	                    $window.location.href = ('#/tab/main-menu');
+	                } else {
+	                    $rootScope.hide();
+	                    if (error.code == 'INVALID_EMAIL') {
+	                        $rootScope.notify('Invalid Email Address');
+	                    } else if (error.code == 'EMAIL_TAKEN') {
+	                        $rootScope.notify('Email Address already taken');
+	                    } else {
+	                        $rootScope.notify('Oops something went wrong. Please try again later');
+	                    }
+	                }
+	            })
+	       }
+
+             // check session
+            $rootScope.checkSession();
+
+            $scope.user = {
+                email: "",
+                password: ""
+            };
+            $scope.validateUser = function() {
+                $rootScope.show('Please wait.. Authenticating');
+                var email = this.user.email;
+                var password = this.user.password;
+                if (!email || !password) {
+                    $rootScope.notify("Please enter valid credentials");
+                    return false;
+                }
+
+                $rootScope.auth.$login('password', {
+                    email: email,
+                    password: password
+                }).then(function(user) {
+                    $rootScope.hide();
+                    $rootScope.userEmail = user.email;
+                    $window.location.href = ('#/tab/main-menu/');
+                }, function(error) {
+                    $rootScope.hide();
+                    if (error.code == 'INVALID_EMAIL') {
+                        $rootScope.notify('Invalid Email Address');
+                    } else if (error.code == 'INVALID_PASSWORD') {
+                        $rootScope.notify('Invalid Password');
+                    } else if (error.code == 'INVALID_USER') {
+                        $rootScope.notify('Invalid User');
+                    } else {
+                        $rootScope.notify('Oops something went wrong. Please try again later');
+                    }
+                });
+            }
+
+
+
+
 
 
 	$scope.saveNewGame = function(players) {
@@ -132,8 +204,85 @@ angular
 }])  //// @endAppController
 
 
+.controller('SignInCtrl', [
+        '$scope', '$rootScope', '$firebaseAuth', '$window',
+      function($scope, $rootScope, $firebaseAuth, $window) {
+          // check session
+          $rootScope.checkSession();
+
+          $scope.user = {
+              email: "",
+              password: ""
+          };
+          $scope.validateUser = function() {
+              $rootScope.show('Please wait.. Authenticating');
+              var email = this.user.email;
+              var password = this.user.password;
+              if (!email || !password) {
+                  $rootScope.notify("Please enter valid credentials");
+                  return false;
+              }
+
+              $rootScope.auth.$login('password', {
+                  email: email,
+                  password: password
+              }).then(function(user) {
+                  $rootScope.hide();
+                  $rootScope.userEmail = user.email;
+                  $window.location.href = ('#/bucket/list');
+              }, function(error) {
+                  $rootScope.hide();
+                  if (error.code == 'INVALID_EMAIL') {
+                      $rootScope.notify('Invalid Email Address');
+                  } else if (error.code == 'INVALID_PASSWORD') {
+                      $rootScope.notify('Invalid Password');
+                  } else if (error.code == 'INVALID_USER') {
+                      $rootScope.notify('Invalid User');
+                  } else {
+                      $rootScope.notify('Oops something went wrong. Please try again later');
+                  }
+              });
+          }
+      }
+  ]) //// @endAppController
 
 
+.controller('SignUpCtrl', [
+    '$scope', '$rootScope', '$firebaseAuth', '$window',
+    function($scope, $rootScope, $firebaseAuth, $window) {
+
+        $scope.user = {
+            email: "",
+            password: ""
+        };
+        $scope.createUser = function() {
+            var email = this.user.email;
+            var password = this.user.password;
+            if (!email || !password) {
+                $rootScope.notify("Please enter valid credentials");
+                return false;
+            }
+            $rootScope.show('Please wait.. Registering');
+
+            $rootScope.auth.$createUser(email, password, function(error, user) {
+                if (!error) {
+                    $rootScope.hide();
+                    $rootScope.userEmail = user.email;
+                    $window.location.href = ('#/bucket/list');
+                } else {
+                    $rootScope.hide();
+                    if (error.code == 'INVALID_EMAIL') {
+                        $rootScope.notify('Invalid Email Address');
+                    } else if (error.code == 'EMAIL_TAKEN') {
+                        $rootScope.notify('Email Address already taken');
+                    } else {
+                        $rootScope.notify('Oops something went wrong. Please try again later');
+                    }
+                }
+            });
+        }
+    } 
+]) //// @endAppController
 
 .controller('CardsCtrl', function($scope, $ionicModal, $ionicPopover, $ionicListDelegate, Cards) {
 
@@ -242,8 +391,8 @@ angular
   };
 })
 
-.controller('CardsController', ['$scope', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 
-  function($scope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, PlayerService, CardService, ModalService, CountdownService, DealerService) {
+.controller('CardsController', ['$scope', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', 'TDCardDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 
+  function($scope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, TDCardDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService) {
 
 	  var cardTypes = CardService.all();
 
@@ -272,7 +421,7 @@ angular
 	  	//$scope.refreshCards();
 	  	$scope.activeCards = CardService.threeCards();
 	  }
-$scope.deal();
+//$scope.deal();
 	  $scope.addCard = function() {
 	    var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
 	    newCard.id = Math.random();
@@ -303,7 +452,7 @@ $scope.deal();
 
 	$scope.cardSwipedRight = function(index) {
 	    console.log('RIGHT SWIPE');
-	    //$scope.addCard();
+	   // $scope.addCard();
 	    $scope.cardDestroyed(index);
 	};
 
@@ -440,7 +589,7 @@ $scope.deal();
   vm.displayCard = function(){
     console.log("vm.displayCard was just called");
 
-          vm.card = CardService.first();
+          //vm.card = CardService.first();
      
           vm.phrase = vm.card.phrase;
           vm.altPhrase = vm.card.altPhrase;

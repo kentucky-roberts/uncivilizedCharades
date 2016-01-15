@@ -3,7 +3,6 @@ angular
         'ionic',
         'app.config', 
         'app.security',
-        'app.login', 
         'ngRoute', 
         'app.animations',
         'app.directives', 
@@ -12,27 +11,87 @@ angular
         'app.services'
       ])
 
-    .run(['$ionicPlatform', '$rootScope', function($ionicPlatform, $rootScope) {       
-
-      $ionicPlatform.ready(function() {
-
-          if (window.cordova && window.cordova.plugins.Keyboard) {
+    
+.run(function($ionicPlatform, $rootScope, $firebaseAuth, $firebase, $window, $ionicLoading) {
+    $ionicPlatform.ready(function() {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            cordova.plugins.Keyboard.disableScroll(true);
-
-          }
-
-          if (window.StatusBar) {
-            // org.apache.cordova.statusbar required
+        }
+        if (window.StatusBar) {
             StatusBar.styleDefault();
-          }
+        }
 
-      });
-    }])
+        $rootScope.userEmail = null;
+        $rootScope.baseUrl = 'https://charades-app.firebaseio.com/';
+        var authRef = new Firebase($rootScope.baseUrl);
+        $rootScope.auth = $firebaseAuth(authRef);
+
+        $rootScope.show = function(text) {
+            $rootScope.loading = $ionicLoading.show({
+                content: text ? text : 'Loading..',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+        };
+
+        $rootScope.hide = function() {
+            $ionicLoading.hide();
+        };
+
+        $rootScope.notify = function(text) {
+            $rootScope.show(text);
+            $window.setTimeout(function() {
+                $rootScope.hide();
+            }, 1999);
+        };
+
+        $rootScope.logout = function() {
+            $rootScope.auth.$logout();
+            $rootScope.checkSession();
+        };
+
+        $rootScope.checkSession = function() {
+            var auth = new FirebaseSimpleLogin(authRef, function(error, user) {
+                if (error) {
+                    // no action yet.. redirect to default route
+                    $rootScope.userEmail = null;
+                    $window.location.href = '#/tab/signin';
+                } else if (user) {
+                    // user authenticated with Firebase
+                    $rootScope.userEmail = user.email;
+                    $window.location.href = ('#/tab/main-menu');
+                } else {
+                    // user is logged out
+                    $rootScope.userEmail = null;
+                    $window.location.href = '#/login/signin';
+                }
+            });
+        }
+    });
+})
 
 .config(function($stateProvider, $urlRouterProvider, $ionicNativeTransitionsProvider) {
 
- $stateProvider.state('tab', {
+ $stateProvider
+    // .state('auth', {
+    //         url: "/auth",
+    //         abstract: true,
+    //         templateUrl: "templates/login.html"
+    //     })
+    //     .state('auth.signin', {
+    //         url: '/signin',
+    //         views: {
+    //             'auth-signin': {
+    //                 templateUrl: 'templates/login.html',
+    //                 controller: 'AppController'
+    //             }
+    //         }
+    //     })
+    .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
@@ -44,7 +103,7 @@ angular
             nativeTransitions: null,
             cache: false,
             templateUrl: 'templates/login/login.directive.html',
-            controller: 'LoginController'
+            controller: 'AppController'
           }
         }
       })

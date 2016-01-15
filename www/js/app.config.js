@@ -19,6 +19,7 @@ angular
         'ion-fab-button',
         'ionic.contrib.frost',          
         'ionic.contrib.ui.tinderCards'
+       //'ionic.contrib.ui.cards'
     ])
 
     .constant('version', '1.0.0')

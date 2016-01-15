@@ -8,16 +8,19 @@
            
                   <img class="avatar" src="img/avatar.jpg">
 
-                  <input name="email" type="text" ng-model="email" placeholder="Your Email">
+                  <input name="email" type="text" ng-model="user.email" placeholder="Your Email">
                   
-                  <input name="password" type="password" ng-model="password" placeholder="Your Password">
+                  <input name="password" type="password" ng-model="user.password" placeholder="Your Password">
 
-                  <input ng-cloak ng-show="createMode" name="confirm" type="password" ng-model="confirm" placeholder="Confirm Password">
+                  <input ng-cloak ng-show="createMode" name="confirm" type="password" ng-model="user.confirm" placeholder="Confirm Password">
 
-                  <button class="button button-positive button button-block button-login" ng-click="login(email, pass)" ng-hide="createMode">
+                  <button class="button button-positive button button-block button-login" ng-click="validateUser()" ng-hide="createMode">
                       Log In</button>
+
                   <button class="button button-positive button-outline button-block button-register" ng-click="createMode = true" ng-hide="createMode">Register</button>
-                  <button class="button button-positive button-block button-register" ng-cloak ng-show="createMode" ng-click="createAccount()">Create Account</button>
+
+                  <button class="button button-positive button-block button-register" ng-cloak ng-show="createMode" ng-click="createUser()">Sign up</button>
+
                   <button class="button button-light button-outline button-block" ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
                   
                   <p ng-show="err" class="error">{{err}}</p>

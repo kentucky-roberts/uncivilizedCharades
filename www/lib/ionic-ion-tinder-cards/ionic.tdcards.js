@@ -178,14 +178,14 @@
     bindEvents: function() {
       var self = this;
       ionic.onGesture('dragstart', function(e) {
-        /*
+        
         var cx = window.innerWidth / 2;
         if(e.gesture.touches[0].pageX < cx) {
           self._transformOriginRight();
         } else {
           self._transformOriginLeft();
         }
-        */
+        
         ionic.requestAnimationFrame(function() { self._doDragStart(e) });
       }, this.el);
 

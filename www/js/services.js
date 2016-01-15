@@ -62,6 +62,27 @@ angular
   
 })
 
+
+
+.service('CountdownService', function() {
+
+    this.tags = {
+        a: true,
+        b: true
+    };
+    
+    this.setTrueTag = function() {
+        this.tags.a = true;
+        this.tags.b = true;
+    };
+    
+    this.setFalseTag = function() {
+        this.tags.a = false;
+        this.tags.b = false;
+    };
+})
+
+
  .factory('UserService', function() {
      
       var service = {
@@ -411,24 +432,6 @@ angular
 
 
 
-.service('CountdownService', function() {
-
-    this.tags = {
-        a: true,
-        b: true
-    };
-    
-    this.setTrueTag = function() {
-        this.tags.a = true;
-        this.tags.b = true;
-    };
-    
-    this.setFalseTag = function() {
-        this.tags.a = false;
-        this.tags.b = false;
-    };
-})
-
 
 
 .factory('DealerService', ['GameService', 'CardService', '$timeout', function(GameService, CardService, $timeout) {
@@ -528,12 +531,14 @@ angular
       reload: function() {
         return $firebaseArray(cardTypes.slice(0,3));
       },
-      destroyCard: function(index) {
-        return $firebaseArray(cardTypes.slice(index, 1));
-      },
-      remove: function(card) {
-        cards.splice(cards.indexOf(card), 1);
-      },
+      // destroyCard: function(index) {
+      //   return $firebaseArray$remove(index).then(function(index) {
+      //   index.key() === index.$id; // true
+      // });
+      // },
+      // remove: function(card) {
+      //   cards.splice(cards.indexOf(card), 1);
+      // },
       setActiveCard: function(index) {
         setActiveCard(index);
       },
@@ -551,6 +556,9 @@ angular
 
 .factory('Cards', ['$firebaseArray', function($firebaseArray) {
   var cardsRef = new Firebase('https://charades-app.firebaseio.com/card_types');
+
+
+
   return $firebaseArray(cardsRef);
 }])
 
