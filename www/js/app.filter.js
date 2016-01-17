@@ -1,4 +1,4 @@
-angular.module('app.filters', [])
+angular.module('app.filter', [])
 /**/
 .filter('exclude', function() {
   return function(input, exclude) {

@@ -2,7 +2,6 @@
     display: none!important;
 }
 
-
 @keyframes appear {
   from {
     opacity: 0;
@@ -199,14 +198,56 @@
   }
 }
 
-swipe-card.pop-in-start {
+td-card.pop-in-start {
   -webkit-transform: scale(0,0);
 }
-swipe-card.pop-in {
+td-card.pop-in {
   -webkit-animation: bounceIn 0.4s ease-out;
 }
 
 
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    -ms-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
 
 
 @keyframes flip {

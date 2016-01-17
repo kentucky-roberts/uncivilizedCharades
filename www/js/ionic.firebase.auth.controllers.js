@@ -78,11 +78,16 @@ angular.module('bucketList.controllers', [])
     }
 ])
 
-.controller('myListCtrl', function($rootScope, $scope, $window, $ionicModal, $firebase) {
+.controller('myListCtrl', function($rootScope, $scope, $window, $ionicModal, $firebase, ModalService) {
+    
     $rootScope.show("Please wait... Processing");
+    
     $scope.list = [];
+    
     var bucketListRef = new Firebase($rootScope.baseUrl + escapeEmailAddress($rootScope.userEmail));
+    
     bucketListRef.on('value', function(snapshot) {
+
         var data = snapshot.val();
         $scope.list = [];
         for (var key in data) {
@@ -103,12 +108,29 @@ angular.module('bucketList.controllers', [])
     });
 
 
-    $ionicModal.fromTemplateUrl('templates/newItem.html', function(modal) {
-        $scope.newTemplate = modal;
-    });
+     $scope.showNewPlayer = function() {
+        ModalService
+          .init('templates/modals/new-player.html', $scope)
+          .then(function(modal) {
+            modal.show();
+          });
+      };
+
+    $scope.showNewGame = function() {
+        ModalService
+          .init('templates/modals/new-game.html', $scope)
+          .then(function(modal) {
+            modal.show();
+          });
+      };
+
+    // $ionicModal.fromTemplateUrl('templates/newItem.html', function(modal) {
+    //     $scope.newTemplate = modal;
+    // });
 
     $scope.newTask = function() {
-        $scope.newTemplate.show();
+        //$scope.newTemplate.show();
+        $scope.showNewPlayer();
     };
 
     $scope.markCompleted = function(key) {
@@ -142,9 +164,9 @@ angular.module('bucketList.controllers', [])
     };
 })
 
-.controller('newCtrl', function($rootScope, $scope, $window, $firebase) {
+.controller('newCtrl', function($rootScope, $scope, $window, $firebase, ModalService) {
     $scope.data = {
-        item: ""
+        player: ""
     };
 
     $scope.close = function() {
@@ -152,15 +174,15 @@ angular.module('bucketList.controllers', [])
     };
 
     $scope.createNew = function() {
-        var item = this.data.item;
-        if (!item) return;
+        var player = this.data.player;
+        if (!player) return;
         $scope.modal.hide();
         $rootScope.show();
 
         $rootScope.show("Please wait... Creating new");
 
         var form = {
-            item: item,
+            player: player,
             isCompleted: false,
             created: Date.now(),
             updated: Date.now()

@@ -1,22 +1,22 @@
 <div class="modal">
     <ion-header-bar class="bar bar-header bar-error">
-        <h1 class="title">Time Expired!</h1>
+        <h1 class="title">Your game is lame!</h1>
         <button class="button button-clear pull-left " ng-click="closeModal()">close</button>
     </ion-header-bar>
      <ion-content class="bg-error">
-        <div class="row">
-        <div class="col">
             <div class="text-center">
-                <h2>Booo {{game.activePlayer}}</h2>
+                <h2>Time Expired!</h2>
+                <p class="text--center text--lead">
+                    This is where the other team may risk 1 point and try to correctly guess the card's secret phrase.</p>
                 <br>
-                <i class="ion-close bigIcon" style="font-size: 40px;"></i>
-                <h3>Time Expired! Other Team Submit Guess to 'Steal Points.'</h3>
                 <br>
+                <p class="text--center">
+                    Woud the other team like to steal the point?
+                </p>
                 <br>
-                <button class="button button-light button-large" ng-click="game.startBonousRound()">Steal Point</button>
-                <button class="button button-light button-large" ng-click="game.nextStep()">Next Turn</button>
+                <button class="button button-outline button-energized button-large" ng-click="game.startBonousRound()">Yes, steal point</button>
+                <button class="button button-light button-outline button-large" ng-click="game.nextStep()">No thanks, start next turn</button>
             </div>
-            </div>
-        </div>
+
     </ion-content>
 </div>

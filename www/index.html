@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-
-
 <!doctype html>
-<html lang="en" ng-app="app">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +13,20 @@
     <style>
         
     </style>
+
+
+
+
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ionic-service-core/ionic-core.js"></script>
     <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
 
     <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/jquery-ui/jquery-ui.min.js"></script>
-    <script src="lib/collide/collide.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="lib/EaselJS/lib/easeljs-0.8.1.min.js"></script>
+
+
     <!-- ngCordova -->
     <!-- IMPORTANT : SHOULD be after ionic bundle and before cordova.js -->
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
@@ -34,40 +35,16 @@
     <script src="lib/firebase/firebase.js"></script>
     <script src="lib/angularfire/dist/angularfire.js"></script>
     <script src="lib/firebase-simple-login/firebase-simple-login.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
     <!-- <script src="cordova.js"></script> -->
-    <script src="lib/ionic-ion-frost/ionic.contrib.frost.js"></script>
+   
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/app.config.js"></script>
-    <!--<script src="js/ionic.firebase.auth.controllers.js"></script>-->
-    <script src="lib/ionic-ion-tinder-cards/ionic.tdcards.js"></script>
 
-    <!--<script src="templates/js/ionic.swipecards.custom.js"></script>-->
-    <script src="templates/components/appversion/appversion-directive.js"></script>
-    <script src="templates/components/auth/auth.js"></script>
-    <script src="templates/components/firebase.utils/firebase.utils.js"></script>
-    <script src="templates/components/ngcloak/ngcloak-decorator.js"></script>
-    <script src="templates/components/reverse/reverse-filter.js"></script>
-    <script src="templates/components/security/security.js"></script>
-        
-    <script src="templates/main-menu/main-menu.controller.js"></script>
-    <script src="templates/game/game.controller.js"></script>
-    <script src="templates/settings/settings.controller.js"></script>
-    
-    <script src="js/animations.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/filters.js"></script>
+        <script src="lib/ionic-charades/ionic.tdcards.js"></script>
+             <script src="lib/collide/collide.js"></script>
 
-
-    <!-- Moment -->
     <script src="lib/moment/min/moment.min.js"></script>
-
-    <!-- rounded progrssbar for timer on player -->
     <script src="lib/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
     <script src="lib/angular-route/angular-route.js"></script>
@@ -78,19 +55,47 @@
     <script src="lib/angular-xeditable/dist/js/xeditable.js"></script>
     <script src="lib/angular-audio/app/angular.audio.js"></script>
     <script src="lib/ionic-toast/dist/ionic-toast.bundle.min.js"></script>
-    <script src="lib/ionic-native-transitions/dist/ionic-native-transitions.min.js"></script>
+
+
+
+
+        <!--ion-fab-button-->
+    <link rel="stylesheet" href="http://hafizbilal112.github.io/ion-fab-button/ion-fabButton.css"/>
     <script src="http://hafizbilal112.github.io/ion-fab-button/ion-fabButton.js"></script>
+
+    <script src="templates/auth/signin.controller.js"></script>
+    <script src="templates/auth/signup.controller.js"></script>
+
+    <script src="templates/products/product.service.js"></script>
+    <script src="templates/players/player.service.js"></script>
+
+    <script src="templates/settings/settings.controller.js"></script>
+    <script src="templates/modals/modal.service.js"></script>
+    
+    <script src="templates/cards/cards.module.js"></script>
+    <script src="templates/cards/cards.controller.js"></script>
+    <script src="templates/cards/card.controller.js"></script>
+    <script src="templates/cards/card.service.js"></script>
+    <script src="templates/countdown/countdown.service.js"></script>
+
+    <script src="templates/game/game.module.js"></script>
+    <script src="templates/game/game.directive.js"></script>
+    <script src="templates/game/game.controller.js"></script>
+    <script src="templates/game/game.service.js"></script>
+
+    <script src="js/app.animation.js"></script>
+    <script src="js/app.controller.js"></script>
+    <script src="js/app.filter.js"></script>
+    <script src="js/app.service.js"></script>
+    <script src="js/app.directive.js"></script>
 
 
 </head>
-
 <body ng-app="app" animation="slide-left-right-ios7" ng-cloak="" no-scroll="">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
     <ion-nav-bar class="bar-transparent">
-
-    
     </ion-nav-bar>
     <!--
       The views will be rendered in the <ion-nav-view> directive below
@@ -102,8 +107,4 @@
 
 
   </body>
-
 </html>
-
-
-</head></html>

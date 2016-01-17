@@ -1,20 +1,58 @@
-angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
+angular
+  .module('app.game')
+    .controller('GameController', GameController);
 
-.controller('GameController', ['$scope', 'fbutil', '$firebaseObject', 'FBURL', '$state', '$ionicTabsDelegate', '$ionicModal', '$timeout', '$ionicPopup', '$timeout', '$ionicLoading', 'ModalService', 'TeamService', 'PlayerService', 'CardService', 'DealerService', 'GameService', 'CountdownService', 'AppService', 'ngAudio',  'ionicToast', function ($scope, fbutil, $firebaseObject, FBURL, $state, $ionicTabsDelegate, $ionicModal, $timeout, $ionicPopup, $timeout, $ionicLoading, ModalService, TeamService, PlayerService, Cards, Players, DealerService, GameService, CountdownService, AppService, ngAudio, ionicToast) {
-   
-
-	$scope.syncedValue = $firebaseObject(fbutil.ref('syncedValue'));
-	$scope.players = Players;
-	$scope.FBURL = FBURL;
-
-
+GameController.$inject = ['$scope', '$rootScope', '$firebaseAuth', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicTabsDelegate', '$ionicPlatform', '$firebaseObject', 'ngAudio', 'ionicToast', '$ionicNavBarDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 'TeamService', 'AppService', 'GameService', 'Games', '$log'];
+function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, $ionicPlatform, $firebaseObject, ngAudio, ionicToast, $ionicNavBarDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService, TeamService, AppService, GameService, Games, $log) {
 
   $scope.showLoading = function() {
     $ionicLoading.show();
   }; $scope.showLoading();
 
- 
+    $scope.hasHeaderFabLeft = false;
+    $scope.hasHeaderFabRight = false;
+
+    var navIcons = document.getElementsByClassName('ion-navicon');
+    for (var i = 0; i < navIcons.length; i++) {
+        navIcons.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    }
+
+    // var clickingStuff = document.getElementsByClassName('.draggable-player');
+    // for (var i = 0; i < navIcons.length; i++) {
+    //     clickingStuff.addEventListener('click', function() {
+    //         this.classList.toggle('active');
+    //     });
+    // }
+
+
     var game = this;
+
+	////////////////////////////////////////
+	// Game Sound Effects
+	////////////////////////////////////////
+	$scope.chaChing = ngAudio.load("sound/cha-ching.mp3"); // returns NgAudioObject
+	$scope.awww = ngAudio.load("sound/awww.mp3"); // returns NgAudioObject
+	$scope.crickets = ngAudio.load("sound/crickets.mp3"); // returns NgAudioObject
+	$scope.snowballSplat = ngAudio.load("sound/snowball-splat.mp3"); // returns NgAudioObject
+	$scope.squishFart = ngAudio.load("sound/squish-fart.mp3"); // returns NgAudioObject
+	$scope.voiceOn = ngAudio.load("sound/voice_on.mp3"); // returns NgAudioObject
+	$scope.voiceOff = ngAudio.load("sound/voice_off.mp3"); // returns NgAudioObject
+	$scope.clickOn = ngAudio.load("sound/click-on.mp3"); // returns NgAudioObject
+	$scope.clickOff = ngAudio.load("sound/click-off.mp3"); // returns NgAudioObject
+
+	$scope.soundChaChing = function() { $scope.chaChing.play(); };
+	$scope.soundAwww = function() { $scope.awww.play(); };
+	$scope.soundCrickets = function() { $scope.crickets.play(); };
+	$scope.soundSnowballSplat = function() { $scope.snowballSplat.play(); };
+	$scope.soundSquishFart = function() { $scope.squishFart.play(); };
+	$scope.soundVoiceOn = function() { $scope.voiceOn.play(); };
+	$scope.soundVoiceOff = function() { $scope.voiceOff.play(); };
+	$scope.soundClickOn = function() { $scope.clickOn.play(); };
+	$scope.soundClickOff = function() { $scope.clickOff.play(); };
+
+
 
         /**
          * Our game can have multiple states:
@@ -37,12 +75,12 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	    game.showResults = false;
 	    game.players = [];
 	    game.teams = [];
-
 	    game.team1Score = 0;
 	    game.team2Score = 0;
 	    game.activeTeam = "Team1";
 	    game.nextActiveTeam = "Team2";
-		
+	    game.activeTeamColor = "border-bottom-dark";
+
 	    //game.deck = CardService.newDeck();
 	    //game.dealer = DealerService.newDealer(game.deck);
 	    //game.players = AppService.availablePlayers();
@@ -50,7 +88,7 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	    // game.activePlayerCount = 0;
 	    // game.activePlayer = game.players[game.activePlayerCount];
 
-	    
+
 	     game.demoMakePlayers();
 	     game.demoMakeTeams();
 	    //game.createPlayers();
@@ -64,16 +102,16 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 
 		var p1 = PlayerService.newPlayer("Randy Jackson");
 		game.players.push(angular.extend({}, p1));
-		
+
 		var p2 = PlayerService.newPlayer("Bert Rynolds");
 		game.players.push(angular.extend({}, p2));
-		
+
 		var p3 = PlayerService.newPlayer("Sandra Bullock");
 		game.players.push(angular.extend({}, p3));
-		
+
 		var p4 = PlayerService.newPlayer("Tim Taylor");
 		game.players.push(angular.extend({}, p4));
-		
+
 		$scope.players = angular.copy(game.players);
 		//$scope.player = game.players[0];
 		//console.log(game.players[0].name);
@@ -82,8 +120,8 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 
 		//PlayerService.logInfo();
 		//p1.PlayerService.changeScore(5);
-		
-		 
+
+
 		 //var p1Stats = PlayerService.player.logInfo(p1);
 		 //sconsole.log(game.player[0]);
 		// p4.PlayerService.logInfo();
@@ -98,8 +136,6 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 		var gp1 = game.players[1];
 		var gp2 = game.players[2];
 		var gp3 = game.players[3];
-
-		
 		var team1 = TeamService.newTeam("Blue Team", [gp0, gp2]);
 
 		game.teams.push(angular.extend({}, team1));
@@ -108,35 +144,7 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 
 		game.teams.push(angular.extend({}, team2));
 		//var object = angular.merge({}, object1, object2)
-
 		$scope.teams = game.teams;
-
-
-		// var at = 0; //active team
-		// var ap = 0;  //active player
-
-		// function playerSequence() {
-		// 	if (game.teams.length === at ) {
-		// 		at = 0;
-		// 	}
-		// 	if (game.teams.players.length === ap ) {
-		// 		ap = 0;
-		// 	}
-		// 	game.activePlayer = game.teams[at].players[ap];
-		// 	console.log(game.activePlayer);
-		// 	nextPlayer(); 
-		// }
-
-		// function nextPlayer() {
-		// 	at ++;
-		// 	ap ++;
-		// }
-	       
-	 //       playerSequence();
-	      
-		
-
-
  		for (var i = 0; i < game.teams.length; i++) {
 	        var t = game.teams[i];
 	      }
@@ -146,10 +154,19 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	       // console.log("playerName: " + p.name + "playerScore: " + p.score);
 	      }
 	     console.log( p);
-	 
-	 
+
+
 	};
 
+
+	
+	////////////////////////////////////////
+	// Toast
+	////////////////////////////////////////
+	$scope.showToast = function(){
+	<!-- ionicToast.show(message, position, stick, time); -->
+	  ionicToast.show('This is a toast at the top.', 'top', true, 2500);
+	};
 
 	////////////////////////////////////////
 	// ModalService
@@ -161,7 +178,15 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	        modal.show();
 	      });
 	  };
-	  
+
+	  $scope.showNewGame = function() {
+	    ModalService
+	      .init('templates/modals/new-game.html', $scope)
+	      .then(function(modal) {
+	        modal.show();
+	      });
+	  };
+
 	  $scope.showLogin = function() {
 	    ModalService
 	      .init('templates/modals/login-user.html')
@@ -170,31 +195,9 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	      });
 	  };
 
-	////////////////////////////////////////
-	// Toast
-	////////////////////////////////////////
-	$scope.showToast = function(){
-	<!-- ionicToast.show(message, position, stick, time); -->
-	  ionicToast.show('This is a toast at the top.', 'top', true, 2500);
-	};
-
-
-
 	$scope.saveGame = function() {
 		console.log("saveGame!");
 	};
-	
-	// UserService.save({name: 'Saimon', email: 'saimon@devdactic.com'});
-	// // UserService.update({user: 1}, {name: 'Saimon', email: 'saimon@devdactic.com'});
-	// // UserService.update({user: 1, name: 'Saimon', email: 'saimon@devdactic.com'}, {});
-
-	// var query = UserService.query();
-
-	// query.$promise.then(function(data) {
-	//     $scope.users = data;
-	//     console.log("users from query.$promise: " + $scope.users);
-	//     // Do whatever when the request is finished
-	// });
 	/**
 	* DragPlayers to make Teams
 	*
@@ -210,14 +213,14 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
         $scope.onDropComplete1=function(data,evt){
             var index = $scope.droppedObjects1.indexOf(data);
             var player = $scope.players.indexOf(data);
-            //$scope.soundClickOn();
+            $scope.soundClickOn();
 
             if (index == -1) {
-              $scope.droppedObjects1.push(data); 
+              $scope.droppedObjects1.push(data);
               //$scope.assignPlayerTeam(data);
               game.players.push(player);
               console.log("game players: " + game.players);
-             
+
             }
             if (player > -1) {
               $scope.players.splice(player, 1);
@@ -232,10 +235,10 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
         }
         $scope.onDragSuccess2=function(data,evt){
             var index = $scope.droppedObjects2.indexOf(data);
-            
+
             if (index > -1) {
                 $scope.droppedObjects2.splice(index, 1);
-                
+
             }
         }
         $scope.onDropComplete2=function(data,evt){
@@ -249,7 +252,7 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
               	console.log("game players: " + game.players);
                 //PlayerService.changeTeam("team2");
             }
-          
+
             if (player > -1) {
               $scope.players.splice(player, 1);
             }
@@ -259,26 +262,6 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
         var inArray = function(array, player) {
             var index = array.indexOf(player);
         }
-
-
-  //       $scope.assignPlayerTeam = function(index) {
-      
-		// var x = index;
-		
-		// if ( $scope.players[x].team === team1 ) {
-		// 	alert("is on team1");
-		// }
-
-  //       	if ($scope.players[x].team === team2) {
-
-  //       		//PlayerService.player.changeTeam(team1);
-  //       		alert("is on team2");
-  //       	}
-        	
-        	
-
-  //       };
-
 
 	$scope.team1 = {
 	    name: "Goodguys"
@@ -290,27 +273,12 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 
 
 
-
-
-// $scope.addNewPlayer = function(playerName) {
-//     $scope.err = null;
-//     var newPlayer = PlayerService.newPlayer(playerName);
-
-//     $scope.players.$add(newPlayer)
-//     .then(function(/* user */) {
-//       $scope.modal.remove();
-//     }, function(err) {
-//       $scope.err = errMessage(err);
-//     });
-//   };
-
-
 	$scope.addNewPlayer = function(playerName) {
 		console.log("$scope.addNewPlayer() was called...");
 		$scope.closeModal();
 		var newPlayer = PlayerService.newPlayer(playerName);
 		console.log(newPlayer);
-		
+
 		game.players.push(angular.extend({}, newPlayer));
 		$scope.players = angular.copy(game.players);
 
@@ -326,68 +294,6 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	};
 
 
-
-
-
-
-
-
-	////////////////////////////////////////
-	// Game Sound Effects
-	////////////////////////////////////////
-	// $scope.chaChing = ngAudio.load("sound/cha-ching.mp3"); // returns NgAudioObject
-	// $scope.awww = ngAudio.load("sound/awww.mp3"); // returns NgAudioObject
-	// $scope.crickets = ngAudio.load("sound/crickets.mp3"); // returns NgAudioObject
-	// $scope.snowballSplat = ngAudio.load("sound/snowball-splat.mp3"); // returns NgAudioObject
-	// $scope.squishFart = ngAudio.load("sound/squish-fart.mp3"); // returns NgAudioObject
-	// $scope.voiceOn = ngAudio.load("sound/voice_on.mp3"); // returns NgAudioObject
-	// $scope.voiceOff = ngAudio.load("sound/voice_off.mp3"); // returns NgAudioObject
-	// $scope.clickOn = ngAudio.load("sound/click-on.mp3"); // returns NgAudioObject
-	// $scope.clickOff = ngAudio.load("sound/click-off.mp3"); // returns NgAudioObject
-
-	// $scope.soundChaChing = function() { $scope.chaChing.play(); };
-	// $scope.soundAwww = function() { $scope.awww.play(); };
-	// $scope.soundCrickets = function() { $scope.crickets.play(); };
-	// $scope.soundSnowballSplat = function() { $scope.snowballSplat.play(); };
-	// $scope.soundSquishFart = function() { $scope.squishFart.play(); };
-	// $scope.soundVoiceOn = function() { $scope.voiceOn.play(); };
-	// $scope.soundVoiceOff = function() { $scope.voiceOff.play(); };
-	// $scope.soundClickOn = function() { $scope.clickOn.play(); };
-	// $scope.soundClickOff = function() { $scope.clickOff.play(); };
-
-	// ////////////////////////////////////////
-	// // Layout Methods
-	// ////////////////////////////////////////
-	// $scope.hideNavBar = function() {
-	//     document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
-	// };
-	
-	// $scope.hideNavBar();
-
-	// $scope.showNavBar = function() {
-	//     document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
-	// };
-
-	// $scope.noHeader = function() {
-	//     var content = document.getElementsByTagName('ion-content');
-	//     for (var i = 0; i < content.length; i++) {
-	//         if (content[i].classList.contains('has-header')) {
-	//             content[i].classList.toggle('has-header');
-	//         }
-	//     }
-	// };
-
-	////////////////////////////////////////
-	// ModalService
-	////////////////////////////////////////
-	  $scope.showNewPlayer = function() {
-	    ModalService
-	      .init('templates/modals/new-player.html', $scope)
-	      .then(function(modal) {
-	        modal.show();
-	      });
-	  };
-	  
 	  game.firstActivePlayer = function() {
 	  	game.activePlayerCount = 0;
 	  };
@@ -450,13 +356,15 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	  };
 
 
-	
+
+
+
 // $scope.$on('$ionicView.enter', function(e) {
- 
+
 //  });
 
-	
-	
+
+
 	game.getActivePlayer = function(turn) {
 		if (game.turn === 1 ) {
 			game.activePlayer = game.teams[0].players[0];
@@ -499,11 +407,11 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 			return game.activePlayer;
 		}
 	};
-	
+
 
 	/**
-	* 
-	* Global CountdownService watch function 
+	*
+	* Global CountdownService watch function
 	*
 	**/
 	$scope.CountdownService = CountdownService;
@@ -519,7 +427,7 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	$scope.$watch(function() {
 	      return CountdownService.tags;
 	    	},
-	    
+
 	    	function(newVal, oldVal) {
 			console.log(newVal);
 			console.log(oldVal);
@@ -532,8 +440,8 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 
 
 	/**
-	* 
-	* SVG-Countdown timer 
+	*
+	* SVG-Countdown timer
 	*
 	**/
 	var mytimeout = null; // the current timeoutID
@@ -635,4 +543,4 @@ angular.module('app.game', ['firebase.utils', 'firebase.auth', 'ngRoute'])
 	};
 
 	$scope.hideLoading();
-}]);  ///    END GAME CONTROLLER   ///
+};  ///    END GAME CONTROLLER   ///

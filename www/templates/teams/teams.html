@@ -1,0 +1,55 @@
+<ion-view view-title="Drop players into teams" name="teams-view">
+  <ion-content class="padding">
+  
+
+         <div class="row">
+                <div class="col">
+                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
+                        
+                        <ul class="dragable-objects">
+                            <li ng-repeat="player in droppedObjects1" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)"
+                                class="bg-team1"
+                                ng-center-anchor="{{centerAnchor}}">
+                                <h1 class="player-name">{{player.name}}</h1>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="">
+                    <ul class="draggable-objects">
+                        <li ng-repeat="player in players">
+                            
+                            <div class="draggable-player" ng-drag="true" ng-drag-data="player" data-allow-transform="true"> 
+                                <h1 class="player-name">{{player.name}}</h1>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
+                        <ul class="dragable-objects">
+                            <li ng-repeat="player in droppedObjects2" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" 
+                                class="bg-team2"
+                                ng-center-anchor="{{centerAnchor}}">
+                                <h1 class="player-name">{{player.name}}</h1>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+  
+
+        <div class="bar bar-footer bar-dark">
+           <p class="title">{{game.message}}</p>
+           <button class="button button-positive button-outline button-icon ion-plus" ng-click="showNewPlayer()">Add New Player
+          </button>
+           <button class="button button-energized button-large button-outline" ng-click="saveNewGame()">Save Game</button>
+           <a native-ui-sref="tabs.teams" native-ui-sref-opts="{reload: true}" class="button icon-left   button-positive {{ (readyForTeams === true) ? 'show' : 'show' }}" ng-click="showBuildTeams()"> Next Step</a>
+        </div>
+
+
+      <ion-content>
+</ion-view>

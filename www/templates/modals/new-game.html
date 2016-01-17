@@ -4,16 +4,17 @@
         <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
     </ion-header-bar>
     <ion-content class="has-header">
+    
+      <h1>Start New Game</h1>
+      <p class="text--center text--lead">
+        Confirm your new game's players and click button below to start a new game.
+      </p>
 
-        <section class="list" ng-repeat="player in players track by $index">
-            <a class="list-item item-player">
-                <img src="{{player.face}}" class="avatar">
-                <h2 class="ng-binding">{{player.name}}</h2>
-                <p class="ng-binding">Score: {{player.score}} <strong>Team:</strong> {{player.team}}</p>
-            </a>
-        </section>
+      <ul class="list">
+		<li class="list-item" ng-repeat="player in game.players">{{player.name}}</li>
+      </ul>
 
-        <button type="submit" class="button button-block button-balanced" ng-click="createNewGame(players)"> Create & Save New Game!</button>
+        <button type="submit" class="button button-block button-balanced button-large" ng-click="createNewGame(players)"> Start New Game</button>
     </ion-content>
 </div>
 

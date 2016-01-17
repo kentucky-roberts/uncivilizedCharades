@@ -30,7 +30,6 @@
 }
 
 .item {
-
     border: none!important;
     background-color: transparent;
     color: $brand-color-gray;
@@ -64,14 +63,6 @@
     color: $brand-yellow;
 }
 
-.item-radio .item-content {
-    position: relative;
-    z-index: 2;
-    padding: 16px 49px 16px 16px;
-    border: none;
-    background: transparent;
-}
-
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
     display: block;
     padding-top: 2px;
@@ -92,7 +83,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     overflow: hidden;
     min-height: 100%;
     min-width: 100%;
-    background-color: $brand-bg;
+    background-color: $brand-color-light;
     opacity: 1;
 }
 
@@ -147,6 +138,10 @@ form {
     }
 }
 
+.view {
+    background-color: transparent;
+}
+
 // .pane {
 //     top: 0 !important;
 // }
@@ -154,27 +149,24 @@ form {
 // .pane .has-header {
 //     top: 0 !important;
 // }
-
+/*
 .has-header {
     top: 0 !important;
 }
+*/
 
 .bar-subheader {
-    top: 0;
+    top: 50px;
     display: block;
     height: 44px;
 }
 
-.view {
-    background-color: transparent;
-}
-
 .bar.bar-header {
-    //background-color: #3f51b5;
-    height: 56px;
-    border-color: transparent;
+    height: 50px;
+    border-bottom: none;
 }
 
+/*
 .bar.bar-header:after{
      position: absolute;
      left: 0;
@@ -186,27 +178,16 @@ form {
  }
 
  .bar.bar-header .title {
-    color: #f1f1f1;
+    color: $brand-color-light;
     height: 55px;
     font-size: 1.3em;
     line-height: 56px;
     text-align: center;
 }
 
+*/
 
 .bar {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     position: absolute;
     right: 0;
     left: 0;
@@ -220,11 +201,20 @@ form {
     border-width: 0;
     border-style: solid;
     border-top: 1px solid transparent;
-    -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-    -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-    box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-    border-bottom: 1px solid $brand-color-dark;
-    background-color: $brand-bg;
-    border-width: 1px will actually create 2 device pixels on retina;
-    background-size: 0;
+    background-color: transparent;
+    border-bottom: none;
+    text-align: center;
 }
+
+
+    .slider {
+      height: 100%;
+    }
+    .slider-slide {
+      padding-top: 80px;
+      background-color: #fff;
+      color: #000;
+      text-align: center;
+      font-weight: 300;
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    }

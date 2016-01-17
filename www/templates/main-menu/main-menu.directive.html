@@ -1,106 +1,19 @@
 
 
 <ion-view view-title="Main Menu" name="main-menu-view">
-  <ion-content class="padding">
+  <ion-content class="padding main-menu">
+    
+    <h1 class="main-menu-title">Uncivilized Charades</h1>
 
 
-<div ng-controller="TodoCtrl">
-<ion-header-bar class="bar-dark">
-      <button class="button button-icon" ng-click="toggleGames()">
-          <i class="icon ion-navicon"></i>
-      </button>
-      <h1 class="title">{{activeGame.title}}</h1>
-  <!-- New Task button-->
-      <button class="button button-icon" ng-click="newPlayer()">
-          <i class="icon ion-compose"></i>
-      </button>
-  </ion-header-bar>
 
-<div class="row">
-  <div class="col">
-  <h1 class="title">{{activeGame.title}}</h1>
-    <button class="button button-icon" ng-click="toggleGames()">
-          <i class="icon ion-navicon"></i>
-      </button>
-       <ion-list>
-          <ion-item ng-repeat="game in games" ng-click="selectGame(game, $index)" >
-              {{game.title}}
-          </ion-item>
-      </ion-list>
-  </div>
-  <div class="col">
-    <ion-list>
-        <ion-item ng-repeat="player in game.players">
-            <img src="img/player-images/avatar.jpg" class="avatar">
-            <h2>{{player.name}}</h2>
-        </ion-item>
-    </ion-list>
-  </div>
-  <div class="col"></div>
-</div>
+     <button class="button button-outline button-stable button-block" ng-click="toIntro()">Tutorial</button>
+
+     <button class="button button-outline button-positive button-large button-block" ng-click="game.newGame()">New Game</button>
+
+    <button class="button button-outline button-clear button-large button-block" ng-click="game.loadGame()">Load Game</button>
 
 
-</div>
-
-
-            <script id="new-player.html" type="text/ng-template">
-
-              <div class="modal">
-
-                <!-- Modal header bar -->
-                <ion-header-bar class="bar-secondary">
-                  <h1 class="title">New Player</h1>
-                  <button class="button button-clear button-positive" ng-click="closeNewPlayer()">Cancel</button>
-                </ion-header-bar>
-
-                <!-- Modal content area -->
-                <ion-content>
-
-                  <form ng-submit="createPlayer(player)">
-                    <div class="list">
-                      <label class="item item-input">
-                        <input type="text" placeholder="What is the new player's name?" ng-model="player.name">
-                      </label>
-                    </div>
-                    <div class="padding">
-                      <button type="submit" class="button button-block button-positive">Create Player</button>
-                    </div>
-                  </form>
-
-                </ion-content>
-
-              </div>
-
-            </script>
-            <script id="new-game.html" type="text/ng-template">
-
-              <div class="modal">
-
-                <!-- Modal header bar -->
-                <ion-header-bar class="bar-secondary">
-                  <h1 class="title">New Game</h1>
-                  <button class="button button-clear button-positive" ng-click="closeNewGame()">Cancel</button>
-                </ion-header-bar>
-
-                <!-- Modal content area -->
-                <ion-content>
-
-                  <form ng-submit="newGame(game)">
-                    <div class="list">
-                      <label class="item item-input">
-                        <input type="text" placeholder="Game Title" ng-model="game.title">
-                      </label>
-                    </div>
-                    <div class="padding">
-                      <button type="submit" class="button button-block button-positive">Create Game</button>
-                    </div>
-                  </form>
-
-                </ion-content>
-
-              </div>
-
-            </script>
   </ion-content>
 </ion-view>
 

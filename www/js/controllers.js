@@ -2,287 +2,8 @@
 angular
   .module('app.controllers', [])
 
-// .controller('AppController', [ '$rootScope', '$scope',  '$window', '$interval', '$timeout', '$state', '$ionicTabsDelegate', '$ionicPopup', '$http', '$ionicModal', '$ionicLoading', 'ionicToast', 'ngAudio', 'LoginService', 'UserService', 'PlayerService', 'TeamService', 'GameService', 'CardService,' 'DealerService', 'ModalService', 'CountdownService',  
-// 	function($scope, $state, $window, $interval, $timeout, $ionicTabsDelegate, $ionicPopup, $http, $ionicModal, $ionicLoading, ionicToast, ngAudio, LoginService, UserService, PlayerService, TeamService, GameService, CardService, DealerService, ModalService, CountdownService) {
-  	
-.controller('AppController', ['$scope', '$rootScope', '$firebaseAuth', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicTabsDelegate', '$ionicPlatform', 'fbutil', '$firebaseObject', 'FBURL', 'ngAudio', 'ionicToast', '$ionicNavBarDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 'LoginService', 'GameService', 'UserService', 'AppService', 'GameService', 'Games', 
-  function($scope, $rootScope, $firebaseAuth, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, $ionicPlatform, fbutil, $firebaseObject, FBURL, ngAudio, ionicToast, $ionicNavBarDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService, LoginService, GameService, UserService, AppService, GameService, Games) {
-
-	$scope.showLoading = function() {
-		$ionicLoading.show();
-	}; $scope.showLoading(); 
-
-	// $ionicPlatform.ready(function() {
-	//     $scope.$apply(function() {
-	//         // sometimes binding does not work! :/
-	//         // getting device infor from $cordovaDevice
-	//         var device = $cordovaDevice.getDevice();
-	//         $scope.manufacturer = device.manufacturer;
-	//         $scope.model = device.model;
-	//         $scope.platform = device.platform;
-	//         $scope.uuid = device.uuid;
-	//         $scope.boot$scope();
-	//     })
-	// })
-
-	var app = this;
-	$scope.user = [];
-	$scope.players = [];
-	$scope.teams = [];
 
 
-	$scope.user = {
-            email: "",
-            password: ""
-        };
-        $scope.createUser = function() {
-            var email = this.user.email;
-            var password = this.user.password;
-            if (!email || !password) {
-                $rootScope.notify("Enter your email and password.");
-                return false;
-            }
-            $rootScope.show('Sight tight, creating your new account ...');
-            $rootScope.auth.$createUser(email, password, function(error, user) {
-	                if (!error) {
-	                    $rootScope.hide();
-	                    $rootScope.userEmail = user.email;
-	                    $window.location.href = ('#/tab/main-menu');
-	                } else {
-	                    $rootScope.hide();
-	                    if (error.code == 'INVALID_EMAIL') {
-	                        $rootScope.notify('Invalid Email Address');
-	                    } else if (error.code == 'EMAIL_TAKEN') {
-	                        $rootScope.notify('Email Address already taken');
-	                    } else {
-	                        $rootScope.notify('Oops something went wrong. Please try again later');
-	                    }
-	                }
-	            })
-	       }
-
-             // check session
-            $rootScope.checkSession();
-
-            $scope.user = {
-                email: "",
-                password: ""
-            };
-            $scope.validateUser = function() {
-                $rootScope.show('Please wait.. Authenticating');
-                var email = this.user.email;
-                var password = this.user.password;
-                if (!email || !password) {
-                    $rootScope.notify("Please enter valid credentials");
-                    return false;
-                }
-
-                $rootScope.auth.$login('password', {
-                    email: email,
-                    password: password
-                }).then(function(user) {
-                    $rootScope.hide();
-                    $rootScope.userEmail = user.email;
-                    $window.location.href = ('#/tab/main-menu/');
-                }, function(error) {
-                    $rootScope.hide();
-                    if (error.code == 'INVALID_EMAIL') {
-                        $rootScope.notify('Invalid Email Address');
-                    } else if (error.code == 'INVALID_PASSWORD') {
-                        $rootScope.notify('Invalid Password');
-                    } else if (error.code == 'INVALID_USER') {
-                        $rootScope.notify('Invalid User');
-                    } else {
-                        $rootScope.notify('Oops something went wrong. Please try again later');
-                    }
-                });
-            }
-
-
-
-
-
-
-	$scope.saveNewGame = function(players) {
-		// GameService.saveFirebaseGame();
-		console.log("saveNewGame() called!");
-	};
-
-
-	////////////////////////////////////////
-	// Game Sound Effects
-	////////////////////////////////////////
-	$scope.chaChing = ngAudio.load("sound/cha-ching.mp3"); // returns NgAudioObject
-	$scope.awww = ngAudio.load("sound/awww.mp3"); // returns NgAudioObject
-	$scope.crickets = ngAudio.load("sound/crickets.mp3"); // returns NgAudioObject
-	$scope.snowballSplat = ngAudio.load("sound/snowball-splat.mp3"); // returns NgAudioObject
-	$scope.squishFart = ngAudio.load("sound/squish-fart.mp3"); // returns NgAudioObject
-	$scope.voiceOn = ngAudio.load("sound/voice_on.mp3"); // returns NgAudioObject
-	$scope.voiceOff = ngAudio.load("sound/voice_off.mp3"); // returns NgAudioObject
-	$scope.clickOn = ngAudio.load("sound/click-on.mp3"); // returns NgAudioObject
-	$scope.clickOff = ngAudio.load("sound/click-off.mp3"); // returns NgAudioObject
-
-	$scope.soundChaChing = function() { $scope.chaChing.play(); };
-	$scope.soundAwww = function() { $scope.awww.play(); };
-	$scope.soundCrickets = function() { $scope.crickets.play(); };
-	$scope.soundSnowballSplat = function() { $scope.snowballSplat.play(); };
-	$scope.soundSquishFart = function() { $scope.squishFart.play(); };
-	$scope.soundVoiceOn = function() { $scope.voiceOn.play(); };
-	$scope.soundVoiceOff = function() { $scope.voiceOff.play(); };
-	$scope.soundClickOn = function() { $scope.clickOn.play(); };
-	$scope.soundClickOff = function() { $scope.clickOff.play(); };
-
-	////////////////////////////////////////
-	// Layout Methods
-	////////////////////////////////////////
-	$scope.hideNavBar = function() {
-	    document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
-	};
-	
-	$scope.hideNavBar();
-
-	$scope.showNavBar = function() {
-	    document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
-	};
-
-	$scope.noHeader = function() {
-	    var content = document.getElementsByTagName('ion-content');
-	    for (var i = 0; i < content.length; i++) {
-	        if (content[i].classList.contains('has-header')) {
-	            content[i].classList.toggle('has-header');
-	        }
-	    }
-	};
-
-	////////////////////////////////////////
-	// User Authentication
-	////////////////////////////////////////
-	// $scope.showRegistration = $scope.showRegistration;
-	$scope.showLoginUser = function() {
-		$ionicTabsDelegate.select(0);
-	}
-
-	$scope.showBuildPlayers = function() {
-		$ionicTabsDelegate.select(1);
-	}
-
-	$scope.showBuildTeams = function() {
-		$ionicTabsDelegate.select(2);
-	}
-
-	$scope.showMainMenu = function() {
-		$ionicTabsDelegate.select(3);  // main-menu-tab
-
-		if ($scope.user.savedGames.length === -1) {
-			console.log("This user doesn't have any savedGames.  That means they can only create a new game.")
-			$scope.showCreateNewGame();
-		} else {
-			$scope.showLoadGameOrCreateNewGame();
-		}
-	}
-
-	$scope.showCreateNewGame = function() {
-		$ionicTabsDelegate.select(3);  // create-game-tab // uses $scope.players and $scope.teams in pop-up modal, asking to confirm newGame settings.  If YES then // ng-click="$scope.createNewGame($scope.players, $scope.teams);" // 
-
-	};
-
-	$scope.showLoadGameOrCreateNewGame = function() {
-		$ionicTabsDelegate.select(3);  // create-game-tab // uses $scope.players and $scope.teams in pop-up modal, asking to confirm newGame settings.  If YES then // ng-click="$scope.createNewGame($scope.players, $scope.teams);" // 
-		$scope.showLoadGameButton = true;
-	};
-
-
-	$scope.bootApp = function() {
-		$scope.init()
-	};
-	$scope.hideLoading = function() {
-	    $timeout(function() {
-	        $ionicLoading.hide();
-	    }, 1000);
-	};
-	$scope.hideLoading();
-}])  //// @endAppController
-
-
-.controller('SignInCtrl', [
-        '$scope', '$rootScope', '$firebaseAuth', '$window',
-      function($scope, $rootScope, $firebaseAuth, $window) {
-          // check session
-          $rootScope.checkSession();
-
-          $scope.user = {
-              email: "",
-              password: ""
-          };
-          $scope.validateUser = function() {
-              $rootScope.show('Please wait.. Authenticating');
-              var email = this.user.email;
-              var password = this.user.password;
-              if (!email || !password) {
-                  $rootScope.notify("Please enter valid credentials");
-                  return false;
-              }
-
-              $rootScope.auth.$login('password', {
-                  email: email,
-                  password: password
-              }).then(function(user) {
-                  $rootScope.hide();
-                  $rootScope.userEmail = user.email;
-                  $window.location.href = ('#/bucket/list');
-              }, function(error) {
-                  $rootScope.hide();
-                  if (error.code == 'INVALID_EMAIL') {
-                      $rootScope.notify('Invalid Email Address');
-                  } else if (error.code == 'INVALID_PASSWORD') {
-                      $rootScope.notify('Invalid Password');
-                  } else if (error.code == 'INVALID_USER') {
-                      $rootScope.notify('Invalid User');
-                  } else {
-                      $rootScope.notify('Oops something went wrong. Please try again later');
-                  }
-              });
-          }
-      }
-  ]) //// @endAppController
-
-
-.controller('SignUpCtrl', [
-    '$scope', '$rootScope', '$firebaseAuth', '$window',
-    function($scope, $rootScope, $firebaseAuth, $window) {
-
-        $scope.user = {
-            email: "",
-            password: ""
-        };
-        $scope.createUser = function() {
-            var email = this.user.email;
-            var password = this.user.password;
-            if (!email || !password) {
-                $rootScope.notify("Please enter valid credentials");
-                return false;
-            }
-            $rootScope.show('Please wait.. Registering');
-
-            $rootScope.auth.$createUser(email, password, function(error, user) {
-                if (!error) {
-                    $rootScope.hide();
-                    $rootScope.userEmail = user.email;
-                    $window.location.href = ('#/bucket/list');
-                } else {
-                    $rootScope.hide();
-                    if (error.code == 'INVALID_EMAIL') {
-                        $rootScope.notify('Invalid Email Address');
-                    } else if (error.code == 'EMAIL_TAKEN') {
-                        $rootScope.notify('Email Address already taken');
-                    } else {
-                        $rootScope.notify('Oops something went wrong. Please try again later');
-                    }
-                }
-            });
-        }
-    } 
-]) //// @endAppController
 
 .controller('CardsCtrl', function($scope, $ionicModal, $ionicPopover, $ionicListDelegate, Cards) {
 
@@ -292,7 +13,7 @@ angular
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true
 
-  
+
   //$scope.filterFunction = function(element) {
    // return element.name.match(/^Ma/) ? true : false;
   //};
@@ -304,7 +25,7 @@ angular
   $scope.addCard = function(phrase, color, xLevel) {
     $scope.err = null;
     $scope.cards.$add({
-      name: name, 
+      name: name,
       color: color,
       xLevel: xLevel
     })
@@ -356,152 +77,21 @@ angular
 //     $ionicPlatform.ready(function() {
 //         $scope.$apply(function() {
 //             // sometimes binding does not work! :/
- 
+
 //             // getting device infor from $cordovaDevice
 //             var device = $cordovaDevice.getDevice();
- 
+
 //             $scope.manufacturer = device.manufacturer;
 //             $scope.model = device.model;
 //             $scope.platform = device.platform;
 //             $scope.uuid = device.uuid;
- 
+
 //         });
- 
+
 //     });
 // })
 
 //.controller('UserController', function(GameService {})
-.controller('IntroController', function ($scope, $state, $ionicSlideBoxDelegate) {
-
-
-  // Called to navigate to the main app
-  $scope.startApp = function () {
-    $state.go('app.game');
-  };
-  $scope.next = function () {
-    $ionicSlideBoxDelegate.next();
-  };
-  $scope.previous = function () {
-    $ionicSlideBoxDelegate.previous();
-  };
-
-  // Called each time the slide changes
-  $scope.slideChanged = function (index) {
-    $scope.slideIndex = index;
-  };
-})
-
-.controller('CardsController', ['$scope', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', 'TDCardDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 
-  function($scope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, TDCardDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService) {
-
-	  var cardTypes = CardService.all();
-
-	  $scope.oneCard = CardService.oneCard();
-	  $scope.threeCards = CardService.threeCards();
-
-
-	  $scope.cards = {
-	    master: cardTypes,
-	    active: [],
-	    activeCard: [],
-	    discards: [],
-	  };
-
-	  $scope.playerCards = {};
-	  $scope.activeCards = [];
-
-	  $scope.cardsControl = {};
-
-	  $scope.cardDestroyed = function(index) {
-	    $scope.cards.master.splice(index, 1);
-	  };
-
-	  $scope.deal = function() {
-	  	$scope.hideCards = true;
-	  	//$scope.refreshCards();
-	  	$scope.activeCards = CardService.threeCards();
-	  }
-//$scope.deal();
-	  $scope.addCard = function() {
-	    var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-	    newCard.id = Math.random();
-	    $scope.cards.active.push(angular.extend({}, newCard));
-	  };
-
-	  $scope.refreshCards = function() {
-	    // Set $scope.cards to null so that directive reloads
-	    $scope.cards.active = null;
-	    $timeout(function() {
-	      $scope.cards.active = Array.prototype.slice.call($scope.cards.master, 0);
-	    });
-	  };
-
-
-	$scope.cardSwipedUp = function(index) {
-	    console.log('UP SWIPE');
-	    $scope.activateCard(index);
-	    CountdownService.setTrueTag();
-	    $("td-card").addClass("hidden");
-	};
-
-	$scope.cardSwipedLeft = function(index) {
-	    console.log('LEFT SWIPE');
-	    //$scope.addCard();
-	     $scope.cardDestroyed(index);
-	};
-
-	$scope.cardSwipedRight = function(index) {
-	    console.log('RIGHT SWIPE');
-	   // $scope.addCard();
-	    $scope.cardDestroyed(index);
-	};
-
-	$scope.activateCard = function(index) {
-		//console.log("activeCard index: " + index);
-	    $scope.cards.master.splice(index, 1);
-	    $scope.cards.activeCard.push(angular.extend({}, index));
-	    console.log($scope.cards.activeCard);
-	    $("td-card").addClass("hidden");
-	    var activeCard = CardService.activeCard(index);
-	    console.log(activeCard);
-	 };
-
-	$scope.deActivateCard = function(index) {
-	    $scope.cards.activeCard.splice(index, 1);
-	    $scope.cardDestroyed(index);
-	    console.log($scope.cards.activeCard);
-	};
-
-	  $scope.$on('removeCard', function(event, element, card) {
-	    var discarded = $scope.cards.master.splice($scope.cards.master.indexOf(card), 1);
-	    $scope.cards.discards.push(discarded);
-	  });
-
-
-  $scope.showAlt = false;
-
-
-  // $scope.onDragDown = function(index){
-  //   console.log("... you are dragging the card!");
-  // };
-
-  // $scope.onTap = function() {
-  //   console.log("Tapped!");
-  //   $(td-card).addClass("no-shadow");
-  // };
-
-  $scope.onDoubleTap = function() {
-    console.log("Double-Tapped!");
-  };
-
-  // $scope.onHold = function(){
-  //   console.log("onHold just happened!");
-  //   $(td-card).addClass("without-shadow");
-  // };
-
-
- //$scope.reload();
-}])
 
 
 .controller('CardsCtrl', function($scope, TDCardDelegate, $ionicModal, $ionicPopover, $ionicListDelegate, CardService) {
@@ -512,7 +102,7 @@ angular
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true
 
-  
+
   //$scope.filterFunction = function(element) {
    // return element.name.match(/^Ma/) ? true : false;
   //};
@@ -524,7 +114,7 @@ angular
   $scope.addCard = function(phrase, color, xLevel) {
     $scope.err = null;
     $scope.cards.$add({
-      name: name, 
+      name: name,
       color: color,
       xLevel: xLevel
     })
@@ -570,66 +160,53 @@ angular
 }) //CardsCtrl
 
 
-.controller('CardController', function($scope, TDCardDelegate, $timeout, CardService) {
+// .controller('CardController', function($scope, TDCardDelegate, $timeout, CardService) {
 
-  var vm = this;
+//   var vm = this;
 
-  vm.phrase;
-  vm.altPhrase;
+//   vm.phrase;
+//   vm.altPhrase;
 
-  vm.init = function(){
-      vm.showAltPhrase = false;
-      //vm.displayCard();
+//   vm.init = function(){
+//       vm.showAltPhrase = false;
+//       //vm.displayCard();
 
-      $scope.$watchCollection('vm.card',function(newC,oldC){
-          vm.displayCard();
-      });
-  };
+//       $scope.$watchCollection('vm.card',function(newC,oldC){
+//           vm.displayCard();
+//       });
+//   };
 
-  vm.displayCard = function(){
-    console.log("vm.displayCard was just called");
+//   vm.displayCard = function(){
+//     console.log("vm.displayCard was just called");
 
-          //vm.card = CardService.first();
-     
-          vm.phrase = vm.card.phrase;
-          vm.altPhrase = vm.card.altPhrase;
-  };
+//           //vm.card = CardService.first();
 
-  vm.nextCard = function() {
-      CardService.nextCard();
-  };
+//           vm.phrase = vm.card.phrase;
+//           vm.altPhrase = vm.card.altPhrase;
+//   };
 
-  vm.togglePhrases = function() {
-      vm.showAltPhrase === false ? true: false;
-      console.log(vm.showAltPhrase);
-  };
+//   vm.nextCard = function() {
+//       CardService.nextCard();
+//   };
 
-  vm.showAltPhrase = function() {
-    vm.showAltPhrase = false;
-    console.log(vm.showAltPhrase);
-  };
+//   vm.togglePhrases = function() {
+//       vm.showAltPhrase === false ? true: false;
+//       console.log(vm.showAltPhrase);
+//   };
 
-  vm.showPhrase = function() {
-    card.showAltPhrase = true;
-    console.log(card.showAltPhrase);
-  };
+//   vm.showAltPhrase = function() {
+//     vm.showAltPhrase = false;
+//     console.log(vm.showAltPhrase);
+//   };
 
-
-  vm.init();
-})
+//   vm.showPhrase = function() {
+//     card.showAltPhrase = true;
+//     console.log(card.showAltPhrase);
+//   };
 
 
-.controller('CardCtrl', function($scope, TDCardDelegate) {
-  $scope.cardSwipedLeft = function(index) {
-    console.log('LEFT SWIPE');
-    $scope.addCard();
-  };
-  $scope.cardSwipedRight = function(index) {
-    console.log('RIGHT SWIPE');
-    $scope.addCard();
-  };
-})
-
+//   vm.init();
+// })
 
 
 .controller('UnderCtrl', function($scope) {
@@ -703,11 +280,11 @@ angular
 
   // Grab the last active, or the first project
   $scope.activeGame = $scope.games[Games.getLastActiveIndex()];
-    
+
     $scope.showGameModal = function(){
         $scope.gameModal.show();
     };
-    
+
   // Called to create a new project
   $scope.newGame = function(game) {
     //var projectTitle = prompt('Project name');
@@ -742,7 +319,7 @@ angular
       return;
     }
     $scope.activeGame.players.push({
-      name: player.name 
+      name: player.name
     });
     $scope.playerModal.hide();
 
@@ -763,11 +340,11 @@ angular
     $scope.closeNewPlayer = function() {
         $scope.playerModal.hide();
     }
-    
+
     $scope.closeNewGame = function(){
         $scope.gameModal.hide();
     }
-    
+
     $scope.toggleGames = function() {
         //console.log("---------------------------");
         //console.log($scope);
@@ -793,4 +370,3 @@ angular
   });
 
 });
-
