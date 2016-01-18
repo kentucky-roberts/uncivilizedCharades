@@ -273,11 +273,12 @@ background: transparent;
     -webkit-transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-*/
+
 
 .button:focus {
     outline: none;
 }
+*/
 
 .button.ng-hide {
     -webkit-transition: none;
@@ -292,7 +293,7 @@ background: transparent;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
-
+/*
 .button-outline,
 .button-outline:hover,
 .button-outline:active {
@@ -312,7 +313,7 @@ background: transparent;
 .button.button-outline {
     border-color: rgba(0, 0, 0, 0.1);
 }
-
+*/
 .button-flat,
 .bar .button-flat {
     box-shadow: none;

@@ -10794,6 +10794,221 @@ background: transparent;
 .ionic_toast_close:active {
   background-color: #555555; }
 
+/** Background from http://www.transparenttextures.com/ **/
+td-cards {
+  display: block;
+  position: absolute;
+  top: 25%;
+  right: 50%;
+  width: 180px;
+  height: 360px;
+  border-radius: 10px; }
+
+td-card {
+  position: absolute;
+  -webkit-transform: scale(1, 1);
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
+  left: 10%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  width: 310px;
+  height: 180px;
+  border: 1px solid #999;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  }
+
+.card {
+  margin: 0;
+  background-color: #c6c6c6; }
+
+/*
+td-card.card-0 {
+  -webkit-transform: translate3d(0, 0px, 0);
+  transform: translate3d(0, 0px, 0);
+  top: 0px;
+
+  z-index: 10;
+  transform: translate3d(0, 0, -180px);
+  transform-style: preserve-3d;
+}
+td-card.card-1 {
+  -webkit-transform: translate3d(0, 4px, 0);
+  transform: translate3d(0, 4px, 0);
+  z-index: 9;
+  transform: translate3d(0, 0, -180px);
+  transform-style: preserve-3d;
+}
+td-card.card-2 {
+  -webkit-transform: translate3d(0, 8px, 0);
+  transform: translate3d(0, 8px, 0);
+  z-index: 8;
+}
+*/
+td-card .image {
+  position: relative; }
+
+td-card img {
+  max-width: 100%;
+  border-radius: 6px; }
+
+.yes-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 30px;
+  color: #6ffa6f;
+  opacity: 0; }
+
+.no-text {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: #ff7373;
+  opacity: 0; }
+
+.fade {
+  -webkit-transition: 0.2s opacity linear;
+  transition: 0.2s opacity linear;
+  opacity: 0; }
+
+.card img {
+  max-width: 100%;
+  border-radius: 4px; }
+
+.card-face {
+  color: #000;
+  font-family: "Open Sans", sans-serif;
+  background-color: #fff; }
+
+.card-back {
+  background-color: #000;
+  background-image: url("../img/bg/plaid.png");
+  background-repeat: repeat;
+  border: 4px solid white;
+  max-width: 100%;
+  z-index: 1000; }
+
+.card #end-card {
+  background-color: none;
+  box-shadow: none;
+  border-radius: none; }
+
+#end-card {
+  border: none;
+  background-color: none;
+  box-shadow: none;
+  border-radius: none;
+  margin-left: 0; }
+  #end-card i {
+    position: absolute;
+    top: calc(50% - 55px);
+    left: calc(50% - 40px);
+    font-size: 100px; }
+  #end-card .end-card__start--countdown i {
+    position: absolute;
+    top: calc(50% - 55px);
+    left: calc(50% - 40px);
+    font-size: 100px; }
+  #end-card .end-card__start--countdown button {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    text-align: center; }
+
+#end-card i {
+  position: absolute;
+  top: calc(50% - 55px);
+  left: calc(50% - 40px);
+  font-size: 100px; }
+
+.reload-card i {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  font-size: 100px; }
+
+/*
+.playingCards {
+    position: relative;
+    height: 128px;
+    margin-left: 400px;
+}
+
+.card {
+    margin-right: 10px;
+    width: 180px;
+    height: 128px;
+    border-radius: 10px;
+    background: #fff;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.card-index-0 {
+    position: absolute;
+    left: 0;
+}
+
+.card-index-1 {
+    position: absolute;
+    left: 40px;
+}
+
+.card-index-2 {
+    position: absolute;
+    left: 80px;
+}
+
+.card-index-3 {
+    position: absolute;
+    left: 120px;
+}
+
+.card-index-4 {
+    position: absolute;
+    left: 160px;
+}
+
+.card-index-5 {
+    position: absolute;
+    left: 200px;
+}
+
+.card-index-6 {
+    position: absolute;
+    left: 240px;
+}
+
+.card-index-7 {
+    position: absolute;
+    left: 280px;
+}
+
+.card-index-8 {
+    position: absolute;
+    left: 320px;
+}
+
+.card p {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 35px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 35px;
+    text-align: center;
+}
+
+.card.back {
+    background-color: #800080;
+    background-repeat: repeat;
+    background-image: url('argyle.png');
+}
+*/
 body {
   cursor: url("http://ionicframework.com/img/finger.png"), auto;
   font-family: "Open Sans", sans-serif;
@@ -10842,6 +11057,39 @@ h3 {
   font-weight: 300;
   color: #ffffff;
   font-size: 16px; }
+
+h1.instruction-text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  color: #fc0; }
+
+h2.instruction-text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  color: #c6c6c6; }
+
+h3.instruction-text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  color: white;
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0; }
+
+p.instruction-text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: white;
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0; }
 
 a {
   color: #fc0;
@@ -11032,103 +11280,6 @@ i {
   color: white;
   border: 1px solid white; }
 
-td-cards {
-  display: block;
-  position: absolute;
-  top: 25%;
-  right: 50%;
-  width: 250px;
-  height: 200px; }
-
-td-card {
-  position: absolute;
-  -webkit-transform: scale(1, 1);
-  box-sizing: border-box;
-  overflow: hidden;
-  -webkit-animation-fill-mode: forwards;
-  left: 50%;
-  margin-top: 80px;
-  margin-bottom: 40px;
-  width: 300px;
-  height: 250px;
-  border: 1px solid #999;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-  border-radius: 6px; }
-
-.card {
-  margin: 0;
-  background-color: #c6c6c6; }
-
-td-card.card-0 {
-  -webkit-transform: translate3d(0, 0px, 0);
-  transform: translate3d(0, 0px, 0);
-  top: 0px;
-  z-index: 10;
-  transform: translate3d(0, 0, -180px);
-  transform-style: preserve-3d; }
-
-td-card.card-1 {
-  -webkit-transform: translate3d(0, 4px, 0);
-  transform: translate3d(0, 4px, 0);
-  z-index: 9;
-  transform: translate3d(0, 0, -180px);
-  transform-style: preserve-3d; }
-
-td-card.card-2 {
-  -webkit-transform: translate3d(0, 8px, 0);
-  transform: translate3d(0, 8px, 0);
-  z-index: 8; }
-
-td-card .image {
-  position: relative; }
-
-td-card img {
-  max-width: 100%;
-  border-radius: 6px; }
-
-.yes-text {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 30px;
-  color: #6ffa6f;
-  opacity: 0; }
-
-.no-text {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  color: #ff7373;
-  opacity: 0; }
-
-.fade {
-  -webkit-transition: 0.2s opacity linear;
-  transition: 0.2s opacity linear;
-  opacity: 0; }
-
-.card img {
-  max-width: 100%;
-  border-radius: 4px; }
-
-.card-face {
-  color: #000;
-  font-family: "Open Sans", sans-serif;
-  background-color: #fff; }
-
-.card-back {
-  background-color: #000;
-  background-image: url("../img/bg/plaid.png");
-  background-repeat: repeat;
-  border: 4px solid white;
-  max-width: 100%;
-  z-index: 1000; }
-
-.card #end-card {
-  background-color: none;
-  box-shadow: none;
-  border-radius: none; }
-
 .td-title {
   position: absolute;
   top: 10%;
@@ -11173,34 +11324,6 @@ h1.td-title {
 
 .white-text {
   color: white !important; }
-
-#end-card {
-  border: none;
-  background-color: none;
-  box-shadow: none;
-  border-radius: none;
-  margin-left: 0; }
-  #end-card i {
-    position: absolute;
-    top: calc(50% - 55px);
-    left: calc(50% - 40px);
-    font-size: 100px; }
-  #end-card .end-card__start--countdown i {
-    position: absolute;
-    top: calc(50% - 55px);
-    left: calc(50% - 40px);
-    font-size: 100px; }
-  #end-card .end-card__start--countdown button {
-    position: absolute;
-    bottom: 5%;
-    width: 100%;
-    text-align: center; }
-
-#end-card i {
-  position: absolute;
-  top: calc(50% - 55px);
-  left: calc(50% - 40px);
-  font-size: 100px; }
 
 .td-footer {
   position: absolute;
@@ -11260,11 +11383,6 @@ h1.td-title {
   .message__block p.message--text {
     color: white;
     text-align: center; }
-
-h2.instruction-text {
-  color: white;
-  text-align: center;
-  font-size: 14px; }
 
 /* Main Content Boxes */
 .main-content, .content {
@@ -11648,4 +11766,4 @@ a.prev.disabled, a.next.disabled {
   -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
   -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
   box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-  border-bottom: 1px solid #121212; }
+  border-bottom: 1px solid #121212;   

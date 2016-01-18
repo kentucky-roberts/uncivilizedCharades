@@ -25,8 +25,10 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	};
 
 	$scope.deal = function() {
-	    $scope.refreshCards
-	    $scope.activeCards = CardService.threeCards();
+	    $scope.refreshCards;
+	    $scope.activeCards = CardService.nextThreeCards();
+
+	    
 	    $scope.cardsVisible = false;
 	}
 
@@ -45,9 +47,9 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	};
 
 	$scope.cardSwipedUp = function(index) {
-	    console.log('UP SWIPE');
+	    //console.log('UP SWIPE');
 	    $scope.activateCard(index);
-		$scope.newCountdown();
+	    $scope.newCountdown();
 	    // $scope.showCountdown =  function() {
 	    // 	  CountdownService.setTrueTag();
 	    // }
@@ -56,17 +58,15 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	};
 
 
-         $scope.onDoubleTap = function(){
-         	$scope.cardsVisible = true;
-         };
 
-	  $scope.newCountdown = function() {
-	    ModalService
-	      .init('templates/modals/countdown-timer.html', $scope)
-	      .then(function(modal) {
-	        modal.show();
-	      });
-	  };
+
+	  // $scope.newCountdown = function() {
+	  //   ModalService
+	  //     .init('templates/modals/countdown-timer.html', $scope)
+	  //     .then(function(modal) {
+	  //       modal.show();
+	  //     });
+	  // };
 
 	$scope.cardSwipedLeft = function(index) {
 	    console.log('LEFT SWIPE');

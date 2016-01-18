@@ -101,26 +101,45 @@
             </div>
          </td-card>
 
-
-
         <td-card id="end-card" drag="false" ng-if="cards.active.length === 0">
             <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
         </td-card>
 
 
-        
 
-           <div class=" {{ (game.step === 3) ? 'show' : 'hidden' }}">
-                  <td-card id="end-card" drag="false">
-                      <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
-                  </td-card>
+
+          <div class=" {{ (game.turn === 1) ? 'show' : 'hidden' }}">
+              <span class="reload-card">
+                  <span>Start Game</span>
+                  <i class="icon ion-checkmark-circled disable-user-behavior" ng-click="game.nextTurn()"></i>
+              </span>
           </div>
+    
+
+
+          <div class=" {{ (game.step === -1) ? 'show' : 'hidden' }}">
+              <span class="reload-card">
+                  <span>Next Turn</span>
+                  <i class="icon ion-checkmark-circled disable-user-behavior" ng-click="game.readyNextTurn();refreshCards()"></i>
+              </span>
+          </div>
+    
+
+
+         
 
        </td-cards>
 
     </div>
 
 
+
+
+
+      <div id="footer__message__container" class="">
+          <span class="message--textbrand-error {{ (readyForTeams === false) ? 'show' : 'hidden' }}">Please add more players...</span>
+          <span class="message--textbrand-success {{ (readyForTeams == true) ? 'show' : 'hidden' }}">Nice! You may now proceed to the next step or continue adding players!</span>
+      </div>
 
 
 
@@ -138,16 +157,21 @@
             </div>
       </div>
             
-      <div id="footer__message__container" class="">
-          <span class="message--textbrand-error {{ (readyForTeams === false) ? 'show' : 'hidden' }}">Please add more players...</span>
-          <span class="message--textbrand-success {{ (readyForTeams == true) ? 'show' : 'hidden' }}">Nice! You may now proceed to the next step or continue adding players!</span>
-      </div>
-
 
   <div class="bar bar-footer bar-dark">    
 
 
       <div class="td-footer">
+
+            <h2>Turn:  {{game.turn}} Step:  {{game.step}}</h2>
+
+             <h1 class="instruction-text">The H1.instruction-text</h1>
+             <h2 class="instruction-text">The H2.instruction-text</h2>
+             <h3 class="instruction-text">The H3.instruction-text</h3>
+
+  <p class="instruction-text text-lead">The p.instruction-text text-lead</p>
+  <p class="instruction-text">The p.instruction-text</p>
+  
 
               <h2 class="text--center instruction-text {{ (game.step === -1) ? 'show' : 'hidden' }}">
               Swipe the card UP to Start Game
@@ -176,8 +200,6 @@
           <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-left activated" ng-click="soundClickOn();game.nextStep();">
     </button>
 
- <button ng-click="addCard()" class="button button-outline button-royal">Add Card</button>
-    
     <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated" ng-click="soundClickOn();game.nextTurn()">
     </button>
 

@@ -6,12 +6,12 @@ function GameService() {
 
     var service = {
         maxScore: maxScore,
-        secondsRemaining: secondsRemaining
+        maxTime: maxTime
         // newTeams: newTeams
     };
     ////////////////////
     var _maxScore = 10;
-    var _secondsRemaining = 59;
+    var _maxTime = 59;
     /**
      * Returns the numeric maximum hand value before busting
      * @returns {number}
@@ -19,8 +19,8 @@ function GameService() {
     function maxScore(){
         return _maxScore;
     }
-    function secondsRemaining(){
-        return _secondsRemaining;
+    function maxTime(){
+        return _maxTime;
     }
 
 
