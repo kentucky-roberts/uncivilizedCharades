@@ -23,34 +23,7 @@ function AppController($scope, $rootScope, $firebaseAuth, $window, $interval, $t
 	// })
 
 	var app = this;
-	$scope.saveNewGame = function(players) {
-		// GameService.saveFirebaseGame();
-		console.log("saveNewGame() called!");
-	};
 
-
-	// ////////////////////////////////////////
-	// // Game Sound Effects
-	// ////////////////////////////////////////
-	// $scope.chaChing = ngAudio.load("sound/cha-ching.mp3"); // returns NgAudioObject
-	// $scope.awww = ngAudio.load("sound/awww.mp3"); // returns NgAudioObject
-	// $scope.crickets = ngAudio.load("sound/crickets.mp3"); // returns NgAudioObject
-	// $scope.snowballSplat = ngAudio.load("sound/snowball-splat.mp3"); // returns NgAudioObject
-	// $scope.squishFart = ngAudio.load("sound/squish-fart.mp3"); // returns NgAudioObject
-	// $scope.voiceOn = ngAudio.load("sound/voice_on.mp3"); // returns NgAudioObject
-	// $scope.voiceOff = ngAudio.load("sound/voice_off.mp3"); // returns NgAudioObject
-	// $scope.clickOn = ngAudio.load("sound/click-on.mp3"); // returns NgAudioObject
-	// $scope.clickOff = ngAudio.load("sound/click-off.mp3"); // returns NgAudioObject
-
-	// $scope.soundChaChing = function() { $scope.chaChing.play(); };
-	// $scope.soundAwww = function() { $scope.awww.play(); };
-	// $scope.soundCrickets = function() { $scope.crickets.play(); };
-	// $scope.soundSnowballSplat = function() { $scope.snowballSplat.play(); };
-	// $scope.soundSquishFart = function() { $scope.squishFart.play(); };
-	// $scope.soundVoiceOn = function() { $scope.voiceOn.play(); };
-	// $scope.soundVoiceOff = function() { $scope.voiceOff.play(); };
-	// $scope.soundClickOn = function() { $scope.clickOn.play(); };
-	// $scope.soundClickOff = function() { $scope.clickOff.play(); };
 
 	////////////////////////////////////////
 	// Layout Methods

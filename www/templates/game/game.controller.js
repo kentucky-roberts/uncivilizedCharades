@@ -66,7 +66,8 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
          * Initialize our controller data
          */
         game.init = function () {
-          game.turn = -3;
+          //game.turn = -3;
+          game.turn = 1;
 	    game.step = 0;
 	    //game.maxScore = GameService.maxScore();
 	    //game.secondsRemaining = GameService.secondsRemaining();
@@ -79,7 +80,8 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	    game.team2Score = 0;
 	    game.activeTeam = "Team1";
 	    game.nextActiveTeam = "Team2";
-	    game.activeTeamColor = "border-bottom-dark";
+	    game.activeTeamColor = "yellow-text";
+	    game.cardsVisible = false;
 
 	    //game.deck = CardService.newDeck();
 	    //game.dealer = DealerService.newDealer(game.deck);
@@ -90,6 +92,8 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
 
 	     game.demoMakePlayers();
+	     //game.players = PlayerService.getPlayers();
+
 	     game.demoMakeTeams();
 	    //game.createPlayers();
 	    //game.createTeams();
@@ -321,11 +325,16 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	  game.readyNextTurn = function() {
 	  	console.log("ready next turn called.");
 	  	$scope.closeModal();
+	  	game.showRefreshCards();
 	  };
 
+	  game.showRefreshCards = function() {
+	  	game.started = true;
+            game.canDeal = true;
+            console.log();
+            game.showResults = false;
+	  };
         game.startNewGame = function () {
-           // game.player = PlayerService.newPlayer('Ringo', 100);
-            //console.log(game.player);
             game.started = true;
             game.canDeal = true;
             game.showResults = false;
@@ -424,6 +433,8 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	    CountdownService.setTrueTag();
 	};
 
+	$scope.setTrueTag();
+
 	$scope.$watch(function() {
 	      return CountdownService.tags;
 	    	},
@@ -431,7 +442,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	    	function(newVal, oldVal) {
 			console.log(newVal);
 			console.log(oldVal);
-			if (newVal === false) {
+			if (newVal.a === false) {
 			    $scope.newCountdown();
 			    $scope.selectTimer(2);
 			}
@@ -529,8 +540,20 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 		console.log("start bonus round!");
 	};
 
+	game.cardStatus = function(isVisible) {
+	  	console.log("isVisible: "+ isVisible);
+	  	var visibility = isVisible;
 
+		if (visibility == true) {
+			game.cardsVisible = true;
+			alert("The cards should now be visible");
+		} else {
+			game.cardsVisible = false;
+		}
+		
+	};
 
+	game.cardStatus(false);
 
 
 

@@ -9859,7 +9859,6 @@ form {
   height: 44px; }
 
 .bar.bar-header {
-  height: 50px;
   border-bottom: none; }
 
 /*
@@ -11038,12 +11037,15 @@ td-cards {
   position: absolute;
   top: 25%;
   right: 50%;
-  width: 300px;
-  height: 250px;
-  perspective-origin: 50% -50%; }
+  width: 250px;
+  height: 200px; }
 
 td-card {
   position: absolute;
+  -webkit-transform: scale(1, 1);
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
   left: 50%;
   margin-top: 80px;
   margin-bottom: 40px;
@@ -11178,6 +11180,21 @@ h1.td-title {
   box-shadow: none;
   border-radius: none;
   margin-left: 0; }
+  #end-card i {
+    position: absolute;
+    top: calc(50% - 55px);
+    left: calc(50% - 40px);
+    font-size: 100px; }
+  #end-card .end-card__start--countdown i {
+    position: absolute;
+    top: calc(50% - 55px);
+    left: calc(50% - 40px);
+    font-size: 100px; }
+  #end-card .end-card__start--countdown button {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+    text-align: center; }
 
 #end-card i {
   position: absolute;
@@ -11243,6 +11260,11 @@ h1.td-title {
   .message__block p.message--text {
     color: white;
     text-align: center; }
+
+h2.instruction-text {
+  color: white;
+  text-align: center;
+  font-size: 14px; }
 
 /* Main Content Boxes */
 .main-content, .content {

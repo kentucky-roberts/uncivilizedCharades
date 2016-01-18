@@ -1,65 +1,32 @@
 <ion-view name="game-view" >
 
-<style> .tabs { display: none; } </style>
-<div ng-controller="GameController">
-
-
+    <style> .tabs { display: none; } </style>
 
     <ion-header-bar class="bar-dark border-bottom-dark">
       <button class="button button-clear" ng-click="newTask()"></button>
-      <h1 class="title">Active Player {{game.activeTeam}}</h1>
+      <h1 class="title">Active Player: {{game.activePlayer.name || none}}</h1>
       <button class="hidden button button-clear" ng-click="logout()">Logout</button>
-       
     </ion-header-bar>
 
-    
     <div class="bar bar-subheader bar-transparent ">
-      <button class="button button-fab button-balanced icon ion-android-add button-fab-top-right button-flat"></button>
-      <h2 class="text--center instruction-text {{ (game.step === -1) ? 'show' : 'hidden' }}">
-          Swipe the card UP to Start Game
-          <div class="arrow-box">
-            <i class="ion-ios-arrow-thin-up"></i>
-          </div>
-      </h2>
-      <h2 class="instruction-text {{ (game.step === 0) ? 'show' : 'hidden' }}">
-          {{game.activeTeam}}'s Up!<br> 
-          <small>When your ready, hold down your cards to see what you've got.</small>
-      </h2>
-      <h2 class="instruction-text {{ (game.step === 1) ? 'show' : 'hidden' }}">
-          Swipe right and left, choose a card, press GO! button.
-      </h2>
-      <h2 class="instruction-text {{ (game.step === 2) ? 'show' : 'hidden' }}">
-          Act out the Secret Phrase ...<br>
-      </h2>
-      <h2 class="instruction-text {{ (game.step === 3) ? 'show' : 'hidden' }}">
-          Swipe the card UP to begin next turn
-          <div class="arrow-box">
-            <i class="ion-ios-arrow-thin-up center-block animated"></i>
-          </div>
-
-      </h2>
-
+      <button class="hidden button button-fab button-balanced icon ion-android-add button-fab-top-right button-flat"></button>
+     
     </div><!--  bar bar-subheader -->
-  <ion-pane ng-controller="CardsController">
+    <ion-pane ng-controller="CardsController">
 
+          <div class="td-title">
+            <div class="row">
+              <div class="col">ActiveCard: <span>{{ cards.activeCard.length }}</span><span>{{cards.activeCard.phrase}}</span></div>
+              <div class="col">Master: <span>{{ cards.master.length }}</span></div>
+              <div class="col">Cards: <span>{{ cards.active.length }}</span></div>
+              <div class="col">Discards: <span>{{ cards.discards.length }}</span></div>
+            </div>
+          </div>
 
-
-      <div class="td-title  hidden">
+      <div class="td-footer  hidden">
         <div class="row">
-          <div class="col">ActiveCard: <span>{{ cards.activeCard.length }}</span><span>{{activeCard.phrase}}</span></div>
-          <div class="col">Master: <span>{{ cards.master.length }}</span></div>
-          <div class="col">Cards: <span>{{ cards.active.length }}</span></div>
-          <div class="col">Discards: <span>{{ cards.discards.length }}</span></div>
-        </div>
-      </div>
-
-
-
-
-      <div class="td-footer hidden">
-        <div class="row">
-        <button ng-click="deal()" class="button button-outline button-assertive">Deal</button>
-    <button ng-click="game.nextTurn()" class="button button-outline button-royal">Next Turn++</button>
+            <button ng-click="deal()" class="button button-outline button-assertive">Deal</button>
+            <button ng-click="game.nextTurn()" class="button button-outline button-royal">Next Turn++</button>
             <button ng-click="game.nextStep()" class="button button-outline button-royal">Step++</button>
 
           <button ng-click="setFalseTag()" class="button button-outline button-royal">Skip</button>
@@ -108,79 +75,117 @@
 <div ng-if="cards.active">
    <td-cards control="cardsControl">
          <td-card 
-            ng-repeat="card in cards.active"
-                on-swiped-up="cardSwipedUp($index)"
-                on-swiped-left="cardSwipedLeft($index)"
-                on-swiped-right="cardSwipedRight($index)"
-                on-partial-swipe="cardPartialSwipe(amt)" 
-                on-destroy="cardDestroyed($index)"
-                class="card card-{{$index}}  {{ (game.cardsVisible === true) ? 'card-back' : 'card-face' }}">
+                  ng-repeat="card in cards.active"
+                  on-destroy="cardDestroyed($index)"
+                  on-transition-up="cardSwipedUp($index)"
+                  on-transition-left="cardSwipedLeft($index)"
+                  on-transition-right="cardSwipedRight($index)"
+                  on-partial-swipe="cardPartialSwipe(amt)"
+                  on-double-tap="onDoubleTap($index)" 
+                  class="card card-{{$index}}  {{ (cardsVisible === true) ? 'card-back' : 'card-face' }}">
+            
             <div  ng-controller="CardController">
+                <div class="no-text">NOPE</div>
+                <img ng-src="{{card.image}}">
+                <div class="yes-text">LIKE</div>
 
-              <article class="phrase">
+                  <article class="phrase">
                     <h1 class="td-title">{{card.phrase}}</h1>
                   </article>
 
-                  <button  ng-click="activateCard($index);" class="button button-calm button-outlined td-button">Select this Card!</button>
 
-                    <div ng-if="cards.activeCard.length === 1">
-                      <span class="button button-balanced button-block icon ion-ios-timer-outline button-rounded" ng-click="newCountdown();selectTimer(2)">Start Countdown!</span>
-                    </div>
+                  <button  ng-click="activateCard($index)" class="button button-calm button-outlined td-button">Select this Card!</button>
 
+
+                  
             </div>
          </td-card>
+
+
 
         <td-card id="end-card" drag="false" ng-if="cards.active.length === 0">
             <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
         </td-card>
 
+
+        
+
+           <div class=" {{ (game.step === 3) ? 'show' : 'hidden' }}">
+                  <td-card id="end-card" drag="false">
+                      <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
+                  </td-card>
+          </div>
+
        </td-cards>
+
     </div>
+
+
+
+
+
+  </ion-pane>
 
 
 
 
       <div class="control">
-
             <div class="box">
+                <button ng-click="activateCard($index)" 
+                  class="button button-outline button-balanced cbutton cbutton--effect-novak cbutton--click">Activate Card</button>
             
-
-        <button class="button button-fab button-balanced icon ion-leaf activated"></button>
-        <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated"></button>
-       
-
-          <button ng-click="activateCard($index)" class="button button-outline button-balanced cbutton cbutton--effect-novak cbutton--click
-          ">Activate Card</button>
-          <button ng-click="deActivateCard($index)" class="button button-outline button-balanced">De-Activate Card</button>
+                <button ng-click="deActivateCard($index)" class="button button-outline button-balanced">De-Activate Card</button>
+            </div>
+      </div>
+            
+      <div id="footer__message__container" class="">
+          <span class="message--textbrand-error {{ (readyForTeams === false) ? 'show' : 'hidden' }}">Please add more players...</span>
+          <span class="message--textbrand-success {{ (readyForTeams == true) ? 'show' : 'hidden' }}">Nice! You may now proceed to the next step or continue adding players!</span>
       </div>
 
 
-
-    </ion-pane>
-
+  <div class="bar bar-footer bar-dark">    
 
 
+      <div class="td-footer">
+
+              <h2 class="text--center instruction-text {{ (game.step === -1) ? 'show' : 'hidden' }}">
+              Swipe the card UP to Start Game
+              <div class="arrow-box">
+              <i class="ion-ios-arrow-thin-up"></i>
+              </div>
+              </h2>
+              <h2 class="instruction-text {{ (game.step === 0) ? 'show' : 'hidden' }}">
+              {{game.activeTeam}}'s Up!<br> 
+              <small>When your ready, double tap your cards to see what you've got.</small>
+              </h2>
+              <h2 class="instruction-text {{ (game.step === 1) ? 'show' : 'hidden' }}">
+              Swipe right and left, choose a card, press GO! button.
+              </h2>
+              <h2 class="instruction-text {{ (game.step === 2) ? 'show' : 'hidden' }}">
+              Act out the Secret Phrase ...<br>
+              </h2>
+              <h2 class="instruction-text {{ (game.step === 3) ? 'show' : 'hidden' }}">
+              Swipe the card UP to begin next turn
+              <div class="arrow-box">
+              <i class="ion-ios-arrow-thin-up center-block animated"></i>
+              </div>
+              </h2>
+      </div>
+
+          <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-left activated" ng-click="soundClickOn();game.nextStep();">
+    </button>
+
+ <button ng-click="addCard()" class="button button-outline button-royal">Add Card</button>
+    
+    <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated" ng-click="soundClickOn();game.nextTurn()">
+    </button>
 
 
-</div><!-- GameController -->
+    <button class="button button-fab button-balanced icon ion-leaf activated hidden" ng-click="soundClickOn()"></button>
 
 
-
-<div id="footer__message__container">
-<p class="message--text">Heloooo</p>
-  <span class="brand-error {{ (readyForTeams === false) ? 'show' : 'hidden' }}">Please add more players...</span>
-<span class="brand-success {{ (readyForTeams == true) ? 'show' : 'hidden' }}">Nice! You may now proceed to the next step or continue adding players!</span>
-</div>
-
-
-
-    <div class="bar bar-footer bar-dark">    
-
-
-            <a native-ui-sref="tabs.teams" native-ui-sref-opts="{reload: true}" class="button icon-left ion-chevron-right  button-positive {{ (readyForTeams === true) ? 'show' : 'show' }}" ng-click="showBuildTeams();soundClickOff()"> Next Step</a>
-
-            <button class="button button-fab button-positive icon ion-chevron-right button-fab-bottom-right activated"
-              ng-click="soundClickOn()"></button>
-    </div>
-
+    <a native-ui-sref="tabs.teams" native-ui-sref-opts="{reload: true}" class="hidden button icon-left ion-chevron-right  button-positive {{ (readyForTeams === true) ? 'show' : 'show' }}" ng-click="showBuildTeams();soundClickOff()"> Next Step</a>
+    <button class="hidden button button-fab button-positive icon ion-chevron-right button-fab-bottom-right activated" ng-click="soundClickOn()"></button>
+  </div>
 </ion-view>

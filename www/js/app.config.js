@@ -15,6 +15,7 @@ angular
         'ion-fab-button',
         'angular-svg-round-progress',
         'ionic.contrib.ui.tinderCards'
+      //'ionic.contrib.ui.cards'
     ])
 
     .constant('version', '1.0.0')

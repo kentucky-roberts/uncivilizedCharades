@@ -2,15 +2,15 @@ angular
   .module('app')
     .controller('CardsController', CardsController);
 
-CardsController.$inject = ['$scope','$rootScope', '$timeout', 'ngAudio', 'CardService', 'CountdownService', 'ModalService'];
+CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicTabsDelegate', 'ionicToast', 'ngAudio', 'CardService', 'CountdownService', 'ModalService'];
 
-function CardsController($scope, $rootScope, $timeout, ngAudio, CardService, CountdownService, ModalService) {
+function CardsController($scope, $rootScope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, ionicToast, ngAudio, CardService, CountdownService, ModalService) {
 
   	var cardTypes = CardService.all();
   	var threeCards = CardService.threeCards();
 
 	$scope.cards = {
-	    master: cardTypes,
+	    master: threeCards,
 	    active: [],
 	    activeCard: [],
 	    discards: [],
@@ -27,6 +27,7 @@ function CardsController($scope, $rootScope, $timeout, ngAudio, CardService, Cou
 	$scope.deal = function() {
 	    $scope.refreshCards
 	    $scope.activeCards = CardService.threeCards();
+	    $scope.cardsVisible = false;
 	}
 
 	$scope.addCard = function() {
@@ -53,6 +54,11 @@ function CardsController($scope, $rootScope, $timeout, ngAudio, CardService, Cou
 	    // //$scope.showCountdown();
 	    //$("td-card").addClass("hidden");
 	};
+
+
+         $scope.onDoubleTap = function(){
+         	$scope.cardsVisible = true;
+         };
 
 	  $scope.newCountdown = function() {
 	    ModalService
@@ -81,8 +87,14 @@ function CardsController($scope, $rootScope, $timeout, ngAudio, CardService, Cou
 	    console.log($scope.cards.activeCard);
 	    $("td-card").addClass("hidden");
 	    var activeCard = CardService.activeCard(index);
+
+		CountdownService.setFalseTag();
 	    console.log(activeCard);
 	};
+
+
+
+
 
 	$scope.deActivateCard = function(index) {
 	    $scope.cards.activeCard.splice(index, 1);
