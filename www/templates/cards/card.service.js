@@ -79,6 +79,9 @@ angular
     threeCards: function() {
       return cardTypes.slice(0,3);
     },
+    dealCards: function() {
+      return cardTypes.slice(0,3);
+    },
     reload: function() {
       return cardTypes.slice(0,3);
     },
@@ -86,7 +89,7 @@ angular
       return cardTypes.slice(index, 1);
     },
     remove: function(card) {
-      cards.splice(cards.indexOf(card), 1);
+      cardTypes.splice(cards.indexOf(card), 1);
     },
     activeCard: function() {
       return activeCard;

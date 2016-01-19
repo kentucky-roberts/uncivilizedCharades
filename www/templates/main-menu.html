@@ -24,17 +24,18 @@
   <button class="button button-block" ng-click="showToast()">Show Toast at top with close</button>
 
   
-  
+      <a native-ui-sref="tabs.teams" native-ui-sref-opts="{reload: true}" class="button button-large button-calm button-outline"> New Game</a>
+
+
 
       <button class="button button-large button-stable button-outline" ng-click="selectTabWithIndex(7)">Settings</button>
       <button class="button button-large button-balanced button-outline" ng-click="selectTabWithIndex(5)">Visit Store</button>
 
-      <button class="button button-large button-calm button-outline" ng-click="app.buildNewGame()">Start New Game</button>
 
-      <button class="button button-large button-positive {{ (app.showLoadGameButton === true) ? 'show' : 'hidden' }}" ng-click="app.showLoadSavedGames()">Load Saved Game</button>
+      <button class="button button-large button-positive {{ (game.showLoadGameButton === true) ? 'show' : 'hidden' }}" ng-click="game.listSavedGames()">Show Saved Games</button>
 
-      <div class="list {{ (app.showSavedGames === true) ? 'show' : 'hidden' }}">
-        <a href="#" class="list-item"></a>
+      <div class="list {{ (game.showLoadGame === true) ? 'show' : 'hidden' }}">
+        <a href="#" class="list-item">Load Game</a>
       </div>
 
 

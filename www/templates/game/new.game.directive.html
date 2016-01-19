@@ -4,8 +4,8 @@
 
     <ion-header-bar class="bar-dark border-bottom-dark">
       <button class="button button-clear" ng-click="newTask()"></button>
-      <h1 class="title">Active Player: {{game.activePlayer.name || none}}</h1>
-      <button class="hidden button button-clear" ng-click="logout()">Logout</button>
+      <h1 class="title">Active Player: <span class="yellow-text" >{{game.activePlayer.name}}</span></h1>
+      <button class="button button-clear icon ion-ios-more" ng-click="showMoreMenu()"></button>
     </ion-header-bar>
 
     <div class="bar bar-subheader bar-transparent ">
@@ -85,42 +85,45 @@
                   class="card card-{{$index}}  {{ (cardsVisible === true) ? 'card-back' : 'card-face' }}">
             
             <div  ng-controller="CardController">
-                <div class="no-text">NOPE</div>
-                <img ng-src="{{card.image}}">
-                <div class="yes-text">LIKE</div>
+                <div class="hidden no-text">NOPE</div>
+                <div class="hidden yes-text">LIKE</div>
 
                   <article class="phrase">
                     <h1 class="td-title">{{card.phrase}}</h1>
                   </article>
 
 
-                  <button  ng-click="activateCard($index)" class="button button-calm button-outlined td-button">Select this Card!</button>
+                  <button  ng-click="activateCard($index)" class="button button-calm button-outline td-button">Select this Card!</button>
 
 
                   
             </div>
          </td-card>
 
-        <td-card id="end-card" drag="false" ng-if="cards.active.length === 0">
+        <td-card id="end-card"  drag="false" class=" {{ (game.turn === 0) ? 'show' : 'hidden' }}">
             <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
         </td-card>
 
 
+        <td-card id="active-card" class="card card-back " drag="false" ng-if="cards.active.length === 1">
+            
+        </td-card>
 
 
-          <div class=" {{ (game.turn === 1) ? 'show' : 'hidden' }}">
+
+          <div id="start__game" class=" {{ (game.turn === -1) ? 'show' : 'hidden' }}">
               <span class="reload-card">
-                  <span>Start Game</span>
-                  <i class="icon ion-checkmark-circled disable-user-behavior" ng-click="game.nextTurn()"></i>
+                  <h1 class="body--title">Start Game</h1>
+                  <button class="button button-energized icon ion-power button-large text--center" ng-click="game.startNewGame()">Start Game</button>
               </span>
           </div>
     
 
 
-          <div class=" {{ (game.step === -1) ? 'show' : 'hidden' }}">
+          <div class=" {{ (game.step === 3 ) ? 'show' : 'hidden' }}">
               <span class="reload-card">
                   <span>Next Turn</span>
-                  <i class="icon ion-checkmark-circled disable-user-behavior" ng-click="game.readyNextTurn();refreshCards()"></i>
+                  <i class="icon ion-checkmark-circled disable-user-behavior" ng-click="game.nextTurn();refreshCards();"></i>
               </span>
           </div>
     
@@ -160,54 +163,51 @@
 
   <div class="bar bar-footer bar-dark">    
 
+      <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-left activated" ng-click="soundClickOn();game.nextTurn();"></button>
+
+    <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated" ng-click="soundClickOn();game.nextStep()">
+    </button>
+
+
+
+
 
       <div class="td-footer">
 
-            <h2>Turn:  {{game.turn}} Step:  {{game.step}}</h2>
+            <span class="instruction-text"><small>Turn:</small>  <b>{{game.turn}}</b> </span><span class="instruction-text"><small> Step:</small> <b>{{game.step}}</b></span>
 
-             <h1 class="instruction-text">The H1.instruction-text</h1>
-             <h2 class="instruction-text">The H2.instruction-text</h2>
-             <h3 class="instruction-text">The H3.instruction-text</h3>
+            <h2 class="instruction-text {{ (game.step === -1) ? 'show' : 'hidden' }}">
+              Game not available, please add players. <br> Step -1
+            </h2>
 
-  <p class="instruction-text text-lead">The p.instruction-text text-lead</p>
-  <p class="instruction-text">The p.instruction-text</p>
-  
-
-              <h2 class="text--center instruction-text {{ (game.step === -1) ? 'show' : 'hidden' }}">
-              Swipe the card UP to Start Game
-              <div class="arrow-box">
-              <i class="ion-ios-arrow-thin-up"></i>
-              </div>
-              </h2>
               <h2 class="instruction-text {{ (game.step === 0) ? 'show' : 'hidden' }}">
-              {{game.activeTeam}}'s Up!<br> 
-              <small>When your ready, double tap your cards to see what you've got.</small>
-              </h2>
-              <h2 class="instruction-text {{ (game.step === 1) ? 'show' : 'hidden' }}">
-              Swipe right and left, choose a card, press GO! button.
-              </h2>
-              <h2 class="instruction-text {{ (game.step === 2) ? 'show' : 'hidden' }}">
-              Act out the Secret Phrase ...<br>
-              </h2>
-              <h2 class="instruction-text {{ (game.step === 3) ? 'show' : 'hidden' }}">
-              Swipe the card UP to begin next turn
-              <div class="arrow-box">
-              <i class="ion-ios-arrow-thin-up center-block animated"></i>
-              </div>
-              </h2>
+              {{game.activePlayer.name}}'s turn, click button to deal cards.<br>Step 0
+            </h2>
+
+            <h2 class="instruction-text {{ (game.step === 1) ? 'show' : 'hidden' }}">
+              Choose one of these three cards to act out. 
+            </h2>
+
+             <h2 class="instruction-text {{ (game.step === 2) ? 'show' : 'hidden' }}">
+              Click Start to begin the countdown clock.
+            </h2>
+
+            <h2 class="instruction-text {{ (game.step === 3) ? 'show' : 'hidden' }}">
+              Step 3: ACTION STEP.  Do action then readyNextTurn(); --> Countdown clock return success, then award 1 point to active team.  If return false then, award no points, ready next turn.
+            </h2>
+
+
+
+
       </div>
 
-          <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-left activated" ng-click="soundClickOn();game.nextStep();">
-    </button>
+ 
 
-    <button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated" ng-click="soundClickOn();game.nextTurn()">
-    </button>
-
-
-    <button class="button button-fab button-balanced icon ion-leaf activated hidden" ng-click="soundClickOn()"></button>
 
 
     <a native-ui-sref="tabs.teams" native-ui-sref-opts="{reload: true}" class="hidden button icon-left ion-chevron-right  button-positive {{ (readyForTeams === true) ? 'show' : 'show' }}" ng-click="showBuildTeams();soundClickOff()"> Next Step</a>
+    
+
     <button class="hidden button button-fab button-positive icon ion-chevron-right button-fab-bottom-right activated" ng-click="soundClickOn()"></button>
   </div>
 </ion-view>

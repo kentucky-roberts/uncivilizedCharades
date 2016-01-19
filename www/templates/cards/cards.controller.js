@@ -21,14 +21,14 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	$scope.cardsControl = {};
 
 	$scope.cardDestroyed = function(index) {
-	    $scope.cards.master.splice(index, 1);
+	    $scope.cards.master.splice(index, 1);  // Remove a card from ->  $scope.cards.master
 	};
 
 	$scope.deal = function() {
 	    $scope.refreshCards;
-	    $scope.activeCards = CardService.nextThreeCards();
-
-	    
+	    //$scope.activeCards = DealerService.dealThreeCards();
+	    var dealtCards = CardService.dealCards();
+	    $scope.cards.active.push(angular.extend({}, dealtCards));
 	    $scope.cardsVisible = false;
 	}
 
@@ -58,7 +58,9 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	};
 
 
-
+	$scope.noPoint = function() {
+		$scope.deActivateCard();
+	};
 
 	  // $scope.newCountdown = function() {
 	  //   ModalService
@@ -69,13 +71,13 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	  // };
 
 	$scope.cardSwipedLeft = function(index) {
-	    console.log('LEFT SWIPE');
+	   
 	    //$scope.addCard();
 	    $scope.cardDestroyed(index);
 	};
 
 	$scope.cardSwipedRight = function(index) {
-	    console.log('RIGHT SWIPE');
+	    //console.log('RIGHT SWIPE');
 	    // $scope.addCard();
 	    $scope.cardDestroyed(index);
 	};

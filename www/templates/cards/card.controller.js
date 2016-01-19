@@ -9,11 +9,14 @@ CardController.$inject = ['$scope', '$rootScope', 'CardService', 'CountdownServi
 function CardController($scope, $rootScope, CardService, CountdownService) {
 
 	$scope.cardSwipedLeft = function(index) {
-	    console.log('LEFT SWIPE');
+	    console.log('LEFT SWIPE destroied card');
+	    CardService.destroyCard(index);
 	   // $scope.addCard();
 	};
 	$scope.cardSwipedRight = function(index) {
 	    console.log('RIGHT SWIPE');
+	    CardService.destroyCard(index);
+
 	   // $scope.addCard();
 	};
 
@@ -23,7 +26,9 @@ function CardController($scope, $rootScope, CardService, CountdownService) {
 	};
 
 	$scope.cardSwipedUp = function(index) {
-	    console.log('UP SWIPE');
+	    console.log('UP SWIPE from CardController');
+	    CardService.activateCard(index);
+
 	    //$scope.addCard();
 	};
 };

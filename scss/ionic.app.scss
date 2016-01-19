@@ -72,7 +72,26 @@ h1 {
       }
 }
 
+h1.body--title {
+  font-family: $brand-font-family-base;
+      font-weight: 800;
+      color: $brand-yellow;
+      font-size: 32px;
+      line-height: 34px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+        -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+        box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+        border-bottom: 1px solid $brand-color-dark;
+}
 
+.center--block {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+}
 
 h2 {
     font-family: $brand-font-family-base;
@@ -126,6 +145,22 @@ p.instruction-text {
   text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
 }
 
+h2.success-title {
+    font-family: $brand-font-family-base;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 32px;
+    line-height: 36px;
+}
+
+p.success-message {
+  text-align: center;
+  color: $brand-color-light;
+  fint-size: 16px;
+  padding: 15px;
+}
+
+
 
 a {
   color: $brand-link-color;
@@ -176,15 +211,19 @@ a {
 }
 
 .team-1-name {
+  display: block;
   text-align: center;
   min-width:  300px;
   width: 100%;
+  margin-top: 65px;
 }
 
 .team-2-name {
+  display: block;
   text-align: center;
   min-width:  300px;
   width: 100%;
+  margin-top: 65px;
 }
 
 .editable-click, a.editable-click {

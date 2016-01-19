@@ -26,7 +26,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
     //     });
     // }
 
-
+	
     var game = this;
 
 	////////////////////////////////////////
@@ -67,16 +67,16 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
          */
         game.init = function () {
           //game.turn = -3;
-          game.turn = 0;
-	    game.step = 0;
-	    game.activePlayerCount = 0;
+          game.turn = -1;
+	    game.step = -1;
+	    game.activePlayer = -1;
 	    game.maxScore = GameService.maxScore();
 	    game.secondsRemaining = GameService.maxTime();
 	    game.canDeal = false;
 	    game.started = false;
 	    game.showResults = false;
-	    game.deck = CardService.newDeck();  //new
-	    game.dealer = DealerService.newDealer(game.deck);  //new
+	    //game.deck = CardService.newDeck();  //new
+	    //game.dealer = DealerService.newDealer(game.deck);  //new
 	    game.playerCards = [];  //new
 	    game.players = [];
 	    game.teams = [];
@@ -88,19 +88,31 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	    game.activeTeamColor = "yellow-text";
 	    game.cardsVisible = false;
 
-	    game.maxValue = GameService.maxValue();
-            game.canDeal = false;
-            game.started = false;
-            game.showResults = false;
-            game.deck = CardService.newDeck();
-            game.dealer = DealerService.newDealer(game.deck);
-            game.betValue = 100;
-            game.playerCards = [];
-            game.handValue = 0;
 
-            game.updateButtons(false, false, false);
+		game.showLoadGameButton = false;  // main-menu buttons will appear when true
+		game.showSavedGame = false;  // main-menu buttons will appear when true  
+		game.showSavedGames = false; //main-menu button appear when true -> list a users saved games to Load.
 
-            game.setupHotKeys();
+
+game.loadGame = function() {
+	
+};
+game.listSavedGames = function() {
+
+};
+	    // game.maxValue = GameService.maxValue();
+     //        game.canDeal = false;
+     //        game.started = false;
+     //        game.showResults = false;
+     //        game.deck = CardService.newDeck();
+     //        game.dealer = DealerService.newDealer(game.deck);
+     //        game.betValue = 100;
+     //        game.playerCards = [];
+     //        game.handValue = 0;
+
+     //        game.updateButtons(false, false, false);
+
+     //        game.setupHotKeys();
 
 
 
@@ -122,10 +134,27 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
 
 
-        game.start = function() {
-        	game.turn = 1;
-        	game.step = 1
+        game.createNewGame = function() {
+        	game.turn = -1;
+        	game.step = -1;
+        	game.activePlayer = -1;
+
+
         };
+
+        game.start = function() {
+        	game.turn = 0;
+        	game.step = 0;
+        	game.activePlayer = 0;
+        	game.getActivePlayer();
+        };
+
+
+
+        //if !game.players load the "add-players-drag-teamName tab-view"
+        //  teams-tab -> ng-model="players" ->-> game.addNewPlayer(player) ->  var newPlayer = PlayerService.newPlayer(playerName);
+        //  if (game.players) > 3 { game.showSaveGameButton = true;}
+        // on-click="saveNewGame(players)"
 
 
 	game.demoMakePlayers = function() {
@@ -190,7 +219,78 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	};
 
 
-	
+	// game.turn = 0;
+	// game.count = 0;
+	// game.activePlayer = 0;
+
+
+	////  GAME SERVICE    ////  todo... move this to a service
+	game.getActivePlayer = function(turn) {
+
+
+
+		// var tc = game.turn;
+		// var pc = game.count;
+		// var ap = game.activePlayer;
+
+		// var newActivePlayer = pc +1
+
+		// game.activePlayer = game.players[tc];
+
+
+
+		if (game.turn === 0 ) {
+			game.activePlayer = game.teams[0].players[0];
+			game.activePlayer.isActive = true;
+			console.log("from game.getActivePlayer() " + game.activePlayer);
+			return game.activePlayer;
+		}
+
+		if (game.turn === 1 ) {
+			game.activePlayer = game.teams[1].players[0];
+			game.activePlayer.isActive = true;
+			console.log(game.activePlayer);
+			return game.activePlayer;
+		}
+
+		if (game.turn === 2 ) {
+			game.activePlayer = game.teams[0].players[1];
+			game.activePlayer.isActive = true;
+			console.log(game.activePlayer);
+			return game.activePlayer;
+		}
+
+		if (game.turn === 3 ) {
+			game.activePlayer = game.teams[1].players[1];
+			game.activePlayer.isActive = true;
+			console.log(game.activePlayer);
+			return game.activePlayer;
+		}
+
+		if (game.turn === 4 ) {
+			game.activePlayer = game.teams[0].players[0];
+			game.activePlayer.isActive = true;
+			console.log(game.activePlayer);
+			return game.activePlayer;
+		}
+
+		if (game.turn === 5 ) {
+			game.activePlayer = game.teams[1].players[0];
+			console.log(game.activePlayer);
+			return game.activePlayer;
+		}
+	};
+
+
+
+
+
+
+
+
+
+
+
 	////////////////////////////////////////
 	// Toast
 	////////////////////////////////////////
@@ -275,7 +375,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
         $scope.onDropComplete2=function(data,evt){
             var index = $scope.droppedObjects2.indexOf(data);
             var player = $scope.players.indexOf(data);
-            //$scope.clickOn();
+            $scope.soundClickOn();
 
             if (index == -1) {
                 $scope.droppedObjects2.push(data);
@@ -308,6 +408,9 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 		console.log("$scope.addNewPlayer() was called...");
 		$scope.closeModal();
 		var newPlayer = PlayerService.newPlayer(playerName);
+
+
+
 		console.log(newPlayer);
 
 		game.players.push(angular.extend({}, newPlayer));
@@ -344,6 +447,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	 game.nextTurn = function() {
 	 	console.log("nextTurn called. current game.turn:" + game.turn);
 	  	game.turn += 1;
+	  	game.activePlayerCount += 1;
 	  	var turn = game.turn;
 	  	console.log("New game.turn: " + game.turn);
 	  	game.getActivePlayer(turn);
@@ -368,6 +472,9 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             game.started = true;
             game.canDeal = true;
             game.showResults = false;
+            game.step = 0;
+            game.turn = 0;
+            $("#start__game").addClass("hidden");
         };
 
 
@@ -443,53 +550,6 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	    .then(function(modal) {
 	      modal.show();
 	    });
-	};
-
-
-
-
-	////  GAME SERVICE    ////  todo... move this to a service
-	game.getActivePlayer = function(turn) {
-		if (game.turn === 1 ) {
-			game.activePlayer = game.teams[0].players[0];
-			game.activePlayer.isActive = true;
-			console.log("from game.getActivePlayer() " + game.activePlayer);
-			return game.activePlayer;
-		}
-
-		if (game.turn === 2 ) {
-			game.activePlayer = game.teams[1].players[0];
-			game.activePlayer.isActive = true;
-			console.log(game.activePlayer);
-			return game.activePlayer;
-		}
-
-		if (game.turn === 3 ) {
-			game.activePlayer = game.teams[0].players[1];
-			game.activePlayer.isActive = true;
-			console.log(game.activePlayer);
-			return game.activePlayer;
-		}
-
-		if (game.turn === 4 ) {
-			game.activePlayer = game.teams[1].players[1];
-			game.activePlayer.isActive = true;
-			console.log(game.activePlayer);
-			return game.activePlayer;
-		}
-
-		if (game.turn === 5 ) {
-			game.activePlayer = game.teams[0].players[0];
-			game.activePlayer.isActive = true;
-			console.log(game.activePlayer);
-			return game.activePlayer;
-		}
-
-		if (game.turn === 6 ) {
-			game.activePlayer = game.teams[1].players[0];
-			console.log(game.activePlayer);
-			return game.activePlayer;
-		}
 	};
 
 
