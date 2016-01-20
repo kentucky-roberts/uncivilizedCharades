@@ -12,7 +12,7 @@
                 <p class="success-message">You have been awarded <strong>+1 Point</strong> and your team now has {{game.activeTeam.score}}.  Click button below to continue.</p>
                 <br>
                 <br>
-                <button class="button button-light button-block" ng-click="game.readyNextTurn(); closeModal();">Next Turn</button>
+                <button class="button button-light button-block" ng-click="game.awardPoint();game.readyNextTurn(); closeModal();">Next Turn</button>
             </div>
         </div>
     </ion-content>

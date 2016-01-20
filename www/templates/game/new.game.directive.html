@@ -35,7 +35,28 @@
   </div>
 
   <div id="game__container--title">
-        <h1>Uncivilized Charades</h1>
+        <h1 class="start__game">Uncivilized Charades</h1>
+
+              <h2 class="instruction-text {{ (game.step === -2) ? 'show' : 'hidden' }}">
+              Game not available, please add players. <br> Step -2
+              </h2>
+              <h2 class="instruction-text {{ (game.step === -1) ? 'show' : 'hidden' }}">
+              Click button to start game. <br> Step -1
+              </h2>
+              <h2 class="instruction-text {{ (game.step === 0) ? 'show' : 'hidden' }}">
+              {{game.activePlayer.name}}'s turn, click button to deal cards.<br>Step 0
+              </h2>
+              <h2 class="instruction-text {{ (game.step === 1) ? 'show' : 'hidden' }}">
+              Choose one of these three cards to act out. 
+              </h2>
+              <h2 class="instruction-text {{ (game.step === 2) ? 'show' : 'hidden' }}">
+              Click Start to begin the countdown clock.
+              </h2>
+              <h2 class="instruction-text {{ (game.step === 3) ? 'show' : 'hidden' }}">
+              Step 3: ACTION STEP.  Do action then readyNextTurn(); --> Countdown clock return success, then award 1 point to active team.  If return false then, award no points, ready next turn.
+              </h2>
+
+
   </div>
 
   <div id="game__container--cards">
@@ -69,7 +90,12 @@
             </div>
          </td-card>
 
-        <td-card id="end-card"  drag="false" class="card {{ (game.turn === 0) ? 'show' : 'hidden' }}">
+        <td-card id="end-card"  drag="false" class="card {{ (game.step === 0) ? 'show' : 'hidden' }}">
+            <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
+        </td-card>
+
+
+        <td-card id="end-card"  drag="false" class="card {{ (game.step === 0 && game.turn != 0) ? 'show' : 'hidden' }}">
             <i class="icon ion-ios-refresh disable-user-behavior" ng-click="refreshCards()"></i>
         </td-card>
 
@@ -91,7 +117,7 @@
     
 
 
-          <div class=" {{ (game.step === 3 ) ? 'show' : 'hidden' }}">
+          <div class="hidden {{ (game.step === -11 ) ? 'show' : 'hidden' }}">
               <span class="reload-card">
                   <span>Next Turn</span>
                   <i class="icon ion-checkmark-circled disable-user-behavior cbutton cbutton--effect-novak " ng-click="game.nextTurn();refreshCards();"></i>
@@ -113,22 +139,28 @@
 
   </div>
 
-  <div id="game__container--toast"></div>
+  <div id="game__container--toast">
+             <h2 class="instruction-text code"><small>Turn:</small>  <b>{{game.turn}}</b> </span><span class="instruction-text"><small> Step:</small> <b>{{game.step}}</b></h2>
+  </div>
 
   <div id="game__container--players" class="">
   
       
-          <div class="testimonial item">
+          <div class="testimonial item" class="animated slideInLeft  {{ (game.activePlayer.length > -1 ) ? 'show' : 'hidden' }}">
               <div class="author">
                   <div class="testimonial-image ">
                     <img alt="testimonial photo of lt col brad magrath" src="img/player-images/avatar.jpg">
                   </div>
                   <div class="testimonial-author-info">
-                      <a href="#"><span class="color">{{game.activePlayer.name || "Active Player"}}</span></a> 02 Points
+                      <a href="#"><span class="color">{{game.activePlayer.name || "Active Player"}}</span></a> Score: 2
                   </div>
               </div>
       </div>
     
+   
+   <button class="hidden button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated cbutton cbutton--effect-novak " ng-click="soundClickOn();game.addPoint({{game.activePlayer}})"></button>
+
+
       <button class="hidden button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated cbutton cbutton--effect-novak " ng-click="soundClickOn();game.nextStep()"></button>
 
 
@@ -136,25 +168,7 @@
 
   <div id="game__container--bottom message__block" class="hidden">
     
-      <h2 class="instruction-text code"><small>Turn:</small>  <b>{{game.turn}}</b> </span><span class="instruction-text"><small> Step:</small> <b>{{game.step}}</b></h2>
-      <h2 class="instruction-text {{ (game.step === -2) ? 'show' : 'hidden' }}">
-      Game not available, please add players. <br> Step -2
-      </h2>
-      <h2 class="instruction-text {{ (game.step === -1) ? 'show' : 'hidden' }}">
-      Click button to start game. <br> Step -1
-      </h2>
-      <h2 class="instruction-text {{ (game.step === 0) ? 'show' : 'hidden' }}">
-      {{game.activePlayer.name}}'s turn, click button to deal cards.<br>Step 0
-      </h2>
-      <h2 class="instruction-text {{ (game.step === 1) ? 'show' : 'hidden' }}">
-      Choose one of these three cards to act out. 
-      </h2>
-      <h2 class="instruction-text {{ (game.step === 2) ? 'show' : 'hidden' }}">
-      Click Start to begin the countdown clock.
-      </h2>
-      <h2 class="instruction-text {{ (game.step === 3) ? 'show' : 'hidden' }}">
-      Step 3: ACTION STEP.  Do action then readyNextTurn(); --> Countdown clock return success, then award 1 point to active team.  If return false then, award no points, ready next turn.
-      </h2>
+     
 
   </div>
 

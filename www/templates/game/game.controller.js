@@ -140,21 +140,6 @@ game.listSavedGames = function() {
 
 
 
-        game.createNewGame = function() {
-        	game.turn = -1;
-        	game.step = -1;
-        	game.activePlayer = -1;
-
-
-        };
-
-        game.start = function() {
-        	game.turn = 0;
-        	game.step = 0;
-        	game.activePlayer = 0;
-        	game.getActivePlayer();
-        };
-
 
 
         //if !game.players load the "add-players-drag-teamName tab-view"
@@ -195,6 +180,11 @@ game.listSavedGames = function() {
 
 	};
 
+game.addPoint = function(index) {
+	var pid = activePlayer(index)
+	pid.PlayerService.changeScore(1);
+	pid.PlayerService.logInfo();
+};
 
 	game.demoMakeTeams = function() {
 		console.log("game.demoMakeTeams() was called...");
@@ -464,13 +454,13 @@ game.listSavedGames = function() {
 	  	console.log("ready next turn called.");
 	  	$scope.closeModal();
 	  	game.showRefreshCards();
-	  	game.step = -1;
+	  	game.step = 0;
 	  };
 
 	  game.showRefreshCards = function() {
 	  	game.started = true;
             game.canDeal = true;
-            game.step = -1;
+            game.step = 0;
             console.log();
             game.showResults = false;
 	  };
@@ -481,9 +471,20 @@ game.listSavedGames = function() {
             game.step = 0;
             game.turn = 0;
             $("#start__game").addClass("hidden");
+             $(".start__game").addClass("hidden");
+             game.getActivePlayer(0);
         };
 
 
+        game.createNewGame = function() {
+        	game.turn = -1;
+        	game.step = -1;
+        	game.activePlayer = -1;
+
+
+        };
+
+      
 
 
 
@@ -565,10 +566,14 @@ game.listSavedGames = function() {
 
 
 
+game.noPoint = function() {
+	game.step = 0;
+};
 
 
-
-
+game.awardPoint = function() {
+	game.step = 0;
+};
 
 
 
