@@ -60,9 +60,9 @@ ion-content {
 h1 {
       font-family: $brand-font-family-base;
       font-weight: 800;
-      color: #ffffff;
-      font-size: 24px;
-      line-height: 26px;
+      color: $brand-red;
+      font-size: 32px;
+      line-height: 34px;
 
       .text-underline {
          -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
@@ -72,7 +72,7 @@ h1 {
       }
 }
 
-h1.body--title {
+h2.body--title {
   font-family: $brand-font-family-base;
       font-weight: 800;
       color: $brand-yellow;
@@ -96,8 +96,9 @@ h1.body--title {
 h2 {
     font-family: $brand-font-family-base;
     font-weight: 600;
-    color: #ffffff;
+    color: $brand-yellow;
     font-size: 26px;
+    text-align: center;
 }
 
 h3 {
@@ -160,6 +161,191 @@ p.success-message {
   padding: 15px;
 }
 
+
+
+#game__container--top { 
+    display: block;
+    top: 0;
+    right: 0%;
+    left: 0%;
+    width: 100%;
+    height: 0%;
+    border-radius: 0;
+ //   background-color: lightgoldenrodyellow;
+
+  #top__menu {} }
+
+#game__container--scores {
+    display: inline-block;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    left: 0%;
+    width: 100%;
+    height: 5%;
+    border-radius: 0;
+  //  background-color:lightcoral;
+    padding: 0;
+    margin: 0;
+    .row {
+      padding: 0!important;
+    }
+    .col {
+      padding: 0!important;
+    }
+}
+#team1_score {
+    display: block;
+    text-align: center;
+    color: $brand-team1-color;
+  //  background-color: black;
+
+      i {
+          font-size: 62px;
+          line-height: 64px;
+          vertical-align: middle;
+          color: $brand-team1-color;
+      }
+
+}
+#team2_score {
+    display: block;
+    text-align: center;
+    color: $brand-team2-color;
+    //background-color: lightslategrey;
+
+      i {
+          font-size: 62px;
+          line-height: 64px;
+          vertical-align: middle;
+          color: $brand-team2-color;
+      }
+}
+
+#game__container--title {
+    display: block;
+    position: absolute;
+    top: 5%;
+    right: 0%;
+    left: 0%;
+    width: 100%;
+    min-height: 15%;
+    height: 100%;
+    border-radius: 0;
+    //background-color:teal;
+
+
+  
+  h1 { color: #fff; text-align: center; margin: 15px auto; }
+
+}
+#game__container--cards, td-cards {
+    display: block;
+    position: absolute;
+    bottom: 25%;
+    right: 0%;
+    left: 0%;
+    width: 100%;
+    height: 50%;
+    border-radius: 0;
+   // background-color:lightcyan;
+
+
+    td-card {
+      display: block;
+      position: absolute;
+      top: 15%;
+      width: 128px;
+      height:  180px;
+      border: 1px solid #999;
+     box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+      border-radius: 6px;
+    }
+
+    .card-0 {
+        left: 10%;
+        display: block;
+       // background-color: purple;
+        z-index: 30;
+    }
+
+    .card-1 {
+        left: 35%;
+        display: block;
+       // background-color: blue;
+        z-index: 20;
+    }
+
+    .card-2 {
+        left: 55%;
+        display: block;
+      //  background-color: orange;
+        z-index: 10;
+    }
+
+}
+
+#game__container--toast {
+    display: block;
+    position: absolute;
+    top: 75%;
+    right: 0%;
+    left: 0%;
+    width: 100%;
+    height: 5%;
+    border-radius: 0;
+   // background-color:purple;
+}
+
+#game__container--players {
+    display: block;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    left: 0%;
+    width: 100%;
+    height: 15%;
+    //background-color: $brand-color-light;
+
+    .testimonial.item{ padding: 0!important;}
+
+    .next__container { 
+      display: block;
+      padding: 0!important;
+       bottom: 0%;
+       top:0%;
+       right: 0%;
+        width:30%;
+        height:100%;
+            i {
+          font-size: 25px;
+          line-height: 25px;
+          vertical-align: middle;
+          color: white;
+      }
+
+    }
+    .player__container { 
+      display: block;
+      padding: 0!important;
+       bottom: 0%;
+       left: 0%;
+      width:70%;
+
+    }
+}
+
+#game__container--bottom {
+    display: block;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    left: 0%;
+    width: 100%;
+    height: 0%;
+    border-radius: 0;
+   // background-color: $brand-color-dark;
+}
 
 
 a {
@@ -365,7 +551,7 @@ i {
 
 #footer__message__container {
   position: absolute;
-  bottom: 50px;
+  bottom: 0;
   right: 0;
   left: 0;
   width: 100%;
@@ -502,33 +688,39 @@ h1.td-title {
     font-weight: 100;
 }
 
-
-.message__block {
-          position: absolute;
-    top: calc(90% - 150px);
-    width: 100%;
-    height: 200px;
-      padding: 6px;
-      left: 0;
-      right: 0;
-      width: 100%;
-      z-index: 2;
-      background-color: #2b2b2b;
-      color: #fff;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px;
-      -webkit-box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.5);
-      -moz-box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.5);
-      box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.5);
-      
-      p.message--text {
-          color: white;
-          text-align: center;
-      }
+code {
+  color: $brand-code;
+  font-family: $brand-code-font-family-base;
 }
 
+.code {
+  color: $brand-code;
+  font-family: $brand-code-font-family-base;
+}
 
+.message__block {
+    position: absolute;
+    top: calc(90% - 150px);
+    width: 100%;
+    min-height: 350px;
+    height: 100%;
+    padding: 6px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: #2b2b2b;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.5);
+    p.message--text {
+        color: $brand-code;
+        text-align: left;
+    }
+
+}
 
 /* Main Content Boxes */
 .main-content,.content {
@@ -657,11 +849,11 @@ a.prev.disabled,a.next.disabled {
 
 /* Testimonials */
 .testimonial p {
-    background: #fafafa;
+    background: $brand-color-light;
     font-weight: 500;
-    margin: 0;
-    padding: 27px 25px;
-  border: 1px solid #ddd;
+    margin-top: 5px;
+    padding-top: 5px;;
+  border: 1px solid $brand-color-light;
   
   /* Safari 4-5,Chrome 1-9 */ 
   background:-webkit-gradient(linear,0% 0%,0% 100%,from(#f8f8f8),to(#fafafa));
@@ -808,7 +1000,7 @@ a.prev.disabled,a.next.disabled {
 
 .our-clients, .service-reasons {
   background-color: transparent;
-  background-image: url("http://wendysmithteam.com/images/uploads/bg/img-bg-blur.jpg");
+  /*background-image: url("http://wendysmithteam.com/images/uploads/bg/img-bg-blur.jpg"); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-clip: border-box;
@@ -840,7 +1032,7 @@ a.prev.disabled,a.next.disabled {
 
 .main-menu {
   background-color: transparent;
-  background-image: url("http://wendysmithteam.com/images/uploads/bg/img-bg-blur.jpg");
+  /*background-image: url("http://wendysmithteam.com/images/uploads/bg/img-bg-blur.jpg");*/
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-clip: border-box;
@@ -993,4 +1185,44 @@ a.prev.disabled,a.next.disabled {
     -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
     box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
     border-bottom: 1px solid $brand-color-dark;
+}
+
+.close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 75px;
+    height: 75px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+}
+
+.start__button__container {
+  margin-right: auto;
+  margin-left: auto;
+  width:100%;
+  height: 200px;
+  line-height: 215px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+h1.td-title {
+    font-family: "Shadows Into Light Two", cursive;
+    font-size: 20px;
+    color: #121212;
+    text-align: center;
+    margin: 25% auto;
+    line-height: 26PX;
 }

@@ -7,10 +7,10 @@ $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #387ef5 !default;
 $balanced:                        #33cd5f !default;
-$energized:                       #ffc900 !default;
+$energized:                       #ffc000 !default;
 $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
-$dark:                            #444 !default;
+$dark:                            #121212 !default;
 $calm:                            #11c1f3 !default;
 $fb-blue:                       	#3b5998 !default;
 $google-red:                   	#d34836 !default;
@@ -20,7 +20,7 @@ $google-red:                   	#d34836 !default;
 //   Set Custom Brand 
 // --------------------------------------------------
 //
-$brand-primary:						#fc0 !default;
+$brand-primary:						$energized;
 $brand-yellow:							#fc0 !default;
 $brand-blue:							#84bcde !default; 
 $brand-red:							#fb292d !default; 
@@ -35,7 +35,9 @@ $brand-gray:							$brand-color-gray;
 $brand-light-gray:						#bfbfbf !default;
 $brand-color-dark:						#121212 !default;
 $brand-color-light:						#c6c6c6 !default;
-
+$brand-color-nav:						#bfbfbf;
+$brand-code:							#dadbb1;
+$brand-code-font-family-base:		menlo, monaco, 'andale mono', 'courier new', fixed !default;
 $brand-color-success:					$energized;
 $brand-color-error:					$assertive;
 
@@ -53,7 +55,7 @@ $brand-team2-color:			$brand-blue;
 // --------------------------------------------------
 //
 $brand-link-color:		$brand-primary;
-$brand-link-color-hover:	#ffffff;
+$brand-link-color-hover:	#ffffff !default;
 
 
 

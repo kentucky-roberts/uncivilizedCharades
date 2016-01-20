@@ -1,22 +1,72 @@
 <ion-view view-title="Main Menu" name="main-menu-view">
-  <ion-content class="padding main-menu">
-    
-    <h1 class="main-menu-title">Uncivilized Charades</h1>
+    <style> .tabs { display: none; } </style>
+  <ion-content no-scroll>
+
+	<div id="game__container--top">
+	    <div id="top__menu"></div>
+	</div>
+
+	<div id="game__container--scores">
+		<div class="row">
+              	<div class="col">
+              		<div id="team1__score" class="text--center">
+              			<span><i class="icon ion-disc"></i></span>
+              			<span><i class="icon ion-disc"></i></span>
+              		</div>
+              	</div>
+            	<div class="col">
+            		<div id="team2__score" class="text--center">
+            			<span><i class="icon ion-disc"></i></span>
+            			<span><i class="icon ion-disc"></i></span>
+            			<span><i class="icon ion-disc"></i></span>
+            		</div>
+            	</div>
+            </div>
+	</div>
+
+	<div id="game__container--title">
+	      <h1>Uncivilized Charades</h1>
+	   	<h2>Start Game</h2>
+	</div>
+
+	<div id="game__container--cards" class="my-cards">
+
+		<div class="my-card my-card-0"><h1 class="td-title">Secret phrase to act out.</h1><button class="button button-outline button-stable">Activate</button><button class="button button-outline button-stable">Alt</button></div>
+
+		<div class="my-card my-card-1"><h1 class="td-title">Do the cha cha.</h1><button class="button button-outline button-stable">Activate</button><button class="button button-outline button-stable">Alt</button></div>
+
+		<div class="my-card my-card-2"><h1 class="td-title">Saturday night feaver</h1><button class="button button-outline button-stable">Activate</button><button class="button button-outline button-stable">Alt</button></div>
 
 
+	</div>
 
-     <button class="button button-outline button-stable button-block" ng-click="toIntro()">Tutorial</button>
-	<button class="button button-outline button-stable button-block" ng-click="showBuildTeams()">Build Teams</button>
+	<div id="game__container--toast"></div>
 
-     
+	<div id="game__container--players" class="">
+	
+	   	
+	      	<div class="testimonial item">
+		          <div class="author">
+		              <div class="testimonial-image ">
+		              	<img alt="testimonial photo of lt col brad magrath" src="img/player-images/avatar.jpg">
+		              </div>
+		              <div class="testimonial-author-info">
+		                  <a href="#"><span class="color">Player Name</span></a> 02 Points
+		              </div>
+		          </div>
+			</div>
+	  
+			<button class="button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated cbutton cbutton--effect-novak " ng-click="soundClickOn();game.nextStep()"></button>
 
-     <button class="button button-outline button-positive button-large button-block" ng-click="game.newGame()">New Game</button>
 
-    <button class="button button-outline button-clear button-large button-block" ng-click="game.loadGame()">Load Game</button>
+	</div>
 
-
+	<div id="game__container--bottom"></div>
 
   </ion-content>
 </ion-view>
+
+
+
 
 

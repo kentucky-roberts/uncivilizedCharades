@@ -1,34 +1,34 @@
  /** Background from http://www.transparenttextures.com/ **/
 
-td-cards {
-    display: block;
-    position: absolute;
-    top: 25%;
-    right: 10%;
-    width: 315px;
-    height: 180px;
-    border-radius: 10px;
-}
+// td-cards {
+//     display: block;
+//     position: absolute;
+//     top: 25%;
+//     right: 10%;
+//     width: 315px;
+//     height: 180px;
+//     border-radius: 10px;
+// }
 
-td-card {
-  position: absolute;
+// td-card {
+//   position: absolute;
 
-  -webkit-transform: scale(1,1);
-  box-sizing: border-box;
-  overflow: hidden;
-  -webkit-animation-fill-mode: forwards;
+//   -webkit-transform: scale(1,1);
+//   box-sizing: border-box;
+//   overflow: hidden;
+//   -webkit-animation-fill-mode: forwards;
 
 
-  left: 10%;
-  margin-top: 80px;
-  margin-bottom: 40px;
-    width: 360px;
-    height: 180px;
-  border: 1px solid #999;
-  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 6px;
+//   left: 10%;
+//   margin-top: 80px;
+//   margin-bottom: 40px;
+//     width: 360px;
+//     height: 180px;
+//   border: 1px solid #999;
+//   box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+//   border-radius: 6px;
 
-}
+// }
 
 .card {
   margin: 0;

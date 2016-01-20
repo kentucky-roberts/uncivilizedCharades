@@ -19,14 +19,14 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
         });
     }
 
-    // var clickingStuff = document.getElementsByClassName('.draggable-player');
-    // for (var i = 0; i < navIcons.length; i++) {
-    //     clickingStuff.addEventListener('click', function() {
-    //         this.classList.toggle('active');
-    //     });
-    // }
+    var cbuttons = document.getElementsByClassName('.cbutton.cbutton--effect-novak');
+    for (var i = 0; i < cbuttons.length; i++) {
+        cbuttons.addEventListener('click', function() {
+            this.classList.toggle('.cbutton--click');
+        });
+    }
 
-	
+
     var game = this;
 
 	////////////////////////////////////////
@@ -51,6 +51,12 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	$scope.soundVoiceOff = function() { $scope.voiceOff.play(); };
 	$scope.soundClickOn = function() { $scope.clickOn.play(); };
 	$scope.soundClickOff = function() { $scope.clickOff.play(); };
+	
+
+	$scope.alertMe = function() {
+		alert("alertting you!");
+	}
+
 
 
 
@@ -476,7 +482,6 @@ game.listSavedGames = function() {
             game.turn = 0;
             $("#start__game").addClass("hidden");
         };
-
 
 
 
