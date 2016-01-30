@@ -1,64 +1,52 @@
 <ion-view view-title="Drop players into teams" name="teams-view">
   <ion-content class="padding">
         
+
+<div id="game__container--top">
+    You currently have <strong>{{players.length}}</strong> of <strong>4</strong> minimum players for a new game.
+
+    <a  href="#" editable-text="team1.name">{{ team1.name || "team1" }}</a>
+    <a  href="#" editable-text="team2.name">{{ team2.name || "team2" }}</a>
+</div>
+
+
+
+
         <div class="row">
-                <div class="col">
-                    <span class="team-1-name">
-                        <a  href="#" editable-text="team1.name">{{ team1.name || "team1" }}</a>
-                    </span>
-                    </div>
-                <div class="col">
-                    <ul>
-                        <li ng-repeat="player in players">{{player.name}}</li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <span class="team-2-name">
-                        <a  href="#" editable-text="team2.name">{{ team2.name || "team2" }}</a>
-                    </span>
-                </div>
-        </div>
-
-
-         <div class="row">
-                <div class="col">
-                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
-                        
-                        <ul class="dragable-objects">
-                            <li ng-repeat="player in droppedObjects1" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)"
-                                class="bg-team1"
-                                ng-center-anchor="{{centerAnchor}}">
-                                {{player.name}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="">
-                    <ul class="draggable-objects">
-                        <li ng-repeat="player in players">
-                            
-                            <div class="draggable-player" ng-drag="true" ng-drag-data="player" data-allow-transform="true"> 
-                                {{player.name}} 
-                            </div>
-
+            <div class="col">
+                <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
+                    <ul class="dragable-objects">
+                        <li ng-repeat="player in droppedObjects1" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)" class="bg-team1" ng-center-anchor="{{centerAnchor}}">
+                            <img src="{{player.face}}" class="ng-binding">
+                            <h2 class="ng-binding player-name">{{player.name}}</h2>
+                            <h3 class="ng-binding player-score">Score: {{player.score}}<h3>
                         </li>
                     </ul>
                 </div>
-
-                <div class="col">
-                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
-                        <ul class="dragable-objects">
-                            <li ng-repeat="player in droppedObjects2" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" 
-                                class="bg-team2"
-                                ng-center-anchor="{{centerAnchor}}">
-                                {{player.name}}
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="">
+                <ul class="draggable-objects">
+                    <li ng-repeat="player in players">
+                        <div class="draggable-player" ng-drag="true" ng-drag-data="player" data-allow-transform="true">
+                            <img src="{{player.face}}" class="ng-binding">
+                            <h2 class="ng-binding player-name">{{player.name}}</h2>
+                            <h3 class="ng-binding player-score">Score: {{player.score}}<h3>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
+                    <ul class="dragable-objects">
+                        <li ng-repeat="player in droppedObjects2" ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" class="bg-team2" ng-center-anchor="{{centerAnchor}}">
+                            <img src="{{player.face}}" class="ng-binding">
+                            <h2 class="ng-binding player-name">{{player.name}}</h2>
+                            <h3 class="ng-binding player-score">Score: {{player.score}}<h3>
+                        </li>
+                    </ul>
                 </div>
             </div>
-  
+        </div>
 
 
 

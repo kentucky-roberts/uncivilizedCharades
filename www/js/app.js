@@ -61,7 +61,7 @@ angular
               } else if (user) {
                 // user authenticated with Firebase
                 $rootScope.userEmail = user.email;
-                $window.location.href = ('#/intro');
+                $window.location.href = ('#/main-menu');
               } else {
                 // user is logged out
                 $rootScope.userEmail = null;
@@ -138,7 +138,8 @@ angular
         views: {
           'tab-main-menu': {
             cache: false,
-            templateUrl: 'templates/main-menu/main-menu.directive.html'
+            templateUrl: 'templates/main-menu/main-menu.directive.html',
+            controller: 'AppController'
           }
         }
       })
@@ -147,9 +148,9 @@ angular
           views: {
             'tab-game': {
               cache: false,
-              templateUrl: 'templates/game/new.game.directive.html',
+              templateUrl: 'templates/game/game.directive.02.html',
               controller: 'GameController',
-              controllerAs: 'game',
+              controllerAs: 'game'
             }
           }
         })
@@ -164,6 +165,18 @@ angular
             }
           }
         })
+
+        .state('tab.card-list', {
+          url: '/card-list',
+          views: {
+            'tab-card-list': {
+              templateUrl: 'templates/card-list.html',
+              controller: 'GameController'
+            }
+          }
+        })
+
+
       .state('tab.settings', {
           url: '/settings',
           views: {

@@ -1,3 +1,530 @@
+
+
+.my-show-hide-animation.ng-hide-add,
+.my-show-hide-animation.ng-hide-remove {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+
+  /* remember to add this */
+  display:block!important;
+  opacity:1;
+}
+.my-show-hide-animation.ng-hide {
+  opacity:0;
+}
+
+
+
+.my-show-hide-animation.ng-hide-remove,
+.my-show-hide-animation.ng-hide-add {
+  /* remember, the .hg-hide class is added to element
+     when the active class is added causing it to appear
+     as hidden. Therefore set the styling to display=block
+     so that the hide animation is visible */
+  display:block!important;
+}
+
+.my-show-hide-animation.ng-hide-add {
+  -webkit-animation:0.5s hide;
+  animation:0.5s hide;
+}
+
+@keyframes hide {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-webkit-keyframes hide {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+.my-show-hide-animation.ng-hide-remove {
+  -webkit-animation:0.5s show;
+  animation:0.5s show;
+}
+
+@keyframes show {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+@-webkit-keyframes show {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.my-toggle-animation {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+
+  background:white;
+  padding:10px;
+  border:1px solid black;
+  color:black;
+}
+
+.my-toggle-animation.disabled {
+  background:grey;
+  color:#555;
+  border-color:#555;
+}
+
+.my-toggle-animation {
+  padding:10px;
+  border:1px solid black;
+}
+
+.my-toggle-animation.disabled-add {
+  -webkit-animation:0.5s disable-on;
+  animation:0.5s disable-on;
+}
+
+@keyframes disable-on {
+  from {
+    background:white;
+    color:black;
+    border-color:black;
+  }
+  to {
+    background:grey;
+    color:#555;
+    border-color:#555;
+  }
+}
+
+@-webkit-keyframes disable-on {
+  from {
+    background:white;
+    color:black;
+    border-color:black;
+  }
+  to {
+    background:grey;
+    color:#555;
+    border-color:#555;
+  }
+}
+
+.my-toggle-animation.disabled-remove {
+  -webkit-animation:0.5s disable-off;
+  animation:0.5s disable-off;
+}
+
+.my-toggle-animation.disabled {
+  background:grey;
+  color:#555;
+  border-color:#555;
+}
+
+@keyframes disable-off {
+  from {
+    background:grey;
+    color:#555;
+    border-color:#555;
+  }
+  to {
+    background:white;
+    color:black;
+    border-color:black;
+  }
+}
+
+@-webkit-keyframes disable-off {
+  from {
+    background:grey;
+    color:#555;
+    border-color:#555;
+  }
+  to {
+    background:white;
+    color:black;
+    border-color:black;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+.my-switch-container {
+  position:relative;
+  height:500px;
+}
+
+.my-switch-animation.ng-enter,
+.my-switch-animation.ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+  height:500px;
+
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+}
+
+.my-switch-animation.ng-enter {
+  right:100%;
+}
+
+.my-switch-animation.ng-leave,
+.my-switch-animation.ng-enter.ng-enter-active {
+  right:0;
+}
+
+.my-switch-animation.ng-leave.ng-leave-active {
+  right:-100%;
+}
+
+.my-switch-container {
+  position:relative;
+  height:500px;
+}
+
+.my-switch-animation.ng-enter, .my-switch-animation.ng-leave {
+  height:500px;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+}
+
+.my-switch-animation.ng-enter {
+  -webkit-animation:0.5s switch-enter;
+  animation:0.5s switch-enter;
+}
+
+.my-switch-animation.ng-leave {
+  -webkit-animation:0.5s switch-leave;
+  animation:0.5s switch-leave;
+}
+
+@keyframes switch-enter {
+  from { right:50%; }
+  to { right:0; }
+}
+
+@-webkit-keyframes switch-enter {
+  from { right:50%; }
+  to { right:0; }
+}
+
+@keyframes switch-leave {
+  from { right:0; }
+  to { right:-50%; }
+}
+
+@-webkit-keyframes switch-leave {
+  from { right:0; }
+  to { right:-50%; }
+}
+
+.my-slide-container {
+  position:relative;
+}
+.my-slide-animation.ng-enter, .my-slide-animation.ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:600px;
+}
+
+.my-slide-animation.ng-enter {
+  z-index:100;
+  top:600px;
+  opacity:0;
+}
+.my-slide-animation.ng-enter.ng-enter-active {
+  top:0;
+  opacity:1;
+}
+
+.my-slide-animation.ng-leave {
+  z-index:101;
+  top:0;
+  opacity:1;
+}
+.my-slide-animation.ng-leave.ng-leave-active {
+  top:-600px;
+  opacity:0;
+}
+
+.my-slide-container {
+  position:relative;
+}
+
+.my-slide-animation.ng-enter, .my-slide-animation.ng-leave {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:600px;
+}
+
+.my-slide-animation.ng-enter {
+  -webkit-animation: 0.5s slide-animation-enter;
+  animation: 0.5s slide-animation-enter;
+}
+
+.my-slide-animation.ng-leave {
+  -webkit-animation: 0.5s slide-animation-leave;
+  animation: 0.5s slide-animation-leave;
+}
+
+@keyframes slide-animation-enter {
+  from {
+    z-index:100;
+    top:600px;
+    opacity:0;
+  }
+  to {
+    top:0;
+    opacity:1;
+  }
+}
+
+@keyframes slide-animation-leave {
+  from {
+    z-index:101;
+    top:0;
+    opacity:1;
+  }
+  to {
+    top:-600px;
+    opacity:0;
+  }
+}
+
+@-webkit-keyframes slide-animation-enter {
+  from {
+    z-index:100;
+    top:600px;
+    opacity:0;
+  }
+  to {
+    top:0;
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes slide-animation-leave {
+  from {
+    z-index:101;
+    top:0;
+    opacity:1;
+  }
+  to {
+    top:-600px;
+    opacity:0;
+  }
+}
+
+
+
+
+
+
+
+
+.my-repeat-animation.ng-enter, 
+.my-repeat-animation.ng-leave, 
+.my-repeat-animation.ng-move {
+  -webkit-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+  position:relative;
+}
+
+.my-repeat-animation.ng-enter {
+  left:-10px;
+  opacity:0;
+}
+.my-repeat-animation.ng-enter.ng-enter-active {
+  left:0;
+  opacity:1;
+}
+
+.my-repeat-animation.ng-leave {
+  left:0;
+  opacity:1;
+}
+.my-repeat-animation.ng-leave.ng-leave-active {
+  left:-10px;
+  opacity:0;
+}
+
+.my-repeat-animation.ng-move {
+  opacity:0.5;
+}
+.my-repeat-animation.ng-move.ng-move-active {
+  opacity:1;
+}
+
+.my-repeat-animation.ng-enter,
+.my-repeat-animation.ng-leave,
+.my-repeat-animation.ng-move {
+  position:relative;
+}
+
+.my-repeat-animation.ng-enter {
+  -webkit-animation: 0.5s repeat-animation-enter;
+  animation: 0.5s repeat-animation-enter;
+}
+
+.my-repeat-animation.ng-leave {
+  -webkit-animation: 0.5s repeat-animation-leave;
+  animation: 0.5s repeat-animation-leave;
+}
+
+.my-repeat-animation.ng-move {
+  -webkit-animation: 0.5s repeat-animation-move;
+  animation: 0.5s repeat-animation-move;
+}
+
+@keyframes repeat-animation-enter {
+  from {
+    left:-10px;
+    opacity:0;
+  }
+  to {
+    left:0;
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes repeat-animation-enter {
+  from {
+    left:-10px;
+    opacity:0;
+  }
+  to {
+    left:0;
+    opacity:1;
+  }
+}
+
+@keyframes repeat-animation-leave {
+  from {
+    left:0;
+    opacity:1;
+  }
+  to {
+    left:-10px;
+    opacity:0;
+  }
+}
+
+@-webkit-keyframes repeat-animation-leave {
+  from {
+    left:0;
+    opacity:1;
+  }
+  to {
+    left:-10px;
+    opacity:0;
+  }
+}
+
+@keyframes repeat-animation-move {
+  from { opacity:0.5; }
+  to { opacity:1; }
+}
+
+@-webkit-keyframes repeat-animation-move {
+  from { opacity:0.5; }
+  to { opacity:1; }
+}
+
+
+
+
+
+
+
+
+/* starting animations */
+.my-special-animation.ng-enter {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+
+  background:red;
+}
+
+/* destination animations */
+.my-special-animation.ng-enter.ng-enter-active {
+  background:blue;
+}
+
+/* starting animations */
+.my-special-animation.ng-enter {
+  -webkit-animation:0.5s red-to-blue;
+  animation:0.5s red-to-blue;
+}
+
+@keyframes red-to-blue {
+  from { background:red; }
+  to { background:blue; }
+}
+
+@-webkit-keyframes red-to-blue {
+  from { background:red; }
+  to { background:blue; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .ng-hide {
     display: none!important;
 }

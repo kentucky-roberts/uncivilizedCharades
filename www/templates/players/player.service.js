@@ -15,8 +15,8 @@ function PlayerService() {
      * @param initialScore
      * @constructor
      */
-    function Player(playerName) {
-  this.name = playerName;
+    function Player(playerName, initialScore) {
+      this.name = playerName;
       this.initialScore = 0;
       this.initialTeam = "FreeAgent";
       this.initialFace = "img/player-images/avatar.jpg";
@@ -28,8 +28,8 @@ function PlayerService() {
 
 
     Player.prototype.logInfo = function() {
-    console.log("Name: " +this.name+ " initialScore: "+ this.initialScore  +  " Score: "+ this.score +  " isActive: "+ this.isActive   );
-  };
+        console.log("Name: " +this.name+ " initialScore: "+ this.initialScore  +  " Score: "+ this.score +  " isActive: "+ this.isActive   );
+     };
     /**
      * Change the score by amount
      * @param amountToChange
@@ -42,10 +42,10 @@ function PlayerService() {
         this.score += amountToChange;
     };
 
-    Player.prototype.changeTeam = function(teamName){
-        if(!angular.isDefined(this.team)){
-            this.team = this.initialTeam;
-        }
+    Player.prototype.assignTeam = function(teamName){
+        // if(!angular.isDefined(this.team)){
+        //     this.team = this.initialTeam;
+        // }
         this.team = teamName;
     };
 

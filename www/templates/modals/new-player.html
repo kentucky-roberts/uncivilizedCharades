@@ -1,16 +1,25 @@
-<div class="modal">
-     <ion-header-bar class="bar bar-clear">
-        <h1 class="title">Add New Player</h1>
-        <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
-    </ion-header-bar>
-    <ion-content class="has-header">
-        <form class="em-top-45">
-            <div class="list">
-                <label class="item item-input">
-                    <input type="text" ng-model="playerName" placeholder="Enter new player name" autofocus />
-                </label>
-            </div>
-        </form>
-        <button type="submit" class="button button-block button-balanced" ng-click="addNewPlayer(playerName)">Add  Player</button>
-    </ion-content>
+ <div class="modal">
+
+  <!-- Modal header bar -->
+  <ion-header-bar class="bar-secondary">
+    <h1 class="title">New Player</h1>
+    <button class="button button-icon ion-close" ng-click="closeModal()"></button>
+  </ion-header-bar>
+
+  <!-- Modal content area -->
+  <ion-content>
+
+    <form ng-submit="game.addNewPlayer(playerName)">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="What is the new player's name?" ng-model="playerName" autofocus />
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-positive">Add Player</button>
+      </div>
+    </form>
+
+  </ion-content>
+
 </div>

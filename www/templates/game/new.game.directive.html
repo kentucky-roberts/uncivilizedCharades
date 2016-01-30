@@ -1,4 +1,4 @@
-<ion-view  name="game-view">
+<ion-view view-title="Game" name="game-view">
     <style> .tabs { display: none; } </style>
   <ion-content no-scroll>
 
@@ -15,30 +15,35 @@
 
 
 
+
   <div id="game__container--top">
       <div id="top__menu"></div>
   </div>
 
+    <div id="game__container--title">
+      <h1>This is the game__container--title</h1>
+  </div>
+
+
   <div id="game__container--scores">
     <div class="row">
-                <div class="col">
-                  <div id="team1__score" class="text--center">
-                  <span ng-repeat="point in game.team1Points"><i class="icon ion-disc"></i></span>
-                  </div>
-                </div>
-              <div class="col">
-                <div id="team2__score" class="text--center">
-                  <span ng-repeat="point in game.team2Points"><i class="icon ion-disc"></i></span>
-                </div>
-              </div>
-            </div>
+      <div class="col">
+        <div id="team1__score" class="text--center">
+        <span><i class="icon ion-disc"></i></span>
+        </div>
+      </div>
+    <div class="col">
+      <div id="team2__score" class="text--center">
+        <span><i class="icon ion-disc"></i></span>
+      </div>
+    </div>
+    </div>
   </div>
 
   <div id="game__container--title">
-        <h1 class="start__game">Uncivilized Charades</h1>
 
               <h2 class="instruction-text {{ (game.step === -2) ? 'show' : 'hidden' }}">
-              Game not available, please add players. <br> Step -2
+              Uncivilized Charades 
               </h2>
               <h2 class="instruction-text {{ (game.step === -1) ? 'show' : 'hidden' }}">
               Click button to start game. <br> Step -1
@@ -110,7 +115,7 @@
               <span class="text--center reload-card">
                   <h1 class="body--title">Start Game</h1>
                   <div class="start__button__container">
-                      <button class="button button-energized button-fab button-outline icon ion-power" ng-click="game.startNewGame()"></button>
+                      <button class="button button-energized button-large button-fab button-outline icon ion-power" ng-click="game.startNewGame()"></button>
                   </div>
               </span>
           </div>
@@ -144,33 +149,26 @@
   </div>
 
   <div id="game__container--players" class="">
-  
-      
-          <div class="testimonial item" class="animated slideInLeft  {{ (game.activePlayer.length > -1 ) ? 'show' : 'hidden' }}">
-              <div class="author">
-                  <div class="testimonial-image ">
-                    <img alt="testimonial photo of lt col brad magrath" src="img/player-images/avatar.jpg">
-                  </div>
-                  <div class="testimonial-author-info">
-                      <a href="#"><span class="color">{{game.activePlayer.name || "Active Player"}}</span></a> Score: 2
-                  </div>
-              </div>
-      </div>
-    
-   
-   <button class="hidden button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated cbutton cbutton--effect-novak " ng-click="soundClickOn();game.addPoint({{game.activePlayer}})"></button>
+
+      <div class="testimonial item" class="animated slideInLeft  {{ (game.activePlayer.length > -1 ) ? 'show' : 'hidden' }}">
+        <div class="author">
+            <div class="testimonial-image ">
+              <img alt="testimonial photo of lt col brad magrath" src="img/player-images/avatar.jpg">
+            </div>
+            <div class="testimonial-author-info">
+                <a href="#"><span class="color">{{game.activePlayer.name || "Active Player"}}</span></a> Score: 2
+            </div>
+        </div>
+       </div>
+
+      <button class="hidden button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated cbutton cbutton--effect-novak " ng-click="soundClickOn();game.addPoint({{game.activePlayer}})"></button>
 
 
       <button class="hidden button button-fab button-balanced icon ion-android-add button-fab-bottom-right activated cbutton cbutton--effect-novak " ng-click="soundClickOn();game.nextStep()"></button>
 
 
   </div>
-
-  <div id="game__container--bottom message__block" class="hidden">
-    
-     
-
-  </div>
+      <div id="game__container--bottom message__block" class="hidden"></div>
 
   </ion-content>
 </ion-view>

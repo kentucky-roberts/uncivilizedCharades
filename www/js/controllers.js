@@ -4,6 +4,14 @@ angular
 
 
 
+.controller('CardListController', ['$scope', 'CardType',
+  function($scope, CardType) {
+    $scope.cards = CardType.findRange();
+    $scope.orderProp = 'phrase';
+
+  }])
+
+
 
 .controller('CardsCtrl', function($scope, $ionicModal, $ionicPopover, $ionicListDelegate, Cards) {
 
@@ -224,7 +232,6 @@ angular
 
 
 .controller('StoreController', function($scope, ProductService) {
-
 	var store = this;
 
 	store.products = ProductService.all();

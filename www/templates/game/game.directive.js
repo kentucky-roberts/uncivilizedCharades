@@ -8,7 +8,8 @@ function uncivilizedCharades() {
         templateUrl: 'app/game/new.game.directive.html',
         scope: {
             max: '=',
-            players: '='
+            players: '=',
+            game: '='
         },
         controller: GameController,
         controllerAs: 'game',

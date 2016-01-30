@@ -1,0 +1,40 @@
+<ion-view view-title="Card List">
+  <ion-content>
+    
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="query" type="text">
+      </label>
+    </div>
+
+    <ion-list
+      can-swipe="listCanSwipe"
+      show-delete="shouldShowDelete"
+      show-edit="showEdit"
+      class="item-remove-animate">
+      
+      <ion-item class="item-remove-animate" ng-repeat="card in cards | filter:query | orderBy: 'phrase' " type="item-text-wrap">
+  
+        {{card.phrase}}, 
+        
+    
+
+
+        <ion-option-button class="button-assertive" ng-click="cards.$remove(card)">
+          Delete
+        </ion-option-button>
+        
+
+        
+
+      </ion-item>
+    </ion-list>
+
+    <p ng-show="err" class="error">{{err}}</p>
+    <div class="bar bar-footer">
+      <button class="button button-clear pull-left" ng-click="openModal()"><i class="ion-ios-plus-empty"></i> Add New</button>
+    </div>
+
+  </ion-content>
+</ion-view>

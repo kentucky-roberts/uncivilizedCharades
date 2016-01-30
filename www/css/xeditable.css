@@ -4,7 +4,6 @@ Edit-in-place for angular.js
 Build date: 2015-03-26 
 */
 .editable-wrap {
-    display: inline-block;
     white-space: nowrap;
     margin: 0
 }

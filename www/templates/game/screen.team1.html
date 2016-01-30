@@ -1,0 +1,24 @@
+ <div>
+ 	<h1 class="brand-color-light">{{game.activePlayer.name}} <small>Points: {{game.activePlayer.score}}</small></h1>
+      <h2 class="instruction-text">{{game.activePlayer.team}}</h2>
+
+      <div id="dealer" class="hidden">
+          <span class="text--center reload-card">
+              <h1 class="body--title">Push button to deal cards</h1>
+              <div class="start__button__container">
+                  <button class="deal-cards button button-energized" ng-click="game.deal()">Deal Cards</button>
+              </div>
+          </span>
+      </div>
+
+      <div class="{{(game.canDeal === false) ? 'hidden' : 'show'}} ">
+        <td-cards>
+          <td-card class="card  card-0 {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
+          <td-card class="card card-1  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
+          <td-card class="card card-2  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
+        </td-cards>
+      </div>
+
+	<button class="button button-outline button-light" ng-click="game.nextTurn()">Next Turn</button>
+
+ </div>

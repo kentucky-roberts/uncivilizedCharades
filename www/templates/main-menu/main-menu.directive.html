@@ -1,20 +1,32 @@
-<ion-view view-title="Main Menu" name="main-menu-view">
+<ion-view name="main-menu-view">
   <ion-content class="main-menu">
-    
-    <h1 class="main-menu-title">Uncivilized Charades</h1>
+	    
+	<ion-slide-box on-slide-changed="slideHasChanged($index)">
+	    <ion-slide>
+	        <div class="box blue">
+	            <h1 class="text-underline">Uncivilized Charades</h1>
+	            <p>
+	                New Game todo... --create-players, drag players to team-area. on drop completePlayerService.assignTeam()
+	            </p>
+	            <p> <a ui-sref="tab.teams" ui-sref-opts="{reload: true}" class="button button-large button-calm button-outline">Teams</a></p>
+	        </div>
+	    </ion-slide>
+
+	    <ion-slide>
+	        <div class="box bg-team1">
+	            <h1>Team1's Turn</h1>
 
 
+	        </div>
+	    </ion-slide>
 
-     <button class="button button-outline button-stable button-block" ng-click="toIntro()">Tutorial</button>
-	<button class="button button-outline button-stable button-block" ng-click="showBuildTeams()">Build Teams</button>
+	    <ion-slide>
+	        <div class="box bg-team2">
+	            <h1>Team2's Turn</h1>
 
-     
-
-     <button class="button button-outline button-positive button-large button-block" ng-click="#/tab/game">New Game</button>
-
-    <button class="button button-outline button-clear button-large button-block" ng-click="game.loadGame()">Load Game</button>
-
-
+	        </div>
+	    </ion-slide>
+	</ion-slide-box>
 
   </ion-content>
 </ion-view>

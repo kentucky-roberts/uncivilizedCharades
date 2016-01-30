@@ -1,7 +1,7 @@
 <div class="modal">
     <ion-header-bar class="bar bar-header bar-error">
         <h1 class="title">Your game is lame!</h1>
-        <button class="button button-clear pull-left " ng-click="closeModal()">close</button>
+        <button class="button button-icon ion-close" ng-click="closeModal()"></button>
     </ion-header-bar>
      <ion-content class="bg-error">
             <div class="text-center">
@@ -14,10 +14,10 @@
                     Woud the other team like to steal the point?
                 </p>
                 <br>
-                <button class="button button-outline button-energized button-large" ng-click="game.stealPoint()">Yes, steal point</button>
+                <button class="button button-link button-large" ng-click="game.stealPoint()">Yes, steal point</button>
 
                 <br>
-                <button class="button button-light button-outline button-large" ng-click="game.noPoint();game.readyNextTurn();">No thanks, start next turn</button>
+                <button class="button button-link button-large" ng-click="game.noPoint();game.readyNextTurn();">No thanks, start next turn</button>
             </div>
 
     </ion-content>

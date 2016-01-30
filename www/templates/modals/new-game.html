@@ -1,20 +1,25 @@
-<div class="modal">
-     <ion-header-bar class="bar bar-clear">
-        <h1 class="title">New Game</h1>
-        <button class="button button-clear pull-left " ng-click="closeModal()">Cancel</button>
+  <div class="modal">
+
+    <!-- Modal header bar -->
+    <ion-header-bar class="bar-secondary">
+      <h1 class="title">New Game</h1>
+      <button class="button button-clear button-positive" ng-click="closeNewGame()">Cancel</button>
     </ion-header-bar>
-    <ion-content class="has-header">
-    
-      <h1>Start New Game</h1>
-      <p class="text--center text--lead">
-        Confirm your new game's players and click button below to start a new game.
-      </p>
 
-      <ul class="list">
-		<li class="list-item" ng-repeat="player in game.players">{{player.name}}</li>
-      </ul>
+    <!-- Modal content area -->
+    <ion-content>
 
-        <button type="submit" class="button button-block button-balanced button-large" ng-click="createNewGame(players)"> Start New Game</button>
+      <form ng-submit="newGame(game)">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="Game Title" ng-model="game.title">
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-positive">Create Game</button>
+        </div>
+      </form>
+
     </ion-content>
-</div>
 
+  </div>

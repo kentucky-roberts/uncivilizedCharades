@@ -21,17 +21,11 @@
       </div>
   </div>
 </div>
-  <button class="button button-block" ng-click="showToast()">Show Toast at top with close</button>
-
-  
-      <a native-ui-sref="tabs.teams" native-ui-sref-opts="{reload: true}" class="button button-large button-calm button-outline"> New Game</a>
-
-
-
+    <button class="button button-block" ng-click="showToast()">Show Toast at top with close</button>
+      <a ui-sref="tabs.teams" ui-sref-opts="{reload: true}" class="button button-large button-calm button-outline">Teams</a>
       <button class="button button-large button-stable button-outline" ng-click="selectTabWithIndex(7)">Settings</button>
       <button class="button button-large button-balanced button-outline" ng-click="selectTabWithIndex(5)">Visit Store</button>
-
-
+      
       <button class="button button-large button-positive {{ (game.showLoadGameButton === true) ? 'show' : 'hidden' }}" ng-click="game.listSavedGames()">Show Saved Games</button>
 
       <div class="list {{ (game.showLoadGame === true) ? 'show' : 'hidden' }}">

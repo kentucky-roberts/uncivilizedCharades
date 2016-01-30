@@ -1,0 +1,154 @@
+<ion-view view-title="" name="game-view" scroll="true">
+  <style> .tabs { display: none; } </style>
+
+  <ion-pane>
+
+      <div id="preflight" class="show">
+
+          <div class=" {{(game.started === false && game.readyForTeams === false) ? 'show' : 'hidden'}} ">
+
+                <div id="game__container--title">
+                    <h3 class="text--center">
+                      You currently have <strong>{{game.players.length || 0}}</strong> of <strong class="color-primary">4</strong> players.
+                    </h3>
+                    <span class="instruction-text text--center {{(game.players >= 1) ? 'show' : 'hidden' }}"><i class="icon ion-checkmark-circled disable-user-behavior"></i> You now have enough players to start a game!</span>
+                </div>
+
+                <div id="game__container--new-players" class="show">
+                      <div class="testimonial item" ng-model="players" ng-repeat="player in game.players">
+                          <div class="author">
+                              <div class="testimonial-image "><img src="img/player-images/avatar.jpg"></div>
+                              <div class="testimonial-author-info">
+
+                                  <span class="name">{{player.name}}</span><br>
+                                  <span class="score">{{player.score}}</span><br>
+                                  <span class="steam">{{player.team}}</span>
+
+                                  <div class="{{(game.debugging === true) ? 'show' : 'hidden' }}">
+                                      <button class="button button-outline button-calm" ng-click="game.addPoint($index)">Add Point</button>
+                                      <button class="button button-outline button-calm" ng-click="game.joinTeam1($index)">Join Team 1</button>
+                                      <button class="button button-outline button-calm" ng-click="game.joinTeam2($index)">Join Team 2</button>
+                                 </div>
+                              </div>
+                          </div>
+                      </div>
+                </div>
+
+                 <!--  FIXED OUTSIDE STUFF -->
+                <div class="fixed-outside-right {{ (game.players.length >= 1) ? 'show' : 'hidden' }}">
+                      <i class="icon-next ion-ios-arrow-right bigIcon animated " ng-click="game.showBuildTeams()" style="font-size: 60px;"></i>
+                </div>
+
+                <div class="row fixed-outside-bottom {{(game.players.length < 1) ? 'show' : 'hidden' }}">
+                  <div class="col">
+                      <h3 class="instruction-text">Add a  player!</h3>
+                      <a class="button button-outline button-energized button-large" ng-click="playerModalShow()"> Add a player ...</a>
+                  </div>
+                </div>
+
+                <div class="row fixed-outside-bottom {{(game.players.length < 4 && game.players.length >= 1 ) ? 'show' : 'hidden' }}">
+                  <div class="col">
+                      <a class="button button-outline button-energized button-large" ng-click="playerModalShow()"> ... add more players ...</a>
+                  </div>
+                </div>
+                 <!--// FIXED OUTSIDE STUFF -->
+          </div>
+
+          <div class=" {{(game.started === false && game.readyForTeams === true) ? 'show' : 'hidden'}} ">
+            <div class="row">
+                <div class="col">
+                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
+                        <ul class="dragable-objects">
+                            <li ng-repeat="player in droppedObjects1"  ng-model="players"  ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess1($data,$event)" class="bg-team1" ng-center-anchor="{{centerAnchor}}">
+                                <h2 class="player-name">{{player.name}}</h2>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="">
+                    <ul class="draggable-objects">
+                        <li ng-repeat="player in players">
+                            <div class="draggable-player" ng-drag="true"  ng-model="players"  ng-drag-data="player" data-allow-transform="true">
+                                <h2 class="player-name">{{player.name}}</h2>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+
+                    <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
+                        <ul class="dragable-objects">
+                            <li ng-repeat="player in droppedObjects2"  ng-model="players"  ng-drag="true" ng-drag-data="player" ng-drag-success="onDragSuccess2($data,$event)" class="bg-team2" ng-center-anchor="{{centerAnchor}}">
+
+                                <h2 class="player-name">{{player.name}}</h2>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div id="start__game" class=" {{(players.length <= 0) ? 'show' : 'hidden' }}">
+              <span class="text--center reload-card">
+                  <h1 class="body--title">Start Game</h1>
+                  <div class="start__button__container">
+                      <button class="button button-energized button-fab button-outline icon ion-power" ng-click="game.startGame(players)"></button>
+                  </div>
+              </span>
+          </div>
+
+      </div><!-- preflight -->
+      <div id="game" class="hidden">
+
+            <div id="game__container--scores">
+                <div class="row">
+                    <div class="col">
+                        <div id="team1__score" class="text--center">
+                            <span><i class="icon ion-disc"></i></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div id="team2__score" class="text--center">
+                            <span><i class="icon ion-disc"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <div id="">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                <ion-slide class="box brand-bg-dark">
+                    <div ng-include="'templates/game/screen.team1.html'"></div>
+                </ion-slide>
+                <ion-slide class="box brand-bg-light">
+                    <div ng-include="'templates/game/screen.team2.html'"></div>
+                </ion-slide>
+                <ion-slide class="box bg-team1">
+                    <div ng-include="'templates/game/screen.team1.html'"></div>
+                </ion-slide>
+                <ion-slide class="box bg-success">
+                    <div ng-include="'templates/game/screen.success.html'"></div>
+                </ion-slide>
+                <ion-slide class="box bg-game-over">
+                    <div ng-include="'templates/game/screen.game-over.html'"></div>
+                </ion-slide>
+                <ion-slide class="box bg-error">
+                    <div ng-include="'templates/game/screen.error.html'"></div>
+                </ion-slide>
+            </ion-slide-box>
+          </div>
+    </div><!-- game -->
+
+
+
+
+
+      <div class=" {{(game.debugging === true) ? 'show' : 'hidden'}} ">
+          <button class="button button-outline button-assertive button large button-icon ion-plus" ng-click="gameModalShow()">New Game</button>
+          <button class="button button-outline button-assertive button-icon ion-plus" ng-click="playerModalShow()">New Player</button>
+      </div>
+
+
+    </ion-pane>
+</ion-view>
