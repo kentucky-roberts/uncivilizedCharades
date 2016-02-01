@@ -106,15 +106,19 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
     game.teams = [];
     game.team1Score = 0;
     game.team2Score = 0;
+
     game.readyForTeams = false;
 
     game.needsPlayers = true;
+
     game.activeTeam = "Team1";
     game.nextActiveTeam = "Team2";
     game.activeTeamColor = "yellow-text";
+
+
     game.cardsVisible = false;
 
-	game.winningTeamName = "Chris";
+	game.winningTeamName = "FreeAgent";
 
 	game.showLoadGameButton = false;  // main-menu buttons will appear when true
 	game.showSavedGame = false;  // main-menu buttons will appear when true
@@ -272,9 +276,8 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
       }
 
 	game.joinTeam1 = function(index) {
-		var newTeam1Player = game.players[index];
-		newTeam1Player.team = "Team 1";
-		console.log("newTeam1Player.team: " + newTeam1Player.team);
+		game.players[index].team = "Team 1";
+		console.log("newTeam1Player.team: " + game.players[index].team );
 	};
 	game.joinTeam2 = function(index) {
 		var newTeam2Player = game.players[index];
@@ -317,6 +320,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
       // Called each time the slide changes
       $scope.slideChanged = function (index) {
         $scope.slideIndex = index;
+        console.log("slideChanged: " + index);
       };
 
 
@@ -324,17 +328,6 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
       ////////////////////////////////////////
       // Game's pre-flight
       ////////////////////////////////////////
-      game.readyFirstPlayer = function() {
-          game.ap = 0;
-          var activePlayer = game.players[game.ap];
-          console.log("activePlayer.name: " + activePlayer.name + "team: " + activePlayer.team + "score: " + activePlayer.score);
-          console.log("ready first player!!!  " + activePlayer.name);
-      };
-
-      game.readyFirstTurn = function() {
-            game.turn = 1;
-            game.step = 1;
-      };
 
       game.nextActivePlayer = function() {
           game.ap++;
@@ -352,20 +345,30 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
           game.started = true;
           game.canDeal = false;
           game.showResults = false;
+          game.readyNextTurn = false;
+          $("#readyNextTurn").removeClass("show").addClass("hidden");
+
           game.step = 1;  // 1 because it is the beginning of the card dealing cycle
           game.turn += 1;
           game.ap += 1;
 
+         //  var apc = game.ap;
+         // game.readyNextPlayer(apc);  // FIX THISSS TOMORROW
+
+
+
           $ionicSlideBoxDelegate.next();
+          game.showDealer(); // begins the loop again
       };
 
 
 	game.readyNextTurn = function() {
           game.started = true;
           game.canDeal = false;
-          game.showResults = false;
-
-          $scope.closeModal();
+          game.showResults = true;
+          game.readyNextTurn = true;  // shows txt in view
+          $("#showCountdown").removeClass("show").addClass("hidden"); // the was left open from game.showCountdown()
+          $("#readyNextTurn").removeClass("hidden").addClass("show");  // shows bottom txt in view
 
 	};
 
@@ -374,15 +377,21 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
       // Game Has Started!!
       ////////////////////////////////////////
       game.startGame = function(players){
-            var gamePlayers = players;
+            game.players = players;
             console.log("game.players: " + game.players);
 
             game.started = true;
             game.canDeal = false;
             game.showResults = false;
 
-            game.readyFirstPlayer(gamePlayers);
-            game.readyFirstTurn();
+            game.turn = 1;
+            game.step = 1;
+            game.ap = 0;
+
+            game.activePlayer = game.players[game.ap];
+            console.log("game.activePlayer: " + game.activePlayer);
+
+
             // The two functions above return
             // game.step = 1;
             // game.turn = 0;
@@ -393,15 +402,6 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             game.showDealer();
 
       };
-
-
-	  game.showRefreshCards = function() {
-	  	game.started = true;
-            game.canDeal = true;
-            console.log();
-            game.showResults = false;
-
-	  };
 
       game.showDealer = function() {
             game.started = true;
@@ -414,11 +414,95 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             $("#dealer").removeClass("show").addClass("hidden");
       };
 
-        game.deal = function(){
-        	game.canDeal = true;
-           $("#dealer").removeClass("show").addClass("hidden");
+      game.deal = function(){
+            game.canDeal = true;
+            $("#dealer").removeClass("show").addClass("hidden");
+            $("#showCards").removeClass("hidden").addClass("show");
+      };
 
-        };
+      game.showCards = function(){
+            game.cardsVisible = true;
+           $("#showCards").removeClass("show").addClass("hidden");
+            $("#activateCard").removeClass("hidden").addClass("show");
+      };
+
+      game.activateCard = function() {
+          game.cardsVisible = false;
+          $("#activateCard").removeClass("show").addClass("hidden");
+          $("#showCountdown").removeClass("hidden").addClass("show");
+         game.showCountdown();
+      };
+
+      game.showCountdown = function() {
+          game.cardsVisible = false;
+          $("#showCountdown").removeClass("show").addClass("hidden");
+          $("#countdown").removeClass("hidden").addClass("show");
+          $scope.newCountdown();
+          $scope.selectTimer(2);
+          // game.readyNextTurn() will go to: game.awardPoint or game.noPoint, both of which call game.readyNextTurn() which restarts loop
+      };
+
+
+      game.noPoint = function() {
+          game.readyNextTurn();
+      };
+
+      game.awardPoint = function() {
+         // var winner = game.activePlayer;
+          //console.log("Winner is:" + winner + "Award him a point");
+          game.readyNextTurn();
+      };
+
+
+     game.readyNextPlayer = function(apc) {
+        //   var apc = apc;
+        //  // game.turn = 1;  // readyFirstPlayer
+        // // game.ap = 0;   // readyFirstPlayer
+        // game.activePlayer = game.players[apc];
+        //   console.log("activePlayer.name: " + game.activePlayer.name + "team: " + game.activePlayer.team + "score: " + game.activePlayer.score);
+        //   console.log("ready first player!!!  " + game.activePlayer.name);
+      };
+
+
+
+
+      game.getTeamPoints = function(){
+         // Need to return:  game.team1Points, game.team2Points,
+
+         var team1Score = 0;
+         var team2Score = 0;
+
+
+          //   var deck = this;
+          //   this.team1 = [];
+          //   this.team2 = [];
+
+          //   game.players.forEach(function () {
+
+          //                    if (game.players.team == "team1") {
+          //   console.log();
+          // }
+
+          //   });
+
+
+
+         // angular.forEach(game.players, player) {
+         //    console.log(player.name);
+         // }
+
+         //  if (game.players.team == "team1") {
+         //    console.log();
+         //  }
+      };
+
+      game.setTeam1Points = function(){
+          game.team1Points = 1;
+      };
+
+      game.setTeam2Points = function(){
+          game.team2Points = 1;
+      };
 
 
 	game.startBonusRound = function() {
@@ -429,26 +513,15 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 		alert("game.stealPoint() called from GameController yo!");
 	};
 
-
-	game.noPoint = function() {
-		game.step = 0;
-	};
-
-
-	game.awardPoint = function() {
-		game.step = 0;
-	};
-
-
-
-
 	game.makeTeams = function() {
 		game.step = 0;
 	};
 
-
-
-
+      game.showRefreshCards = function() {
+          game.started = true;
+          game.canDeal = true;
+          game.showResults = false;
+      };
 
 
  // var createGame = function(gameTitle) {

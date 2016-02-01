@@ -140,9 +140,17 @@ h3 {
   bottom: 0;
   color:white;
   width: 100%;
-  height:  120px;
+  min-height: 100px;
+
   text-align:center;
- // background-color: blue;
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+    }
 }
 
 .fixed-outside-right {
@@ -223,7 +231,7 @@ p.instruction-text {
   font-weight: 400;
   font-size: 12px;
   color: white;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
 }
 
@@ -287,7 +295,9 @@ h3.player-score {
   margin-bottom: 0;
 }
 
-
+ion-slide-box {
+  height: 650px;
+}
 #game__container--top {
     display: block;
     position: absolute;
@@ -296,7 +306,7 @@ h3.player-score {
     width: 100%;
     height: 10%;
     border-radius: 0;
-   background-color: lightgray;
+   //background-color: lightgray;
 
   #top__menu {}
 }
@@ -312,10 +322,12 @@ h3.player-score {
 
 i.icon-next {
     position: absolute;
-    top: 50%;
+    top: 10%;
+    left: 5%;
     height: 25px;
     width: 25px;
     z-index: 200;
+    color: $brand-yellow;
 }
 
 #game__container--scores {
@@ -324,11 +336,11 @@ i.icon-next {
     top: 10%;
     left: 0%;
     width: 100%;
-    height: 50px;
+    height: 20px;
     border-radius: 0;
     padding: 0;
     margin: 0;
-    background-color: lightyellow;
+    //background-color: lightyellow;
     .row {
       padding: 0!important;
     }
@@ -598,19 +610,19 @@ img.img--center {
 
 
 .slider-slide {
-    position: absolute;
+    position: relative;
     display: block;
     float: left;
     width: 100%;
-    height: 90%;
-    vertical-align: bottom;
-    z-index: 5000;
+   min-height: 600px;
+   height: 100%;
+    vertical-align: top;
+    z-index: 1000;
 }
 
 
 .slider-slide {
-    padding-top: 80px;
-    text-align: center;
+    padding-top: 0;
     font-weight: 300;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -671,6 +683,7 @@ span.name {
     color: #fff;
     color: rgba(255, 255, 255, 0.8);
     text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
+    text-align: left;
 }
 
 span.color {
@@ -680,6 +693,18 @@ span.color {
     font-weight: 400;
     color: $brand-yellow!important;
     text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
+    text-align: left;
+}
+
+
+span.score {
+  font-family: $brand-font-family-base;
+    font-size: 14px;
+    line-height: 15px;
+    font-weight: 400;
+    color: $brand-red!important;
+    text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
+    text-align: left;
 }
 
 

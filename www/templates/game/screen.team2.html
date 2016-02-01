@@ -1,24 +1,110 @@
-  <div>
-      <h1 class="brand-color-dark">{{game.activePlayer.name}} <small>Points: {{game.activePlayer.score}}</small></h1>
-      <h2 class="instruction-text">{{game.activePlayer.team}}</h2>
+ <div>
 
-      <div id="dealer" class="hidden">
-          <span class="text--center reload-card">
-              <h1 class="body--title">Push button to deal cards</h1>
-              <div class="start__button__container">
-                  <button class="deal-cards button button-energized" ng-click="game.deal()">Deal Cards</button>
-              </div>
-          </span>
+      <div id="score__container">
+        <div class="row">
+          <div class="col">
+            <div id="team1__score" class="text--center">
+            Team1
+            <span ng-repeat="point in game.team1Points"><i class="icon ion-disc"></i></span><i class="icon ion-disc"></i>
+            </div>
+          </div>
+        <div class="col">
+          <div id="team2__score" class="text--center">
+            Team2
+            <span ng-repeat="point in game.team2Points"><i class="icon ion-disc"></i></span><i class="icon ion-disc"></i>
+          </div>
+        </div>
+      </div>
       </div>
 
-      <div class="{{(game.canDeal === false) ? 'hidden' : 'show'}} ">
-        <td-cards>
-          <td-card class="card  card-0 {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
-          <td-card class="card card-1  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
-          <td-card class="card card-2  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
-        </td-cards>
-      </div>
 
-  <button class="button button-outline button-light" ng-click="game.nextTurn()">Next Turn</button>
+            <div class="testimonial item">
+                <div class="author">
+                    <div class="testimonial-image "><img src="img/player-images/avatar.jpg"></div>
+                    <div class="testimonial-author-info">
+                        <span class="name">{{game.activePlayer.name}} Chris Roberts</span>
+                        <br>
+                        <span class="score">{{game.activePlayer.score}}0</span>
+                        <br>
+                        <span class="team">{{game.activePlayer.team}}team1</span>
+
+                        <div class="{{(game.debugging === true) ? 'show' : 'hidden' }}">
+                            <button class="button button-outline button-calm" ng-click="game.addPoint($index)">Add Point</button>
+                            <button class="button button-outline button-calm" ng-click="game.joinTeam1($index)">Join Team 1</button>
+                            <button class="button button-outline button-calm" ng-click="game.joinTeam2($index)">Join Team 2</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="{{(game.canDeal === false) ? 'hidden' : 'show'}} ">
+              <td-cards>
+                <td-card class="card card-0  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
+                <td-card class="card card-1  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
+                <td-card class="card card-2  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
+              </td-cards>
+
+
+            </div>
+
+
+
+
+        <!--  FIXED OUTSIDE STUFF -->
+
+        <div class="fixed-outside-top">
+
+        </div>
+
+        <div class="fixed-outside-right {{(game.readyNextTurn === true) ? 'show' : 'hidden'}}">
+              <i class="icon-next ion-ios-arrow-right bigIcon animated pulse" ng-click="game.nextTurn()" style="font-size: 60px;"></i>
+        </div>
+
+        <div class="fixed-outside-bottom">
+          <div class="col">
+
+                  <div id="dealer" class="show">
+                      <h3 class="instruction-test">Push button to deal cards</h3>
+                          <button class="deal-cards button button-energized button-large" ng-click="game.deal()">Deal Cards</button>
+                  </div>
+
+                  <div id="showCards" class="hidden">
+                      <h3 class="instruction-test">Push button to show cards</h3>
+                        <button class="button button-energized button-large" ng-click="game.showCards()">Show Cards</button>
+                  </div>
+
+                  <div id="activateCard" class="hidden">
+                      <h3 class="instruction-test">Choose one of the three phrases above to act out</h3>
+                        <button class="button button-energized button-large button-outline" ng-click="game.activateCard()">Activate Card</button>
+                  </div>
+
+                  <div id="showCountdown" class="hidden">
+                      <h3 class="instruction-test">You'll have 120 secons to act out the phrase. Click button when ready.</h3>
+                        <button class="button button-energized button-large button-outline" ng-click="game.showCountdown()">Start Countdown</button>
+                  </div>
+
+                  <div id="countdown" class="hidden">
+                      <h3 class="instruction-test">This should be a pop-up modal</h3>
+                  </div>
+
+                  <div id="readyNextTurn" class="hidden">
+                      <h3 class="instruction-test">Swipe the page left to start the next turn!</h3>
+                  </div>
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+        <!-- // FIXED OUTSIDE STUFF -->
+
 
  </div>

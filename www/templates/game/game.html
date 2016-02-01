@@ -1,0 +1,41 @@
+<div id="game">
+
+        <div id="game__container--scores">
+            <div class="row">
+                <div class="col">
+                    <div id="team1__score" class="text--center">
+                        <span><i class="icon ion-disc"></i></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div id="team2__score" class="text--center">
+                        <span><i class="icon ion-disc"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                <ion-slide class="box brand-bg-dark">
+                    <div ng-include="'templates/game/screen.team1.html'"></div>
+                </ion-slide>
+                <ion-slide class="box brand-bg-light">
+                    <div ng-include="'templates/game/screen.team2.html'"></div>
+                </ion-slide>
+                <ion-slide class="box bg-team1">
+                    <div ng-include="'templates/game/screen.team1.html'"></div>
+                </ion-slide>
+                <ion-slide class="box bg-success">
+                    <div ng-include="'templates/game/screen.success.html'"></div>
+                </ion-slide>
+                <ion-slide class="box bg-game-over">
+                    <div ng-include="'templates/game/screen.game-over.html'"></div>
+                </ion-slide>
+                <ion-slide class="box bg-error">
+                    <div ng-include="'templates/game/screen.error.html'"></div>
+                </ion-slide>
+            </ion-slide-box>
+          </div>
+    </div><!-- game -->
