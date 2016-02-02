@@ -1,34 +1,37 @@
 <ion-view name="main-menu-view">
-  <ion-content class="main-menu">
-	    
-	<ion-slide-box on-slide-changed="slideHasChanged($index)">
-	    <ion-slide>
-	        <div class="box blue">
-	            <h1 class="text-underline">Uncivilized Charades</h1>
-	            <p>
-	                New Game todo... --create-players, drag players to team-area. on drop completePlayerService.assignTeam()
-	            </p>
-	            <p> <a ui-sref="tab.teams" ui-sref-opts="{reload: true}" class="button button-large button-calm button-outline">Teams</a></p>
-	        </div>
-	    </ion-slide>
+  <ion-content class="{{teamCss}}">
+	<ion-pane ng-if="!gameStarted"><button class="button button-large" ng-click="startGame();">Start Game</button></ion-pane>
 
-	    <ion-slide>
-	        <div class="box bg-team1">
-	            <h1>Team1's Turn</h1>
+  	<ion-pane ng-if="gameStarted" class="{{teamCss}}">
+  	<span>Team1: <strong>{{team1Score}}</strong></span>
+  	<span>Team2: <strong>{{team2Score}}</strong></span>
 
 
-	        </div>
-	    </ion-slide>
+		<h1>{{activePlayer.name}}</h1>
+		<h2>Active Phrase:  {{activePhrase}}</h2>
+		<h3>step:  {{step}}</h3>
 
-	    <ion-slide>
-	        <div class="box bg-team2">
-	            <h1>Team2's Turn</h1>
 
-	        </div>
-	    </ion-slide>
-	</ion-slide-box>
+
+
+
+
+		<button class="button button-large" ng-click="nextStep();">Next Step</button>
+		<button class="button button-large" ng-click="addPointToActiveTeam();">Add Point</button>
+		<button class="button button-large" ng-click="resetGame();">New Game</button>
+
+
+
+
+	</ion-pane>
+
+
 
   </ion-content>
+  <ion-pane ng-if="gameOver">
+	<h1>Game Over</h1>
+	<h2>{{winningTeam}} has won the game.  Play again?</h2>
+  <button class="button button-large" ng-click="startGame();">Restart Game</button></ion-pane>
 </ion-view>
 
 

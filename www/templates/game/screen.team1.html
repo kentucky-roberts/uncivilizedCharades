@@ -38,7 +38,38 @@
                 </div>
             </div>
 
+<!--
 
+          <div ng-if="cards.active">
+             <td-cards control="cardsControl">
+                   <td-card
+                            ng-repeat="card in cards.active"
+                            on-destroy="cardDestroyed($index)"
+                            on-transition-up="cardSwipedUp($index)"
+                            on-transition-left="cardSwipedLeft($index)"
+                            on-transition-right="cardSwipedRight($index)"
+                            on-partial-swipe="cardPartialSwipe(amt)"
+                            on-double-tap="onDoubleTap($index)"
+                            class="card card-{{$index}}  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }}">
+
+                      <div  ng-controller="CardController">
+                          <div class="hidden no-text">NOPE</div>
+                          <div class="hidden yes-text">LIKE</div>
+
+                            <article class="phrase">
+                              <h1 class="td-title">{{card.phrase}}</h1>
+                            </article>
+
+
+                            <button  ng-click="activateCard($index)" class="button button-calm button-outline button-small">Select this Card!</button>
+
+
+
+                      </div>
+                   </td-card>
+                </td-cards>
+            </div>
+ -->
 
             <div class="{{(game.canDeal === false) ? 'hidden' : 'show'}} ">
               <td-cards>

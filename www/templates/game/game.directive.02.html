@@ -3,21 +3,14 @@
 
   <ion-pane>
 
-
 <div id="game" ng-if="game.started">
 
 
 
-            <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide-box
+                on-slide-changed="slideHasChanged($index)">
 
-                <ion-slide class="box brand-bg-dark">
-                    <div ng-include="'templates/game/screen.team1.html'"></div>
-                </ion-slide>
-
-                <ion-slide class="box brand-bg-light">
-                    <div ng-include="'templates/game/screen.team2.html'"></div>
-                </ion-slide>
-
+<!-- <ng-repeat="turn in game.maxTurnCount"> -->
                 <ion-slide class="box bg-team1">
                     <div ng-include="'templates/game/screen.team1.html'"></div>
                 </ion-slide>

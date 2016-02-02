@@ -25,7 +25,7 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	};
 
 	$scope.deal = function() {
-	    $scope.refreshCards;
+	    $scope.refreshCards();
 	    //$scope.activeCards = DealerService.dealThreeCards();
 	    var dealtCards = CardService.dealCards();
 	    $scope.cards.active.push(angular.extend({}, dealtCards));
@@ -71,7 +71,7 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	  // };
 
 	$scope.cardSwipedLeft = function(index) {
-	   
+
 	    //$scope.addCard();
 	    $scope.cardDestroyed(index);
 	};

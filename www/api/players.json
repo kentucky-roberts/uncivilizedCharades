@@ -1,7 +1,7 @@
-{ "players": [
+[
     {
         "id": 1,
-        "playerName": "Lt. Dan",
+        "name": "Lt. Dan",
         "initialScore": 0,
         "score": 0,
         "skips": 5,
@@ -9,7 +9,7 @@
     },
     {
       "id": 2,
-      "playerName": "Jenny"
+      "name": "Jenny",
         "initialScore": 0,
         "score": 0,
         "skips": 5,
@@ -17,7 +17,7 @@
     },
     {
       "id": 3,
-      "playerName": "Momma"
+      "name": "Momma",
         "initialScore": 0,
         "score": 0,
         "skips": 5,
@@ -25,10 +25,10 @@
     },
     {
       "id": 4,
-      "playerName": "Bubba"
+      "name": "Bubba",
         "initialScore": 0,
         "score": 0,
         "skips": 5,
         "team": "team2"
     }
-]}
+]

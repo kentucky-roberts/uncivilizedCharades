@@ -39,6 +39,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
 
       var game = this;
+      var quiz = this;
       game.debugging = false;
 
 	////////////////////////////////////////
@@ -74,10 +75,6 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
       $scope.hasHeaderFabLeft = false;
       $scope.hasHeaderFabRight = false;
 
-
-
-
-
       /**
        * Our game can have multiple states:
        * 1) Game with no player (started = false, canDeal = false, showResults = false)
@@ -90,62 +87,62 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
        * Initialize our controller data
        */
       game.init = function () {
-        //game.turn = -3;
+        game.maxTurnCount = 100;
         game.turn = -1;
-    game.step = -1;
-    game.activePlayer = -1;
-    game.maxScore = GameService.maxScore();
-    game.secondsRemaining = GameService.maxTime();
-    game.canDeal = false;
-    game.started = false;
-    game.showResults = false;
-    //game.deck = CardService.newDeck();  //new
-    game.dealer = DealerService.newDealer(game.deck);  //new
-    game.playerCards = [];  //new
-    game.players = [];
-    game.teams = [];
-    game.team1Score = 0;
-    game.team2Score = 0;
+        game.step = -1;
+        game.activePlayer = -1;
+        game.maxScore = GameService.maxScore();
+        game.secondsRemaining = GameService.maxTime();
+        game.canDeal = false;
+        game.started = false;
+        game.showResults = false;
+        //game.deck = CardService.newDeck();  //new
+        game.dealer = DealerService.newDealer(game.deck);  //new
+        game.playerCards = [];  //new
+        game.players = [];
+        game.teams = [];
+        game.team1Score = 0;
+        game.team2Score = 0;
 
-    game.readyForTeams = false;
+        game.readyForTeams = false;
 
-    game.needsPlayers = true;
+        game.needsPlayers = true;
 
-    game.activeTeam = "Team1";
-    game.nextActiveTeam = "Team2";
-    game.activeTeamColor = "yellow-text";
-
-
-    game.cardsVisible = false;
-
-	game.winningTeamName = "FreeAgent";
-
-	game.showLoadGameButton = false;  // main-menu buttons will appear when true
-	game.showSavedGame = false;  // main-menu buttons will appear when true
-	game.showSavedGames = false; //main-menu button appear when true -> list a users saved games to Load.
+        game.activeTeam = "Team1";
+        game.nextActiveTeam = "Team2";
+        game.activeTeamColor = "yellow-text";
 
 
+        game.cardsVisible = false;
 
-    //game.deck = CardService.newDeck();
-    //game.dealer = DealerService.newDealer(game.deck);
-    //game.players = AppService.availablePlayers();
-    // console.log(game.players);
-    // game.activePlayerCount = 0;
-    // game.activePlayer = game.players[game.activePlayerCount];
+    	game.winningTeamName = "FreeAgent";
 
-
-     //game.demoMakePlayers();
-     //game.players = PlayerService.getPlayers();
-
-     //game.demoMakeTeams();
-    //game.createPlayers();
-    //game.createTeams();
-      };
+    	game.showLoadGameButton = false;  // main-menu buttons will appear when true
+    	game.showSavedGame = false;  // main-menu buttons will appear when true
+    	game.showSavedGames = false; //main-menu button appear when true -> list a users saved games to Load.
 
 
-  game.showBuildTeams = function() {
-    	game.readyForTeams = true;
-    };
+
+        //game.deck = CardService.newDeck();
+        //game.dealer = DealerService.newDealer(game.deck);
+        //game.players = AppService.availablePlayers();
+        // console.log(game.players);
+        // game.activePlayerCount = 0;
+        // game.activePlayer = game.players[game.activePlayerCount];
+
+
+         //game.demoMakePlayers();
+         //game.players = PlayerService.getPlayers();
+
+         //game.demoMakeTeams();
+        //game.createPlayers();
+        //game.createTeams();
+          };
+
+
+      game.showBuildTeams = function() {
+        	game.readyForTeams = true;
+        };
 
 
 
@@ -159,6 +156,21 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	game.restartGame = function() {
 		alert("Restart the Game!");
 	};
+
+
+
+// $scope.addSlide = function() {
+//     var newSlide = "hello";
+//     console.log(newSlide);
+// };
+
+
+// for (var i = 0; i < 10; i++) {
+//     $scope.addSlide();
+// }
+
+
+
 
 
       ////////////////////////////////////////
@@ -348,6 +360,8 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
           game.readyNextTurn = false;
           $("#readyNextTurn").removeClass("show").addClass("hidden");
 
+          $scope.activeQuestion++;
+
           game.step = 1;  // 1 because it is the beginning of the card dealing cycle
           game.turn += 1;
           game.ap += 1;
@@ -373,6 +387,25 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 	};
 
 
+
+// $scope.selectActiveTeam = function() {
+
+//     if ($scope.turn % 2 == 0 && $scope.turn != 1) {
+
+//         $scope.activeTeam = "Team1";
+//         $scope.teamColor = "positive";
+//         return;
+
+//     } else {
+//         $scope.activeTeam = "Team2";
+//         $scope.teamColor = "assertive";
+//         return;
+//     }
+
+// };
+
+
+
       ////////////////////////////////////////
       // Game Has Started!!
       ////////////////////////////////////////
@@ -383,6 +416,8 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             game.started = true;
             game.canDeal = false;
             game.showResults = false;
+
+            //$scope.activeQuestion++;
 
             game.turn = 1;
             game.step = 1;

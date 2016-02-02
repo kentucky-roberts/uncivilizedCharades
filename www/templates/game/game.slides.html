@@ -1,0 +1,35 @@
+<h1>Hello</h1>
+
+
+<div class="question-{{activeQuestion}}" ng-repeat="question in quiz.questions">
+
+    <a role="button"
+        ng-click="nextQuestion()">
+        <span class="sr-clip">Question {{$index}}</span>
+    </a>
+
+    <div id="question-{{activeQuestion}}" class="{{ ($index === activeQuestion) ? 'show' : 'hidden' }}">
+
+      <h2 class="quiz-title"><p>{{ quiz.questions[$index].question }}</p></h2>
+
+      <div class="responses">
+          <div class="form-group response-group-{{a.id}}"
+               ng-repeat="a in quiz.questions[$index].answers track by $id(a)">
+
+          <div class="btn-group">
+                  <label class="btn btn-quiz" ng-model="formData" name="q{{$parent.$index}}" ng-click="addFormData($event)"
+                   data="{{a.text}}"
+                  uib-btn-radio="'{{a.text}}'">{{a.text}}</label>
+              </div>
+          </div>
+          <!--.form-group-->
+      <button class="btn btn-success" id="submit" type="submit">Submit</button>
+      <button class="btn btn-default" ng-click="nextStep()">Next</button>
+      <button class="btn btn-default" ng-click="firstStep()">First</button>
+
+      </div>
+      <!-- .responses -->
+    </div>
+    <!-- .questions -->
+</div>
+<!-- .panel -->

@@ -4,7 +4,7 @@ angular
         'app.config',
         'app.animations',
         'app.directive',
-        'app.service', 
+        'app.service',
         'app.game',
         'app.filter',
         'app.auth'
@@ -117,7 +117,7 @@ angular
           'tab-players': {
             cache: false,
             templateUrl: 'templates/players/players.html',
-            controller: 'GameController', 
+            controller: 'GameController',
             controllerAs: 'game'
           }
         }
