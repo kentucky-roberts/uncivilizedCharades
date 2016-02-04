@@ -1,13 +1,31 @@
 <ion-view name="main-menu-view">
   <ion-content class="{{teamCss}}">
-	<ion-pane ng-if="!gameStarted"><button class="button button-large" ng-click="startGame();">Start Game</button></ion-pane>
 
-  	<ion-pane ng-if="gameStarted" class="{{teamCss}}">
+	<ion-pane ng-if="!gameStarted && !gameOver">
+		<div class="start__button__container">
+			<h1 class="text--start">Uncivilized Charades</h1>
+
+
+
+		    	<button class="start--button button button-energized
+		    						button-fab button-outline icon ion-power
+
+		    						" ng-click="startGame();"></button>
+                <!-- <button class="button button-energized button-fab button-outline icon ion-power" ng-click="game.startGame(players)"></button> -->
+            </div>
+
+            <p class="lead text--red text--center">Start New Game</p>
+	</ion-pane>
+
+
+
+  	<ion-pane ng-if="gameStarted && !gameOver" class="game__slide {{teamCss}} animated">
+
   	<span>Team1: <strong>{{team1Score}}</strong></span>
   	<span>Team2: <strong>{{team2Score}}</strong></span>
 
 
-		<h1>{{activePlayer.name}}</h1>
+		<h1 class="body--title">{{activePlayer.name}}</h1>
 		<h2>Active Phrase:  {{activePhrase}}</h2>
 		<h3>step:  {{step}}</h3>
 
@@ -18,7 +36,8 @@
 
 		<button class="button button-large" ng-click="nextStep();">Next Step</button>
 		<button class="button button-large" ng-click="addPointToActiveTeam();">Add Point</button>
-		<button class="button button-large" ng-click="resetGame();">New Game</button>
+		<button class="button button-large" ng-click="endGame();">End Game</button>
+
 
 
 
@@ -28,10 +47,19 @@
 
 
   </ion-content>
-  <ion-pane ng-if="gameOver">
-	<h1>Game Over</h1>
-	<h2>{{winningTeam}} has won the game.  Play again?</h2>
-  <button class="button button-large" ng-click="startGame();">Restart Game</button></ion-pane>
+  <ion-pane id="game__over__container" ng-if="gameOver">
+	<h1><a href="#"><i class="ion-trophy icon-winner bigIcon" style="font-size: 32px;"></i> </a> {{winningTeam || "Winning Team"}}</h1>
+	<h2>
+		  We have a winner!
+	</h2>
+
+	<i class="ion-ios-refresh icon-reset-game bigIcon text-center" style="font-size: 92px;" ng-click="resetGame();"></i>
+
+	<p class="lead text--center">
+		play again?
+	</p>
+
+  </ion-pane>
 </ion-view>
 
 

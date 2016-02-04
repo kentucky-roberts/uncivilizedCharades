@@ -60,7 +60,7 @@ ion-content {
 h1 {
       font-family: $brand-font-family-base;
       font-weight: 800;
-      color: $brand-color-light;
+      color: white;
       font-size: 32px;
       line-height: 34px;
       text-align: center;
@@ -69,7 +69,7 @@ h1 {
 h1.body-title {
   font-family: $brand-font-family-base;
       font-weight: 800;
-      color: $brand-color-light;
+      color: white;
       font-size: 32px;
       line-height: 32px;
       text-align: center;
@@ -79,7 +79,7 @@ h1.body-title {
       -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
         -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
         box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-        border-bottom: 1px solid $brand-color-dark;
+      //  border-bottom: 1px solid $brand-color-dark;
 }
 
 h2.body-title {
@@ -156,7 +156,7 @@ h3 {
 .fixed-outside-right {
   position: absolute;
   right: 0;
-  color:$brand-color-dark;
+  color: $brand-color-dark;
   width: 20%;
   height: 100%;
   text-align:center;
@@ -175,14 +175,17 @@ h3 {
 
 
 p {
-
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.3;
 }
 
 .lead {
   margin-bottom: 18px;
   font-size: 32px;
   font-weight: 300;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .team1 {
@@ -552,16 +555,15 @@ img.img--center {
 
 .bg-team1 {
  background-color:  $brand-color-dark!important;
- color: $brand-color-light;
+
 
   .pane {
    background-color:  $brand-color-dark!important;
-   color: $brand-color-light;
+
   }
 
   ion-pane {
    background-color:  $brand-color-dark!important;
-   color: $brand-color-light;
   }
 
 
@@ -574,7 +576,7 @@ img.img--center {
   }
 
   h2 {
-     color: $brand-color-light!important;
+     color: $brand-yellow!important;
   }
 
   p {
@@ -584,11 +586,11 @@ img.img--center {
 
 .bg-team2 {
  background-color:  $brand-color-light!important;
- color: $brand-color-dark;
+
 
     .pane {
        background-color:  $brand-color-light!important;
-       color: $brand-color-dark;
+
     }
 
     ion-pane {
@@ -605,7 +607,7 @@ img.img--center {
   }
 
   h2 {
-     color: $brand-color-dark!important;
+     color: $brand-yellow!important;
   }
 
   p {
@@ -751,7 +753,9 @@ span.score {
     text-align: left;
 }
 
-
+.text--red {
+   color: $brand-red!important;
+}
 
 .testimonial p {
     background: transparent;
@@ -1529,14 +1533,67 @@ hr {
 }
 
 .start__button__container {
+  position:relative;
+  display:block;
   margin-right: auto;
   margin-left: auto;
   width:100%;
-  height: 200px;
-  line-height: 215px;
-  vertical-align: middle;
-  text-align: center;
+  height: 400px;
+  padding-top: 50px;
+
+  .button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
+          display: inline-block;
+          padding: 0 0 1px 0;
+          vertical-align: inherit;
+          font-size: 55px;
+          line-height: 125px;
+          pointer-events: none;
+      }
+
+  .start--text {
+    vertical-align: middle;
+    text-align: center;
+
+  }
+
+  .start--button {
+    vertical-align: middle;
+    text-align: center;
+    width: 150px;
+    height: 150px;
+  }
+
+
+
 }
+
+#game__over__container {
+    text-align: center;
+    padding-top: 50px;
+    width: 100%;
+
+
+    h2 {
+
+    }
+
+    i {
+      text-align: center;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .icon-reset-game {
+      font-size: 80px;
+      text-align: center;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+}
+
+
+
 
 h1.td-title {
     font-family: "Shadows Into Light Two", cursive;

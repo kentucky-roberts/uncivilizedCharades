@@ -53,7 +53,7 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 
 
 ////////////////////////////////////////
-//  players
+//  players  replace during production
 ////////////////////////////////////////
 var players =
     $http.get('api/players.json').then(function(playerData) {
@@ -64,23 +64,21 @@ var players =
 
 $scope.players = players;
 
-////////////////////////////////////////
-//  card_types
-////////////////////////////////////////
-var p =
-    $http.get('api/card_types.json').then(function(phraseData) {
-        app.phrases = phraseData.data;
-        console.log(app.phrases[0]);
-        app.totalPhrases = app.phrases.length;
-    });
+	////////////////////////////////////////
+	//  card_types
+	////////////////////////////////////////
+	var p =
+	    $http.get('api/card_types.json').then(function(phraseData) {
+	        app.phrases = phraseData.data;
+	        console.log(app.phrases[0]);
+	        app.totalPhrases = app.phrases.length;
+	    });
 
-$scope.phrases = p;
+	$scope.phrases = p;
 
-
-////////////////////////////////////////
-//  Start Game!!
-////////////////////////////////////////
-
+	////////////////////////////////////////
+	//  Start Game!!
+	////////////////////////////////////////
 	$scope.startGame = function() {
 	    console.log("Start Game!");
 	    $scope.gameStarted = true;
@@ -93,6 +91,10 @@ $scope.phrases = p;
 	    $scope.activePlayer = app.players[app.playerCount];
 
 	    $scope.selectActiveTeam();
+	};
+
+	$scope.endGame = function() {
+		$scope.gameOver = true;
 	};
 
 	$scope.nextStep = function() {
@@ -135,7 +137,8 @@ $scope.phrases = p;
 	$scope.resetGame = function() {
 	    app.step = 0;
 	    app.playerCount = 0;
-	    $scope.gamestarted = false;
+	    $scope.gameStarted = false;
+	    $scope.gameOver = false;
 	    $scope.step = app.step;
 	    //$scope.activeQuestion = 0;
 	    $scope.activePhrase = 0;
@@ -143,6 +146,8 @@ $scope.phrases = p;
 	    $scope.team1Score = 0;
 	    $scope.team2Score = 0;
 	    $scope.winningTeam = null;
+	    $scope.teamColor = null;
+	    $scope.teamCss = null;
 	};
 
 
@@ -156,7 +161,7 @@ $scope.phrases = p;
 
 
 	  	   if ($scope.team1Score === 10 ) {
-		    	$scope.gameStarted = true;
+		    	$scope.gameStarted = false;
 		    	$scope.gameOver = true;
 		    	$scope.winningTeam = "Team2";
 		   }
@@ -168,7 +173,7 @@ $scope.phrases = p;
 		  $scope.teamColor = "assertive";
 
 		  if ($scope.team2Score === 10 ) {
-		    	$scope.gameStarted = true;
+		    	$scope.gameStarted = false;
 		    	$scope.gameOver = true;
 		    	$scope.winningTeam = "Team2"
 		  }
@@ -253,6 +258,8 @@ $scope.phrases = p;
 	        }
 	    }
 	};
+
+	$scope.noHeader();
 
 
 	$scope.initApp();

@@ -3,7 +3,7 @@
 
   <ion-pane>
 
-<div id="game" ng-if="game.started">
+<div id="game" ng-if="!game.started">
 
 
 
@@ -103,7 +103,18 @@
 
           <div class=" {{(game.started === false && game.readyForTeams === true) ? 'show' : 'hidden'}} ">
 
-            <h2 class="instruction-text">Drag players to select teams</h2>
+           <div id="start__game" class=" {{(players.length <= 0 && game.started != true) ? 'show' : 'hidden' }}">
+              <span class="text--center reload-card">
+                  <h1 class="body--title">You may now start a new game</h1>
+                  <div class="start__button__container">
+                      <button class="start--button button button-energized button-fab button-outline icon ion-power" ng-click="game.startGame(players)"></button>
+                  </div>
+              </span>
+          </div>
+
+
+
+            <h1 class="body--title">Drag players to select teams</h1>
             <div class="row">
                 <div class="col">
                     <div class="droppable-object" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
@@ -137,14 +148,6 @@
             </div>
           </div>
 
-          <div id="start__game" class=" {{(players.length <= 0 && game.started != true) ? 'show' : 'hidden' }}">
-              <span class="text--center reload-card">
-                  <h1 class="body--title">You may now start a new game</h1>
-                  <div class="start__button__container">
-                      <button class="button button-energized button-fab button-outline icon ion-power" ng-click="game.startGame(players)"></button>
-                  </div>
-              </span>
-          </div>
 
 
 

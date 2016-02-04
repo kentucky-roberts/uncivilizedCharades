@@ -10697,7 +10697,7 @@ background: transparent;
   display: block; }
 
 /*  http://hafizbilal112.github.io/ion-fab-button/ion-fabButton.css  */
-.animated {
+.animated-button {
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
   -webkit-animation-fill-mode: both;
@@ -11152,7 +11152,7 @@ ion-content {
 h1 {
   font-family: "Open Sans", sans-serif;
   font-weight: 800;
-  color: #c6c6c6;
+  color: white;
   font-size: 32px;
   line-height: 34px;
   text-align: center; }
@@ -11160,7 +11160,7 @@ h1 {
 h1.body-title {
   font-family: "Open Sans", sans-serif;
   font-weight: 800;
-  color: #c6c6c6;
+  color: white;
   font-size: 32px;
   line-height: 32px;
   text-align: center;
@@ -11169,8 +11169,7 @@ h1.body-title {
   padding-bottom: 5px;
   -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
   -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-  box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-  border-bottom: 1px solid #121212; }
+  box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0; }
 
 h2.body-title {
   font-family: "Open Sans", sans-serif;
@@ -11249,7 +11248,7 @@ h3 {
   margin-bottom: 18px;
   font-size: 32px;
   font-weight: 300;
-  line-height: 1.4; }
+  line-height: 1.3; }
 
 .team1 {
   color: yellow; }
@@ -11546,29 +11545,24 @@ img.img--center {
   margin-left: auto; }
 
 .bg-team1 {
-  background-color: #121212 !important;
-  color: #c6c6c6; }
+  background-color: #121212 !important; }
   .bg-team1 .pane {
-    background-color: #121212 !important;
-    color: #c6c6c6; }
+    background-color: #121212 !important; }
   .bg-team1 ion-pane {
-    background-color: #121212 !important;
-    color: #c6c6c6; }
+    background-color: #121212 !important; }
   .bg-team1 span {
     color: #c6c6c6 !important; }
   .bg-team1 h1 {
     color: #c6c6c6 !important; }
   .bg-team1 h2 {
-    color: #c6c6c6 !important; }
+    color: #fc0 !important; }
   .bg-team1 p {
     color: #c6c6c6 !important; }
 
 .bg-team2 {
-  background-color: #c6c6c6 !important;
-  color: #121212; }
+  background-color: #c6c6c6 !important; }
   .bg-team2 .pane {
-    background-color: #c6c6c6 !important;
-    color: #121212; }
+    background-color: #c6c6c6 !important; }
   .bg-team2 ion-pane {
     background-color: #c6c6c6 !important;
     color: #121212; }
@@ -11577,7 +11571,7 @@ img.img--center {
   .bg-team2 h1 {
     color: #121212 !important; }
   .bg-team2 h2 {
-    color: #121212 !important; }
+    color: #fc0 !important; }
   .bg-team2 p {
     color: #121212 !important; }
 
@@ -11681,6 +11675,9 @@ span.score {
   color: #fb292d !important;
   text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
   text-align: left; }
+
+.text--red {
+  color: #fb292d !important; }
 
 .testimonial p {
   background: transparent;
@@ -12328,13 +12325,20 @@ hr {
   filter: alpha(opacity=20); }
 
 .start__button__container {
+  position: relative;
+  display: block;
   margin-right: auto;
   margin-left: auto;
   width: 100%;
-  height: 200px;
-  line-height: 215px;
-  vertical-align: middle;
-  text-align: center; }
+  height: 400px; }
+  .start__button__container .start--text {
+    vertical-align: middle;
+    text-align: center; }
+  .start__button__container .start--button {
+    vertical-align: middle;
+    text-align: center;
+    width: 200px;
+    height: 200px; }
 
 h1.td-title {
   font-family: "Shadows Into Light Two", cursive;
