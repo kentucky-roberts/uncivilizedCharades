@@ -320,9 +320,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
       ////////////////////////////////////////
       // ionicSlideBoxDeligate
       ////////////////////////////////////////
-      $scope.startApp = function () {
-        $state.go('app.game');
-      };
+
       $scope.next = function () {
         $ionicSlideBoxDelegate.next();
       };

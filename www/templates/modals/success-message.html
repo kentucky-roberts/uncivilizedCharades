@@ -5,7 +5,7 @@
     <ion-content class="bg-success">
         <div class="row">
             <div class="col">
-                <h3><i class="ion-checkmark bigIcon" style="font-size: 60px;"></i> Well done {{game.activePlayer}}!!</h3>
+                <h3><i class="ion-checkmark bigIcon" style="font-size: 50px;"></i> Well done <strong>{{activePlayer.name}}!</strong>!</h3>
                 <br>
 
 
@@ -13,7 +13,9 @@
                 <p>Click button below to continue</p>
                 <br>
                 <br>
-                <button class="button button-balanced button-large icon ion-ios-arrow-right button-block" ng-click="game.awardPoint();closeModal();"> Continue</button>
+                <button class="button button-light button-large button-outline icon ion-ios-arrow-right button-block" ng-click="game.awardPoint();closeModal();"> Continue</button>
+
+
             </div>
         </div>
     </ion-content>

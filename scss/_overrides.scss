@@ -65,17 +65,18 @@
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
     display: block;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-left: 5px;
-    height: 38px;
+    padding-top: 16px;
+    padding-bottom: 14px;
+    padding-left: 14px;
+    height: 48px;
     color: white;
     vertical-align: middle;
-    font-size: 28px;
-    line-height: 38px;
+    font-size: 18px;
+    line-height: 48px;
     border-radius: 3px;
-    border: 1px solid $brand-color-light;
+    border: 1px solid #c6c6c6;
 }
+
 
 .modal {
     display: block;
@@ -85,7 +86,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     overflow: hidden;
     min-height: 100%;
     min-width: 100%;
-    background-color: $brand-color-light;
+
     opacity: 1;
 }
 

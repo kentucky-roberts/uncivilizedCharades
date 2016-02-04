@@ -10,6 +10,9 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 	}; $scope.showLoading();
 
 	var app = this;
+	var game = this;
+
+
 
 	var message = {};
 	$scope.players = [];
@@ -21,6 +24,7 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 
 	$scope.initApp = function() {
 		$scope.gameStarted = false;
+		gameSlideActive  = false;
 		$scope.slides = [];
           	$scope.activeQuestion = 0;
           	$scope.welcomeUser();
@@ -29,6 +33,15 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 
           	$scope.team1Score = 0;
           	$scope.team2Score = 0;
+
+          	$state.go('tab.splash-screen');
+          	$scope.showSplashScreen = function() {
+		    $timeout(function() {
+		    	 $state.go('tab.main-menu');
+		    }, 5000);
+		};
+		$scope.showSplashScreen();
+
 
 	};
 
@@ -82,6 +95,7 @@ $scope.players = players;
 	$scope.startGame = function() {
 	    console.log("Start Game!");
 	    $scope.gameStarted = true;
+	    $scope.gameSlideActive = true;
 	    app.step = 0;
 	    app.playerCount = 0;
 	    $scope.step = app.step;
@@ -116,7 +130,8 @@ $scope.players = players;
 	    $scope.activePhrase = app.phrases[app.step].phrase;
 	   // $("animated ").addClass("bounceOutUp");
 
-	   $scope.selectActiveTeam();
+	   $scope.selectActiveTeam();  //  Also controlling  //  $scope.gameSlideActive = false || true
+
 	};
 
 	$scope.lastStep = function() {
@@ -159,7 +174,6 @@ $scope.players = players;
 	        $scope.team1Score += 1;
 	        $scope.teamColor = "positive";
 
-
 	  	   if ($scope.team1Score === 10 ) {
 		    	$scope.gameStarted = false;
 		    	$scope.gameOver = true;
@@ -188,44 +202,47 @@ $scope.players = players;
 
 	        app.activeTeam = "Team1";
 	        console.log(app.activeTeam);
-	        $scope.teamColor = "positive";
-	        $scope.teamCss = "bg-team1";
+	        $scope.gameSlideActive = false;
+
+		$scope.swapSlides = function() {
+		    $timeout(function() {
+		    	 $scope.teamColor = "positive";
+	        	$scope.teamCss = "bg-team1";
+		        $scope.gameSlideActive = true;
+		    }, 300);
+		};
+		$scope.swapSlides();
+
+
 	        return;
 
 	    } else {
 	        app.activeTeam = "Team2";
 	        console.log(app.activeTeam);
-	        $scope.teamColor = "assertive";
-	        $scope.teamCss = "bg-team2";
+	        $scope.gameSlideActive = false;
+
+	        $scope.swapSlides = function() {
+		    $timeout(function() {
+		    	 $scope.teamColor = "assertive";
+	        	 $scope.teamCss = "bg-team2";
+		       $scope.gameSlideActive = true;
+		    }, 300);
+		};
+		$scope.swapSlides();
 	        return;
 	    }
 
 	};
 
 
+$scope.activateGameSlide = function() {
+	$scope.gameSlideActive = true;
+};
 
 
-
-
-	// $scope.discard = function($index) {
-	//     var discarded = $scope.cards.master.splice($scope.cards.master.indexOf(card), 1);
-	 //  	 $scope.cards.discards.push(discarded);
-	// };
-
-	// $scope.activate = function($index) {
-	// 	var activatedQuestion = $index;
-	//     $scope.questions.activated.push(angular.extend({}, activatedQuestion));
-	// };
-
-	// $scope.addQuestions = function() {
-	//     var newQuestion = questions.master[Math.floor(Math.random() * questions.master.length)];
-	//     newQuestion.id = Math.random();
-	//     $scope.questions.active.push(angular.extend({}, newQuestion));
-	//     $scope.activeQuestion = newQuestion;
-	//     console.log()
-	// };
-
-
+$scope.unActivateGameSlide = function() {
+	$scope.gameSlideActive = false;
+};
 
 
 

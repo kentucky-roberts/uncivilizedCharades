@@ -1,20 +1,28 @@
 <div class="modal">
     <ion-header-bar class="bar bar-header bar-error">
-        <button class="button button-icon ion-close close" ng-click="closeModal()"></button>
+        <button class="button button-icon ion-close close pull--right" ng-click="closeModal()"></button>
     </ion-header-bar>
      <ion-content class="bg-error">
 
              <div class="text-center">
 
-                <h1>Time Expired!</h1>
-                <i class="ion-alert-circle bigIcon" style="font-size: 60px;"></i>
-               <h2>Your game is lame</h2>
-                <h3>Woud the other team like to steal the point?</h3>
+                <h1><i class="ion-alert-circle bigIcon" style="font-size: 60px;"></i> Time Expired!</h1>
+               <h2>Your game is lame, no points for you!</h2>
+                <h3></h3>
                 <br>
-                <button class="button button-link button-large" ng-click="game.stealPoint();closeModal();">Yes, steal point</button>
+                <p class="lead text--center">
+                    Hey, Other Team!!
+                </p>
+                <p class="text--center">
+                    Push button below to risk <strong>1 Point</strong> and make a guss at what the secret phrase was.
+                </p>
+                <button class="button button-link button-large  ion-checkmark  pull--left" ng-click="game.stealPoint();closeModal();">Yes, steal point</button>
 
-                <br>
-                <button class="button button-link button-large ion-checkmark" ng-click="game.noPoint();closeModal();">Nope</button>
+
+                <p class="text--center">Or, click button below to continue</p>
+
+                <button class="button button-balanced button-large button-outline icon ion-ios-arrow-right pull--right" ng-click="game.awardPoint();closeModal();"> Continue</button>
+
             </div>
 
 

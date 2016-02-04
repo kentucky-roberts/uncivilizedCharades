@@ -95,13 +95,30 @@ h2.body-title {
       -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
         -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
         box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-        border-bottom: 1px solid $brand-color-dark;
 }
 
 .center--block {
       margin-left: auto;
       margin-right: auto;
       text-align: center;
+}
+
+.text--center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+}
+
+.pull--right {
+      right: 0;
+      margin-right: 0!important;
+      text-align: right;
+}
+
+.pull--left {
+      left: 0;
+      margin-left: 0!important;
+      text-align: left;
 }
 
 h2 {
@@ -1347,7 +1364,7 @@ a.prev.disabled,a.next.disabled {
 
 .main-menu {
   background-color: transparent;
-  /*background-image: url("http://wendysmithteam.com/images/uploads/bg/img-bg-blur.jpg");*/
+  background-image: url("img/game-images/uncivilized-splash-02.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-clip: border-box;
@@ -1532,17 +1549,34 @@ hr {
     filter: alpha(opacity=20);
 }
 
-.start__button__container {
-  position:relative;
-  display:block;
-  margin-right: auto;
-  margin-left: auto;
-  width:100%;
-  height: 400px;
-  padding-top: 50px;
+.game__slide {
+  height: 100%;
+  width: 100%;
+}
 
-  .button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
-          display: inline-block;
+
+h1.start--text {
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+#game__start__container {
+    text-align: center;
+    width: 100%;
+
+   .start__button__container {
+      display: block;
+      margin-bottom: 25px;
+      margin-right: auto;
+      margin-left: auto;
+      width:100%;
+
+      .button .icon:before,
+      .button.icon:before,
+      .button.icon-left:before,
+      .button.icon-right:before {
+          margin-right: auto;
+          margin-left: auto;
           padding: 0 0 1px 0;
           vertical-align: inherit;
           font-size: 55px;
@@ -1550,31 +1584,39 @@ hr {
           pointer-events: none;
       }
 
-  .start--text {
-    vertical-align: middle;
-    text-align: center;
+      .start--text {
+        vertical-align: middle;
+        text-align: center;
+        margin-top: 25px;
 
-  }
+      }
 
-  .start--button {
-    vertical-align: middle;
-    text-align: center;
-    width: 150px;
-    height: 150px;
-  }
+      .start--button {
+        margin-right: auto;
+        margin-left: auto;
+        vertical-align: middle;
+        text-align: center;
+        width: 150px;
+        height: 150px;
+      }
 
-
-
+    }
 }
 
 #game__over__container {
+  background-color: $brand-bg;
     text-align: center;
-    padding-top: 50px;
     width: 100%;
 
+    h1 {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        color: $brand-yellow;
+    }
 
     h2 {
-
+        margin-top: 20px;
+        margin-bottom: 25px;
     }
 
     i {

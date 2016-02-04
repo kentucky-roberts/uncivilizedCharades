@@ -9575,14 +9575,14 @@ a.button {
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
   display: block;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  height: 38px;
+  padding-top: 16px;
+  padding-bottom: 14px;
+  padding-left: 14px;
+  height: 48px;
   color: white;
   vertical-align: middle;
-  font-size: 28px;
-  line-height: 38px;
+  font-size: 18px;
+  line-height: 48px;
   border-radius: 3px;
   border: 1px solid #c6c6c6; }
 
@@ -9594,7 +9594,6 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   overflow: hidden;
   min-height: 100%;
   min-width: 100%;
-  background-color: #c6c6c6;
   opacity: 1; }
 
 .input-label {
@@ -10936,33 +10935,54 @@ background: transparent;
   background-color: #555555; }
 
 /** Background from http://www.transparenttextures.com/ **/
+td-cards {
+  display: block;
+  position: absolute;
+  top: 25%;
+  right: 10%;
+  width: 315px;
+  height: 180px;
+  border-radius: 10px; }
+
+td-card {
+  position: absolute;
+  -webkit-transform: scale(1, 1);
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
+  left: 10%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  width: 360px;
+  height: 180px;
+  border: 1px solid #999;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 6px; }
+
 .card {
   margin: 0;
   background-color: #c6c6c6; }
 
-/*
 td-card.card-0 {
   -webkit-transform: translate3d(0, 0px, 0);
   transform: translate3d(0, 0px, 0);
   top: 0px;
-
   z-index: 10;
   transform: translate3d(0, 0, -180px);
-  transform-style: preserve-3d;
-}
+  transform-style: preserve-3d; }
+
 td-card.card-1 {
   -webkit-transform: translate3d(0, 4px, 0);
   transform: translate3d(0, 4px, 0);
   z-index: 9;
   transform: translate3d(0, 0, -180px);
-  transform-style: preserve-3d;
-}
+  transform-style: preserve-3d; }
+
 td-card.card-2 {
   -webkit-transform: translate3d(0, 8px, 0);
   transform: translate3d(0, 8px, 0);
-  z-index: 8;
-}
-*/
+  z-index: 8; }
+
 td-card .image {
   position: relative; }
 
@@ -11183,13 +11203,27 @@ h2.body-title {
   padding-bottom: 5px;
   -moz-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
   -webkit-box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-  box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
-  border-bottom: 1px solid #121212; }
+  box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0; }
 
 .center--block {
   margin-left: auto;
   margin-right: auto;
   text-align: center; }
+
+.text--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; }
+
+.pull--right {
+  right: 0;
+  margin-right: 0 !important;
+  text-align: right; }
+
+.pull--left {
+  left: 0;
+  margin-left: 0 !important;
+  text-align: left; }
 
 h2 {
   font-family: "Open Sans", sans-serif;
@@ -11243,6 +11277,12 @@ h3 {
   width: 20%;
   height: 100%;
   text-align: center; }
+
+p {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.3; }
 
 .lead {
   margin-bottom: 18px;
@@ -12165,7 +12205,7 @@ a.prev.disabled, a.next.disabled {
 
 .main-menu {
   background-color: transparent;
-  /*background-image: url("http://wendysmithteam.com/images/uploads/bg/img-bg-blur.jpg");*/
+  background-image: url("img/game-images/uncivilized-splash-02.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-clip: border-box;
@@ -12324,21 +12364,66 @@ hr {
   opacity: 0.2;
   filter: alpha(opacity=20); }
 
-.start__button__container {
-  position: relative;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
-  height: 400px; }
-  .start__button__container .start--text {
-    vertical-align: middle;
-    text-align: center; }
-  .start__button__container .start--button {
-    vertical-align: middle;
+.game__slide {
+  height: 100%;
+  width: 100%; }
+
+h1.start--text {
+  margin-top: 50px;
+  margin-bottom: 25px; }
+
+#game__start__container {
+  text-align: center;
+  width: 100%; }
+  #game__start__container .start__button__container {
+    display: block;
+    margin-bottom: 25px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%; }
+    #game__start__container .start__button__container .button .icon:before,
+    #game__start__container .start__button__container .button.icon:before,
+    #game__start__container .start__button__container .button.icon-left:before,
+    #game__start__container .start__button__container .button.icon-right:before {
+      margin-right: auto;
+      margin-left: auto;
+      padding: 0 0 1px 0;
+      vertical-align: inherit;
+      font-size: 55px;
+      line-height: 125px;
+      pointer-events: none; }
+    #game__start__container .start__button__container .start--text {
+      vertical-align: middle;
+      text-align: center;
+      margin-top: 25px; }
+    #game__start__container .start__button__container .start--button {
+      margin-right: auto;
+      margin-left: auto;
+      vertical-align: middle;
+      text-align: center;
+      width: 150px;
+      height: 150px; }
+
+#game__over__container {
+  background-color: #333;
+  text-align: center;
+  width: 100%; }
+  #game__over__container h1 {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #fc0; }
+  #game__over__container h2 {
+    margin-top: 20px;
+    margin-bottom: 25px; }
+  #game__over__container i {
     text-align: center;
-    width: 200px;
-    height: 200px; }
+    margin-right: auto;
+    margin-left: auto; }
+  #game__over__container .icon-reset-game {
+    font-size: 80px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto; }
 
 h1.td-title {
   font-family: "Shadows Into Light Two", cursive;

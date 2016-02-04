@@ -133,6 +133,15 @@ angular
           }
         }
       })
+            .state('tab.splash-screen', {
+        url: '/splash-screen',
+        views: {
+          'tab-splash-screen': {
+            cache: false,
+            templateUrl: 'templates/splash-screen/splash-screen.html'
+          }
+        }
+      })
       .state('tab.main-menu', {
         url: '/main-menu',
         views: {
