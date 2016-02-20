@@ -160,7 +160,7 @@ angular
           views: {
             'tab-game': {
               cache: false,
-              templateUrl: 'templates/game/game.html',
+              templateUrl: 'templates/game.html',
               controller: 'GameController',
               controllerAs: 'game'
             }

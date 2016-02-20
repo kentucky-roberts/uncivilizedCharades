@@ -1,11 +1,9 @@
 <div class="modal">
-     <ion-header-bar class="bar bar-header bar-success">
-        <h1 class="title balanced">Success!</h1>
-     </ion-header-bar>
+
     <ion-content class="bg-success">
         <div class="row">
             <div class="col">
-                <h3 class="success--title"> <i class="ion-thumbsup bigIcon" style="font-size: 50px;"></i> Well Done <strong>{{activePlayer.name}}!</strong></h3>
+                <h3 class="success--title"> Well Done <strong>{{activePlayer.name || game.activeTeam }}!</strong></h3>
                 <br>
 
 
@@ -13,7 +11,7 @@
                 <p>Click button below to continue</p>
                 <br>
                 <br>
-                <button class="button button-light button-large button-outline icon ion-checkmark pull--right text--white" ng-click="addPointToActiveTeam();closeModal();nextStep();"> Continue</button>
+                <button class="button button-balanced icon ion-checkmark text--white" ng-click="addPointToActiveTeam();closeModal();nextStep();"> </button>
 
 
             </div>

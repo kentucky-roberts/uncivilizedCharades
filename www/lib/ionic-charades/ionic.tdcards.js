@@ -129,7 +129,7 @@
     doubleTap: function() {
       this.doubleTap();
     },
-    
+
     /**
      * Snap the card back to its original position
      */
@@ -159,22 +159,22 @@
       }
 
       self.onTransitionOut(
-        isGestureSwipe 
+        isGestureSwipe
           ? self.thresholdAmount : swipeRight
-          ? self.thresholdAmount : swipeUp 
+          ? self.thresholdAmount : swipeUp
           ? 0.5 : -0.5
 
            );
 
       var angle, targetX, targetY, velocityX, rotateTo;
-      
+
       if(swipeRight) {
         targetX = (this.parentWidth / 2) + (this.width);
-      } 
+      }
 
       if(swipeUp) {
         targetY = (this.parentHeight / 2) + (this.height);
-      } 
+      }
 
       else {
         targetX = (this.parentWidth + this.width);
@@ -195,7 +195,7 @@
       }
 
       var duration = 0.3 - Math.min(Math.max(Math.abs(velocityX)/10, 0.05), 0.2);
-      
+
       ionic.requestAnimationFrame(function() {
         self.el.style.transform = self.el.style.webkitTransform = 'translate3d(' + targetX + 'px, ' + targetY + 'px,0) rotate(' + rotateTo + 'rad)';
         self.el.style.transition = self.el.style.webkitTransition = 'all ' + duration + 's ease-in-out';
@@ -262,9 +262,9 @@
       var point = window.innerWidth / 2 + this.rotationDirection * (width / 2)
       var distance = Math.abs(point - e.gesture.touches[0].pageX);
       console.log("distance: " + distance);
-      
+
       this.touchDistance = distance * 10;
-      //console.log("touchDistance:  " + touchDistance);      
+      //console.log("touchDistance:  " + touchDistance);
 
     },
 
@@ -285,8 +285,8 @@
 
       // if (this.y / (this.parentHeight/2) {
       //   this.thresholdAmount = (this.y / (this.parentHeight/2) );
-      // }   
-      
+      // }
+
       this.thresholdAmount = (this.x / (this.parentWidth/2) );
       this.thresholdAmountY = (this.y / (this.parentHeight/2) );
 
@@ -297,9 +297,9 @@ console.log("thresholdAmountY: " + thresholdAmountY);
       var self = this;
       setTimeout(function() {
         self.onPartialSwipe(self.thresholdAmount);
-        
+
           console.log(self.thresholdAmount);
-      
+
       });
     },
     _doDragEnd: function(e) {
@@ -339,7 +339,7 @@ console.log("thresholdAmountY: " + thresholdAmountY);
         onSwipeLeft: '&',
         onSwipeRight: '&',
         onSwipeUp: '&',
-        
+
         onTransitionLeft: '&',
         onTransitionRight: '&',
         onTransitionUp: '&',
@@ -355,7 +355,7 @@ console.log("thresholdAmountY: " + thresholdAmountY);
           var el = $element[0];
           var leftText = el.querySelector('.no-text');
           var rightText = el.querySelector('.yes-text');
-          
+
           // Force hardware acceleration for animation - better performance on first touch
           el.style.transform = el.style.webkitTransform = 'translate3d(0px, 0px, 0px)';
 
@@ -534,7 +534,7 @@ console.log("thresholdAmountY: " + thresholdAmountY);
       //       if(!card) continue;
       //       if(i > 0) {
       //         card.style.transform = card.style.webkitTransform = 'translate3d(0, ' + (i * 4) + 'px, 0)';
-   
+
       //       }
       //       card.style.zIndex = (existingCards.length - i);
       //     }

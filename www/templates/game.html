@@ -1,28 +1,26 @@
 <ion-view view-title="" name="game-view">
 
+    <ion-pane  id="game__welcome" class="my-slide-animation" ng-if="game.welcome && !game.preflight && !game.started && !game.over">
+              <div ng-include="'templates/game2/game.welcome.html'"></div>
+    </ion-pane>
 
-      <ion-pane  id="game__preflight" class="my-slide-animation" ng-if="game.preflight && !game.started && !game.over">
-              <h1>Preflight</h1>
-                <!-- <div ng-include="'templates/game/preflight.game.html'"></div> -->
-              <button class="button button-stable button-outline button block" ng-click="gameWithPlayers();">Game With Players</button>
-              <button class="button button-stable button-outline button-block" ng-click="gameWithTeams();">Game With Teams</button>
-              <button class="button button-stable button-outline button-block" ng-click="startQuickStart();">Game With Teams</button>
+
+      <ion-pane  id="game__preflight" class="my-slide-animation" ng-if="!game.welcome && game.preflight && !game.started && !game.over">
+              <div ng-include="'templates/game2/game.preflight.html'"></div>
       </ion-pane>
 
-
-
-      <ion-pane  id="game" class="my-slide-animation" ng-if="game.quickStart && !game.preflight && !game.started && !game.game-over">
+      <ion-pane  id="game__quickStart" class="my-slide-animation" ng-if="!game.welcome && game.quickStart && !game.preflight && !game.started && !game.game-over">
             <!--   <h1>Game</h1> -->
               <div ng-include="'templates/game2/game.quick-start.html'"></div>
       </ion-pane>
 
-      <ion-pane  id="game" class="my-slide-animation" ng-if="!game.preflight && game.started && !game.game-over">
+      <ion-pane  id="game" class="my-slide-animation" ng-if="!game.welcome && !game.preflight && game.started && !game.game-over">
             <!--   <h1>Game</h1> -->
               <div ng-include="'templates/game2/game.html'"></div>
       </ion-pane>
 
 
-      <ion-pane  id="game" class="my-slide-animation" ng-if="!game.preflight && game.started && game.game-over">
+      <ion-pane  id="game__over" class="my-slide-animation" ng-if="!game.welcome && !game.preflight && game.started && game.game-over">
               <h1>Game Over</h1>
               <div ng-include="'templates/game2/game-over.html'"></div>
       </ion-pane>

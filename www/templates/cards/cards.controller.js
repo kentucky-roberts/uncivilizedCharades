@@ -4,7 +4,7 @@ angular
 
 CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicTabsDelegate', 'ionicToast', 'ngAudio', 'CardService', 'CountdownService', 'ModalService'];
 
-function CardsController($scope, $rootScope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, ionicToast, ngAudio, CardService, CountdownService, ModalService) {
+	function CardsController($scope, $rootScope, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, ionicToast, ngAudio, CardService, CountdownService, ModalService) {
 
   	var cardTypes = CardService.all();
   	var threeCards = CardService.threeCards();
@@ -47,9 +47,10 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	};
 
 	$scope.cardSwipedUp = function(index) {
-	    //console.log('UP SWIPE');
+	    console.log('UP SWIPE');
 	    $scope.activateCard(index);
 	    $scope.newCountdown();
+	    $scope.cardsVisible = false;
 	    // $scope.showCountdown =  function() {
 	    // 	  CountdownService.setTrueTag();
 	    // }
@@ -57,6 +58,10 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	    //$("td-card").addClass("hidden");
 	};
 
+
+	$scope.onDoubleTap = function () {
+		$scope.cardsVisible = true;
+	};
 
 	$scope.noPoint = function() {
 		$scope.deActivateCard();
@@ -71,14 +76,13 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	  // };
 
 	$scope.cardSwipedLeft = function(index) {
-
-	    //$scope.addCard();
+	    $scope.addCard();
 	    $scope.cardDestroyed(index);
 	};
 
 	$scope.cardSwipedRight = function(index) {
-	    //console.log('RIGHT SWIPE');
-	    // $scope.addCard();
+	    console.log('RIGHT SWIPE');
+	    $scope.addCard();
 	    $scope.cardDestroyed(index);
 	};
 
@@ -88,24 +92,22 @@ function CardsController($scope, $rootScope, $window, $interval, $timeout, $ioni
 	    $scope.cards.activeCard.push(angular.extend({}, index));
 	    console.log($scope.cards.activeCard);
 	    $("td-card").addClass("hidden");
-	    var activeCard = CardService.activeCard(index);
+
+	    		var activeCard = CardService.activeCard(index);
 
 		CountdownService.setFalseTag();
 	    console.log(activeCard);
 	};
 
 
-
-
-
 	$scope.deActivateCard = function(index) {
 	    $scope.cards.activeCard.splice(index, 1);
-	    $scope.cardDestroyed(index);
+	    		$scope.cardDestroyed(index);
 	    console.log($scope.cards.activeCard);
 	};
 
 	$scope.$on('removeCard', function(event, element, card) {
 	    var discarded = $scope.cards.master.splice($scope.cards.master.indexOf(card), 1);
-	    $scope.cards.discards.push(discarded);
+	    		$scope.cards.discards.push(discarded);
 	});
 };

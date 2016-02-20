@@ -3,18 +3,20 @@
         <ion-header-bar class="bar bar-header bar-dark">
             <h1 class="title">Steal Point</h1>
         </ion-header-bar>
-        <ion-content class="padding bg-brand-dark">
+        <ion-content class="padding brand-bg">
 
             <h1 class="text--start">Your team has 1 guess to correctly guess the other team's secret phrase</h1>
             <h3>Take your time, click the button below after you've officially gussed to see the secret phrase</h3>
 
-             <td-cards>
-                <td-card class="card card--back"></td-card>
-            </td-cards>
+
+                <td-card class="card  {{(secretPhraseVisible == true) ? 'card-back' : 'card-face' }}">
+                        <h1 class="td-title">{{cards.activeCard.phrase}}</h1>
+                </td-card>
+
 
             <button class="button button-energized button-large  center--block" ng-click="showSecretPhrase()">Show Secret Phrase</button>
 
-            <div ng-if="showSecretPhrase">
+            <div ng-if="secretPhraseVisible">
                     <button class="button button  button-dark button-outline " ng-click="guessedCorrect();addPointToActiveTeam();closeModal();nextStep();">Guessed Correct</button>
                     <button class="button button  button-dark button-outline " ng-click="guessedWrong();addPointToActiveTeam();closeModal();nextStep();">Guessed Wrongt</button>
             </div>

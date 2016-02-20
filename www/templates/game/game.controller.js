@@ -86,16 +86,14 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             game.players = [];
             game.teams = [];
 
-            game.cardsVisible = false;
-
             game.activeTeam = "Team1";
             game.nextActiveTeam = "Team2";
             game.activeTeamColor = "yellow-text";
             game.winningTeamName = "FreeAgent";
 
 
-
             game.canDeal = false;
+            game.cardsVisible = false;
 
             $scope.gamePreflight= false;
             $scope.gameStarted = false;
@@ -104,6 +102,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             $scope.gameSlideActive  = true;
             $scope.gameHasPlayers = false;
 
+            game.welcome = true;
             game.quickStart = false;  // KEY TO THE APP START OPTIONS
             game.preflight  = false;
             game.started  = false;
@@ -126,29 +125,32 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
 
         $scope.gameWithPlayers = function() { // game with players
-             $scope.gameHasPlayers = true;
+            $scope.gameHasPlayers = true;
             $scope.gameType = true; // we have chosen a gameType no longer need to see the option buttons
-            $scope.startPreflight(); // this is where we build players, select teams for game.  screen has startGame() button to begin actual game
-        };
 
-        $scope.startPreflight = function() {
+            game.welcome = false;
             game.quickStart = false;
             game.preflight  = true;
             game.started  = false;
             game.over  = false;
+            $scope.initPreflight();
         };
+
 
         $scope.gameWithTeams = function() { // game without players
             $scope.gameHasPlayers = false;
             $scope.gameType = true; // we have chosen a gameType no longer need to see the option buttons
             $scope.editTeamNames = true;
 
+            game.welcome = false;
             game.preflight  = false;
             game.quickStart = true;
             game.started  = false;
             game.over  = false;
             $scope.initQuickStart();
         };
+
+
 
 
 
@@ -160,19 +162,39 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
           name: "Badguys"
       };
 
-      $scope.updateTeamNames = function(teams) {
-          var teams = teams;
-          // todo...
+
+      $scope.updateTeamNames = function() {
+
+              // var team1 = $scope.team1;
+              // var team2 = $scope.team2;
+
+              // game.teams = {
+              //       team1: team1,
+              //       team2: team2,
+              //       activeTeam: []
+              // };
+
+              // todo...
       };
 
+      $scope.initPreflight = function () {
 
+            $scope.gameHasPlayers = true;
+            game.welcome = false;
+            game.preflight  =  true; // init
+            game.started  = false;
+            game.over  = false;
+            game.quickStart = false;
 
-        $scope.initQuickStart = function() {
+      };
 
+      $scope.initQuickStart = function() {
+
+            game.welcome = false;
             game.preflight  = false;
             game.started  = false;
             game.over  = false;
-            game.quickStart = true;
+            game.quickStart = true; // init
 
 
             //$scope.gameTeamsOnly = true; // displays view to customize team names with ng-click="startQuickStart()" to start game w/out players passing ->  var players = "teamsOnly"; to  ->  $scope.startGame(players)
@@ -186,19 +208,19 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
         $scope.startQuickStart = function(teams) { // game without players  tab='tab-game-withTeams'
             var teams = this.teams;
             console.log("start Quick Start");
+            game.welcome = false;
             game.preflight  = false;
-            game.started  = true;
+            game.started  = true; /// init
             game.over  = false;
-            game.quickStart = true;
-
+            game.quickStart = false;
 
             $scope.gameHasPlayers = false;
             $scope.gameType = true; // we have chosen a gameType no longer need to see the option buttons
             $scope.editTeamNames = false;
 
-            $scope.gameStarted = true;
+            $scope.welcome = false;
             $scope.mainMenu = false;
-            $scope.quickStart = true
+            $scope.quickStart = false;
             $scope.gameStarted = true; // init
             $scope.gamePreflight = false;
             $scope.gameOver = false;
@@ -213,6 +235,8 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
         //  Start Game!!
         ////////////////////////////////////////
         $scope.startGame = function( players) {
+
+
 
           var p = players;
             console.log("players:  " + p);
@@ -431,6 +455,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
       };
 
       $scope.showStealPoint = function() {
+        $scope.secretPhraseVisible = false;
           ModalService
               .init('templates/modals/steal-point.html')
               .then(function(modal) {
@@ -438,8 +463,14 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
               });
       };
 
+
+      $scope.showSecretPhrase = function () {
+        $scope.secretPhraseVisible = true;
+      };
+
       $scope.stealPointGuess = function(answer) {
           var answer = answer;
+          $scope.secretPhraseVisible = false;
 
           if (answer == true) {
             console.log("guessedCorrect");
@@ -618,33 +649,53 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
       };
 
+      game.initLoop = function() {
+          $("#dealer").removeClass("hidden").addClass("show");
+          $("#dealerDeal").removeClass("hidden").addClass("show");
+      };
+
       game.showDealer = function() {
             game.started = true;
+
             game.canDeal = false;
             game.showResults = false;
+            game.dealerVisible = true;
+
+            came.cardsDealt = false;
+            game.cardsVisible = false;
+
             $("#dealer").removeClass("hidden").addClass("show");
       };
 
       game.hideDealer = function() {
             $("#dealer").removeClass("show").addClass("hidden");
+            $("#dealerDeal").removeClass("show").addClass("hidden");
       };
 
       game.deal = function(){
             game.canDeal = true;
-            game.cardsVisible = false;
+            game.dealerVisible = false;
+            game.cardsDealt = true;
+            game.cardsVisible = true;
+
             $("#dealer").removeClass("show").addClass("hidden");
+            $("#dealerDeal").removeClass("show").addClass("hidden");
             $("#showCards").removeClass("hidden").addClass("show");
       };
 
       game.showCards = function(){
+            game.canDeal = false;
             game.cardsVisible = true;
-           $("#showCards").removeClass("show").addClass("hidden");
+            game.cardsDealt = true;
+
+            $("#showCards").removeClass("show").addClass("hidden");
             $("#activateCard").removeClass("hidden").addClass("show");
       };
 
       game.activateCard = function() {
           game.cardsVisible = false;
           game.canDeal = false;
+          game.cardsDealt = false;
           $("#activateCard").removeClass("show").addClass("hidden");
           $("#showCountdown").removeClass("hidden").addClass("show");
          game.showCountdown();
@@ -658,6 +709,11 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
           $scope.selectTimer(2);
           // game.readyNextTurn() will go to: game.awardPoint or game.noPoint, both of which call game.readyNextTurn() which restarts loop
       };
+
+      game.initLoop();
+
+
+
 
 
       game.noPoint = function() {
@@ -730,6 +786,9 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
   game.stealPoint = function(team) {
     alert("game.stealPoint() called from GameController yo!");
+
+
+
   };
 
   game.makeTeams = function() {

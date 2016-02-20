@@ -102,6 +102,10 @@ h2.body-title {
         box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
 }
 
+.brand-bg {
+  background-color:  $brand-bg;
+}
+
 .center--block {
       margin-left: auto;
       margin-right: auto;
@@ -509,44 +513,45 @@ i.icon-next {
     h1 { color: #fff; text-align: center; margin: 15px auto; }
 
 }
-#game__container--cards, td-cards {
+
+ td-cards {
     display: block;
     position: relative;
     bottom: 25%;
     right: 0%;
     left: 0%;
-    width: 100%;
-    height: 50%;
+    width: 300px;
+    height:  180px;
     border-radius: 0;
 
     td-card {
       display: block;
       position: absolute;
       top: 15%;
-      width: 128px;
+      width: 300px;
       height:  180px;
       border: 1px solid #999;
      box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
       border-radius: 6px;
     }
 
-    .card-0 {
-        left: 10%;
-        display: block;
-        z-index: 30;
-    }
+    // .card-0 {
+    //     left: 10%;
+    //     display: block;
+    //     z-index: 30;
+    // }
 
-    .card-1 {
-        left: 35%;
-        display: block;
-        z-index: 20;
-    }
+    // .card-1 {
+    //     left: 35%;
+    //     display: block;
+    //     z-index: 20;
+    // }
 
-    .card-2 {
-        left: 55%;
-        display: block;
-        z-index: 10;
-    }
+    // .card-2 {
+    //     left: 55%;
+    //     display: block;
+    //     z-index: 10;
+    // }
 
 }
 
@@ -1197,12 +1202,17 @@ h1.td-title {
     border: 1px solid white;
 }
 
-/*progress time text on middle of circle*/
-.progress-wrapper{
-    margin:50px auto;
+ion-header-bar {
+  border: none!important;
 }
 
-.progress{
+/*progress time text on middle of circle*/
+.progress-wrapper {
+    margin:50px auto;
+    background-color:  #brand-color-dark;
+}
+
+.progress {
     position: fixed;
       left: 50%;
       top: 50%;
@@ -1211,9 +1221,10 @@ h1.td-title {
       margin-left: -300px;
       margin-top: -300px;
     line-height: 9em;
-//    font-size:2em;
+    font-size: 60px;
     text-align: center;
     font-weight: 100;
+    color: $brand-yellow;
 }
 
 code {

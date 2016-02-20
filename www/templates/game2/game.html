@@ -18,16 +18,39 @@
             <!-- Active Team Info if no Players -->
             <div class="item" ng-if="!gameHasPlayers">
                 <h2>Active Team</h2>
-                <h1>{{game.activeTeam.name}}</h1>
+                <h1>{{game.activeTeam}}</h1>
             </div>
 
-            <div class="{{(game.canDeal === true) ? 'show' : 'hidden'}} ">
-              <td-cards>
-                <td-card class="card card-0  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
-                <td-card class="card card-1  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
-                <td-card class="card card-2  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
-              </td-cards>
-            </div>
+
+        <div class="fixed__outside--center">
+              <button id="dealerDeal" class="show deal-cards button button-energized button-large" ng-click="game.deal()">Deal Cards</button>
+        </div>
+
+
+        <td-cards ng-if="game.cardsVisible">
+            <td-card class="card card-{{$index}}  {{ (game.cardsVisible === true) ? 'card-back' : 'card-face' }}">
+                    <article class="phrase">
+                      <h1 class="td-title">{{game.activePhrase}}</h1>
+                    </article>
+                    <button  ng-click="activateCard($index)" class="button button-calm button-outline button-small">Select this Card!</button>
+             </td-card>
+
+             <td-card class="card card-{{$index}}  {{ (game.cardsVisible === true) ? 'card-back' : 'card-face' }}">
+                    <article class="phrase">
+                      <h1 class="td-title"></h1>
+                    </article>
+                    <button  ng-click="activateCard($index)" class="button button-calm button-outline button-small">Select this Card!</button>
+             </td-card>
+
+             <td-card class="card card-{{$index}}  {{ (game.cardsVisible === true) ? 'card-back' : 'card-face' }}">
+                    <article class="phrase">
+                      <h1 class="td-title"></h1>
+                    </article>
+                    <button  ng-click="activateCard($index)" class="button button-calm button-outline button-small">Select this Card!</button>
+             </td-card>
+        </td-cards>
+
+
 
 
     <button class="hidden button button-large" ng-click="nextStep();">Next Step</button>
@@ -55,11 +78,11 @@
                        <div class="col">
                           <div id="dealer" class="show">
                               <h3 class="instruction-test">Push button to deal cards</h3>
-                              <button class="deal-cards button button-energized button-large" ng-click="game.deal()">Deal Cards</button>
+                              <!-- <button class="deal-cards button button-energized button-large" ng-click="game.deal();deal();">Deal Cards</button> -->
                           </div>
                           <div id="showCards" class="hidden">
                               <h3 class="instruction-test">Push button to show cards</h3>
-                              <button class="button button-energized button-large" ng-click="game.showCards()">Show Cards</button>
+                              <button class="button button-energized button-large" ng-click="game.showCards();">Show Cards</button>
                           </div>
                           <div id="activateCard" class="hidden">
                               <h3 class="instruction-test">Choose one of the three phrases above to act out</h3>
