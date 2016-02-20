@@ -22,10 +22,10 @@ body {
     padding-top:0;
     cursor: move;//
     background-color: transparent;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    /* margin: 0 auto; */
+    border-radius: 100%;
     border: 2px solid #aaa;//
     background-size: cover;
 }
@@ -86,7 +86,7 @@ ul.draggable-objects:after {
 
 ul.draggable-objects {
     padding: 25px auto;
-    margin: 15px auto;
+    margin: 60px auto;
     height: 100%;
     min-height: 400px;
     width: 4px;
@@ -99,14 +99,16 @@ ul.draggable-objects {
     display: block;
     width: 75px;
     height: 75px;
-    margin-bottom: 5px;
-    margin-left: -50px;
+    margin-bottom: 35px;
+    margin-top: 10px;
+    margin-left: -35px;
     position: relative;
     z-index: 10;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
     z-index: 3;
+    background-position: cover;
     background-image: url("../img/player-images/avatar.jpg");
 }
 

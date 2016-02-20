@@ -1,28 +1,8 @@
-<ion-content  ng-if="!game.started">
-       <h3 class="text--center">
-            Click to customize <strong> team names</strong>,<br> or start new game.
-      </h3>
-      <div class="fixed__outside--center">
-          <div class="row">
-              <div class="col">
-                  <h2><a href="#" ng-model="team.name" editable-text="team.name">{{ team1.name || 'empty' }}</a></h2></div>
-              <div class="col">
-                  <h2><a href="#" ng-model="team.name" editable-text="team.name">{{ team2.name || 'empty' }}</a></h2></div>
-          </div>
-          <div class="row">
-              <div class="col">
-                  <p class="lead text--red text--center text--start">Quick Start</p>
-                  <button class="button button-energized button-fab button-outline icon ion-power" ng-click="startQuickStart(team);"></button>
-              </div>
-          </div>
-      </div>
-</ion-content>
-
-<ion-content class="{{teamCss}}" ng-if="game.started">
+<ion-content class="{{teamCss}}" >
     <div class="game__slide  {{teamCss}} slide-right-to-left" ng-if="gameSlideActive">
 
             <!-- Active Player Info -->
-            <div id="game__with___players" class="hidden testimonial item">
+            <div class="testimonial item" ng-if="gameHasPlayers">
                 <div class="author">
                     <div class="testimonial-image "><img src="img/player-images/avatar.jpg"></div>
                     <div class="testimonial-author-info">
@@ -33,21 +13,13 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- Active Team Info if no Players -->
-            <div class="item" id="game__with__teams">
-                <h2 class="active-team">Active Team</h2>
-<!--                     <img src="img/arrow-images/downLeft--white.png" class="arrow arrow--small">
-                <img src="img/arrow-images/upRight--white.png" class="arrow text--center">
-                <img src="img/arrow-images/downRight--white.png" class="arrow">
-                <img src="img/arrow-images/upLeft--white.png" class="arrow"> -->
-
-
-                <h1>{{game.activeTeam || 'Active Team Name'}}</h1>
+            <div class="item" ng-if="!gameHasPlayers">
+                <h2>Active Team</h2>
+                <h1>{{game.activeTeam.name}}</h1>
             </div>
 
-            <div class="{{(game.canDeal == true ) ? 'show' : 'hidden'}} ">
+            <div class="{{(game.canDeal === true) ? 'show' : 'hidden'}} ">
               <td-cards>
                 <td-card class="card card-0  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
                 <td-card class="card card-1  {{(game.cardsVisible === false) ? 'card-back' : 'card-face' }} "></td-card>
@@ -71,7 +43,7 @@
                           </div>
                         </div>
                       <div class="col">
-                        <div id="team2__score" class="text--center {{(game.activeTeam == game.teams[1] ) ? 'text--yellow' : 'text--white'}}">
+                        <div id="team2__score" class="text--center">
                           Team2:
                            <strong>{{team2Score}}</strong>
                         </div>
@@ -108,3 +80,8 @@
       </div>
   </ion-content>
 </ion-view>
+
+
+
+
+

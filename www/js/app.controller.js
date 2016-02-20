@@ -10,7 +10,7 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 	}; $scope.showLoading();
 
 	var app = this;
-	var game = this;
+	// var game = this;
 
 
 
@@ -22,28 +22,91 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 	//$state.go("tab.teams");
 
 
+	$scope.showLoadGameButton = false;  // main-menu buttons will appear when true
+      $scope.showSavedGame = false;  // main-menu buttons will appear when true
+      $scope.showSavedGames = false; //main-menu button appear when true -> list a users saved games to Load.
+
+
+
 	$scope.initApp = function() {
 		$scope.gameStarted = false;
-		gameSlideActive  = false;
-		$scope.slides = [];
+		//gameSlideActive  = false;
+		//$scope.slides = [];
           	$scope.activeQuestion = 0;
           	$scope.welcomeUser();
-          	app.team1Score = 0;
-          	app.team2Score = 0;
+          	$scope.needsPlayers = true;
+          	// app.team1Score = 0;
+          	// app.team2Score = 0;
 
-          	$scope.team1Score = 0;
-          	$scope.team2Score = 0;
+          	// $scope.team1Score = 0;
+          	// $scope.team2Score = 0;
 
-          	$state.go('tab.splash-screen');
-          	$scope.showSplashScreen = function() {
-		    $timeout(function() {
-		    	 $state.go('tab.main-menu');
-		    }, 5000);
-		};
-		$scope.showSplashScreen();
+             $scope.gameHasPlayers = false;
+		$scope.appStarted = false;
+		$scope.mainMenu = false;
+		$scope.quickStart = false;
+		$scope.gameStarted = false;
+		$scope.gamePreflight= false;
+		$scope.gameOver = false;
 
 
+  //         	$state.go('tab.splash-screen');
+  //         	$scope.showSplashScreen = function() {
+		//     $timeout(function() {
+		//     	 $state.go('tab.splash-screen');
+		//     }, 5000);
+		// };
+		// $scope.showSplashScreen();
 	};
+
+
+
+        //////////////////////////////////////
+       //  Start Pre-Game!!
+        //////////////////////////////////////
+        $scope.startApp = function() {
+            $scope.appStarted = true; // init
+            $scope.mainMenu = true;
+            $scope.quickStart = false;
+            $scope.gameStarted = false;
+            $scope.gamePreflight = false;
+            $scope.gameOver = false;
+
+
+        };
+
+
+
+        $scope.gameWithPlayers = function() { // game with players
+            $scope.gameHasPlayers = true;
+            $scope.gameType = true; // we have chosen a gameType no longer need to see the option buttons
+            $scope.startPreflight(); // this is where we build players, select teams for game.  screen has startGame() button to begin actual game
+        };
+
+        $scope.startPreflight = function() {
+            $scope.gamePreflight = false;
+
+            // game.quickStart = false;
+            // game.preflight  = true;
+            // game.started  = false;
+            // game.over  = false;
+        };
+
+        $scope.gameWithTeams = function() { // game without players
+            $scope.gameHasPlayers = false;
+            $scope.gameType = true; // we have chosen a gameType no longer need to see the option buttons
+            $scope.editTeamNames = true;
+
+            // game.preflight  = false;
+            // game.quickStart = true;
+            // game.started  = false;
+            // game.over  = false;
+            $scope.initQuickStart();
+        };
+
+
+
+
 
 
 		$scope.welcomeUser = function() {
@@ -63,196 +126,51 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 	    };
 
 
+	// $scope.startGameTeamsOnly function () {
+	// 	var players =
+	// 	    $http.get('api/players.json').then(function(playerData) {
+	// 	        app.players = playerData.data;
+	// 	        console.log(app.players[0]);
+	// 	        app.totalPlayers = app.players.length;
+	// 	    });
+	// 	$scope.players = players;
+	// };
 
 
-////////////////////////////////////////
-//  players  replace during production
-////////////////////////////////////////
-var players =
-    $http.get('api/players.json').then(function(playerData) {
-        app.players = playerData.data;
-        console.log(app.players[0]);
-        app.totalPlayers = app.players.length;
-    });
 
-$scope.players = players;
 
-	////////////////////////////////////////
-	//  card_types
-	////////////////////////////////////////
-	var p =
-	    $http.get('api/card_types.json').then(function(phraseData) {
-	        app.phrases = phraseData.data;
-	        console.log(app.phrases[0]);
-	        app.totalPhrases = app.phrases.length;
-	    });
 
-	$scope.phrases = p;
-
-	////////////////////////////////////////
-	//  Start Game!!
-	////////////////////////////////////////
-	$scope.startGame = function() {
-	    console.log("Start Game!");
-	    $scope.gameStarted = true;
-	    $scope.gameSlideActive = true;
-	    app.step = 0;
-	    app.playerCount = 0;
-	    $scope.step = app.step;
-	    //$scope.activeQuestion = app.questions[app.step].question;
-
-	    $scope.activePhrase = app.phrases[app.step].phrase;
-	    $scope.activePlayer = app.players[app.playerCount];
-
-	    $scope.selectActiveTeam();
+	$scope.saveGame = function() {
+		console.log("saveGame!");
 	};
 
-	$scope.endGame = function() {
-		$scope.gameOver = true;
-	};
+      ////////////////////////////////////////
+      // ModalService
+      ////////////////////////////////////////
 
-	$scope.nextStep = function() {
-	    console.log("Next Step called ... ");
+	$scope.showLogin = function() {
+          ModalService
+              .init('templates/modals/login-user.html')
+              .then(function(modal) {
+                  modal.show();
+              });
+      };
 
-	    var maxPlayers = app.players.length;
-	    if (app.playerCount === maxPlayers) {
-	    		app.playerCount = 0;
-	    }
-
-	    app.step += 1;
-	    app.playerCount += 1;
-	    $scope.step = app.step;
-	    //$scope.activeQuestion = app.questions[app.step].question;
-
-
-
-	    $scope.activePlayer = app.players[app.playerCount];
-	    $scope.activePhrase = app.phrases[app.step].phrase;
-	   // $("animated ").addClass("bounceOutUp");
-
-	   $scope.selectActiveTeam();  //  Also controlling  //  $scope.gameSlideActive = false || true
-
-	};
-
-	$scope.lastStep = function() {
-	      app.step -= 1;
-	      $scope.step = app.step;
-	      app.playerCount -= 1;
-	      //$scope.activeQuestion = app.questions[app.step].question;
-	       $scope.activePlayer = app.players[app.step];
-	      $scope.activePhrase = app.phrases[app.step].phrase;
-	};
-
-	$scope.firstStep = function() {
-	    app.step = 1;
-	    app.playerCount = 0;
-	    $scope.step = app.step;
-	};
-
-	$scope.resetGame = function() {
-	    app.step = 0;
-	    app.playerCount = 0;
-	    $scope.gameStarted = false;
-	    $scope.gameOver = false;
-	    $scope.step = app.step;
-	    //$scope.activeQuestion = 0;
-	    $scope.activePhrase = 0;
-	    $scope.activePlayer = 0;
-	    $scope.team1Score = 0;
-	    $scope.team2Score = 0;
-	    $scope.winningTeam = null;
-	    $scope.teamColor = null;
-	    $scope.teamCss = null;
-	};
-
-
-	$scope.addPointToActiveTeam = function() {
-
-	    if (app.step % 2 == 0 && app.step != 1) {
-
-	        $scope.activeTeam = "Team1";
-	        $scope.team1Score += 1;
-	        $scope.teamColor = "positive";
-
-	  	   if ($scope.team1Score === 10 ) {
-		    	$scope.gameStarted = false;
-		    	$scope.gameOver = true;
-		    	$scope.winningTeam = "Team2";
-		   }
-	        return;
-
-	    } else {
-	        $scope.activeTeam = "Team2";
-	        $scope.team2Score += 1;
-		  $scope.teamColor = "assertive";
-
-		  if ($scope.team2Score === 10 ) {
-		    	$scope.gameStarted = false;
-		    	$scope.gameOver = true;
-		    	$scope.winningTeam = "Team2"
-		  }
-	        return;
-	    }
-	};
-
-
-	$scope.selectActiveTeam = function() {
-
-	    if (app.step % 2 == 0 && app.step != 1) {
-
-	        app.activeTeam = "Team1";
-	        console.log(app.activeTeam);
-	        $scope.gameSlideActive = false;
-
-		$scope.swapSlides = function() {
-		    $timeout(function() {
-		    	 $scope.teamColor = "positive";
-	        	$scope.teamCss = "bg-team1";
-		        $scope.gameSlideActive = true;
-		    }, 300);
-		};
-		$scope.swapSlides();
-
-
-	        return;
-
-	    } else {
-	        app.activeTeam = "Team2";
-	        console.log(app.activeTeam);
-	        $scope.gameSlideActive = false;
-
-	        $scope.swapSlides = function() {
-		    $timeout(function() {
-		    	 $scope.teamColor = "assertive";
-	        	 $scope.teamCss = "bg-team2";
-		       $scope.gameSlideActive = true;
-		    }, 300);
-		};
-		$scope.swapSlides();
-	        return;
-	    }
-
-	};
-
-
-$scope.activateGameSlide = function() {
-	$scope.gameSlideActive = true;
-};
-
-
-$scope.unActivateGameSlide = function() {
-	$scope.gameSlideActive = false;
-};
-
-
+      $scope.showNewGame = function() {
+          ModalService
+              .init('templates/modals/new-game.html', $scope)
+              .then(function(modal) {
+                  modal.show();
+              });
+      };
 
 
 
 	//  FYI  $state.reload()  is the shorthand way to do the following...
 	//
-	// 	$state.transitionTo($state.current, $stateParams, {
-	//       reload: true, inherit: false, notify: false
-	//     });
+		// $state.transitionTo($state.current, $stateParams, {
+	 //      reload: true, inherit: false, notify: false
+	 //    });
 
 	////////////////////////////////////////
 	// Layout Methods
@@ -276,7 +194,7 @@ $scope.unActivateGameSlide = function() {
 	    }
 	};
 
-	$scope.noHeader();
+	//$scope.noHeader();
 
 
 	$scope.initApp();

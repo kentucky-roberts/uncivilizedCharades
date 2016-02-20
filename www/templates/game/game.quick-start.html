@@ -1,0 +1,24 @@
+<div class="bar bar-header bar-transparrent">
+  <h1 class="title"></h1>
+</div>
+
+<h1 class="text--start ">
+    Quick Start
+</h1>
+<h3 class="text--center">
+      Click to customize <strong> team names</strong>,<br> or start new game.
+</h3>
+<div class="fixed__outside--center">
+    <div class="row">
+        <div class="col">
+            <h2><a href="#" editable-text="team.name">{{ team1.name || 'empty' }}</a></h2></div>
+        <div class="col">
+            <h2><a href="#" editable-text="team.name">{{ team2.name || 'empty' }}</a></h2></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p class="lead text--red text--center text--start">Start New Game</p>
+            <button class="button button-energized button-fab button-outline icon ion-power" ng-click="startQuickStart(team);"></button>
+        </div>
+    </div>
+</div>

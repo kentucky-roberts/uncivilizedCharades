@@ -1,29 +1,28 @@
 <div class="modal">
     <ion-header-bar class="bar bar-header bar-error">
-        <button class="button button-icon ion-close close pull--right" ng-click="closeModal()"></button>
+        <button class="hidden button button-icon ion-close close pull--right" ng-click="closeModal()"></button>
     </ion-header-bar>
      <ion-content class="bg-error">
 
              <div class="text-center">
 
-                <h1><i class="ion-alert-circle bigIcon" style="font-size: 60px;"></i> Time Expired!</h1>
-               <h2>Your game is lame, no points for you!</h2>
-                <h3></h3>
+                <h1>Time Expired!</h1>
+               <h3>Your game is lame, no points for you!</h3>
                 <br>
-                <p class="lead text--center">
-                    Hey, Other Team!!
-                </p>
-                <p class="text--center">
-                    Push button below to risk <strong>1 Point</strong> and make a guss at what the secret phrase was.
-                </p>
-                <button class="button button-link button-large  ion-checkmark  pull--left" ng-click="game.stealPoint();closeModal();">Yes, steal point</button>
+                <h3>
+                    The <strong>other team </strong> may risk<br> <strong>1 Point</strong> and try to<br> <strong>guess</strong> at what the <br><strong>secret phrase</strong> was.
+                </h3>
+
+                <p class="text--center">What say you?</p>
 
 
-                <p class="text--center">Or, click button below to continue</p>
+                <br>
 
-                <button class="button button-balanced button-large button-outline icon ion-ios-arrow-right pull--right" ng-click="game.awardPoint();closeModal();"> Continue</button>
+                  <a class="button button-dark button-outline button-block" ng-click="closeModal();showStealPoint();">Steal Point</a>
+                  <a class="button  button-dark button-outline icon icon-right ion-chevron-right" ng-click="closeModal();nextStep();">Continue</a>
+                </div>
 
-            </div>
+
 
 
 

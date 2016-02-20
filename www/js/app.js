@@ -133,12 +133,14 @@ angular
           }
         }
       })
-            .state('tab.splash-screen', {
+      .state('tab.splash-screen', {
         url: '/splash-screen',
         views: {
           'tab-splash-screen': {
             cache: false,
-            templateUrl: 'templates/splash-screen/splash-screen.html'
+            templateUrl: 'templates/splash-screen/splash-screen.html',
+            controller: 'AppController',
+            controllerAs: 'app'
           }
         }
       })
@@ -148,7 +150,8 @@ angular
           'tab-main-menu': {
             cache: false,
             templateUrl: 'templates/main-menu/main-menu.directive.html',
-            controller: 'AppController'
+            controller: 'AppController',
+            controllerAs: 'app'
           }
         }
       })
@@ -157,9 +160,29 @@ angular
           views: {
             'tab-game': {
               cache: false,
-              templateUrl: 'templates/game/game.directive.02.html',
+              templateUrl: 'templates/game/game.html',
               controller: 'GameController',
               controllerAs: 'game'
+            }
+          }
+        })
+        .state('tab.game-withPlayers', {
+          url: '/game-withPlayers',
+          views: {
+            'tab-game-withPlayers': {
+              cache: false,
+              templateUrl: 'templates/game/game-withPlayers.html',
+              controller: 'GameController',
+              controllerAs: 'game'
+            }
+          }
+        })
+        .state('tab.game-withTeams', {
+          url: '/game-withTeams',
+          views: {
+            'tab-game-withTeams': {
+              cache: false,
+              templateUrl: 'templates/game/game-withTeams.html'
             }
           }
         })
@@ -171,16 +194,6 @@ angular
               templateUrl: 'templates/store/store.directive.html',
               controller: 'StoreController',
               controllerAs: 'store'
-            }
-          }
-        })
-
-        .state('tab.card-list', {
-          url: '/card-list',
-          views: {
-            'tab-card-list': {
-              templateUrl: 'templates/card-list.html',
-              controller: 'GameController'
             }
           }
         })
@@ -198,5 +211,5 @@ angular
           }
         });
   // if none of the above states are matched, use this as the fallback
-     $urlRouterProvider.otherwise('/tab/main-menu');
+     $urlRouterProvider.otherwise('/tab/game');
 });

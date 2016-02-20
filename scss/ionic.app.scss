@@ -36,6 +36,11 @@ body {
    background-color: $brand-bg;
    color: $brand-color;
    word-wrap: break-word;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    -o-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal
 
 }
 
@@ -121,6 +126,24 @@ h2.body-title {
       text-align: left;
 }
 
+.arrow__upRight {
+  background-image: url('img/arrow-images/upRight.png');
+  background-size:  cover;
+  height: 100px;
+  width:  53px;
+}
+
+.arrow {
+    height: 80px;
+    width:  45px;
+}
+
+.arrow.arrow--sm {
+    height: 50px;
+    width:  26px;
+}
+
+
 h2 {
     font-family: $brand-font-family-base;
     font-weight: 600;
@@ -137,29 +160,62 @@ h3 {
      text-align: center;
 }
 
+h2.active-team {
+    font-family: $brand-font-family-base;
+    font-weight: 600;
+    color: $brand-yellow;
+    font-size: 28px;
+    text-align: center;
+    margin: 15px auto 0 auto;
+}
+
+
 .em-top-75 {
   margin-top: 75px;
 }
 
 
-.fixed-outside-top {
+.fixed__outside--top {
   position: absolute;
   top: 0;
   color:white;
   width: 100%;
-  height:  120px;
+  height:  200px;
   text-align:center;
  // background-color: pink;
 }
 
-.fixed-outside-bottom {
+.text--pre-title {
+    text-transform: uppercase;
+}
+
+.fixed__outside--center {
+    position: absolute;
+    top: calc(50% - 55px);
+    color: white;
+    width: 100%;
+    min-height:  100px;
+    height: 100%;
+    text-align: center;
+   // background-color: pink;
+    z-index: 10;
+
+
+}
+
+.deal-cards {
+    color: white;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
+}
+
+.fixed__outside--bottom {
   position: absolute;
+  text-align:  center;
   bottom: 0;
   color:white;
   width: 100%;
-  min-height: 100px;
-
-  text-align:center;
+  min-height:  200px;
 
     p {
         margin-bottom: 10px;
@@ -170,7 +226,7 @@ h3 {
     }
 }
 
-.fixed-outside-right {
+.fixed__outside--right {
   position: absolute;
   right: 0;
   color: $brand-color-dark;
@@ -180,7 +236,32 @@ h3 {
  // background-color: red;
 }
 
-.fixed-outside-left {
+.text--yellow {
+  color: $brand-yellow!important;
+}
+
+.text--white {
+  color: white!important;
+}
+
+
+  p.text--pre-title {
+   margin: 45px auto 5px auto;
+    text-align: center;
+  }
+
+  h1.text--start {
+    margin: 0 auto 15px auto;
+    text-align: center;
+  }
+
+  p.text--start {
+    margin: 5px auto 35px auto;
+    text-align: center;
+  }
+
+
+.fixed__outside--left {
   position: absolute;
   left: 0;
   color: $brand-color-dark;
@@ -190,6 +271,13 @@ h3 {
  // background-color: lightcoral;
 }
 
+
+.border__solid--white {
+  padding-top: 6px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border: 1px solid white;
+}
 
 p {
   margin-bottom: 10px;
@@ -255,32 +343,43 @@ p.instruction-text {
   text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
 }
 
-
 span.instruction-text {
   font-family: $brand-font-family-base;
   font-weight: 400;
   font-size: 12px;
   color: white;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
 
   i {
     font-size: 18px;
     color: white;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
   }
 
 
 }
 
+.text__shadow--white {
+  color: white;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0;
+}
 
-h2.success-title {
+h2.success--title {
     font-family: $brand-font-family-base;
     font-weight: 600;
     color: #ffffff;
     font-size: 32px;
     line-height: 36px;
+}
+
+h3.success--title {
+    font-family: $brand-font-family-base;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 50px;
 }
 
 p.success-message {
@@ -318,6 +417,8 @@ h3.player-score {
 ion-slide-box {
   height: 650px;
 }
+
+
 #game__container--top {
     display: block;
     position: absolute;
@@ -624,18 +725,21 @@ img.img--center {
   }
 
   h2 {
-     color: $brand-yellow!important;
+     color: $brand-color-dark!important;
+  }
+  h3 {
+     color: $brand-color-dark!important;
   }
 
   p {
       color: $brand-color-dark!important;
   }
 
-
+    span {
+      color: $brand-color-dark!important;
+  }
 
 }
-
-
 
 .bg-success {
   background-color: $brand-color-success;
@@ -761,7 +865,7 @@ span.color {
 
 
 span.score {
-  font-family: $brand-font-family-base;
+    font-family: $brand-font-family-base;
     font-size: 14px;
     line-height: 15px;
     font-weight: 400;
@@ -1095,9 +1199,7 @@ h1.td-title {
 
 /*progress time text on middle of circle*/
 .progress-wrapper{
-    position: absolute;
     margin:50px auto;
-    font-size: 21px;
 }
 
 .progress{
@@ -1109,7 +1211,7 @@ h1.td-title {
       margin-left: -300px;
       margin-top: -300px;
     line-height: 9em;
-    font-size:2em;
+//    font-size:2em;
     text-align: center;
     font-weight: 100;
 }
@@ -1650,3 +1752,25 @@ h1.td-title {
   z-index: 999;
 }
 
+
+
+
+
+.arrow--upRight {
+  background-color: transparent;
+  background-image: url("www/img/arrow-images/upRight.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-clip: border-box;
+  background-origin: padding-box;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  background-position: center center;
+  background-size: cover;
+}

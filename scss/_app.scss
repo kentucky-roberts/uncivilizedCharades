@@ -17,13 +17,14 @@ $google-red:                   	#d34836 !default;
 
 
 //
-//   Set Custom Brand 
+//   Set Custom Brand
 // --------------------------------------------------
 //
 $brand-primary:						$energized;
 $brand-yellow:							#fc0 !default;
-$brand-blue:							#84bcde !default; 
-$brand-red:							#fb292d !default; 
+$brand-yellow-bright:                                   #fce21e !default;
+$brand-blue:							#84bcde !default;
+$brand-red:							#fb292d !default;
 $brand-secondary:						#fc0 !default;
 $brand-color-link:						$brand-primary;
 $brand-bg:								#333 !default;
@@ -47,7 +48,7 @@ $brand-team2-color:			$brand-blue;
 $brand-bg-dark:				$brand-bg;
 
 //
-//   Get and Add Custom Brand 
+//   Get and Add Custom Brand
 // --------------------------------------------------
 //
 $brand-link-color:		$brand-primary;

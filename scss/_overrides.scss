@@ -77,6 +77,16 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     border: 1px solid #c6c6c6;
 }
 
+@media (min-width: 680px) {
+    .modal {
+        top: 20%;
+        right: 0;
+        bottom: 20%;
+        left: 0;
+        min-height: 240px;
+        width: 100%;
+    }
+}
 
 .modal {
     display: block;
@@ -158,17 +168,6 @@ form {
 }
 */
 
-.bar-subheader {
-    top: 50px;
-    display: block;
-    height: 44px;
-    border: none;
-}
-
-.bar.bar-header {
-    border: none;
-}
-
 /*
 .bar.bar-header:after{
      position: absolute;
@@ -207,5 +206,18 @@ form {
     background-color: transparent;
     border-bottom: none;
     text-align: center;
+    border: none;
+}
+
+.bar-subheader {
+    position: absolute;
+    top: 50px;
+    display: block;
+    height: 44px;
+    border: none;
+}
+
+.bar.bar-header {
+    position: absolute;
     border: none;
 }
