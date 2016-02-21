@@ -514,10 +514,9 @@ i.icon-next {
 
 }
 
- td-cards {
-    display: block;
-    position: relative;
-    bottom: 25%;
+td-cards {
+      position: absolute;
+    bottom: 15%;
     right: 0%;
     left: 0%;
     width: 300px;
@@ -527,7 +526,8 @@ i.icon-next {
     td-card {
       display: block;
       position: absolute;
-      top: 15%;
+      margin-right: auto;
+      margin-left: auto;
       width: 300px;
       height:  180px;
       border: 1px solid #999;

@@ -27,8 +27,11 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	$scope.deal = function() {
 	    $scope.refreshCards();
 	    //$scope.activeCards = DealerService.dealThreeCards();
-	    var dealtCards = CardService.dealCards();
-	    $scope.cards.active.push(angular.extend({}, dealtCards));
+	    // var dealtCards = threeCards ;
+	    // // $scope.cards.active.push(angular.extend({}, dealtCards));
+	    // $scope.addCard();
+	    // $scope.addCard();
+	    // $scope.addCard();
 	    $scope.cardsVisible = false;
 	}
 
@@ -76,13 +79,13 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	  // };
 
 	$scope.cardSwipedLeft = function(index) {
-	    $scope.addCard();
+	    //$scope.addCard();
 	    $scope.cardDestroyed(index);
 	};
 
 	$scope.cardSwipedRight = function(index) {
 	    console.log('RIGHT SWIPE');
-	    $scope.addCard();
+	    //$scope.addCard();
 	    $scope.cardDestroyed(index);
 	};
 

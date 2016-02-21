@@ -22,40 +22,29 @@
             </div>
 
 
-        <div class="fixed__outside--center">
-              <button id="dealerDeal" class="show deal-cards button button-energized button-large" ng-click="game.deal()">Deal Cards</button>
+
+    <div ng-controller="CardsController">
+      <td-cards control="cardsControl" ng-if="game.cardsVisible">
+        <td-card ng-repeat="card in cards.master" on-destroy="cardDestroyed($index)" on-transition-left="cardSwipedLeft($index)" on-transition-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}} {{ (game.cardFaceVisible == true) ? 'card-face' : 'card-back' }}" >
+          <div class="image" ng-controller="CardController">
+
+
+            <h1 class="td-title {{ (game.cardFaceVisible == true) ? 'show' : 'hidden' }}">{{card.phrase}}</h1>
+
+
+             <button  ng-click="activateCard($index)" class="button button-calm button-outline {{ (game.cardFaceVisible == true) ? 'show' : 'hidden' }}">Select this Card!</button>
+            <div class="hidden no-text">NOPE</div>
+            <div class="hidden yes-text">LIKE</div>
+          </div>
+        </td-card>
+
+        <div class="empty" ng-if="!cards.master.length">
+          <button ng-click="deal()" class="button button-outline button-positive">Reload</button>
         </div>
 
+      </td-cards>
+    </div>
 
-        <td-cards ng-if="game.cardsVisible">
-            <td-card class="card card-{{$index}}  {{ (game.cardsVisible === true) ? 'card-back' : 'card-face' }}">
-                    <article class="phrase">
-                      <h1 class="td-title">{{game.activePhrase}}</h1>
-                    </article>
-                    <button  ng-click="activateCard($index)" class="button button-calm button-outline button-small">Select this Card!</button>
-             </td-card>
-
-             <td-card class="card card-{{$index}}  {{ (game.cardsVisible === true) ? 'card-back' : 'card-face' }}">
-                    <article class="phrase">
-                      <h1 class="td-title"></h1>
-                    </article>
-                    <button  ng-click="activateCard($index)" class="button button-calm button-outline button-small">Select this Card!</button>
-             </td-card>
-
-             <td-card class="card card-{{$index}}  {{ (game.cardsVisible === true) ? 'card-back' : 'card-face' }}">
-                    <article class="phrase">
-                      <h1 class="td-title"></h1>
-                    </article>
-                    <button  ng-click="activateCard($index)" class="button button-calm button-outline button-small">Select this Card!</button>
-             </td-card>
-        </td-cards>
-
-
-
-
-    <button class="hidden button button-large" ng-click="nextStep();">Next Step</button>
-    <button class="hidden button button-large" ng-click="addPointToActiveTeam();">Add Point</button>
-    <button class="hidden button button-large" ng-click="endGame();">End Game</button>
 
 
 
@@ -78,7 +67,11 @@
                        <div class="col">
                           <div id="dealer" class="show">
                               <h3 class="instruction-test">Push button to deal cards</h3>
-                              <!-- <button class="deal-cards button button-energized button-large" ng-click="game.deal();deal();">Deal Cards</button> -->
+
+                            <div ng-controller="CardsController">
+                              <button class="deal-cards button button-energized button-large" ng-click="game.deal();deal();">Deal Cards</button>
+                          </div>
+
                           </div>
                           <div id="showCards" class="hidden">
                               <h3 class="instruction-test">Push button to show cards</h3>

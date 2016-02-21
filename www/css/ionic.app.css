@@ -10995,7 +10995,7 @@ background: transparent;
 td-cards {
   display: block;
   position: absolute;
-  top: 25%;
+  top: 15%;
   right: 10%;
   width: 315px;
   height: 180px;
@@ -11046,22 +11046,6 @@ td-card .image {
 td-card img {
   max-width: 100%;
   border-radius: 6px; }
-
-.yes-text {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 30px;
-  color: #6ffa6f;
-  opacity: 0; }
-
-.no-text {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  color: #ff7373;
-  opacity: 0; }
 
 .fade {
   -webkit-transition: 0.2s opacity linear;
@@ -11600,9 +11584,8 @@ i.icon-next {
     margin: 15px auto; }
 
 td-cards {
-  display: block;
-  position: relative;
-  bottom: 25%;
+  position: absolute;
+  bottom: 15%;
   right: 0%;
   left: 0%;
   width: 300px;
@@ -11611,7 +11594,8 @@ td-cards {
   td-cards td-card {
     display: block;
     position: absolute;
-    top: 15%;
+    margin-right: auto;
+    margin-left: auto;
     width: 300px;
     height: 180px;
     border: 1px solid #999;

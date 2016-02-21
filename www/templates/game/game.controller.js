@@ -22,17 +22,17 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
         ////////////////////////////////////////
         //  card_types
         ////////////////////////////////////////
-        var phrases =
-            $http.get('api/card_types.json').then(function(phraseData) {
-                game.phrases = phraseData.data;
-                   console.log(game.phrases[0]);
-                game.totalPhrases = game.phrases.length;
+        var cards =
+            $http.get('api/card_types.json').then(function(cardData) {
+                game.cards = cardData.data;
+                   console.log(game.cards[0]);
+                game.totalCards = game.cards.length;
+
             });
 
-            console.log(game.phrases);
 
-        $scope.phrases = phrases;
 
+          console.log(cards);
 
 
           ////////////////////////////////////////
@@ -236,12 +236,9 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
         ////////////////////////////////////////
         $scope.startGame = function( players) {
 
-
-
           var p = players;
             console.log("players:  " + p);
             console.log("Start Game!");
-
 
           if ( p  ==  "teamsOnly" ) {
             console.log("teams only@!!");
@@ -286,7 +283,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
           $scope.step = game.step;
           //$scope.activeQuestion = game.questions[game.step].question;
 
-          $scope.activePhrase = game.phrases[game.step].phrase;
+          $scope.activePhrase = game.cards[game.step].phrase;
 
 
           if (game.hasPlayers == true) {
@@ -318,7 +315,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
                 $scope.activePlayer = game.players[game.playerCount];
           }
 
-          $scope.activePhrase = game.phrases[game.step].phrase;
+          //$scope.activePhrase = game.phrases[game.step].phrase;
          // $("animated ").addClass("bounceOutUp");
 
          $scope.selectActiveTeam();  //  Also controlling  //  $scope.gameSlideActive = false || true
@@ -331,7 +328,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             game.playerCount -= 1;
             //$scope.activeQuestion = game.questions[game.step].question;
              $scope.activePlayer = game.players[game.step];
-            $scope.activePhrase = game.phrases[game.step].phrase;
+          //  $scope.activePhrase = game.phrases[game.step].phrase;
       };
 
       $scope.firstStep = function() {
@@ -687,6 +684,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             game.canDeal = false;
             game.cardsVisible = true;
             game.cardsDealt = true;
+            game.cardFaceVisible = true;
 
             $("#showCards").removeClass("show").addClass("hidden");
             $("#activateCard").removeClass("hidden").addClass("show");
