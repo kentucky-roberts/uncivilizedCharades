@@ -116,7 +116,7 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	$scope.cardSwipedUp = function(index) {
 	    console.log('UP SWIPE');
 
-	    $scope.newCountdown();
+
 
 	    $scope.activateCard(index);
 
@@ -150,7 +150,7 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 
 		CountdownService.setTrueTag();
 		$scope.hideActiveCard();
-		$scope.deActivateCard();
+		//$scope.deActivateCard();
 		$scope.refreshCards();
 		// $scope.modal.close();
 
