@@ -310,6 +310,11 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
           $scope.step = game.step;
           //$scope.activeQuestion = game.questions[game.step].question;
 
+            game.canDeal = false;
+            game.cardsVisible = false;
+            game.cardsDealt = false;
+            game.cardFaceVisible = false;
+
 
           if (game.hasPlayers == true) {
                 $scope.activePlayer = game.players[game.playerCount];

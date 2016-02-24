@@ -6,6 +6,32 @@
             ng-if="!appStarted && !mainMenu  && !quickStart && !preflight  && !gameStarted && !gameOver"
             ng-controller="GameController as game">
             <h1>Start App</h1>
+              <div id="the-image-id" class="elastic-image" style="background-image: url(https://ununsplash.imgix.net/photo-1421091242698-34f6ad7fc088?fit=crop&fm=jpg&h=650&q=75&w=950)"></div>
+
+  <ion-content elastic-image="the-image-id" class="padding">
+    <div class="the-content">
+        <h2>Elastic image</h2>
+        <p>This is an experiment with an elastic image in Ionic Framework. Note that this is a quick hack, see it as a proof of concept. If some ionic/angular-guru could refine this into something production ready you are welcome to do so.</p>
+      <p>Note: This implementation works by using a combination of background-size: cover and a variable height. This is not great performance wise. It should be re-written using only GPU-friendly properties (i.e. Translate, Scale) so the browser won't have to re-paint on scroll.</p>
+      <p>It should also be improved by using Request Animation Frame for the animation.</p>
+      <div class="list">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">9</div>
+        <div class="item">10</div>
+        <div class="item">12</div>
+        <div class="item">13</div>
+        <div class="item">14</div>
+        <div class="item">15</div>
+      </div>
+    </div>
+  </ion-content>
               <div ng-include="'templates/game/app.start-app.html'"></div>
       </ion-pane>
 
@@ -14,6 +40,9 @@
           ng-if="appStarted  && mainMenu  && !quickStart && !preflight && !gameStarted && !gameOver"
           ng-controller="GameController as game">
              <h1>Main Menu</h1>
+
+
+
               <div ng-include="'templates/main-menu/main-menu.html'"></div>
       </ion-pane>
 

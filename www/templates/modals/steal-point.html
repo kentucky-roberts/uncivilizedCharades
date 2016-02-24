@@ -9,16 +9,19 @@
             <h3>Take your time, click the button below after you've officially gussed to see the secret phrase</h3>
 
 
-                <td-card class="card  {{(secretPhraseVisible == true) ? 'card-back' : 'card-face' }}">
-                        <h1 class="td-title">{{cards.activeCard.phrase}}</h1>
+                <td-card class="card-{{$index}} {{ (activeCardFaceVisible == true) ? 'card-face' : 'card-back' }}">
+                      {{activeCard.phrase}}
                 </td-card>
 
 
-            <button class="button button-energized button-large  center--block" ng-click="showSecretPhrase()">Show Secret Phrase</button>
 
-            <div ng-if="secretPhraseVisible">
-                    <button class="button button  button-dark button-outline " ng-click="guessedCorrect();addPointToActiveTeam();closeModal();nextStep();">Guessed Correct</button>
-                    <button class="button button  button-dark button-outline " ng-click="guessedWrong();addPointToActiveTeam();closeModal();nextStep();">Guessed Wrongt</button>
+             <div ng-if="!activeCardFaceVisible">
+                    <button class="button button-energized button-large  center--block" ng-click="showActiveCardFace()">Ready to guess, show us the secret phrase!</button>
+             </div>
+
+            <div ng-if="activeCardFaceVisible">
+                    <button class="button button  button-dark button-outline " ng-click="guessedCorrect();addPointToActiveTeam();closeModal();nextStep();nextHand();">Guessed Correct</button>
+                    <button class="button button  button-dark button-outline " ng-click="guessedWrong();addPointToActiveTeam();closeModal();nextStep();nextHand();">Guessed Wrongt</button>
             </div>
 
 

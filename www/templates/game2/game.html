@@ -24,15 +24,33 @@
 
 
     <div ng-controller="CardsController">
+
       <td-cards control="cardsControl" ng-if="game.cardsVisible">
-        <td-card ng-repeat="card in cards.master" on-destroy="cardDestroyed($index)" on-transition-left="cardSwipedLeft($index)" on-transition-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}} {{ (game.cardFaceVisible == true) ? 'card-face' : 'card-back' }}" >
+
+        <td-card ng-repeat="card in cards.master"
+            on-destroy="cardDestroyed($index)"
+            on-swipe-up="cardSwipedUp($index)"
+            on-double-tap="togglePhrases()"
+            on-transition-left="cardSwipedLeft($index)"
+            on-transition-right="cardSwipedRight($index)"
+            on-partial-swipe="cardPartialSwipe(amt)"
+            class="card-{{$index}} {{ (game.cardFaceVisible == true) ? 'card-face' : 'card-back' }}" >
+
+
+
           <div class="image" ng-controller="CardController">
 
+            <h1 class="td--phrase {{ (game.cardFaceVisible == true && showAltPhrase == false) ? 'show' : 'hidden' }}">{{card.phrase}}</h1>
+            <h1 class="td--alt-phrase {{ (game.cardFaceVisible == true  && showAltPhrase == true) ? 'show' : 'hidden' }}">{{card.alt_phrase}}</h1>
 
-            <h1 class="td-title {{ (game.cardFaceVisible == true) ? 'show' : 'hidden' }}">{{card.phrase}}</h1>
+            <h2 class="hidden">{{card.id}}</h2>
+
+             <button  ng-click="activateCard($index)" class="hidden button button-calm {{ (game.cardFaceVisible == true) ? 'show' : 'hidden' }}">Select this Card!</button>
+
+             <button  ng-click="togglePhrases()" class="hidden button button-calm button-outline {{ (game.cardFaceVisible == true) ? 'show' : 'hidden' }}">Toggle Phrases</button>
 
 
-             <button  ng-click="activateCard($index)" class="button button-calm button-outline {{ (game.cardFaceVisible == true) ? 'show' : 'hidden' }}">Select this Card!</button>
+
             <div class="hidden no-text">NOPE</div>
             <div class="hidden yes-text">LIKE</div>
           </div>
@@ -42,22 +60,24 @@
           <button ng-click="deal()" class="button button-outline button-positive">Reload</button>
         </div>
 
+
+
       </td-cards>
     </div>
 
 
 
 
-              <div class="fixed__outside--bottom">
+              <div class="fixed__outside--bottom team__scores">
                     <div class="row">
                        <div class="col">
-                          <div id="team1__score" class="text--center text--yellow  {{(game.activeTeam == game.teams[0] ) ? 'text--yellow' : 'text--white'}}">
+                          <div id="team1__score" class="text--center  {{(game.activeTeam == game.teams[0] ) ? 'text--yellow' : 'text--white'}}">
                           Team1:
                           <strong>{{team1Score}}</strong>
                           </div>
                         </div>
                       <div class="col">
-                        <div id="team2__score" class="text--center">
+                        <div id="team2__score" class="text--center {{(game.activeTeam == game.teams[0] ) ? 'text--yellow' : 'text--white'}}">
                           Team2:
                            <strong>{{team2Score}}</strong>
                         </div>
@@ -78,7 +98,7 @@
                               <button class="button button-energized button-large" ng-click="game.showCards();">Show Cards</button>
                           </div>
                           <div id="activateCard" class="hidden">
-                              <h3 class="instruction-test">Choose one of the three phrases above to act out</h3>
+                              <h3 class="instruction-test"><strong>Swipe-up</strong> to choose a phrase to act out<br> <strong>Double-tap</strong> a card to switch to a "G rated" phrase.</h3>
                               <button class="button button-energized button-large button-outline" ng-click="game.activateCard()">Activate Card</button>
                           </div>
                           <div id="showCountdown" class="hidden">

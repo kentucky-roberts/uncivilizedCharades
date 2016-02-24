@@ -138,9 +138,7 @@ angular
         views: {
           'tab-splash-screen': {
             cache: false,
-            templateUrl: 'templates/splash-screen/splash-screen.html',
-            controller: 'AppController',
-            controllerAs: 'app'
+            templateUrl: 'templates/splash-screen/splash-screen.html'
           }
         }
       })
@@ -191,9 +189,7 @@ angular
           views: {
             'tab-store': {
               cache: false,
-              templateUrl: 'templates/store/store.directive.html',
-              controller: 'StoreController',
-              controllerAs: 'store'
+              templateUrl: 'templates/store/store.directive.html'
             }
           }
         })

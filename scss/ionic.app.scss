@@ -195,7 +195,7 @@ h2.active-team {
 
 .fixed__outside--center {
     position: absolute;
-    top: calc(50% - 55px);
+    top: calc(50% - 15px);
     color: white;
     width: 100%;
     min-height:  100px;
@@ -203,8 +203,6 @@ h2.active-team {
     text-align: center;
    // background-color: pink;
     z-index: 10;
-
-
 }
 
 .deal-cards {
@@ -716,8 +714,13 @@ img.img--center {
 
     }
 
+
+    .team__scores {
+      color: $brand-color-dark;
+    }
+
     ion-pane {
-     background-color:  $brand-color-light!important;
+     background-color:  $brand-color-gray!important;
      color: $brand-color-dark;
     }
 
@@ -730,7 +733,7 @@ img.img--center {
   }
 
   h2 {
-     color: $brand-color-dark!important;
+     color: $brand-yellow!important;
   }
   h3 {
      color: $brand-color-dark!important;
@@ -1159,6 +1162,32 @@ h1.td-title {
     text-align: center;
     margin: 15px auto;
 }
+
+h1.td--phrase {
+    color: $brand-color-dark;
+    font-family: $brand-font-family-hand-writing;
+    font-size: 36px;
+    line-height: 1.33;
+    text-align: center;
+    margin: 15px auto;
+}
+
+h1.td--alt-phrase {
+    color: $brand-light-gray;
+    font-family: $brand-font-family-hand-writing;
+    font-size: 36px;
+    line-height: 1.33;
+    text-align: center;
+    margin: 15px auto;
+}
+
+.td--button {
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+  text-align: center;
+}
+
 
 .td-button {
   position: absolute;
@@ -1784,4 +1813,20 @@ h1.td-title {
   padding-left: 0px;
   background-position: center center;
   background-size: cover;
+}
+
+
+
+.elastic-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 44px;
+  /* Initial image height: */
+  height: 300px;
+}
+
+.the-content {
+  /* Same as initial image height: */
+  padding-top: 300px;
 }

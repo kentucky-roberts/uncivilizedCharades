@@ -21,8 +21,19 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	$scope.cardsControl = {};
 
 	$scope.cardDestroyed = function(index) {
-	    $scope.cards.master.splice(index, 1);  // Remove a card from ->  $scope.cards.master
+		console.log("$scope.cardDestroyed(index) was called here");
+	   // $scope.cards.master.splice(index, 1);  // Remove a card from ->  $scope.cards.master
 	};
+
+	$scope.showAltPhrase = false;
+
+
+	$scope.togglePhrases = function () {
+		if ($scope.showAltPhrase == false) {
+			$scope.showAltPhrase = true;
+		} else  $scope.showAltPhrase = false;
+	};
+
 
 	$scope.deal = function() {
 	    $scope.refreshCards();
@@ -38,37 +49,18 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	$scope.addCard = function() {
 	    var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
 	    newCard.id = Math.random();
-	    $scope.cards.active.push(angular.extend({}, newCard));
+	    $scope.cards.master.push(angular.extend({}, newCard));
 	};
 
 	$scope.refreshCards = function() {
 	    // Set $scope.cards to null so that directive reloads
-	    $scope.cards.active = null;
-	    $timeout(function() {
-	        $scope.cards.active = Array.prototype.slice.call($scope.cards.master, 0);
-	    });
-	};
-
-	$scope.cardSwipedUp = function(index) {
-	    console.log('UP SWIPE');
-	    $scope.activateCard(index);
-	    $scope.newCountdown();
 	    $scope.cardsVisible = false;
-	    // $scope.showCountdown =  function() {
-	    // 	  CountdownService.setTrueTag();
-	    // }
-	    // //$scope.showCountdown();
-	    //$("td-card").addClass("hidden");
+	    //$scope.cards.active = null;
+	     Array.prototype.slice.call($scope.cards.master, 0);
+	     Array.prototype.slice.call($scope.cards.active, 0);
+
 	};
 
-
-	$scope.onDoubleTap = function () {
-		$scope.cardsVisible = true;
-	};
-
-	$scope.noPoint = function() {
-		$scope.deActivateCard();
-	};
 
 	  // $scope.newCountdown = function() {
 	  //   ModalService
@@ -79,29 +71,94 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	  // };
 
 	$scope.cardSwipedLeft = function(index) {
-	    //$scope.addCard();
-	    $scope.cardDestroyed(index);
+		console.log('LEFT SWIPE');
+	    $scope.addCard();
+	 //   $scope.cardDestroyed(index);
 	};
 
 	$scope.cardSwipedRight = function(index) {
 	    console.log('RIGHT SWIPE');
-	    //$scope.addCard();
-	    $scope.cardDestroyed(index);
+	    $scope.addCard();
+	   // $scope.cardDestroyed(index);
 	};
 
 	$scope.activateCard = function(index) {
-	    //console.log("activeCard index: " + index);
+	    console.log("activeCard index: " + index);
 	    $scope.cards.master.splice(index, 1);
 	    $scope.cards.activeCard.push(angular.extend({}, index));
 	    console.log($scope.cards.activeCard);
-	    $("td-card").addClass("hidden");
+
 
 	    		var activeCard = CardService.activeCard(index);
 
-		CountdownService.setFalseTag();
+				CountdownService.setFalseTag();
+
+
 	    console.log(activeCard);
 	};
 
+	// $scope.showActiveCard = function(index) {
+
+	// 	$scope.cards.activeCard
+
+	//     console.log($scope.cards.activeCard);
+
+	//     $("td-card").addClass("hidden");
+
+	//     		var activeCard = CardService.activeCard(index);
+
+	// 	CountdownService.setFalseTag();
+	//     console.log(activeCard);
+	// };
+
+
+
+	$scope.cardSwipedUp = function(index) {
+	    console.log('UP SWIPE');
+
+	    $scope.newCountdown();
+
+	    $scope.activateCard(index);
+
+	    $scope.cardsVisible = false;
+	    $scope.activeCardVisible = false;
+	    $scope.activeCardFaceVisible = false;
+
+	};
+
+
+	$scope.stealPoint = function() {
+		$scope.cardsVisible = false;
+		$scope.activeCardVisible = true;
+		$scope.activeCardFaceVisible = false;
+		$("td-card").removeClass("hidden");
+	};
+
+	$scope.showActiveCardFace = function () {
+		$scope.cardsVisible = false;
+		$scope.activeCardVisible = true;
+		$scope.activeCardFaceVisible = true;
+	};
+
+	$scope.hideActiveCard = function () {
+		$scope.cardsVisible = false;
+		$scope.activeCardVisible = false;
+		$scope.activeCardFaceVisible = false;
+	};
+
+	$scope.nextHand = function() {
+
+		CountdownService.setTrueTag();
+		$scope.hideActiveCard();
+		$scope.deActivateCard();
+		$scope.refreshCards();
+		// $scope.modal.close();
+
+	};
+
+	$scope.noPoint = function() {
+		$scope.deActivateCard();
+	};
 
 	$scope.deActivateCard = function(index) {
 	    $scope.cards.activeCard.splice(index, 1);
@@ -112,5 +169,6 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	$scope.$on('removeCard', function(event, element, card) {
 	    var discarded = $scope.cards.master.splice($scope.cards.master.indexOf(card), 1);
 	    		$scope.cards.discards.push(discarded);
+	    		console.log($scope.cards.discards);
 	});
 };

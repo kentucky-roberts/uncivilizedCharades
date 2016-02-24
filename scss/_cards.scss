@@ -3,8 +3,8 @@
 td-cards {
     display: block;
     position: absolute;
-    top: 15%;
-    right: 10%;
+ top: calc(40% - 90px);
+  left: calc(10% - 180px);
     width: 315px;
     height: 180px;
     border-radius: 10px;
@@ -18,28 +18,29 @@ td-card {
   overflow: hidden;
   -webkit-animation-fill-mode: forwards;
 
+ top: 0;
+  left: 0;
 
-  left: 10%;
-  margin-top: 80px;
-  margin-bottom: 40px;
     width: 360px;
     height: 180px;
   border: 1px solid #999;
   box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 6px;
+    border-radius: 10px;
 
 }
 
 .card {
   margin: 0;
-  background-color: $brand-color-light;
+  background-color: white;
+
+
 }
 
 
 td-card.card-0 {
   -webkit-transform: translate3d(0, 0px, 0);
   transform: translate3d(0, 0px, 0);
-  top: 0px;
+
 
   z-index: 10;
   transform: translate3d(0, 0, -180px);

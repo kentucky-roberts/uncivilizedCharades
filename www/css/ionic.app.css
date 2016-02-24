@@ -10995,8 +10995,8 @@ background: transparent;
 td-cards {
   display: block;
   position: absolute;
-  top: 15%;
-  right: 10%;
+  top: calc(40% - 90px);
+  left: calc(10% - 180px);
   width: 315px;
   height: 180px;
   border-radius: 10px; }
@@ -11007,23 +11007,21 @@ td-card {
   box-sizing: border-box;
   overflow: hidden;
   -webkit-animation-fill-mode: forwards;
-  left: 10%;
-  margin-top: 80px;
-  margin-bottom: 40px;
+  top: 0;
+  left: 0;
   width: 360px;
   height: 180px;
   border: 1px solid #999;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-  border-radius: 6px; }
+  border-radius: 10px; }
 
 .card {
   margin: 0;
-  background-color: #c6c6c6; }
+  background-color: white; }
 
 td-card.card-0 {
   -webkit-transform: translate3d(0, 0px, 0);
   transform: translate3d(0, 0px, 0);
-  top: 0px;
   z-index: 10;
   transform: translate3d(0, 0, -180px);
   transform-style: preserve-3d; }
@@ -11046,6 +11044,22 @@ td-card .image {
 td-card img {
   max-width: 100%;
   border-radius: 6px; }
+
+.yes-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 30px;
+  color: #6ffa6f;
+  opacity: 0; }
+
+.no-text {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: #ff7373;
+  opacity: 0; }
 
 .fade {
   -webkit-transition: 0.2s opacity linear;
@@ -11327,7 +11341,7 @@ h2.active-team {
 
 .fixed__outside--center {
   position: absolute;
-  top: calc(50% - 55px);
+  top: calc(50% - 15px);
   color: white;
   width: 100%;
   min-height: 100px;
@@ -11716,15 +11730,17 @@ img.img--center {
   background-color: #c6c6c6 !important; }
   .bg-team2 .pane {
     background-color: #c6c6c6 !important; }
+  .bg-team2 .team__scores {
+    color: #121212; }
   .bg-team2 ion-pane {
-    background-color: #c6c6c6 !important;
+    background-color: #444444 !important;
     color: #121212; }
   .bg-team2 span {
     color: #121212 !important; }
   .bg-team2 h1 {
     color: #121212 !important; }
   .bg-team2 h2 {
-    color: #121212 !important; }
+    color: #fc0 !important; }
   .bg-team2 h3 {
     color: #121212 !important; }
   .bg-team2 p {
@@ -12061,6 +12077,28 @@ h1.td-title {
   color: #121212;
   text-align: center;
   margin: 15px auto; }
+
+h1.td--phrase {
+  color: #121212;
+  font-family: "Shadows Into Light Two", cursive;
+  font-size: 36px;
+  line-height: 1.33;
+  text-align: center;
+  margin: 15px auto; }
+
+h1.td--alt-phrase {
+  color: #bfbfbf;
+  font-family: "Shadows Into Light Two", cursive;
+  font-size: 36px;
+  line-height: 1.33;
+  text-align: center;
+  margin: 15px auto; }
+
+.td--button {
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+  text-align: center; }
 
 .td-button {
   position: absolute;
@@ -12573,5 +12611,17 @@ h1.td-title {
   padding-left: 0px;
   background-position: center center;
   background-size: cover; }
+
+.elastic-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 44px;
+  /* Initial image height: */
+  height: 300px; }
+
+.the-content {
+  /* Same as initial image height: */
+  padding-top: 300px; }
 
 /*# sourceMappingURL=ionic.app.css.map */
