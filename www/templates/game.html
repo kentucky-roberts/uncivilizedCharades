@@ -20,9 +20,9 @@
       </ion-pane>
 
 
-      <ion-pane  id="game__over" class="my-slide-animation" ng-if="!game.welcome && !game.preflight && game.started && game.game-over">
+      <ion-pane  id="game__over" class="my-slide-animation" ng-if="!game.welcome && !game.preflight && !game.started && game.game-over">
               <h1>Game Over</h1>
-              <div ng-include="'templates/game2/game-over.html'"></div>
+              <div ng-include="'templates/game2/game.game-over.html'"></div>
       </ion-pane>
 
 

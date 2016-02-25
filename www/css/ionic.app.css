@@ -10996,28 +10996,48 @@ td-cards {
   display: block;
   position: absolute;
   top: calc(40% - 90px);
-  left: calc(10% - 180px);
+  left: calc(55% - 180px);
   width: 315px;
   height: 180px;
   border-radius: 10px; }
 
 td-card {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 315px;
+  height: 180px;
   -webkit-transform: scale(1, 1);
   box-sizing: border-box;
   overflow: hidden;
   -webkit-animation-fill-mode: forwards;
-  top: 0;
-  left: calc(10% - 180px);
-  width: 360px;
-  height: 180px;
   border: 1px solid #999;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-  border-radius: 10px; }
+  border-radius: 10px;
+  padding: 25px 15px; }
 
 .card {
-  margin: 0;
-  background-color: white; }
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 315px;
+  height: 180px;
+  -webkit-transform: scale(1, 1);
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
+  border: 1px solid #999;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 25px 15px;
+  -webkit-transform: translate3d(0, 0px, 0);
+  transform: translate3d(0, 0px, 0);
+  z-index: 10;
+  transform: translate3d(0, 0, -180px);
+  transform-style: preserve-3d; }
+
+.cards-on-bottom {
+  bottom: 0 !important; }
 
 td-card.card-0 {
   -webkit-transform: translate3d(0, 0px, 0);
@@ -11068,10 +11088,10 @@ td-card img {
 
 .card img {
   max-width: 100%;
-  border-radius: 4px; }
+  border-radius: 10px; }
 
 .card-face {
-  color: #000;
+  color: #121212;
   font-family: "Open Sans", sans-serif;
   background-color: #fff; }
 
@@ -11341,7 +11361,7 @@ h2.active-team {
 
 .fixed__outside--center {
   position: absolute;
-  top: calc(50% - 15px);
+  top: calc(15% - 0px);
   color: white;
   width: 100%;
   min-height: 100px;
@@ -11597,25 +11617,6 @@ i.icon-next {
     text-align: center;
     margin: 15px auto; }
 
-td-cards {
-  position: absolute;
-  bottom: 15%;
-  right: 0%;
-  left: 0%;
-  width: 300px;
-  height: 180px;
-  border-radius: 0; }
-  td-cards td-card {
-    display: block;
-    position: absolute;
-    margin-right: auto;
-    margin-left: auto;
-    width: 300px;
-    height: 180px;
-    border: 1px solid #999;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-    border-radius: 6px; }
-
 #game__container--toast {
   display: block;
   position: absolute;
@@ -11720,9 +11721,15 @@ img.img--center {
   .bg-team1 span {
     color: #c6c6c6 !important; }
   .bg-team1 h1 {
-    color: #c6c6c6 !important; }
+    color: #c6c6c6 !important;
+    margin-top: 0;
+    margin-bottom: 0; }
   .bg-team1 h2 {
-    color: #fc0 !important; }
+    color: #fc0 !important;
+    font-size: 16px;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 0; }
   .bg-team1 p {
     color: #c6c6c6 !important; }
 
@@ -11738,9 +11745,15 @@ img.img--center {
   .bg-team2 span {
     color: #121212 !important; }
   .bg-team2 h1 {
-    color: #121212 !important; }
+    color: #121212 !important;
+    margin-top: 0;
+    margin-bottom: 0; }
   .bg-team2 h2 {
-    color: #fc0 !important; }
+    color: #fc0 !important;
+    font-size: 16px;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 0; }
   .bg-team2 h3 {
     color: #121212 !important; }
   .bg-team2 p {
@@ -12079,7 +12092,7 @@ h1.td-title {
   margin: 15px auto; }
 
 h1.td--phrase {
-  color: #121212;
+  color: #000 !important;
   font-family: "Shadows Into Light Two", cursive;
   font-size: 36px;
   line-height: 1.33;
@@ -12087,7 +12100,7 @@ h1.td--phrase {
   margin: 15px auto; }
 
 h1.td--alt-phrase {
-  color: #bfbfbf;
+  color: #bfbfbf !important;
   font-family: "Shadows Into Light Two", cursive;
   font-size: 36px;
   line-height: 1.33;

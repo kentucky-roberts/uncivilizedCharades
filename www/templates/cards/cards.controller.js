@@ -23,11 +23,13 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	$scope.cardDestroyed = function(index) {
 		console.log("$scope.cardDestroyed(index) was called here");
 	   // $scope.cards.master.splice(index, 1);  // Remove a card from ->  $scope.cards.master
+
+	var recycledCard = cardTypes[index];
+	    $scope.cards.master.push(angular.extend({}, recycledCard));
+
 	};
 
 	$scope.showAltPhrase = false;
-
-
 	$scope.togglePhrases = function () {
 		if ($scope.showAltPhrase == false) {
 			$scope.showAltPhrase = true;
@@ -72,13 +74,13 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 
 	$scope.cardSwipedLeft = function(index) {
 		console.log('LEFT SWIPE');
-	    $scope.addCard();
+	    //$scope.addCard();
 	 //   $scope.cardDestroyed(index);
 	};
 
 	$scope.cardSwipedRight = function(index) {
 	    console.log('RIGHT SWIPE');
-	    $scope.addCard();
+	    //$scope.addCard();
 	   // $scope.cardDestroyed(index);
 	};
 
@@ -88,13 +90,17 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	    $scope.cards.activeCard.push(angular.extend({}, index));
 	    console.log($scope.cards.activeCard);
 
+  		var activeCard = CardService.activeCard(index);
 
-	    		var activeCard = CardService.activeCard(index);
-
-				CountdownService.setFalseTag();
+		CountdownService.setFalseTag();
 
 
 	    console.log(activeCard);
+	};
+
+
+	$scope.showActiveCardFace = function() {
+		$scope.activeCardFaceVisible = true;
 	};
 
 	// $scope.showActiveCard = function(index) {
@@ -115,8 +121,6 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 
 	$scope.cardSwipedUp = function(index) {
 	    console.log('UP SWIPE');
-
-
 
 	    $scope.activateCard(index);
 

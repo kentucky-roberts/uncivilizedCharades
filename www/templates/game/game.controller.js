@@ -151,7 +151,9 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
         };
 
 
-
+      game.showBuildTeams = function() {
+        game.readyForTeams = true;
+      };
 
 
       $scope.team1 = {
@@ -255,14 +257,14 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
           game.hasPlayers = $scope.gameHasPlayers;
 
-          if (game.hasPlayers == true){
+          if (game.hasPlayers === true){
             console.log("The game has players = TRUE");
 
              $("#game__with__players").removeClass("hidden").addClass("show");  //  requires game.players created during preflight
               $("#game__with__teams").addClass("hidden"); // default setting,  game cycles back and forth between 2 teams.  quickStart() skips 'preflight' creates  2 default teams passes into app.start
           }
 
-          if (game.hasPlayers == false){
+          if (game.hasPlayers === false){
             console.log("The game does NOT have players = FALSE");
           }
 
@@ -365,21 +367,23 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
               $scope.activeTeam = "Team1";
               $scope.team1Score += 1;
+              $scope.soundChaChing();
               $scope.teamColor = "positive";
 
-             if ($scope.team1Score === 10 ) {
+             if ($scope.team1Score >= 10 ) {
               $scope.gameStarted = false;
               $scope.gameOver = true;
-              $scope.winningTeam = "Team2";
+              $scope.winningTeam = "Team1";
            }
               return;
 
             } else {
                 $scope.activeTeam = "Team2";
                 $scope.team2Score += 1;
+                $scope.soundChaChing();
             $scope.teamColor = "assertive";
 
-          if ($scope.team2Score === 10 ) {
+          if ($scope.team2Score >= 10 ) {
               $scope.gameStarted = false;
               $scope.gameOver = true;
               $scope.winningTeam = "Team2"

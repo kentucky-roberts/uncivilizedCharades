@@ -138,6 +138,25 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 
 
 
+      ////////////////////////////////////////
+      // ionicSlideBoxDeligate
+      ////////////////////////////////////////
+
+      $scope.next = function () {
+        $ionicSlideBoxDelegate.next();
+      };
+      $scope.previous = function () {
+        $ionicSlideBoxDelegate.previous();
+      };
+      // Called each time the slide changes
+      $scope.slideChanged = function (index) {
+        $scope.slideIndex = index;
+        console.log("slideChanged: " + index);
+      };
+
+
+
+
 
 
 	$scope.saveGame = function() {

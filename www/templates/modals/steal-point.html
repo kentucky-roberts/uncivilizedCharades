@@ -5,19 +5,22 @@
         </ion-header-bar>
         <ion-content class="padding brand-bg">
 
-            <h1 class="text--start">Your team has 1 guess to correctly guess the other team's secret phrase</h1>
-            <h3>Take your time, click the button below after you've officially gussed to see the secret phrase</h3>
+            <h1 class="text--start">One Change to Guess the<br> Other Team's Phrase</h1>
+
+            <p class="lead text--center">Click the button below after you've officially gussed to see the secret phrase</p>
 
 
-                <td-card class="card-{{$index}} {{ (activeCardFaceVisible == true) ? 'card-face' : 'card-back' }}">
-                      {{activeCard.phrase}}
-                </td-card>
+                    <button class="button button-energized button-large  center--block" ng-click="showActiveCardFace(); addPointToActiveTeam();closeModal();nextStep();nextHand();">Ready to guess, show us the secret phrase!</button>
 
 
 
-             <div ng-if="!activeCardFaceVisible">
-                    <button class="button button-energized button-large  center--block" ng-click="showActiveCardFace()">Ready to guess, show us the secret phrase!</button>
-             </div>
+            <div class="cards-on-bottom">
+                <div class="card  {{ (activeCardFaceVisible == true) ? 'card-face' : 'card-back' }}">
+                      {{activeCard.phrase}}  {{cards.activeCard}}
+                </div>
+            </div>
+
+
 
             <div ng-if="activeCardFaceVisible">
                     <button class="button button  button-dark button-outline " ng-click="guessedCorrect();addPointToActiveTeam();closeModal();nextStep();nextHand();">Guessed Correct</button>

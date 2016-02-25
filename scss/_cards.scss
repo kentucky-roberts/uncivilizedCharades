@@ -1,47 +1,62 @@
  /** Background from http://www.transparenttextures.com/ **/
 
 td-cards {
-    display: block;
-    position: absolute;
- top: calc(40% - 90px);
-  left: calc(10% - 180px);
-    width: 315px;
-    height: 180px;
-    border-radius: 10px;
+  display: block;
+  position: absolute;
+  top: calc(40% - 90px);
+  left: calc(55% - 180px);
+  width: 315px;
+  height: 180px;
+  border-radius: 10px;
 }
 
 td-card {
   position: absolute;
-
+  top: 0;
+  left:  0;
+  width: 315px;
+  height: 180px;
   -webkit-transform: scale(1,1);
   box-sizing: border-box;
   overflow: hidden;
   -webkit-animation-fill-mode: forwards;
-
- top: 0;
- left: calc(10% - 180px);
-
-    width: 360px;
-    height: 180px;
   border: 1px solid #999;
   box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-    border-radius: 10px;
-
+  border-radius: 10px;
+  padding: 25px 15px;
 }
 
 .card {
-  margin: 0;
-  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left:  0;
+  width: 315px;
+  height: 180px;
+  -webkit-transform: scale(1,1);
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
+  border: 1px solid #999;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding: 25px 15px;
 
+  -webkit-transform: translate3d(0, 0px, 0);
+  transform: translate3d(0, 0px, 0);
+  z-index: 10;
+  transform: translate3d(0, 0, -180px);
+  transform-style: preserve-3d;
 
 }
 
+
+.cards-on-bottom {
+    bottom: 0!important;
+}
 
 td-card.card-0 {
   -webkit-transform: translate3d(0, 0px, 0);
   transform: translate3d(0, 0px, 0);
-
-
   z-index: 10;
   transform: translate3d(0, 0, -180px);
   transform-style: preserve-3d;
@@ -93,11 +108,11 @@ td-card img {
 
 .card img {
   max-width: 100%;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 .card-face {
-    color: #000;
+    color: #121212;
     font-family: $brand-font-family-base;
     background-color: #fff;
 }

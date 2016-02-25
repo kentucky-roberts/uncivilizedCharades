@@ -1,7 +1,7 @@
 <div id="preflight">
           <div class="">
 
-              <h1 class="text--start {{(game.players.length < 4) ? 'show' : 'hidden' }}">Coose wisely ...</h1>
+              <h1 class="text--start {{(game.players.length < 4) ? 'show' : 'hidden' }}">Add some players ...</h1>
               <h1 class="text--start {{(game.players.length >= 4) ? 'show' : 'hidden' }}">Click right arrow to build teams!</h1>
 
 
@@ -35,7 +35,7 @@
                       <div class="testimonial item" ng-model="players" ng-repeat="player in players">
                           <div class="author">
                               <div class="testimonial-image"><img src="img/player-images/avatar.jpg"></div>
-                              <div class="testimonial-author-info hidden">
+                              <div class="testimonial-author-info">
 
                                   <span class="name">{{player.name}}</span><br>
                                   <span class="score">{{player.score}}</span><br>

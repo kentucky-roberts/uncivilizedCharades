@@ -3,15 +3,15 @@
     <ion-content class="bg-success">
         <div class="row">
             <div class="col">
-                <h3 class="success--title"> Well Done <strong>{{activePlayer.name || game.activeTeam }}!</strong></h3>
+                <h3 class="success--title"> Well Done!</h3>
                 <br>
-
-
-                <p class="lead">You have been awarded <strong>+1 Point</strong></p>
+                        <i class="ion-ribbon-b bigIcon" style="font-size: 60px;"></i>
+                <br>
+                <p class="lead">{{activePlayer.name || game.activeTeam }} <strong>+1 Point</strong></p>
                 <p>Click button below to continue</p>
                 <br>
                 <br>
-                <button class="button button-light button-outline icon ion-checkmark text--white" ng-click="addPointToActiveTeam();closeModal();nextStep();nextHand();"> </button>
+                <button class="button button-light button-outline icon ion-checkmark text--white" ng-click="addPointToActiveTeam();closeModal();nextStep();nextHand();"> Continue </button>
 
 
             </div>

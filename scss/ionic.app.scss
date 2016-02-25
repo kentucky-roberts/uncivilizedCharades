@@ -195,7 +195,7 @@ h2.active-team {
 
 .fixed__outside--center {
     position: absolute;
-    top: calc(50% - 15px);
+    top: calc(15% - 0px);
     color: white;
     width: 100%;
     min-height:  100px;
@@ -512,26 +512,26 @@ i.icon-next {
 
 }
 
-td-cards {
-      position: absolute;
-    bottom: 15%;
-    right: 0%;
-    left: 0%;
-    width: 300px;
-    height:  180px;
-    border-radius: 0;
+// td-cards {
+//       position: absolute;
+//     bottom: 15%;
+//     right: 0%;
+//     left: 0%;
+//     width: 300px;
+//     height:  180px;
+//     border-radius: 0;
 
-    td-card {
-      display: block;
-      position: absolute;
-      margin-right: auto;
-      margin-left: auto;
-      width: 300px;
-      height:  180px;
-      border: 1px solid #999;
-     box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-      border-radius: 6px;
-    }
+//     td-card {
+//       display: block;
+//       position: absolute;
+//       margin-right: auto;
+//       margin-left: auto;
+//       width: 300px;
+//       height:  180px;
+//       border: 1px solid #999;
+//      box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+//       border-radius: 6px;
+//     }
 
     // .card-0 {
     //     left: 10%;
@@ -551,7 +551,7 @@ td-cards {
     //     z-index: 10;
     // }
 
-}
+//}
 
 
 #game__container--toast {
@@ -687,17 +687,22 @@ img.img--center {
    background-color:  $brand-color-dark!important;
   }
 
-
   span {
     color: $brand-color-light!important;
   }
 
   h1 {
-    color: $brand-color-light!important;
+      color: $brand-color-light!important;
+      margin-top: 0;
+      margin-bottom:0;
   }
 
   h2 {
      color: $brand-yellow!important;
+     font-size:  16px;
+     font-weight: 800;
+     margin-top: 0;
+     margin-bottom:0;
   }
 
   p {
@@ -730,10 +735,16 @@ img.img--center {
 
   h1 {
     color: $brand-color-dark!important;
+     margin-top: 0;
+      margin-bottom:0;
   }
 
   h2 {
      color: $brand-yellow!important;
+     font-size:  16px;
+     font-weight: 800;
+     margin-top: 0;
+     margin-bottom:0;
   }
   h3 {
      color: $brand-color-dark!important;
@@ -1164,7 +1175,7 @@ h1.td-title {
 }
 
 h1.td--phrase {
-    color: $brand-color-dark;
+    color: #000!important;
     font-family: $brand-font-family-hand-writing;
     font-size: 36px;
     line-height: 1.33;
@@ -1173,7 +1184,7 @@ h1.td--phrase {
 }
 
 h1.td--alt-phrase {
-    color: $brand-light-gray;
+    color: $brand-light-gray!important;
     font-family: $brand-font-family-hand-writing;
     font-size: 36px;
     line-height: 1.33;

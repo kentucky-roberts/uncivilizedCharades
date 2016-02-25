@@ -1,25 +1,43 @@
 <ion-content class="{{teamCss}}" >
-    <div class="game__slide  {{teamCss}} slide-right-to-left" ng-if="gameSlideActive">
+      <div class="game__slide  {{teamCss}} slide-right-to-left" ng-if="gameSlideActive">
 
-            <!-- Active Player Info -->
-            <div class="testimonial item" ng-if="gameHasPlayers">
-                <div class="author">
-                    <div class="testimonial-image "><img src="img/player-images/avatar.jpg"></div>
-                    <div class="testimonial-author-info">
-                        <span class="name">{{game.activePlayer.name || "Add Players"}}</span>
-                        <br>
-                        <span class="team">{{game.activePlayer.team}}</span>
-                        <span>game.players.index.team {{game.players[$index].team }}</span>
+              <!-- Active Player Info -->
+              <div class="testimonial item" ng-if="gameHasPlayers">
+                  <div class="author">
+                      <div class="testimonial-image "><img src="img/player-images/avatar.jpg"></div>
+                      <div class="testimonial-author-info">
+                          <span class="name">{{game.activePlayer.name || "Add Players"}}</span>
+                          <br>
+                          <span class="team">{{game.activePlayer.team}}</span>
+                          <span>game.players.index.team {{game.players[$index].team }}</span>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Active Team Info if no Players -->
+              <div class="row team__scores" ng-if="!gameHasPlayers">
+
+                    <div class="col">
+                      <div id="team1__score" class="pull--left">
+                      Team1:
+                      <strong>{{team1Score}}</strong>
+                      </div>
                     </div>
-                </div>
-            </div>
 
+                    <div class="col">
+                        <h2>Active Team</h2>
+                        <h1>{{game.activeTeam}}</h1>
+                    </div>
 
-            <!-- Active Team Info if no Players -->
-            <div class="item" ng-if="!gameHasPlayers">
-                <h2>Active Team</h2>
-                <h1>{{game.activeTeam}}</h1>
-            </div>
+                    <div class="col">
+                      <div id="team2__score" class="pull--right">
+                        Team2:
+                         <strong>{{team2Score}}</strong>
+                      </div>
+                    </div>
+
+              </div>
+
 
 
 
@@ -43,7 +61,6 @@
             <h1 class="td--phrase {{ (game.cardFaceVisible == true && showAltPhrase == false) ? 'show' : 'hidden' }}">{{card.phrase}}</h1>
             <h1 class="td--alt-phrase {{ (game.cardFaceVisible == true  && showAltPhrase == true) ? 'show' : 'hidden' }}">{{card.alt_phrase}}</h1>
 
-            <h2 class="hidden">{{card.id}}</h2>
 
              <button  ng-click="activateCard($index)" class="hidden button button-calm {{ (game.cardFaceVisible == true) ? 'show' : 'hidden' }}">Select this Card!</button>
 
@@ -57,7 +74,7 @@
         </td-card>
 
         <div class="empty" ng-if="!cards.master.length">
-          <button ng-click="deal()" class="button button-outline button-positive">Reload</button>
+          <button ng-click="game.deal();deal();" class="button button-outline button-positive">Reload</button>
         </div>
 
 
@@ -68,21 +85,8 @@
 
 
 
-              <div class="fixed__outside--bottom team__scores">
-                    <div class="row">
-                       <div class="col">
-                          <div id="team1__score" class="text--center  {{(game.activeTeam == game.teams[0] ) ? 'text--yellow' : 'text--white'}}">
-                          Team1:
-                          <strong>{{team1Score}}</strong>
-                          </div>
-                        </div>
-                      <div class="col">
-                        <div id="team2__score" class="text--center {{(game.activeTeam == game.teams[0] ) ? 'text--yellow' : 'text--white'}}">
-                          Team2:
-                           <strong>{{team2Score}}</strong>
-                        </div>
-                      </div>
-                    </div>
+              <div class="fixed__outside--bottom">
+
                     <div class="row">
                        <div class="col">
                           <div id="dealer" class="show">
@@ -98,8 +102,8 @@
                               <button class="button button-energized button-large" ng-click="game.showCards();">Show Cards</button>
                           </div>
                           <div id="activateCard" class="hidden">
-                              <h3 class="instruction-test"><strong>Swipe-up</strong> to choose a phrase to act out<br> <strong>Double-tap</strong> a card to switch to a "G rated" phrase.</h3>
-                              <button class="button button-energized button-large button-outline" ng-click="game.activateCard()">Activate Card</button>
+                              <h3 class="instruction-test"><strong>Swipe-up</strong> to select phrase to act out<br> <strong>Double-tap</strong> a card to switch to a "G-Rated" phrase</h3>
+                              <!-- <button class="button button-energized button-large button-outline" ng-click="game.activateCard()">Activate Card</button> -->
                           </div>
                           <div id="showCountdown" class="hidden">
                               <h3 class="instruction-test">You'll have 120 secons to act out the phrase. Click button when ready.</h3>
