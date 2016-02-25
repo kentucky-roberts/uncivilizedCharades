@@ -1022,7 +1022,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
   $scope.hideLoading = function() {
       $timeout(function() {
           $ionicLoading.hide();
-      }, 1000);
+      }, 3000);
   };
   $scope.hideLoading();
 };  ////     END GAME CONTROLLER     ////

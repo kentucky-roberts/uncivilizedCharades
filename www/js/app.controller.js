@@ -213,7 +213,7 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 	    }
 	};
 
-	//$scope.noHeader();
+	$scope.noHeader();
 
 
 	$scope.initApp();
