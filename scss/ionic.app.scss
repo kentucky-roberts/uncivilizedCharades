@@ -103,7 +103,15 @@ h2.body-title {
 }
 
 .brand-bg {
-  background-color:  $brand-bg;
+  background-color:  $brand-bg!important;
+}
+
+.modal-backdrop-bg {
+  background-color:  $brand-bg!important;
+}
+
+.modal {
+  background-color:  #000;
 }
 
 .center--block {
@@ -370,11 +378,12 @@ span.instruction-text {
 }
 
 h2.success--title {
-    font-family: $brand-font-family-base;
+    font-family: $font-family-helvetica;
     font-weight: 600;
     color: #ffffff;
     font-size: 32px;
     line-height: 36px;
+    margin-top: 50px;
 }
 
 h3.success--title {
@@ -680,7 +689,6 @@ img.img--center {
 
   .pane {
    background-color:  $brand-color-dark!important;
-
   }
 
   ion-pane {
@@ -794,7 +802,6 @@ img.img--center {
   color: $brand-team2-color;
 }
 
-
 .slider-slide {
     position: relative;
     display: block;
@@ -806,15 +813,11 @@ img.img--center {
     z-index: 1000;
 }
 
-
 .slider-slide {
     padding-top: 0;
     font-weight: 300;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-
-
-
 
 /* Testimonials */
 .testimonial .author {
@@ -1177,19 +1180,19 @@ h1.td-title {
 h1.td--phrase {
     color: #000!important;
     font-family: $brand-font-family-hand-writing;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 1.33;
     text-align: center;
-    margin: 15px auto;
+    margin: 25px auto;
 }
 
 h1.td--alt-phrase {
     color: $brand-light-gray!important;
     font-family: $brand-font-family-hand-writing;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 1.33;
     text-align: center;
-    margin: 15px auto;
+    margin: 2e5px auto;
 }
 
 .td--button {
@@ -1248,8 +1251,8 @@ ion-header-bar {
 
 /*progress time text on middle of circle*/
 .progress-wrapper {
-    margin:50px auto;
-    background-color:  #brand-color-dark;
+    margin: 0 auto;
+    background-color:  $brand-color-dark;
 }
 
 .progress {
@@ -1264,7 +1267,8 @@ ion-header-bar {
     font-size: 60px;
     text-align: center;
     font-weight: 100;
-    color: $brand-yellow;
+    color: $brand-code;
+    font-family: $brand-code-font-family-base;
 }
 
 code {

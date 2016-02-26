@@ -21,7 +21,7 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	$scope.cardsControl = {};
 
 	$scope.cardDestroyed = function(index) {
-		console.log("$scope.cardDestroyed(index) was called here");
+		console.log("$scope.cardDestroyed(index) was called here" + scope.cards.master.length );
 	   // $scope.cards.master.splice(index, 1);  // Remove a card from ->  $scope.cards.master
 
 	var recycledCard = cardTypes[index];
@@ -127,7 +127,6 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	    $scope.cardsVisible = false;
 	    $scope.activeCardVisible = false;
 	    $scope.activeCardFaceVisible = false;
-
 	};
 
 
@@ -157,7 +156,6 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 		//$scope.deActivateCard();
 		$scope.refreshCards();
 		// $scope.modal.close();
-
 	};
 
 	$scope.noPoint = function() {
@@ -169,6 +167,20 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 	    		$scope.cardDestroyed(index);
 	    console.log($scope.cards.activeCard);
 	};
+
+
+	 ////    COUNTDOWN SERVICE    ////  todo....  make CountdownService.tags -> tags more descriptive name
+	  $scope.CountdownService = CountdownService;
+
+	  $scope.setFalseTag = function() {
+	      CountdownService.setFalseTag();
+	  };
+
+	  $scope.setTrueTag = function() {
+	      CountdownService.setTrueTag();
+	  };
+
+	  $scope.setTrueTag();
 
 	$scope.$on('removeCard', function(event, element, card) {
 	    var discarded = $scope.cards.master.splice($scope.cards.master.indexOf(card), 1);

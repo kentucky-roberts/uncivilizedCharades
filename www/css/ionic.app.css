@@ -9741,7 +9741,7 @@ form {
   color: #fc0;
   font-size: 60px;
   text-align: center;
-  top: 65px;
+  top: 15%;
   left: 0;
   /* CSS3 text shadow: */
   text-shadow: 4px 4px 5px #333333; }
@@ -11287,7 +11287,13 @@ h2.body-title {
   box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0; }
 
 .brand-bg {
-  background-color: #333; }
+  background-color: #333 !important; }
+
+.modal-backdrop-bg {
+  background-color: #333 !important; }
+
+.modal {
+  background-color: #000; }
 
 .center--block {
   margin-left: auto;
@@ -11501,11 +11507,12 @@ span.instruction-text {
   text-shadow: rgba(255, 255, 255, 0.08) 0 1px 0; }
 
 h2.success--title {
-  font-family: "Open Sans", sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 600;
   color: #ffffff;
   font-size: 32px;
-  line-height: 36px; }
+  line-height: 36px;
+  margin-top: 50px; }
 
 h3.success--title {
   font-family: "Open Sans", sans-serif;
@@ -11734,7 +11741,8 @@ img.img--center {
     color: #c6c6c6 !important; }
 
 .bg-team2 {
-  background-color: #c6c6c6 !important; }
+  background-color: darkgrey;
+  }
   .bg-team2 .pane {
     background-color: #c6c6c6 !important; }
   .bg-team2 .team__scores {
@@ -12094,18 +12102,18 @@ h1.td-title {
 h1.td--phrase {
   color: #000 !important;
   font-family: "Shadows Into Light Two", cursive;
-  font-size: 36px;
+  font-size: 32px;
   line-height: 1.33;
   text-align: center;
-  margin: 15px auto; }
+  margin: 25px auto; }
 
 h1.td--alt-phrase {
   color: #bfbfbf !important;
   font-family: "Shadows Into Light Two", cursive;
-  font-size: 36px;
+  font-size: 32px;
   line-height: 1.33;
   text-align: center;
-  margin: 15px auto; }
+  margin: 2e5px auto; }
 
 .td--button {
   position: absolute;
@@ -12154,8 +12162,8 @@ ion-header-bar {
 
 /*progress time text on middle of circle*/
 .progress-wrapper {
-  margin: 50px auto;
-  background-color: #brand-color-dark; }
+  margin: 0 auto;
+  background-color: #121212; }
 
 .progress {
   position: fixed;
@@ -12169,7 +12177,8 @@ ion-header-bar {
   font-size: 60px;
   text-align: center;
   font-weight: 100;
-  color: #fc0; }
+  color: #dadbb1;
+  font-family: menlo, monaco, "andale mono", "courier new", fixed; }
 
 code {
   color: #dadbb1;
