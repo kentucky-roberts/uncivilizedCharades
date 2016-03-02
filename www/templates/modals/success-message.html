@@ -5,13 +5,29 @@
             <div class="col">
                 <h3 class="success--title"> Well Done!</h3>
                 <br>
-                        <i class="ion-ribbon-b bigIcon" style="font-size: 60px;"></i>
+                        <i class="ion-ribbon-b bigIcon" style="font-size: 80px;"></i>
                 <br>
-                <p class="lead">{{activePlayer.name || game.activeTeam }} <strong>+1 Point</strong></p>
-                <p>Click button below to continue</p>
+                <p class="lead text--center"><strong>+1 Point</strong> {{activePlayer.name || game.activeTeam }} </p>
                 <br>
                 <br>
                 <button class="button button-light button-outline icon ion-checkmark text--white" ng-click="addPointToActiveTeam();closeModal();nextStep();nextHand();"> Continue </button>
+                <br>
+
+          <div class="row">
+            <div class="col center--block text--center"></div>
+            <div class="col center--block text--center">
+              <img src="img/arrow-images/upRight--white.png" class="arrow arrow--small center--block text--center">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+               <p class="lead text--center">
+                  Click button <strong>above</strong>
+                  <br>
+                    to continue
+              </p>
+            </div>
+          </div>
 
 
             </div>

@@ -12,7 +12,29 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 	var app = this;
 	// var game = this;
 
+      ////////////////////////////////////////
+      // Layout Methods
+      ////////////////////////////////////////
+      $scope.hideNavBar = function() {
+          document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
+      };
 
+      $scope.hideNavBar();
+
+      $scope.showNavBar = function() {
+          document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
+      };
+
+      $scope.noHeader = function() {
+          var content = document.getElementsByTagName('ion-content');
+          for (var i = 0; i < content.length; i++) {
+              if (content[i].classList.contains('has-header')) {
+                  content[i].classList.toggle('has-header');
+              }
+          }
+      };
+
+      $scope.noHeader();
 
 	var message = {};
 	$scope.players = [];
@@ -191,29 +213,6 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 	 //      reload: true, inherit: false, notify: false
 	 //    });
 
-	////////////////////////////////////////
-	// Layout Methods
-	////////////////////////////////////////
-	$scope.hideNavBar = function() {
-	    document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
-	};
-
-	$scope.hideNavBar();
-
-	$scope.showNavBar = function() {
-	    document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
-	};
-
-	$scope.noHeader = function() {
-	    var content = document.getElementsByTagName('ion-content');
-	    for (var i = 0; i < content.length; i++) {
-	        if (content[i].classList.contains('has-header')) {
-	            content[i].classList.toggle('has-header');
-	        }
-	    }
-	};
-
-	$scope.noHeader();
 
 
 	$scope.initApp();

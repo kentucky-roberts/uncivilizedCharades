@@ -41,7 +41,6 @@ body {
     -o-font-feature-settings: "kern" 1;
     font-feature-settings: "kern" 1;
     font-kerning: normal
-
 }
 
 ion-content {
@@ -297,8 +296,9 @@ p {
 }
 
 .lead {
+  font-family: $brand-font-family-base;
   margin-bottom: 18px;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 300;
   line-height: 1.3;
 }
@@ -387,7 +387,7 @@ h2.success--title {
 }
 
 h3.success--title {
-    font-family: $brand-font-family-base;
+    font-family: $font-family-helvetica;
     font-weight: 600;
     color: #ffffff;
     font-size: 50px;
@@ -770,12 +770,16 @@ img.img--center {
 
 .bg-success {
   background-color: $brand-color-success;
+  padding-top: 45px;
 
   h1 {
-    color: $brand-color-light;
+    color: white;
   }
   h2.instruction-text {
-     color: $brand-color-light;
+     color: white;
+  }
+  h2 {
+    color: white;
   }
 }
 
@@ -785,10 +789,13 @@ img.img--center {
   background-color: $brand-bg;
 
   h1 {
-    color: $brand-color-light;
+    color: white;
   }
   h2.instruction-text {
-     color: $brand-color-light;
+     color: white;
+  }
+  h2 {
+    color: white;
   }
 }
 
@@ -1049,6 +1056,7 @@ i {
   background-color: $balanced;
   color: white;
   text-align: center;
+  padding-top: 45px;
 }
 
 .bar-error {
@@ -1258,7 +1266,7 @@ ion-header-bar {
 .progress {
     position: fixed;
       left: 50%;
-      top: 50%;
+      top: 35%;
       width: 600px;
       height: 600px;
       margin-left: -300px;
@@ -1267,7 +1275,7 @@ ion-header-bar {
     font-size: 60px;
     text-align: center;
     font-weight: 100;
-    color: $brand-code;
+    color: white;
     font-family: $brand-code-font-family-base;
 }
 
@@ -1438,46 +1446,6 @@ a.prev.disabled,a.next.disabled {
     background-size: cover;
 }
 
-/* Carousel Controls */
-
-a.prev.disabled,a.next.disabled {
-    cursor: default;
-}
-
-.carousel-controls a.next {
-    right: 15px;
-    position: absolute;
-}
-
-.carousel-controls a.prev {
-    right: 45px;
-    position: absolute;
-}
-
-a.prev,a.next {
-    width: 25px;
-    height: 25px;
-    display: block;
-    cursor: pointer;
-    background: #333333;
-    color: #fafafa;
-    font-size: 20px;
-    text-align: center;
-    text-decoration: none;
-}
-
-a.next {
-    padding-left: 3px;
-}
-
-a.prev.disabled,a.next.disabled {
-    display: block;
-    cursor: default;
-    background: #333333;
-    color: #fafafa;
-    font-size: 20px;
-    text-align: center;
-}
 
 .our-clients h3.title:after, .service-reasons h3.title:after {
     background: none;
@@ -1707,8 +1675,9 @@ hr {
 }
 
 .game__slide {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
+    padding-top: 3%;
 }
 
 

@@ -25,13 +25,18 @@ a.green.button, .button.button--glow {
 }
 
 
+.button.button-light.button-outline {
+    border-color: #ffffff!important;
+    background: transparent;
+    color: #ffffff!important;
+}
 
 
 .button.button-energized {
-    border-color: transparent;
-    background-color: #ffc900;
-    text-shadow: rgba(0, 0, 0, 0.09) 0px 2px 0px;
-    font-family: $brand-font-family-base;
+      border-color: transparent;
+      background-color: #ffc900;
+      text-shadow: rgba(0, 0, 0, 0.09) 0px 2px 0px;
+      font-family: $brand-font-family-base;
       font-weight: 600;
       color: white;
       font-size: 24px;
@@ -39,8 +44,81 @@ a.green.button, .button.button--glow {
       text-align: center;
 }
 
+.start__countdown__container {
+      display: block;
+      margin-bottom: 25px;
+      margin-right: auto;
+      margin-left: auto;
+      width:100%;
+
+       .button .icon:before,
+      .button.icon:before,
+      .button.icon-left:before,
+      .button.icon-right:before {
+          margin-right: auto;
+          margin-left: auto;
+          padding: 0 0 1px 0;
+          vertical-align: inherit;
+          font-size: 55px;
+          line-height: 125px;
+          pointer-events: none;
+      }
+
+      .start--text {
+          vertical-align: middle;
+          text-align: center;
+          margin-top: 25px;
+      }
+
+      .button-start-countdown {
+          margin-top: 25px;
+          margin-right: auto;
+          margin-left: auto;
+          vertical-align: middle;
+          text-align: center;
+          width: 150px;
+          height: 150px;
+      }
+}
 
 
+.start__button__container {
+      display: block;
+      margin-bottom: 25px;
+      margin-right: auto;
+      margin-left: auto;
+      width:100%;
+
+      .button .icon:before,
+      .button.icon:before,
+      .button.icon-left:before,
+      .button.icon-right:before {
+          margin-right: auto;
+          margin-left: auto;
+          padding: 0 0 1px 0;
+          vertical-align: inherit;
+          font-size: 55px;
+          line-height: 125px;
+          pointer-events: none;
+      }
+
+      .start--text {
+        vertical-align: middle;
+        text-align: center;
+        margin-top: 25px;
+
+      }
+
+      .start--button {
+        margin-right: auto;
+        margin-left: auto;
+        vertical-align: middle;
+        text-align: center;
+        width: 150px;
+        height: 150px;
+      }
+
+}
 
 /* croberts added via command "ionic ionic-ion-ios-buttons" */
 .button-ios-rounded {

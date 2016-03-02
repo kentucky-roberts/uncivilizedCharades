@@ -3,7 +3,7 @@
     $light:                           #fff !default;
     $stable:                          #f8f8f8 !default;
     $positive:                        #387ef5 !default;
-    $balanced:                        #33cd5f !default;
+    $balanced:                        rgb(38, 187, 101) !default;
     $energized:                       #ffc900 !default;
     $assertive:                       #ef473a !default;
     $royal:                           #886aea !default;
@@ -75,6 +75,12 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     line-height: 48px;
     border-radius: 3px;
     border: 1px solid #c6c6c6;
+}
+
+
+
+.modal {
+  padding-top: 45px;
 }
 
 @media (min-width: 680px) {

@@ -1,26 +1,50 @@
 <div class="modal">
+       <ion-content class="bg-error">
 
-     <ion-content class="bg-error">
-
-             <div class="text-center">
-
-              <span>
-                  <i class="ion-close bigIcon" style="font-size: 30px;"></i>
-                  <i class="ion-close bigIcon" style="font-size: 30px;"></i>
+              <span class="text--center">
+                  <i class="ion-close bigIcon" style="font-size: 100px;"></i>
               </span>
 
-                <h1>Time Expired!</h1>
-               <h3>Your game is lame, no points for you!</h3>
-                <br>
-                <h3>
-                    The <strong>other team </strong> may risk<br> <strong>1 Point</strong> and try to<br> <strong>guess</strong> at what the <br><strong>secret phrase</strong> was.
-                </h3>
-                <p class="text--center">What say you?</p>
-                <br>
+             <h1> Time Expired</h1>
+             <h3>No points for <strong>{{activePlayer.name || game.activeTeam }}</strong> </h3>
+             <br>
+              <p class="lead center--block">
+                  You may continue playing, or the <strong>other team</strong> may <strong>risk 1 point</strong>, and try to guess the <strong>secret phrase</strong>.
+              </p>
 
-                  <a class="button button-dark button-outline icon ion-chevron-left" ng-click="closeModal();showStealPoint();">Steal Point</a>
-                  <a class="button  button-dark  button-outline icon icon-right ion-chevron-right" ng-click="closeModal();nextStep();">Continue</a>
+              <div class="row">
+                <div class="col center--block">
+                      <a class="button button-light button-outline icon ion-chevron-left button-block" ng-click="closeModal();showStealPoint();">   Steal Point
+                      </a>
                 </div>
+                <div class="col center--block">
+                       <a class="button  button-light  button-outline icon icon-right ion-chevron-right button-block" ng-click="closeModal();nextStep();">
+                            Continue
+                        </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                        <p class="lead text--center">
+                              What say you?
+                        </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col center--block text--center">
+                      <img src="img/arrow-images/upLeft--black.png" class="arrow arrow--small center--block text--center">
+                </div>
+                <div class="col center--block text--center">
+                      <img src="img/arrow-images/upRight--black.png" class="arrow arrow--small center--block text--center">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                        <p class="lead text--center">
+                              What say you?
+                        </p>
+                </div>
+              </div>
 
-    </ion-content>
+      </ion-content>
 </div>

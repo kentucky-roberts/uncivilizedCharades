@@ -912,8 +912,6 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
       CountdownService.setTrueTag();
   };
 
- // $scope.setTrueTag();
-
   $scope.$watch(function() {
         return CountdownService.tags;
         },
