@@ -1259,24 +1259,23 @@ ion-header-bar {
 
 /*progress time text on middle of circle*/
 .progress-wrapper {
-    margin: 0 auto;
-    background-color:  $brand-color-dark;
+  margin: 0 auto;
 }
 
 .progress {
-    position: fixed;
-      left: 50%;
-      top: 35%;
-      width: 600px;
-      height: 600px;
-      margin-left: -300px;
-      margin-top: -300px;
-    line-height: 9em;
-    font-size: 60px;
-    text-align: center;
-    font-weight: 100;
-    color: white;
-    font-family: $brand-code-font-family-base;
+  position: fixed;
+  left: 50%;
+  top: 35%;
+  width: 600px;
+  height: 600px;
+  margin-left: -300px;
+  margin-top: -300px;
+  line-height: 9em;
+  font-size: 60px;
+  text-align: center;
+  font-weight: 100;
+  color: white;
+  font-family: $brand-code-font-family-base;
 }
 
 code {

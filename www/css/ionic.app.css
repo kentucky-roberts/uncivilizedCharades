@@ -12490,8 +12490,7 @@ ion-header-bar {
 
 /*progress time text on middle of circle*/
 .progress-wrapper {
-  margin: 0 auto;
-  background-color: #121212; }
+  margin: 0 auto; }
 
 .progress {
   position: fixed;
