@@ -4,75 +4,71 @@ angular
 
 GameController.$inject = ['$scope', '$rootScope', '$firebaseAuth', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$ionicSideMenuDelegate', '$state', '$ionicSlideBoxDelegate', '$http', '$ionicTabsDelegate', '$ionicPlatform', '$firebaseObject', 'ngAudio', 'ionicToast', '$ionicNavBarDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 'TeamService', 'AppService', 'GameService', 'Games', '$log', 'CardType'];
 function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $timeout, $ionicModal, $ionicLoading, $ionicSideMenuDelegate, $state, $ionicSlideBoxDelegate, $http, $ionicTabsDelegate, $ionicPlatform, $firebaseObject, ngAudio, ionicToast, $ionicNavBarDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService, TeamService, AppService, GameService, Games, $log, CardType) {
+
   $scope.showLoading = function() {
     $ionicLoading.show();
-  }; $scope.showLoading(); $scope.filterFunction = function(element) {
+  };
+
+  $scope.showLoading();
+
+  $scope.filterFunction = function(element) {
     return element.name.match(/^Ma/) ? true : false;
     };
 
+  var game = this;
 
-      var game = this;
+  game.debugging = false;
 
-      game.debugging = false;
+  ////////////////////////////////////////
+  // Layout Methods
+  ////////////////////////////////////////
+  $scope.hideNavBar = function() {
+      document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
+  };
+
+  $scope.hideTabBar = function() {
+      document.getElementsByClassName('tabs')[0].style.display = 'none';
+  };
+
+  $scope.hideNavBar();
+  $scope.hideTabBar();
+
+  ////////////////////////////////////////
+  //  card_types
+  ////////////////////////////////////////
+  var cards =
+      $http.get('api/card_types.json').then(function (cardData) {
+          game.cards = cardData.data;
+             console.log(game.cards[0]);
+          game.totalCards = game.cards.length;
+      });
+
+    console.log(cards);
+
+    ////////////////////////////////////////
+    // Game Sound Effects
+    ////////////////////////////////////////
+    $scope.chaChing = ngAudio.load("sound/cha-ching.mp3"); // returns NgAudioObject
+    $scope.awww = ngAudio.load("sound/awww.mp3"); // returns NgAudioObject
+    $scope.crickets = ngAudio.load("sound/crickets.mp3"); // returns NgAudioObject
+    $scope.snowballSplat = ngAudio.load("sound/snowball-splat.mp3"); // returns NgAudioObject
+    $scope.squishFart = ngAudio.load("sound/squish-fart.mp3"); // returns NgAudioObject
+    $scope.voiceOn = ngAudio.load("sound/voice_on.mp3"); // returns NgAudioObject
+    $scope.voiceOff = ngAudio.load("sound/voice_off.mp3"); // returns NgAudioObject
+    $scope.clickOn = ngAudio.load("sound/click-on.mp3"); // returns NgAudioObject
+    $scope.clickOff = ngAudio.load("sound/click-off.mp3"); // returns NgAudioObject
+
+    $scope.soundChaChing = function() { $scope.chaChing.play(); };
+    $scope.soundAwww = function() { $scope.awww.play(); };
+    $scope.soundCrickets = function() { $scope.crickets.play(); };
+    $scope.soundSnowballSplat = function() { $scope.snowballSplat.play(); };
+    $scope.soundSquishFart = function() { $scope.squishFart.play(); };
+    $scope.soundVoiceOn = function() { $scope.voiceOn.play(); };
+    $scope.soundVoiceOff = function() { $scope.voiceOff.play(); };
+    $scope.soundClickOn = function() { $scope.clickOn.play(); };
+    $scope.soundClickOff = function() { $scope.clickOff.play(); };
 
 
-
-
-
-        ////////////////////////////////////////
-        //  card_types
-        ////////////////////////////////////////
-        var cards =
-            $http.get('api/card_types.json').then(function(cardData) {
-                game.cards = cardData.data;
-                   console.log(game.cards[0]);
-                game.totalCards = game.cards.length;
-
-            });
-
-
-
-          console.log(cards);
-
-
-          ////////////////////////////////////////
-          // Game Sound Effects
-          ////////////////////////////////////////
-          $scope.chaChing = ngAudio.load("sound/cha-ching.mp3"); // returns NgAudioObject
-          $scope.awww = ngAudio.load("sound/awww.mp3"); // returns NgAudioObject
-          $scope.crickets = ngAudio.load("sound/crickets.mp3"); // returns NgAudioObject
-          $scope.snowballSplat = ngAudio.load("sound/snowball-splat.mp3"); // returns NgAudioObject
-          $scope.squishFart = ngAudio.load("sound/squish-fart.mp3"); // returns NgAudioObject
-          $scope.voiceOn = ngAudio.load("sound/voice_on.mp3"); // returns NgAudioObject
-          $scope.voiceOff = ngAudio.load("sound/voice_off.mp3"); // returns NgAudioObject
-          $scope.clickOn = ngAudio.load("sound/click-on.mp3"); // returns NgAudioObject
-          $scope.clickOff = ngAudio.load("sound/click-off.mp3"); // returns NgAudioObject
-
-          $scope.soundChaChing = function() { $scope.chaChing.play(); };
-          $scope.soundAwww = function() { $scope.awww.play(); };
-          $scope.soundCrickets = function() { $scope.crickets.play(); };
-          $scope.soundSnowballSplat = function() { $scope.snowballSplat.play(); };
-          $scope.soundSquishFart = function() { $scope.squishFart.play(); };
-          $scope.soundVoiceOn = function() { $scope.voiceOn.play(); };
-          $scope.soundVoiceOff = function() { $scope.voiceOff.play(); };
-          $scope.soundClickOn = function() { $scope.clickOn.play(); };
-          $scope.soundClickOff = function() { $scope.clickOff.play(); };
-
-
-          ////////////////////////////////////////
-          // Layout Methods
-          ////////////////////////////////////////
-          $scope.hideNavBar = function() {
-              document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
-          };
-
-          $scope.hideTabBar = function() {
-              document.getElementsByClassName('tabs')[0].style.display = 'none';
-          };
-
-          $scope.hideNavBar();
-
-          $scope.hideTabBar();
 
 
       game.init = function () {
@@ -127,7 +123,6 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
         $scope.gameWithPlayers = function() { // game with players
             $scope.gameHasPlayers = true;
             $scope.gameType = true; // we have chosen a gameType no longer need to see the option buttons
-
             game.welcome = false;
             game.quickStart = false;
             game.preflight  = true;
@@ -367,7 +362,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
 
               $scope.activeTeam = "Team1";
               $scope.team1Score += 1;
-              $scope.soundChaChing();
+              //$scope.soundChaChing();
               $scope.teamColor = "positive";
 
              if ($scope.team1Score >= 10 ) {
@@ -380,7 +375,7 @@ function GameController($scope, $rootScope, $firebaseAuth, $window, $interval, $
             } else {
                 $scope.activeTeam = "Team2";
                 $scope.team2Score += 1;
-                $scope.soundChaChing();
+                //$scope.soundChaChing();
             $scope.teamColor = "assertive";
 
           if ($scope.team2Score >= 10 ) {

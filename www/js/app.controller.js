@@ -5,9 +5,6 @@ angular
 AppController.$inject = ['$scope', '$rootScope', '$state', '$firebaseAuth', '$window', '$interval', '$timeout', '$ionicModal', '$ionicLoading', '$http', '$ionicTabsDelegate', '$ionicPlatform', '$firebaseObject', 'ngAudio', 'ionicToast', '$ionicNavBarDelegate', 'PlayerService', 'CardService', 'ModalService', 'CountdownService', 'DealerService', 'AppService', 'GameService', 'Games', 'MessageService', 'DemoService'];
 function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $interval, $timeout, $ionicModal, $ionicLoading, $http, $ionicTabsDelegate, $ionicPlatform, $firebaseObject, ngAudio, ionicToast, $ionicNavBarDelegate, PlayerService, CardService, ModalService, CountdownService, DealerService, AppService, GameService, Games, MessageService, DemoService) {
 
-	$scope.showLoading = function() {
-		$ionicLoading.show();
-	}; $scope.showLoading();
 
 	var app = this;
 	// var game = this;
@@ -45,8 +42,8 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 
 
 	$scope.showLoadGameButton = false;  // main-menu buttons will appear when true
-      $scope.showSavedGame = false;  // main-menu buttons will appear when true
-      $scope.showSavedGames = false; //main-menu button appear when true -> list a users saved games to Load.
+  $scope.showSavedGame = false;  // main-menu buttons will appear when true
+  $scope.showSavedGames = false; //main-menu button appear when true -> list a users saved games to Load.
 
 
 
@@ -63,13 +60,13 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
           	// $scope.team1Score = 0;
           	// $scope.team2Score = 0;
 
-             $scope.gameHasPlayers = false;
-		$scope.appStarted = false;
-		$scope.mainMenu = false;
-		$scope.quickStart = false;
-		$scope.gameStarted = false;
-		$scope.gamePreflight= false;
-		$scope.gameOver = false;
+            $scope.gameHasPlayers = false;
+        		$scope.appStarted = false;
+        		$scope.mainMenu = false;
+        		$scope.quickStart = false;
+        		$scope.gameStarted = false;
+        		$scope.gamePreflight= false;
+        		$scope.gameOver = false;
 
 
   //         	$state.go('tab.splash-screen');
@@ -87,14 +84,12 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
        //  Start Pre-Game!!
         //////////////////////////////////////
         $scope.startApp = function() {
-            $scope.appStarted = true; // init
-            $scope.mainMenu = true;
-            $scope.quickStart = false;
-            $scope.gameStarted = false;
-            $scope.gamePreflight = false;
-            $scope.gameOver = false;
-
-
+          $scope.appStarted = true; // init
+          $scope.mainMenu = true;
+          $scope.quickStart = false;
+          $scope.gameStarted = false;
+          $scope.gamePreflight = false;
+          $scope.gameOver = false;
         };
 
 
@@ -212,16 +207,5 @@ function AppController($scope, $rootScope, $state, $firebaseAuth, $window, $inte
 		// $state.transitionTo($state.current, $stateParams, {
 	 //      reload: true, inherit: false, notify: false
 	 //    });
-
-
-
 	$scope.initApp();
-
-	$scope.hideLoading = function() {
-	    $timeout(function() {
-	        $ionicLoading.hide();
-	    }, 1000);
-	};
-	$scope.hideLoading();
-
 }; //// @endAppController

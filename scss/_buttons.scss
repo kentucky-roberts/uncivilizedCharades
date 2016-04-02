@@ -51,7 +51,7 @@ a.green.button, .button.button--glow {
       margin-left: auto;
       width:100%;
 
-       .button .icon:before,
+      .button .icon:before,
       .button.icon:before,
       .button.icon-left:before,
       .button.icon-right:before {
@@ -60,7 +60,7 @@ a.green.button, .button.button--glow {
           padding: 0 0 1px 0;
           vertical-align: inherit;
           font-size: 55px;
-          line-height: 125px;
+          line-height: 100px;
           pointer-events: none;
       }
 
@@ -83,41 +83,46 @@ a.green.button, .button.button--glow {
 
 
 .start__button__container {
-      display: block;
-      margin-bottom: 25px;
-      margin-right: auto;
-      margin-left: auto;
-      width:100%;
+  display: block;
+  margin-top: 125px;
+  margin-bottom: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width:100%;
 
-      .button .icon:before,
-      .button.icon:before,
-      .button.icon-left:before,
-      .button.icon-right:before {
-          margin-right: auto;
-          margin-left: auto;
-          padding: 0 0 1px 0;
-          vertical-align: inherit;
-          font-size: 55px;
-          line-height: 125px;
-          pointer-events: none;
-      }
+  .button .icon:before,
+  .button.icon:before,
+  .button.icon-left:before,
+  .button.icon-right:before {
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 0 1px 0;
+    vertical-align: inherit;
+    font-size: 55px;
+    line-height: 100px;
+    pointer-events: none;
+  }
 
-      .start--text {
-        vertical-align: middle;
-        text-align: center;
-        margin-top: 25px;
+  .start--text {
+    vertical-align: middle;
+    text-align: center;
+    margin-top: 15px;
+  }
 
-      }
+  .start--button {
+    margin-right: auto;
+    margin-left: auto;
+    vertical-align: middle;
+    text-align: center;
+    width: 100px!important;
+    height: 100px!important;
+  }
 
-      .start--button {
-        margin-right: auto;
-        margin-left: auto;
-        vertical-align: middle;
-        text-align: center;
-        width: 150px;
-        height: 150px;
-      }
+}
 
+.button100x100 {
+  width: 56px;
+  height: 56px;
 }
 
 /* croberts added via command "ionic ionic-ion-ios-buttons" */

@@ -10676,7 +10676,7 @@ a.green.button, .button.button--glow {
     padding: 0 0 1px 0;
     vertical-align: inherit;
     font-size: 55px;
-    line-height: 125px;
+    line-height: 100px;
     pointer-events: none; }
   .start__countdown__container .start--text {
     vertical-align: middle;
@@ -10693,7 +10693,8 @@ a.green.button, .button.button--glow {
 
 .start__button__container {
   display: block;
-  margin-bottom: 25px;
+  margin-top: 125px;
+  margin-bottom: 15px;
   margin-right: auto;
   margin-left: auto;
   width: 100%; }
@@ -10706,19 +10707,23 @@ a.green.button, .button.button--glow {
     padding: 0 0 1px 0;
     vertical-align: inherit;
     font-size: 55px;
-    line-height: 125px;
+    line-height: 100px;
     pointer-events: none; }
   .start__button__container .start--text {
     vertical-align: middle;
     text-align: center;
-    margin-top: 25px; }
+    margin-top: 15px; }
   .start__button__container .start--button {
     margin-right: auto;
     margin-left: auto;
     vertical-align: middle;
     text-align: center;
-    width: 150px;
-    height: 150px; }
+    width: 100px !important;
+    height: 100px !important; }
+
+.button100x100 {
+  width: 56px;
+  height: 56px; }
 
 /* croberts added via command "ionic ionic-ion-ios-buttons" */
 .button-ios-rounded {
@@ -12838,6 +12843,18 @@ hr {
   width: 100%;
   padding-top: 3%; }
 
+.arrow__message img {
+  display: block;
+  float: right;
+  height: 60px;
+  width: 35px;
+  margin-right: 0;
+  padding-right: 0; }
+
+.arrow__message p {
+  display: block;
+  line-height: 4; }
+
 h1.start--text {
   margin-top: 50px;
   margin-bottom: 25px; }
@@ -12860,19 +12877,18 @@ h1.start--text {
       padding: 0 0 1px 0;
       vertical-align: inherit;
       font-size: 55px;
-      line-height: 125px;
+      line-height: 100px;
       pointer-events: none; }
     #game__start__container .start__button__container .start--text {
-      vertical-align: middle;
-      text-align: center;
-      margin-top: 25px; }
+      vertical-align: bottom; }
     #game__start__container .start__button__container .start--button {
       margin-right: auto;
       margin-left: auto;
       vertical-align: middle;
       text-align: center;
-      width: 150px;
-      height: 150px; }
+      width: 100px;
+      height: 100px;
+      border-width: 2px; }
 
 #game__over__container {
   background-color: #333;
