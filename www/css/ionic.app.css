@@ -10688,8 +10688,8 @@ a.green.button, .button.button--glow {
     margin-left: auto;
     vertical-align: middle;
     text-align: center;
-    width: 150px;
-    height: 150px; }
+    width: 100px !important;
+    height: 100px !important; }
 
 .start__button__container {
   display: block;
