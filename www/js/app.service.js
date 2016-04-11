@@ -38,7 +38,7 @@ angular
 })
 
  .factory('AppService', function() {
-     
+
       var service = {
           newGamePlayer: newGamePlayer,
           //availableGamePlayers: availableGamePlayers
@@ -68,7 +68,7 @@ angular
             players.forEach(function(player) {
               availableGamePlayers.push(player);
               console.log("availableGamePlayers: " + availableGamePlayers.length);
-              
+
               var name = player.name;
               var score= player.score;
               var team = player.team;
@@ -130,14 +130,14 @@ angular
 
 
 .factory('DealerService', ['GameService', 'CardService', '$timeout', function(GameService, CardService, $timeout) {
-      
+
 var dealer = this;
       var service = {
             newDealer: newDealer,
             Dealer: Dealer
         };
 
-        var deck = CardService.all(); 
+        var deck = CardService.all();
         function newDealer(deck){
             var dealer = new Dealer(deck);
             return dealer;
@@ -171,14 +171,14 @@ var dealer = this;
             dealer.makeDeck = function() {
                 dealer.deck = {
                     master: CardService.all(),
-                    cards: [], 
+                    cards: [],
                     discards: [],
                 };
-                // console.log("dealer.deck.master:  " + dealer.deck.master.length);
-                // console.log("dealer.deck.cards:  " + dealer.deck.cards.length);
-                // console.log("dealer.deck.discards:  " + dealer.deck.discards.length);
+                console.log("dealer.deck.master:  " + dealer.deck.master.length);
+                console.log("dealer.deck.cards:  " + dealer.deck.cards.length);
+                console.log("dealer.deck.discards:  " + dealer.deck.discards.length);
             };
-            
+
             dealer.makeDeck();
 
 
@@ -198,21 +198,21 @@ var dealer = this;
                 dealer.hit(true, false, dealer.getHandValue);
                 dealer.hit(false, false, dealer.getHandValue);
             };
-            
+
             //dealer.deal();
 
             dealer.hit = function(hideCards, animate, callback){
               console.log('hideCards' + hideCards + 'animate: ' + animate + 'callback: ' + callback);
 
-               
+
               var newHand = dealer.deck.master.slice(0,3);
 console.log("your new cards: " + newHand);
-                
+
 
             //     var card = dealer.deck.deal();
 
             //     card.hideValue = hideCard;
-                
+
             //     dealer.deck.cards.push(card);
 
             //     if(animate){
@@ -236,7 +236,7 @@ console.log("your new cards: " + newHand);
             };
 
             dealer.init();
-   
+
     } // function teamScore(team)
     return service;
 }]) //  function DealerService])

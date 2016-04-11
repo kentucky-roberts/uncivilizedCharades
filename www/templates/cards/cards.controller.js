@@ -24,7 +24,7 @@ CardsController.$inject = ['$scope', '$rootScope',  '$window', '$interval', '$ti
 		console.log("$scope.cardDestroyed(index) was called here" + $scope.cards.master.length );
 	   // $scope.cards.master.splice(index, 1);  // Remove a card from ->  $scope.cards.master
 
-	var recycledCard = cardTypes[index];
+	var recycledCard = $scope.cards.master[index];
 	console.log(recycledCard);
 	    $scope.cards.master.push(angular.extend({}, recycledCard));
 
